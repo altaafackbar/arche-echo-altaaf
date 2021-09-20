@@ -1,4 +1,4 @@
-# ARCHIE | ECHO App
+# ARCHE | ECHO App
 
 Hello, this is a placeholder for our md file.
 
