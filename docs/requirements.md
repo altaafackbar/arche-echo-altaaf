@@ -14,7 +14,129 @@
 
 ## User Stories
 
+### US 01.01.01 - Login and create account
+
+As a user, I want to create a personal account, so that I can have a secure, individualized experience that is appropriate for myself and my family’s needs.
+
+**Acceptance Tests:**
+
+1. Login as a user with correct information
+2. Input incorrect information and make sure it doesn’t allow the user to continue or access another individual’s account
+
+### US 01.02.01 - User profile screen and customization
+
+As a user, I want to have a centralized location for all information that is personally related to me (profile picture, children’s sub-profiles, etc.) and also the ability to customize/add/remove from it, so that I can have an experience that feels conducive to myself and my children’s needs.
+
+**Acceptance Tests:**
+
+1. Changes to my profile picture will be saved
+2. Clicking “add a child” will take the user to the “create a child’s profile” screen
+
+### US 01.03.01 - Create and attach a child’s profile to one specific account (only accessible when logged-in)
+
+As a user, I want to create a profile(s) for my child(ren), so that I can store/track relevant information like the: child’s age, weight, height, and medical dosages; I also want to be able to add to/update this information so that I can see a dated and sorted entry log.
+
+**Acceptance Tests:**
+
+1. Creating a child’s profile should: create an entry in the database and should still exist after reloading the app (with the correct information).
+2. Updating a child’s profile should: add a new entry in the database; properly displaying the new information in addition to the old info on the child’s profile page after reloading.
+
+### US 02.01.01 - Splash Screen(s)
+
+As a user, I want to see a splash screen when I launch the app so that I immediately know what app I am opening and also the organizations/companies behind the app I am using.
+
+**Acceptance Tests:**
+
+1. Launching the app immediately shows the splash screen(s).
+2. The app functions as expected afterwards.
+
+### US 02.02.01 -  App introduction/Onboarding? (first time launching the app only)
+
+As a user, I want to be able to see a brief overview of the app's functionalities and offerings (through simple infographics) so that I can quickly decide if this app is appropriate/suitable for my usage.
+
+**Acceptance Tests:**
+
+1. Launching the app for the first time shows the app introduction slides.
+2. The app will show the user disclaimer afterwards.
+
+### US 02.03.01 - User disclaimer (first time launching the app only)
+
+As a user, I want to see a disclaimer form the first time I use the app so I know the risks and the implications of using this app; I also want to be able to accept or decline the disclaimer form so that my consent dictates whether I can use the app or not.
+
+**Acceptance Tests:**
+
+1. Accepting the disclaimer form directs you to the language selection screen.
+2. Declining the disclaimer form sends you back to the beginning of  app introduction slides.
+
+### US 02.04.01 - Language selection (first time launching the app only)
+
+As a user, I want to be able to select my choice of language (between English and French) the first time I use the app so I am able to use the app in my preferred official language.
+
+**Acceptance Tests:**
+
+1. Selecting English as my choice of language will display all subsequent app functions in English.
+2. Selecting French as my choice of language will display all subsequent app functions in French.
+
+### US 02.05.01 - User Home Screen
+
+As a user, I want to have an intuitive home screen so that I have simple and quick paths of navigation to the major functions/sections of the app.
+
+**Acceptance Tests:**
+
+1. Clicking each option/shortcut will take me to the corresponding  section of the app.
+2. Clicking the back arrow from the subsequent pages will bring me back to the home screen.
+
+### US 03.01.01 - Navigation menu (bottom right hamburger menu)
+
+As a user, I want to have a navigation menu so that I can navigate to different functions more easily.
+
+**Acceptance Tests:**
+
+1. Clicking each possible menu item will take me to the corresponding app page.
+
+### US 03.01.02 - Call 811 and 911 button (located in navigation menu)
+
+As a user, I want to let the app take me to my phone’s dialpad and pre-enter either 811 or 911 into it, so that I can have an easy way to access further health information (HealthLink in Alberta) or emergency help if deemed necessary.
+
+**Acceptance Tests:**
+
+1. Clicking the 811 button will take me to my phone’s dialpad with 811 pre-entered into it.
+2. Clicking the 911 button will take me to my phone’s dialpad with 911 pre-entered into it.
+
+### US 03.02.01 - Shortcut hotbar (bottom of app)
+
+As a user, I want to have a persistent set of shortcuts so that I can intuitively access the most important parts of the app without wasting needless time.
+
+**Acceptance Tests:**
+
+1. Clicking each option/shortcut will take me to the corresponding section of the app.
+2. The shortcut hotbar is on the bottom of the app within all pages/functions of our app.
+
+
 ## MoSCoW
+
+### Must Have
+
+- US.01.01.01 - Login and create account
+- US 01.02.01 - User profile screen
+- US 01.03.01 - Create and attach child account
+- US 02.03.01 - User disclaimer
+- US 02.04.01 - Language selection
+- US 02.05.01 - User Home Screen
+- US 03.01.01 - Navigation menu
+
+### Should Have
+
+- US 02.01.01 - Splash Screen
+- US 03.01.02 - Call 811 and 911 button
+
+### Could Have
+
+- US 02.02.01 - App introduction/Onboarding
+
+### Would Like But Won't Get
+
+- 
 
 ## Similar Products
 
