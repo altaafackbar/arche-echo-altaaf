@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
-  
+  <link rel="canonical" href="https://ualberta-cmput401.github.io/arche-echo/software-design/">
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Project Management - ARCHE | ECHO</title>
+  <title>Software Design - ARCHE | ECHO</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -18,9 +18,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Project Management";
-    var mkdocs_page_input_path = "project-management.md";
-    var mkdocs_page_url = null;
+    var mkdocs_page_name = "Software Design";
+    var mkdocs_page_input_path = "software-design.md";
+    var mkdocs_page_url = "/arche-echo/software-design/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js" defer></script>
@@ -50,28 +50,22 @@
                     <li class="toctree-l1"><a class="reference internal" href="../requirements/">Project Requirements</a>
                     </li>
                 </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../software-design/">Software Design</a>
-                    </li>
-                </ul>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Project Management</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Software Design</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#story-map">Story Map</a>
+    <li class="toctree-l2"><a class="reference internal" href="#architecturecomponent-diagram">Architecture/Component Diagram</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#project-plan">Project Plan</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#sprint-1">Sprint 1</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#due-september-25th">Due: September 25th</a>
+    <li class="toctree-l2"><a class="reference internal" href="#uml-class-diagram">UML Class Diagram</a>
     </li>
-        </ul>
+    <li class="toctree-l2"><a class="reference internal" href="#sequence-diagram">Sequence Diagram</a>
     </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#team-canvas">Team Canvas</a>
+    <li class="toctree-l2"><a class="reference internal" href="#low-fidelity-user-interface">Low-Fidelity User interface</a>
     </li>
     </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../project-management/">Project Management</a>
                     </li>
                 </ul>
       </div>
@@ -95,7 +89,7 @@
     
       
     
-    <li>Project Management</li>
+    <li>Software Design</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -107,56 +101,12 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="project-management">Project Management</h1>
-<p>This page provides a general overview of the assigned tasks and roles for the duration of four sprints (subject to change).</p>
-<h2 id="story-map">Story Map</h2>
-<h2 id="project-plan">Project Plan</h2>
-<h3 id="sprint-1">Sprint 1</h3>
-<h4 id="due-september-25th">Due: September 25th</h4>
-<table>
-<thead>
-<tr>
-<th>Rubric Description</th>
-<th>Task-to-Do</th>
-<th>Assigned To</th>
-<th>Date To Complete By</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Project Overview</td>
-<td>Documentation</td>
-<td>Jason Branch-Allen</td>
-<td>September 23rd, 2021</td>
-</tr>
-<tr>
-<td>User Stories</td>
-<td>Documentation</td>
-<td>Altaaf Ackbar, Jun Li, Kevin Zhu</td>
-<td>September 24th, 2021</td>
-</tr>
-<tr>
-<td>High Level Design</td>
-<td>Documentation</td>
-<td>Natalia Hasan, Jayden Cho, Jun Li</td>
-<td>September 24th, 2021</td>
-</tr>
-<tr>
-<td>Low Fidelity User Interface</td>
-<td>Documentation</td>
-<td>Altaaf Ackbar, Kevin Zhu, Jun Li</td>
-<td>September 24th, 2021</td>
-</tr>
-<tr>
-<td>Release Planning</td>
-<td>Documentation</td>
-<td>Entire Team</td>
-<td>September 25th, 2021</td>
-</tr>
-</tbody>
-</table>
-<h2 id="team-canvas">Team Canvas</h2>
-<p><a href="https://app.mural.co/t/cmput401archeecho2317/m/cmput401archeecho2317/1632341633459/3b26ae38edf4979545c577553d083510287b6177?sender=uec97b50f6cf57db579342252"><img alt="Team Canvas" src="https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/images/Team%20Canvas.png?token=AEZVPX4CQLCRYU7YU2GFDMTBKY7KI" /></a></p>
+                <h1 id="software-design">Software Design</h1>
+<h2 id="architecturecomponent-diagram">Architecture/Component Diagram</h2>
+<h2 id="uml-class-diagram">UML Class Diagram</h2>
+<p><a href="https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/images/CMPUT%20401%20ARCHE_ECHO%20UML%20Component%20Diagram.png?token=AEZVPX2PZOBKEVAUAP55FZLBKZAOK"><img alt="UML Diagram" src="https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/images/CMPUT%20401%20ARCHE_ECHO%20UML%20Component%20Diagram.png?token=AEZVPX2PZOBKEVAUAP55FZLBKZAOK" /></a></p>
+<h2 id="sequence-diagram">Sequence Diagram</h2>
+<h2 id="low-fidelity-user-interface">Low-Fidelity User interface</h2>
               
             </div>
           </div>
@@ -164,8 +114,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../project-management/" class="btn btn-neutral float-right" title="Project Management">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-        <a href="../software-design/" class="btn btn-neutral" title="Software Design"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+        <a href="../requirements/" class="btn btn-neutral" title="Project Requirements"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -191,8 +143,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../software-design/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../requirements/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
+    
+      <span><a href="../project-management/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
