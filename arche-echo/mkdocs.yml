@@ -3,4 +3,4 @@ nav:
     - Project Requirements: requirements.md
     - Software Design: software-design.md
     - Project Management: project-management.md
-theme: material
+theme: readthedocs
