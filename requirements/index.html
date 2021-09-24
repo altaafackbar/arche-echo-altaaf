@@ -54,8 +54,42 @@
     <li class="toctree-l2"><a class="reference internal" href="#project-glossary">Project Glossary</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#user-stories">User Stories</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#us-010101-login-and-create-account">US 01.01.01 - Login and create account</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-010201-user-profile-screen-and-customization">US 01.02.01 - User profile screen and customization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-010301-create-and-attach-a-childs-profile-to-one-specific-account-only-accessible-when-logged-in">US 01.03.01 - Create and attach a child’s profile to one specific account (only accessible when logged-in)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-020101-splash-screens">US 02.01.01 - Splash Screen(s)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-020201-app-introductiononboarding-first-time-launching-the-app-only">US 02.02.01 -  App introduction/Onboarding? (first time launching the app only)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-020301-user-disclaimer-first-time-launching-the-app-only">US 02.03.01 - User disclaimer (first time launching the app only)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-020401-language-selection-first-time-launching-the-app-only">US 02.04.01 - Language selection (first time launching the app only)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-020501-user-home-screen">US 02.05.01 - User Home Screen</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-030101-navigation-menu-bottom-right-hamburger-menu">US 03.01.01 - Navigation menu (bottom right hamburger menu)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-030102-call-811-and-911-button-located-in-navigation-menu">US 03.01.02 - Call 811 and 911 button (located in navigation menu)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-030201-shortcut-hotbar-bottom-of-app">US 03.02.01 - Shortcut hotbar (bottom of app)</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#moscow">MoSCoW</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#must-have">Must Have</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#should-have">Should Have</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#could-have">Could Have</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#would-like-but-wont-get">Would Like But Won't Get</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#similar-products">Similar Products</a>
     </li>
@@ -127,7 +161,106 @@
 <li><strong>Symptom Checker</strong> - The Symptom Checker is a tool that can be used to determine possible illnesses or conditions that a child may be experiencing depending on what part of the body is causing conflict for the child from their visible symptoms.</li>
 </ul>
 <h2 id="user-stories">User Stories</h2>
+<h3 id="us-010101-login-and-create-account">US 01.01.01 - Login and create account</h3>
+<p>As a user, I want to create a personal account, so that I can have a secure, individualized experience that is appropriate for myself and my family’s needs.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Login as a user with correct information</li>
+<li>Input incorrect information and make sure it doesn’t allow the user to continue or access another individual’s account</li>
+</ol>
+<h3 id="us-010201-user-profile-screen-and-customization">US 01.02.01 - User profile screen and customization</h3>
+<p>As a user, I want to have a centralized location for all information that is personally related to me (profile picture, children’s sub-profiles, etc.) and also the ability to customize/add/remove from it, so that I can have an experience that feels conducive to myself and my children’s needs.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Changes to my profile picture will be saved</li>
+<li>Clicking “add a child” will take the user to the “create a child’s profile” screen</li>
+</ol>
+<h3 id="us-010301-create-and-attach-a-childs-profile-to-one-specific-account-only-accessible-when-logged-in">US 01.03.01 - Create and attach a child’s profile to one specific account (only accessible when logged-in)</h3>
+<p>As a user, I want to create a profile(s) for my child(ren), so that I can store/track relevant information like the: child’s age, weight, height, and medical dosages; I also want to be able to add to/update this information so that I can see a dated and sorted entry log.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Creating a child’s profile should: create an entry in the database and should still exist after reloading the app (with the correct information).</li>
+<li>Updating a child’s profile should: add a new entry in the database; properly displaying the new information in addition to the old info on the child’s profile page after reloading.</li>
+</ol>
+<h3 id="us-020101-splash-screens">US 02.01.01 - Splash Screen(s)</h3>
+<p>As a user, I want to see a splash screen when I launch the app so that I immediately know what app I am opening and also the organizations/companies behind the app I am using.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Launching the app immediately shows the splash screen(s).</li>
+<li>The app functions as expected afterwards.</li>
+</ol>
+<h3 id="us-020201-app-introductiononboarding-first-time-launching-the-app-only">US 02.02.01 -  App introduction/Onboarding? (first time launching the app only)</h3>
+<p>As a user, I want to be able to see a brief overview of the app's functionalities and offerings (through simple infographics) so that I can quickly decide if this app is appropriate/suitable for my usage.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Launching the app for the first time shows the app introduction slides.</li>
+<li>The app will show the user disclaimer afterwards.</li>
+</ol>
+<h3 id="us-020301-user-disclaimer-first-time-launching-the-app-only">US 02.03.01 - User disclaimer (first time launching the app only)</h3>
+<p>As a user, I want to see a disclaimer form the first time I use the app so I know the risks and the implications of using this app; I also want to be able to accept or decline the disclaimer form so that my consent dictates whether I can use the app or not.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Accepting the disclaimer form directs you to the language selection screen.</li>
+<li>Declining the disclaimer form sends you back to the beginning of  app introduction slides.</li>
+</ol>
+<h3 id="us-020401-language-selection-first-time-launching-the-app-only">US 02.04.01 - Language selection (first time launching the app only)</h3>
+<p>As a user, I want to be able to select my choice of language (between English and French) the first time I use the app so I am able to use the app in my preferred official language.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Selecting English as my choice of language will display all subsequent app functions in English.</li>
+<li>Selecting French as my choice of language will display all subsequent app functions in French.</li>
+</ol>
+<h3 id="us-020501-user-home-screen">US 02.05.01 - User Home Screen</h3>
+<p>As a user, I want to have an intuitive home screen so that I have simple and quick paths of navigation to the major functions/sections of the app.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Clicking each option/shortcut will take me to the corresponding  section of the app.</li>
+<li>Clicking the back arrow from the subsequent pages will bring me back to the home screen.</li>
+</ol>
+<h3 id="us-030101-navigation-menu-bottom-right-hamburger-menu">US 03.01.01 - Navigation menu (bottom right hamburger menu)</h3>
+<p>As a user, I want to have a navigation menu so that I can navigate to different functions more easily.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Clicking each possible menu item will take me to the corresponding app page.</li>
+</ol>
+<h3 id="us-030102-call-811-and-911-button-located-in-navigation-menu">US 03.01.02 - Call 811 and 911 button (located in navigation menu)</h3>
+<p>As a user, I want to let the app take me to my phone’s dialpad and pre-enter either 811 or 911 into it, so that I can have an easy way to access further health information (HealthLink in Alberta) or emergency help if deemed necessary.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Clicking the 811 button will take me to my phone’s dialpad with 811 pre-entered into it.</li>
+<li>Clicking the 911 button will take me to my phone’s dialpad with 911 pre-entered into it.</li>
+</ol>
+<h3 id="us-030201-shortcut-hotbar-bottom-of-app">US 03.02.01 - Shortcut hotbar (bottom of app)</h3>
+<p>As a user, I want to have a persistent set of shortcuts so that I can intuitively access the most important parts of the app without wasting needless time.</p>
+<p><strong>Acceptance Tests:</strong></p>
+<ol>
+<li>Clicking each option/shortcut will take me to the corresponding section of the app.</li>
+<li>The shortcut hotbar is on the bottom of the app within all pages/functions of our app.</li>
+</ol>
 <h2 id="moscow">MoSCoW</h2>
+<h3 id="must-have">Must Have</h3>
+<ul>
+<li>US.01.01.01 - Login and create account</li>
+<li>US 01.02.01 - User profile screen</li>
+<li>US 01.03.01 - Create and attach child account</li>
+<li>US 02.03.01 - User disclaimer</li>
+<li>US 02.04.01 - Language selection</li>
+<li>US 02.05.01 - User Home Screen</li>
+<li>US 03.01.01 - Navigation menu</li>
+</ul>
+<h3 id="should-have">Should Have</h3>
+<ul>
+<li>US 02.01.01 - Splash Screen</li>
+<li>US 03.01.02 - Call 811 and 911 button</li>
+</ul>
+<h3 id="could-have">Could Have</h3>
+<ul>
+<li>US 02.02.01 - App introduction/Onboarding</li>
+</ul>
+<h3 id="would-like-but-wont-get">Would Like But Won't Get</h3>
+<ul>
+<li></li>
+</ul>
 <h2 id="similar-products">Similar Products</h2>
 <ul>
 <li><a href="https://apps.apple.com/us/app/first-aid-by-american-red-cross/id529160691">First Aid: American Red Cross</a><ul>
