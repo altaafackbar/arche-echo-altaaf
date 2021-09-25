@@ -6,7 +6,7 @@
 
 Description to be added
 
-![UML Diagram](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/images/CMPUT%20401%20ARCHE_ECHO%20UML%20Component%20Diagram.png?token=AEZVPX2PZOBKEVAUAP55FZLBKZAOK)
+![UML Diagram](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/main/docs/images/UML%20Component%20Diagram.png?token=AEZVPX7XYECJDCYYPBHEVZ3BLDLCU)
 
 ## Sequence Diagram
 
