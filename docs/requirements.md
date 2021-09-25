@@ -18,7 +18,7 @@
 
 As a user, I want to create a personal account, so that I can have a secure, individualized experience that is appropriate for myself and my family’s needs.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Login as a user with correct information
 2. Input incorrect information and make sure it doesn’t allow the user to continue or access another individual’s account
@@ -27,7 +27,7 @@ As a user, I want to create a personal account, so that I can have a secure, ind
 
 As a user, I want to have a centralized location for all information that is personally related to me (profile picture, children’s sub-profiles, etc.) and also the ability to customize/add/remove from it, so that I can have an experience that feels conducive to myself and my children’s needs.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Changes to my profile picture will be saved
 2. Clicking “add a child” will take the user to the “create a child’s profile” screen
@@ -36,16 +36,35 @@ As a user, I want to have a centralized location for all information that is per
 
 As a user, I want to create a profile(s) for my child(ren), so that I can store/track relevant information like the: child’s age, weight, height, and medical dosages; I also want to be able to add to/update this information so that I can see a dated and sorted entry log.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Creating a child’s profile should: create an entry in the database and should still exist after reloading the app (with the correct information).
 2. Updating a child’s profile should: add a new entry in the database; properly displaying the new information in addition to the old info on the child’s profile page after reloading.
+
+### US 01.03.02 - Display summary statistics for each individual child and their entry logs (height, weight and dosage)
+
+As a user, I want to see my child(ren)’s starting entry, current entry and net change as summary statistics (for each individual category/log), so I can have key information without wasting any needless effort.
+
+**Acceptance Criteria:**
+
+1. “Starting” statistics should be the exact same as the first entry within the entry log.
+2. “Current” statistics should be the newest entry in the entry log.
+3. “Net change” statistics should be the difference between the “starting” and “current” statistics. 
+
+### US 01.03.03 - Graphically see changes/trends within a certain child’s entry log
+
+As a user, I want to see my child(ren)’s historical data plotted on a graph, so I can see trends/transformations over time in a quick and simple graphical medium.
+
+**Acceptance Criteria:**
+
+1. For every entry within the entry log, there should be an appropriate and accurate plot on the graph.
+2. The scale of the graph should be appropriate and automatically modified according to the size of the numbers in the entry log (allowing for a graph without needless blank space).
 
 ### US 02.01.01 - Splash Screen(s)
 
 As a user, I want to see a splash screen when I launch the app so that I immediately know what app I am opening and also the organizations/companies behind the app I am using.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Launching the app immediately shows the splash screen(s).
 2. The app functions as expected afterwards.
@@ -54,7 +73,7 @@ As a user, I want to see a splash screen when I launch the app so that I immedia
 
 As a user, I want to be able to see a brief overview of the app's functionalities and offerings (through simple infographics) so that I can quickly decide if this app is appropriate/suitable for my usage.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Launching the app for the first time shows the app introduction slides.
 2. The app will show the user disclaimer afterwards.
@@ -63,7 +82,7 @@ As a user, I want to be able to see a brief overview of the app's functionalitie
 
 As a user, I want to see a disclaimer form the first time I use the app so I know the risks and the implications of using this app; I also want to be able to accept or decline the disclaimer form so that my consent dictates whether I can use the app or not.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Accepting the disclaimer form directs you to the language selection screen.
 2. Declining the disclaimer form sends you back to the beginning of  app introduction slides.
@@ -72,7 +91,7 @@ As a user, I want to see a disclaimer form the first time I use the app so I kno
 
 As a user, I want to be able to select my choice of language (between English and French) the first time I use the app so I am able to use the app in my preferred official language.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Selecting English as my choice of language will display all subsequent app functions in English.
 2. Selecting French as my choice of language will display all subsequent app functions in French.
@@ -81,7 +100,7 @@ As a user, I want to be able to select my choice of language (between English an
 
 As a user, I want to have an intuitive home screen so that I have simple and quick paths of navigation to the major functions/sections of the app.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Clicking each option/shortcut will take me to the corresponding  section of the app.
 2. Clicking the back arrow from the subsequent pages will bring me back to the home screen.
@@ -90,7 +109,7 @@ As a user, I want to have an intuitive home screen so that I have simple and qui
 
 As a user, I want to have a navigation menu so that I can navigate to different functions more easily.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Clicking each possible menu item will take me to the corresponding app page.
 
@@ -98,7 +117,7 @@ As a user, I want to have a navigation menu so that I can navigate to different 
 
 As a user, I want to let the app take me to my phone’s dialpad and pre-enter either 811 or 911 into it, so that I can have an easy way to access further health information (HealthLink in Alberta) or emergency help if deemed necessary.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Clicking the 811 button will take me to my phone’s dialpad with 811 pre-entered into it.
 2. Clicking the 911 button will take me to my phone’s dialpad with 911 pre-entered into it.
@@ -107,10 +126,101 @@ As a user, I want to let the app take me to my phone’s dialpad and pre-enter e
 
 As a user, I want to have a persistent set of shortcuts so that I can intuitively access the most important parts of the app without wasting needless time.
 
-**Acceptance Tests:**
+**Acceptance Criteria:**
 
 1. Clicking each option/shortcut will take me to the corresponding section of the app.
 2. The shortcut hotbar is on the bottom of the app within all pages/functions of our app.
+
+### US 04.01.01 - App settings menu
+
+As a user, I want to be able to customize and change the degree of accessibility (login, signup, and logout) and the visual functionality (language, text size, night mode) of the app on my own device so that I can view/use the app in the way that is most convenient and comfortable for me.
+
+**Acceptance Criteria:**
+
+1. Using/changing each setting and their options, will bring out the desired outcome while maintaining proper app functionality.
+
+### US 04.01.02 - Night Mode
+
+As a user, I want to be able to enable/disable “night mode” for the app so that I can have a color theme that is less harsh on the eyes.
+
+**Acceptance Criteria:**
+
+1. Toggling night mode on will change every page on the app to a darker color theme.
+2. Toggling night mode off will change every page on the app back to a lighter color theme. 
+   
+### US 04.01.03 - Text Size
+
+As a user, I want to be able to customize the font size of the app so that I can have an easier time discerning text if I’m visually impaired.
+
+**Acceptance Criteria:**
+
+1. Choosing between each of the three levels of text will accordingly adjust the font size of the text used in the app.
+
+### US 04.01.04 - Language and account settings
+
+As an admin, I want users to have the ability to customize their language and modify their account settings (signup, login, logout) even after initial setup, so that users never feel bound by their choices during initial setup.
+
+**Acceptance Criteria:**
+
+1. Choosing between French and English will make all text in the app the corresponding language.
+2. Logging out will remove all personal information associated with the account off of the app.
+3. Logging in will fill the app with your personal information and saved details.
+4. Signing up will properly create an account in the backend in which users can continually reuse.
+
+### US 05.01.01 - Tools and resources menu
+
+As a user, I want to be able to have access to a catalogue of common, but informative and medically-sound media, so that I can confidently find, learn and (potentially) apply information appropriate to my medical situation.
+
+**Acceptance Criteria:**
+
+1. Nature and scope of this functionality of the app is too dynamic and large--no real simple acceptance criteria (too many file types, different file types at the same time, etc.)
+
+### US 05.01.02 - Adding/removing from tools and resources
+
+As an admin, I want to be able to dynamically add/edit/remove media from the catalogue, so that we can keep the informative content on our app relevant and purposeful.
+
+**Acceptance Criteria:**
+
+1. Nature and scope of this functionality of the app is too dynamic and large--no real simple acceptance criteria (too many file types, different file types at the same time, etc.)
+
+### US 06.01.01 - ARCHE-ECHO info page (About us page)
+
+As an admin, I want users to see an info page (that admins can edit) regarding ARCHE | ECHO, so that users can easily access basic information about the application and owners.
+
+**Acceptance Criteria:**
+
+1. Clicking “ARCHE | ECHO” will bring up a page with some simple “about us” information.
+2. Editing in admin mode will correctly store edits in the backend and a reload will correctly display the edits.
+
+### US 06.02.01 - Contact us (at ARCHE-ECHO) function
+
+As an admin, I want users to be able to easily find our organization’s contact information, so that they can provide feedback and report issues.
+
+**Acceptance Criteria:**
+
+1. Clicking “Contact Us” will lead to a simple page with labelled contact information.
+
+### US 07.01.01 - Find a Clinic (Interactive Maps)
+
+As a user, I want to be able to access a map with the closest clinics around me and relevant information such as its distance, rating, hours of operation, address and phone number, so that I can decide which hospital is the most convenient and appropriate for my needs.
+
+**Acceptance Criteria:**
+
+1. Clicking the “Find a Clinic” tab will bring me to the interactive map in which I will see pins on the map (that I can select) and also a list of nearby clinics. 
+
+### US 07.01.02 - Sorting/Filtering/Saving of the Clinics
+
+As a user, I want to be able to sort, filter and save clinics, so that my preferences (for which/what clinics) will be remembered and my situational needs can be more accurately addressed.
+
+**Acceptance Criteria:**
+
+1. Selecting “Sort by proximity” will sort the hospitals by distance.
+2. Selecting “sort by rating” will sort the clinics by rating.
+3. Filtering for a type of clinic will bring up only those types of clinics.
+4. Selecting “save location” will keep this clinic at the top of your clinic list.
+
+
+
 
 
 ## MoSCoW
