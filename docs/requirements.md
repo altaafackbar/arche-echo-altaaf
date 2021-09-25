@@ -219,9 +219,13 @@ As a user, I want to be able to sort, filter and save clinics, so that my prefer
 3. Filtering for a type of clinic will bring up only those types of clinics.
 4. Selecting “save location” will keep this clinic at the top of your clinic list.
 
+### US 08.01.01 - Symptom checker with select region of body function (Select symptom, related factors and show list of cause)
 
+As a user, I want to be able to select a body part on the interactive animation and then be able to select multiple symptoms, so that I can get an accurate list of causes and potential ailments.
 
+**Acceptance Criteria:**
 
+1. Selecting a body part and choosing symptoms will bring me to the relevant causes/ailments.
 
 ## MoSCoW
 
@@ -239,6 +243,7 @@ As a user, I want to be able to sort, filter and save clinics, so that my prefer
 - US 05.01.02 - Adding/removing from tools and resources
 - US 07.01.01 - Find a Clinic (Interactive Maps)
 - US 07.01.02 - Sorting/Filtering/Saving of the Clinics
+- US 08.01.01 - Symptom checker with select region of body function
 
 ### Should Have
 

@@ -4,6 +4,8 @@ This page provides a general overview of the Story Map, the overall Project Plan
 
 ## Story Map
 
+![story map](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/main/docs/images/ARCHE%20ECHO%20story-map.png?token=AEZVPXZKAZEN22FDJ4QAS4TBLDMW6)
+
 ## Project Plan
 
 ### Sprint 1

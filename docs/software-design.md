@@ -18,5 +18,5 @@ The picture below shows a rough sequence of interactions between a user, the app
 
 Description and wireframe image to be added.
 
-![Wireframe](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/images/docs/images/ARCHE%20ECHO%20UI%20Flow%20Diagram%20(1).png?token=AEZVPX54UJ6IUQGZL5R24PTBLDJQS)
+![Wireframe](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/main/docs/images/ARCHE%20ECHO%20UI%20Flow%20Diagram-compressed.png?token=AEZVPXZOKVTGB3QACXYTDYTBLDNWG)
 
