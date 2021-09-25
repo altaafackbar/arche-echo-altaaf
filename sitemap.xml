@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://ualberta-cmput401.github.io/arche-echo/</loc>
+         <loc>https://ualberta-cmput401.github.io/arche-echo/docs/</loc>
          <lastmod>2021-09-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://ualberta-cmput401.github.io/arche-echo/project-management/</loc>
+         <loc>https://ualberta-cmput401.github.io/arche-echo/docs/project-management/</loc>
          <lastmod>2021-09-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://ualberta-cmput401.github.io/arche-echo/requirements/</loc>
+         <loc>https://ualberta-cmput401.github.io/arche-echo/docs/requirements/</loc>
          <lastmod>2021-09-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://ualberta-cmput401.github.io/arche-echo/software-design/</loc>
+         <loc>https://ualberta-cmput401.github.io/arche-echo/docs/software-design/</loc>
+         <lastmod>2021-09-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ualberta-cmput401.github.io/arche-echo/images/</loc>
+         <lastmod>2021-09-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ualberta-cmput401.github.io/arche-echo/images/project-management/</loc>
+         <lastmod>2021-09-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ualberta-cmput401.github.io/arche-echo/images/requirements/</loc>
+         <lastmod>2021-09-25</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ualberta-cmput401.github.io/arche-echo/images/software-design/</loc>
          <lastmod>2021-09-25</lastmod>
          <changefreq>daily</changefreq>
     </url>
