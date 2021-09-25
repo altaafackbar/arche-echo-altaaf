@@ -11,8 +11,7 @@ Description to be added
 ## Sequence Diagram
 
 The picture below shows a rough sequence of interactions between a user, the app and its server.
-
-![UML_Sequence](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/bbc92e7e60a581a152c627b65388872a66db8224/uml/whole.jpg?token=AE5RB44YJE3ZNXJSOFYU7HLBLBN2S)
+![UML_Sequence](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/2ab165d3a6f457918957fd7df58a24afc6f564e3/docs/images/uml_sequence/whole.jpg?token=AE5RB44X4PW6SLN6E4QINEDBLDGWI)
 
 ## Low-Fidelity User interface
 Description and wireframe image to be added.
