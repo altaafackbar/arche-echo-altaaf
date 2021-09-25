@@ -61,6 +61,10 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#us-010301-create-and-attach-a-childs-profile-to-one-specific-account-only-accessible-when-logged-in">US 01.03.01 - Create and attach a child’s profile to one specific account (only accessible when logged-in)</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-010302-display-summary-statistics-for-each-individual-child-and-their-entry-logs-height-weight-and-dosage">US 01.03.02 - Display summary statistics for each individual child and their entry logs (height, weight and dosage)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-010303-graphically-see-changestrends-within-a-certain-childs-entry-log">US 01.03.03 - Graphically see changes/trends within a certain child’s entry log</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#us-020101-splash-screens">US 02.01.01 - Splash Screen(s)</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#us-020201-app-introductiononboarding-first-time-launching-the-app-only">US 02.02.01 -  App introduction/Onboarding? (first time launching the app only)</a>
@@ -76,6 +80,26 @@
     <li class="toctree-l3"><a class="reference internal" href="#us-030102-call-811-and-911-button-located-in-navigation-menu">US 03.01.02 - Call 811 and 911 button (located in navigation menu)</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#us-030201-shortcut-hotbar-bottom-of-app">US 03.02.01 - Shortcut hotbar (bottom of app)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-040101-app-settings-menu">US 04.01.01 - App settings menu</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-040102-night-mode">US 04.01.02 - Night Mode</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-040103-text-size">US 04.01.03 - Text Size</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-040104-language-and-account-settings">US 04.01.04 - Language and account settings</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-050101-tools-and-resources-menu">US 05.01.01 - Tools and resources menu</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-050102-addingremoving-from-tools-and-resources">US 05.01.02 - Adding/removing from tools and resources</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-060101-arche-echo-info-page-about-us-page">US 06.01.01 - ARCHE-ECHO info page (About us page)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-060201-contact-us-at-arche-echo-function">US 06.02.01 - Contact us (at ARCHE-ECHO) function</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-070101-find-a-clinic-interactive-maps">US 07.01.01 - Find a Clinic (Interactive Maps)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-070102-sortingfilteringsaving-of-the-clinics">US 07.01.02 - Sorting/Filtering/Saving of the Clinics</a>
     </li>
         </ul>
     </li>
@@ -163,79 +187,162 @@
 <h2 id="user-stories">User Stories</h2>
 <h3 id="us-010101-login-and-create-account">US 01.01.01 - Login and create account</h3>
 <p>As a user, I want to create a personal account, so that I can have a secure, individualized experience that is appropriate for myself and my family’s needs.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Login as a user with correct information</li>
 <li>Input incorrect information and make sure it doesn’t allow the user to continue or access another individual’s account</li>
 </ol>
 <h3 id="us-010201-user-profile-screen-and-customization">US 01.02.01 - User profile screen and customization</h3>
 <p>As a user, I want to have a centralized location for all information that is personally related to me (profile picture, children’s sub-profiles, etc.) and also the ability to customize/add/remove from it, so that I can have an experience that feels conducive to myself and my children’s needs.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Changes to my profile picture will be saved</li>
 <li>Clicking “add a child” will take the user to the “create a child’s profile” screen</li>
 </ol>
 <h3 id="us-010301-create-and-attach-a-childs-profile-to-one-specific-account-only-accessible-when-logged-in">US 01.03.01 - Create and attach a child’s profile to one specific account (only accessible when logged-in)</h3>
 <p>As a user, I want to create a profile(s) for my child(ren), so that I can store/track relevant information like the: child’s age, weight, height, and medical dosages; I also want to be able to add to/update this information so that I can see a dated and sorted entry log.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Creating a child’s profile should: create an entry in the database and should still exist after reloading the app (with the correct information).</li>
 <li>Updating a child’s profile should: add a new entry in the database; properly displaying the new information in addition to the old info on the child’s profile page after reloading.</li>
 </ol>
+<h3 id="us-010302-display-summary-statistics-for-each-individual-child-and-their-entry-logs-height-weight-and-dosage">US 01.03.02 - Display summary statistics for each individual child and their entry logs (height, weight and dosage)</h3>
+<p>As a user, I want to see my child(ren)’s starting entry, current entry and net change as summary statistics (for each individual category/log), so I can have key information without wasting any needless effort.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>“Starting” statistics should be the exact same as the first entry within the entry log.</li>
+<li>“Current” statistics should be the newest entry in the entry log.</li>
+<li>“Net change” statistics should be the difference between the “starting” and “current” statistics. </li>
+</ol>
+<h3 id="us-010303-graphically-see-changestrends-within-a-certain-childs-entry-log">US 01.03.03 - Graphically see changes/trends within a certain child’s entry log</h3>
+<p>As a user, I want to see my child(ren)’s historical data plotted on a graph, so I can see trends/transformations over time in a quick and simple graphical medium.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>For every entry within the entry log, there should be an appropriate and accurate plot on the graph.</li>
+<li>The scale of the graph should be appropriate and automatically modified according to the size of the numbers in the entry log (allowing for a graph without needless blank space).</li>
+</ol>
 <h3 id="us-020101-splash-screens">US 02.01.01 - Splash Screen(s)</h3>
 <p>As a user, I want to see a splash screen when I launch the app so that I immediately know what app I am opening and also the organizations/companies behind the app I am using.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Launching the app immediately shows the splash screen(s).</li>
 <li>The app functions as expected afterwards.</li>
 </ol>
 <h3 id="us-020201-app-introductiononboarding-first-time-launching-the-app-only">US 02.02.01 -  App introduction/Onboarding? (first time launching the app only)</h3>
 <p>As a user, I want to be able to see a brief overview of the app's functionalities and offerings (through simple infographics) so that I can quickly decide if this app is appropriate/suitable for my usage.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Launching the app for the first time shows the app introduction slides.</li>
 <li>The app will show the user disclaimer afterwards.</li>
 </ol>
 <h3 id="us-020301-user-disclaimer-first-time-launching-the-app-only">US 02.03.01 - User disclaimer (first time launching the app only)</h3>
 <p>As a user, I want to see a disclaimer form the first time I use the app so I know the risks and the implications of using this app; I also want to be able to accept or decline the disclaimer form so that my consent dictates whether I can use the app or not.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Accepting the disclaimer form directs you to the language selection screen.</li>
 <li>Declining the disclaimer form sends you back to the beginning of  app introduction slides.</li>
 </ol>
 <h3 id="us-020401-language-selection-first-time-launching-the-app-only">US 02.04.01 - Language selection (first time launching the app only)</h3>
 <p>As a user, I want to be able to select my choice of language (between English and French) the first time I use the app so I am able to use the app in my preferred official language.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Selecting English as my choice of language will display all subsequent app functions in English.</li>
 <li>Selecting French as my choice of language will display all subsequent app functions in French.</li>
 </ol>
 <h3 id="us-020501-user-home-screen">US 02.05.01 - User Home Screen</h3>
 <p>As a user, I want to have an intuitive home screen so that I have simple and quick paths of navigation to the major functions/sections of the app.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Clicking each option/shortcut will take me to the corresponding  section of the app.</li>
 <li>Clicking the back arrow from the subsequent pages will bring me back to the home screen.</li>
 </ol>
 <h3 id="us-030101-navigation-menu-bottom-right-hamburger-menu">US 03.01.01 - Navigation menu (bottom right hamburger menu)</h3>
 <p>As a user, I want to have a navigation menu so that I can navigate to different functions more easily.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Clicking each possible menu item will take me to the corresponding app page.</li>
 </ol>
 <h3 id="us-030102-call-811-and-911-button-located-in-navigation-menu">US 03.01.02 - Call 811 and 911 button (located in navigation menu)</h3>
 <p>As a user, I want to let the app take me to my phone’s dialpad and pre-enter either 811 or 911 into it, so that I can have an easy way to access further health information (HealthLink in Alberta) or emergency help if deemed necessary.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Clicking the 811 button will take me to my phone’s dialpad with 811 pre-entered into it.</li>
 <li>Clicking the 911 button will take me to my phone’s dialpad with 911 pre-entered into it.</li>
 </ol>
 <h3 id="us-030201-shortcut-hotbar-bottom-of-app">US 03.02.01 - Shortcut hotbar (bottom of app)</h3>
 <p>As a user, I want to have a persistent set of shortcuts so that I can intuitively access the most important parts of the app without wasting needless time.</p>
-<p><strong>Acceptance Tests:</strong></p>
+<p><strong>Acceptance Criteria:</strong></p>
 <ol>
 <li>Clicking each option/shortcut will take me to the corresponding section of the app.</li>
 <li>The shortcut hotbar is on the bottom of the app within all pages/functions of our app.</li>
+</ol>
+<h3 id="us-040101-app-settings-menu">US 04.01.01 - App settings menu</h3>
+<p>As a user, I want to be able to customize and change the degree of accessibility (login, signup, and logout) and the visual functionality (language, text size, night mode) of the app on my own device so that I can view/use the app in the way that is most convenient and comfortable for me.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>Using/changing each setting and their options, will bring out the desired outcome while maintaining proper app functionality.</li>
+</ol>
+<h3 id="us-040102-night-mode">US 04.01.02 - Night Mode</h3>
+<p>As a user, I want to be able to enable/disable “night mode” for the app so that I can have a color theme that is less harsh on the eyes.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>Toggling night mode on will change every page on the app to a darker color theme.</li>
+<li>Toggling night mode off will change every page on the app back to a lighter color theme. </li>
+</ol>
+<h3 id="us-040103-text-size">US 04.01.03 - Text Size</h3>
+<p>As a user, I want to be able to customize the font size of the app so that I can have an easier time discerning text if I’m visually impaired.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>Choosing between each of the three levels of text will accordingly adjust the font size of the text used in the app.</li>
+</ol>
+<h3 id="us-040104-language-and-account-settings">US 04.01.04 - Language and account settings</h3>
+<p>As an admin, I want users to have the ability to customize their language and modify their account settings (signup, login, logout) even after initial setup, so that users never feel bound by their choices during initial setup.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>Choosing between French and English will make all text in the app the corresponding language.</li>
+<li>Logging out will remove all personal information associated with the account off of the app.</li>
+<li>Logging in will fill the app with your personal information and saved details.</li>
+<li>Signing up will properly create an account in the backend in which users can continually reuse.</li>
+</ol>
+<h3 id="us-050101-tools-and-resources-menu">US 05.01.01 - Tools and resources menu</h3>
+<p>As a user, I want to be able to have access to a catalogue of common, but informative and medically-sound media, so that I can confidently find, learn and (potentially) apply information appropriate to my medical situation.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>Nature and scope of this functionality of the app is too dynamic and large--no real simple acceptance criteria (too many file types, different file types at the same time, etc.)</li>
+</ol>
+<h3 id="us-050102-addingremoving-from-tools-and-resources">US 05.01.02 - Adding/removing from tools and resources</h3>
+<p>As an admin, I want to be able to dynamically add/edit/remove media from the catalogue, so that we can keep the informative content on our app relevant and purposeful.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>Nature and scope of this functionality of the app is too dynamic and large--no real simple acceptance criteria (too many file types, different file types at the same time, etc.)</li>
+</ol>
+<h3 id="us-060101-arche-echo-info-page-about-us-page">US 06.01.01 - ARCHE-ECHO info page (About us page)</h3>
+<p>As an admin, I want users to see an info page (that admins can edit) regarding ARCHE | ECHO, so that users can easily access basic information about the application and owners.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>Clicking “ARCHE | ECHO” will bring up a page with some simple “about us” information.</li>
+<li>Editing in admin mode will correctly store edits in the backend and a reload will correctly display the edits.</li>
+</ol>
+<h3 id="us-060201-contact-us-at-arche-echo-function">US 06.02.01 - Contact us (at ARCHE-ECHO) function</h3>
+<p>As an admin, I want users to be able to easily find our organization’s contact information, so that they can provide feedback and report issues.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>Clicking “Contact Us” will lead to a simple page with labelled contact information.</li>
+</ol>
+<h3 id="us-070101-find-a-clinic-interactive-maps">US 07.01.01 - Find a Clinic (Interactive Maps)</h3>
+<p>As a user, I want to be able to access a map with the closest clinics around me and relevant information such as its distance, rating, hours of operation, address and phone number, so that I can decide which hospital is the most convenient and appropriate for my needs.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>Clicking the “Find a Clinic” tab will bring me to the interactive map in which I will see pins on the map (that I can select) and also a list of nearby clinics. </li>
+</ol>
+<h3 id="us-070102-sortingfilteringsaving-of-the-clinics">US 07.01.02 - Sorting/Filtering/Saving of the Clinics</h3>
+<p>As a user, I want to be able to sort, filter and save clinics, so that my preferences (for which/what clinics) will be remembered and my situational needs can be more accurately addressed.</p>
+<p><strong>Acceptance Criteria:</strong></p>
+<ol>
+<li>Selecting “Sort by proximity” will sort the hospitals by distance.</li>
+<li>Selecting “sort by rating” will sort the clinics by rating.</li>
+<li>Filtering for a type of clinic will bring up only those types of clinics.</li>
+<li>Selecting “save location” will keep this clinic at the top of your clinic list.</li>
 </ol>
 <h2 id="moscow">MoSCoW</h2>
 <h3 id="must-have">Must Have</h3>
