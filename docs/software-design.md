@@ -2,11 +2,10 @@
 
 ## Architecture/Component Diagram
 
+![UML Diagram](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/main/docs/images/UML%20Component%20Diagram.png?token=AEZVPX4IXBR4FCSR7JQDSLTBLDQ7Q)
+
 ## UML Class Diagram
 
-Description to be added
-
-![UML Diagram](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/main/docs/images/UML%20Component%20Diagram.png?token=AEZVPX4IXBR4FCSR7JQDSLTBLDQ7Q)
 
 ## Sequence Diagram
 
