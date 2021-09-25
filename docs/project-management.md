@@ -1,6 +1,6 @@
 # Project Management
 
-This page provides a general overview of the assigned tasks and roles for the duration of four sprints (subject to change).
+This page provides a general overview of the Story Map, the overall Project Plan for the four sprints, and an overview of the Team Canvas with a clickable link to the Team Canvas Mural document.
 
 ## Story Map
 
