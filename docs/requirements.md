@@ -234,19 +234,34 @@ As a user, I want to be able to sort, filter and save clinics, so that my prefer
 - US 02.04.01 - Language selection
 - US 02.05.01 - User Home Screen
 - US 03.01.01 - Navigation menu
+- US 03.02.01 - Shortcut hotbar
+- US 05.01.01 - Tools and resources menu
+- US 05.01.02 - Adding/removing from tools and resources
+- US 07.01.01 - Find a Clinic (Interactive Maps)
+- US 07.01.02 - Sorting/Filtering/Saving of the Clinics
 
 ### Should Have
 
 - US 02.01.01 - Splash Screen
 - US 03.01.02 - Call 811 and 911 button
+- US 04.01.01 - App settings menu
+- US 04.01.02 - Night Mode
+- US 04.01.03 - Text Size
+- US 04.01.04 - Language and account settings
+- US 06.01.01 - ARCHE-ECHO info page
+- US 06.02.01 - Contact us (at ARCHE-ECHO) function
+
 
 ### Could Have
 
 - US 02.02.01 - App introduction/Onboarding
+- US 01.03.02 - Display summary statistics for each individual child and their entry logs
+- US 01.03.03 - Graphically see changes/trends within a certain child’s entry log
 
 ### Would Like But Won't Get
 
-- 
+- App usage data
+- Exchange Bluetooth token with another phone
 
 ## Similar Products
 
