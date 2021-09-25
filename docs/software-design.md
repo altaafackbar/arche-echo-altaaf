@@ -11,5 +11,5 @@ The picture below shows a rough sequence of interactions between a user, the app
 ![UML_Sequence](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/bbc92e7e60a581a152c627b65388872a66db8224/uml/whole.jpg?token=AE5RB44YJE3ZNXJSOFYU7HLBLBN2S)
 
 ## Low-Fidelity User interface
-Description and wireframe image to be added
+Description and wireframe image to be added.
 
