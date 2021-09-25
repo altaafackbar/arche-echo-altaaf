@@ -7,24 +7,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   
-  <link rel="canonical" href="https://ualberta-cmput401.github.io/arche-echo/images/requirements/">
-  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <link rel="canonical" href="https://ualberta-cmput401.github.io/arche-echo/requirements/">
+  <link rel="shortcut icon" href="../img/favicon.ico">
   <title>Project Requirements - ARCHE | ECHO</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="../../css/theme.css" />
-  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
   <script>
     // Current page data
     var mkdocs_page_name = "Project Requirements";
-    var mkdocs_page_input_path = "images/requirements.md";
-    var mkdocs_page_url = "/arche-echo/images/requirements/";
+    var mkdocs_page_input_path = "requirements.md";
+    var mkdocs_page_url = "/arche-echo/requirements/";
   </script>
   
-  <script src="../../js/jquery-2.1.1.min.js" defer></script>
-  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script> 
 </head>
@@ -37,25 +37,107 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="../.." class="icon icon-home"> ARCHE | ECHO</a>
+        <a href=".." class="icon icon-home"> ARCHE | ECHO</a>
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-                <ul>
-                    <li class="toctree-l1"><a class="" href="../../requirements.md">Project Requirements</a>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Project Requirements</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#executive-summary">Executive Summary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#project-glossary">Project Glossary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#user-stories">User Stories</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#us-010101-login-and-create-account">US 01.01.01 - Login and create account</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-010201-user-profile-screen-and-customization">US 01.02.01 - User profile screen and customization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-010301-create-and-attach-a-childs-profile-to-one-specific-account-only-accessible-when-logged-in">US 01.03.01 - Create and attach a child’s profile to one specific account (only accessible when logged-in)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-010302-display-summary-statistics-for-each-individual-child-and-their-entry-logs-height-weight-and-dosage">US 01.03.02 - Display summary statistics for each individual child and their entry logs (height, weight and dosage)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-010303-graphically-see-changestrends-within-a-certain-childs-entry-log">US 01.03.03 - Graphically see changes/trends within a certain child’s entry log</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-020101-splash-screens">US 02.01.01 - Splash Screen(s)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-020201-app-introductiononboarding-first-time-launching-the-app-only">US 02.02.01 -  App introduction/Onboarding? (first time launching the app only)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-020301-user-disclaimer-first-time-launching-the-app-only">US 02.03.01 - User disclaimer (first time launching the app only)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-020401-language-selection-first-time-launching-the-app-only">US 02.04.01 - Language selection (first time launching the app only)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-020501-user-home-screen">US 02.05.01 - User Home Screen</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-030101-navigation-menu-bottom-right-hamburger-menu">US 03.01.01 - Navigation menu (bottom right hamburger menu)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-030102-call-811-and-911-button-located-in-navigation-menu">US 03.01.02 - Call 811 and 911 button (located in navigation menu)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-030201-shortcut-hotbar-bottom-of-app">US 03.02.01 - Shortcut hotbar (bottom of app)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-040101-app-settings-menu">US 04.01.01 - App settings menu</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-040102-night-mode">US 04.01.02 - Night Mode</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-040103-text-size">US 04.01.03 - Text Size</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-040104-language-and-account-settings">US 04.01.04 - Language and account settings</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-050101-tools-and-resources-menu">US 05.01.01 - Tools and resources menu</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-050102-addingremoving-from-tools-and-resources">US 05.01.02 - Adding/removing from tools and resources</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-060101-arche-echo-info-page-about-us-page">US 06.01.01 - ARCHE-ECHO info page (About us page)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-060201-contact-us-at-arche-echo-function">US 06.02.01 - Contact us (at ARCHE-ECHO) function</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-070101-find-a-clinic-interactive-maps">US 07.01.01 - Find a Clinic (Interactive Maps)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#us-070102-sortingfilteringsaving-of-the-clinics">US 07.01.02 - Sorting/Filtering/Saving of the Clinics</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#moscow">MoSCoW</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#must-have">Must Have</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#should-have">Should Have</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#could-have">Could Have</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#would-like-but-wont-get">Would Like But Won't Get</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#similar-products">Similar Products</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#open-source-products">Open Source Products</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#technical-resources">Technical Resources</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#backend-firebase-firestore">Backend: Firebase + Firestore</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#deployment-cybera-travis-ci">Deployment: Cybera + Travis CI</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#frontend-flutter">Frontend: Flutter</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="" href="../../software-design.md">Software Design</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../software-design/">Software Design</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="" href="../../project-management.md">Project Management</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../project-management/">Project Management</a>
                     </li>
                 </ul>
       </div>
@@ -67,7 +149,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../..">ARCHE | ECHO</a>
+        <a href="..">ARCHE | ECHO</a>
       </nav>
 
       
@@ -75,7 +157,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../..">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
     
@@ -272,19 +354,33 @@
 <li>US 02.04.01 - Language selection</li>
 <li>US 02.05.01 - User Home Screen</li>
 <li>US 03.01.01 - Navigation menu</li>
+<li>US 03.02.01 - Shortcut hotbar</li>
+<li>US 05.01.01 - Tools and resources menu</li>
+<li>US 05.01.02 - Adding/removing from tools and resources</li>
+<li>US 07.01.01 - Find a Clinic (Interactive Maps)</li>
+<li>US 07.01.02 - Sorting/Filtering/Saving of the Clinics</li>
 </ul>
 <h3 id="should-have">Should Have</h3>
 <ul>
 <li>US 02.01.01 - Splash Screen</li>
 <li>US 03.01.02 - Call 811 and 911 button</li>
+<li>US 04.01.01 - App settings menu</li>
+<li>US 04.01.02 - Night Mode</li>
+<li>US 04.01.03 - Text Size</li>
+<li>US 04.01.04 - Language and account settings</li>
+<li>US 06.01.01 - ARCHE-ECHO info page</li>
+<li>US 06.02.01 - Contact us (at ARCHE-ECHO) function</li>
 </ul>
 <h3 id="could-have">Could Have</h3>
 <ul>
 <li>US 02.02.01 - App introduction/Onboarding</li>
+<li>US 01.03.02 - Display summary statistics for each individual child and their entry logs</li>
+<li>US 01.03.03 - Graphically see changes/trends within a certain child’s entry log</li>
 </ul>
 <h3 id="would-like-but-wont-get">Would Like But Won't Get</h3>
 <ul>
-<li></li>
+<li>App usage data</li>
+<li>Exchange Bluetooth token with another phone</li>
 </ul>
 <h2 id="similar-products">Similar Products</h2>
 <ul>
@@ -344,6 +440,13 @@
           </div>
           <footer>
   
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../software-design/" class="btn btn-neutral float-right" title="Software Design">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+    </div>
+  
 
   <hr/>
 
@@ -367,12 +470,14 @@
     
     
     
+      <span><a href="../software-design/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
   </span>
 </div>
-    <script>var base_url = '../..';</script>
-    <script src="../../js/theme_extra.js" defer></script>
-    <script src="../../js/theme.js" defer></script>
-      <script src="../../search/main.js" defer></script>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
     <script defer>
         window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
