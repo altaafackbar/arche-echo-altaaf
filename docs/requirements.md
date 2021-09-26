@@ -304,7 +304,7 @@ As a user, I want to be able to select a body part on the interactive animation 
 
 + [Cybera](https://www.cybera.ca/)
 + [Travis CI](https://docs.travis-ci.com/)
-+ [Flutter Deployment Documentation](https://flutter.dev/docs/deployment/cd)
++ [React Native Deployment Documentation](https://docs.expo.dev/distribution/app-stores/)
 
 ### Frontend: React Native + Expo
 
