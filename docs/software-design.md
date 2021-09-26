@@ -11,7 +11,7 @@ This is a component diagram.
 ## UML Class Diagram
 
 This is a UML class diagram of logical entities. The details will be improved as the implementation is clarified.
-![UML Class Diagram]()
+![UML Class Diagram](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/main/docs/images/ARCHE%20_%20ECHO%20-%20UML%20Class.drawio.png?token=AEZVPXZRMLEAZI65W3EITXLBLD5FY)
 
 ## Sequence Diagram
 

@@ -294,11 +294,11 @@ As a user, I want to be able to select a body part on the interactive animation 
 
 ## Technical Resources
 
-### Backend: Firebase + Firestore
+### Backend: Django + MongoDB
 
-+ [Firebase Documentation](https://firebase.google.com/docs)
-+ [Firestore Documentation](https://firebase.google.com/docs/firestore)
-+ [Flutter Firebase Tutorial](https://www.youtube.com/watch?v=sfA3NWDBPZ4&list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC&ab_channel=TheNetNinja)
++ [Django Documentation](https://docs.djangoproject.com/en/3.2/)
++ [MongoDB Documentation](https://docs.mongodb.com/realm/tutorial/react-native/)
++ [Django and React Native Tutorial](https://blog.crowdbotics.com/react-native-django-for-beginners/)
 
 ### Deployment: Cybera + Travis CI
 
@@ -306,10 +306,11 @@ As a user, I want to be able to select a body part on the interactive animation 
 + [Travis CI](https://docs.travis-ci.com/)
 + [Flutter Deployment Documentation](https://flutter.dev/docs/deployment/cd)
 
-### Frontend: Flutter
+### Frontend: React Native + Expo
 
-+ [Flutter Documentation](https://flutter.dev/docs)
-+ [Flutter Tutorial](https://www.youtube.com/watch?v=x0uinJvhNxI&ab_channel=Academind)
-+ [Flutter Resources](https://github.com/Solido/awesome-flutter)
++ [React Native Documentation](https://reactnative.dev/docs/getting-started)
++ [React Native Resources](https://github.com/jondot/awesome-react-native)
++ [React Native Tutorial](https://youtu.be/npe3Wf4tpSg)
++ [Expo Documentation](https://docs.expo.dev/)
 
 
