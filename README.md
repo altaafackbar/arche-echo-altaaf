@@ -1,6 +1,6 @@
 # ARCHE | ECHO App
 
-## Depolyment website
+## Deployment website
 https://ualberta-cmput401.github.io/arche-echo/requirements/
 
 ## Project overview
