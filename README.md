@@ -1,9 +1,9 @@
 # ARCHE | ECHO App
 
-## Deployment website
+## Deployment Website
 https://ualberta-cmput401.github.io/arche-echo/requirements/
 
-## Project overview
+## Project Overview
 
 This project involves developing an app for parents managing their child's acute illness. The ARCHE and ECHO groups have been co-developing parental health resources (i.e. KT tools such as interactive infographics, videos, and eBooks). These resources are played in healthcare setting across Canada including Alberta’s HUTV platform which results in exposure to almost a million viewers each month.
 
@@ -11,4 +11,4 @@ Our goal is to increase the accessibility and visibility of these tools to paren
 
 The app will support two languages: English and French.
 ##
-Meeting Minutes can be found at [wiki](https://github.com/UAlberta-CMPUT401/arche-echo/wiki)
+**Meeting Minutes can be found at our [Wiki]**(https://github.com/UAlberta-CMPUT401/arche-echo/wiki)
