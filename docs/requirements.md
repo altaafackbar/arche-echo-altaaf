@@ -282,13 +282,13 @@ As a user, I want to be able to select a body part on the interactive animation 
 
 ## Open Source Products
 
-+ [Flutter Translate](https://github.com/bratan/flutter_translate)
-    + Open source library for implementing other languages in Flutter.
++ [React Native Translation](https://www.npmjs.com/package/react-native-translation)
+    + Open source library for implementing other languages in React Native.
     + Allows the user to toggle between different languages seamlessly. Using this library would be an efficient means of integrating French and English translation options in the app.
-+ [Geolocator API](https://pub.dev/packages/geolocator)
++ [Geolocator API](https://github.com/react-native-geolocation/react-native-geolocation)
     + API used to access geolocation of device and pinpoint exact location.
     + Finds the location of the user which we can subsequently use along with the Google Maps SDK to find nearby clinics based on user location.
-+ [Google Maps SDK](https://pub.dev/packages/google_maps_flutter)
++ [Google Maps SDK](https://docs.expo.dev/versions/latest/sdk/map-view/)
     + Software Development Kit for integrating Google Maps into applications.
     + Implements Google Maps into the application which can be used to pinpoint nearby clinics for users to find based on their geographic location.
 
