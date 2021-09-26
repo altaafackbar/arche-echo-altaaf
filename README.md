@@ -11,4 +11,4 @@ Our goal is to increase the accessibility and visibility of these tools to paren
 
 The app will support two languages: English and French.
 ##
-**Meeting Minutes can be found at our [Wiki]**(https://github.com/UAlberta-CMPUT401/arche-echo/wiki)
+### Meeting Minutes can be found at our [Wiki](https://github.com/UAlberta-CMPUT401/arche-echo/wiki)
