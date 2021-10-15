@@ -81,14 +81,22 @@ WSGI_APPLICATION = 'arche_echo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# PostgreSQL Database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'arche_echo',
+#         'USER': 'postgres',
+#         'PASSWORD': 'archeecho401',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'arche_echo',
-        'USER': 'postgres',
-        'PASSWORD': 'archeecho401',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -147,12 +155,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
 
         # Oauth2 Authentication classes
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
+        # django-oauth-toolkit >= 1.0.0
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework_social_oauth2.authentication.SocialAuthentication',
     ],
 }
 
 AUTHENTICATION_BACKENDS = (
-   'rest_framework_social_oauth2.backends.DjangoOAuth2',
-   'django.contrib.auth.backends.ModelBackend',
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 )
