@@ -4,7 +4,7 @@ This page provides a general overview of the Story Map, the overall Project Plan
 
 ## Story Map
 
-![story map](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/main/docs/images/ARCHE%20ECHO%20story-map.png?token=AEZVPX5SVYT434R4776LZ4TBMUOYC)
+![story map](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/main/docs/images/ARCHE%20ECHO%20story-map.png?token=AE5RB4YBEXILIMGKNIOBWXLBLDQL2)
 
 
 ## Project Plan
@@ -64,4 +64,4 @@ This page provides a general overview of the Story Map, the overall Project Plan
 | Codebase                                 | US 01.03.01 - Create and attach a child’s profile to one specific account | Jun Li      | November 23rd, 2021 |
 
 ## Team Canvas
-![Team Canvas](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/main/docs/images/Team%20Canvas.png?token=AEZVPXZCICS2JYWSC4G4X2TBMUPQ2)
+![Team Canvas](https://raw.githubusercontent.com/UAlberta-CMPUT401/arche-echo/main/docs/images/Team%20Canvas.png?token=AE5RB47MOFAYIBRFIR4BQN3BLDQV2)

@@ -6,7 +6,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import Landing from './login-pages/Landing'
 import Login from './login-pages/Login'
 import SignUp from './login-pages/SignUp'
-import Disclaimer from './login-pages/Disclaimer'
 
 const Stack = createNativeStackNavigator()
 
@@ -19,7 +18,6 @@ export default function Navigator(){
     <Stack.Screen options={{headerShown: false}} name="Landing" component={Landing} />
     <Stack.Screen name="Login" component={Login} />
     <Stack.Screen name="SignUp" component={SignUp} />
-    <Stack.Screen name="Disclaimer" component={Disclaimer} />
     </Stack.Navigator>
     </NavigationContainer>
 
