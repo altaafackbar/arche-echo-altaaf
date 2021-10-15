@@ -24,14 +24,15 @@ auth_api_urls = [
 
 
 if settings.DEBUG:
-    auth_api_urls.append(path(r'verify', include('rest_framework.urls')))
+    auth_api_urls.append(path(r'verify/', include('rest_framework.urls')))
 
 api_url_patterns = [
-    path(r'accounts/', include(users_api_router.router.urls)),
+    path('', include('users.urls')),
     path(r'auth/', include(auth_api_urls)),
 ]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(api_url_patterns)),
+    
 ]

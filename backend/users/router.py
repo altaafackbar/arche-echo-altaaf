@@ -1,7 +1,9 @@
-from rest_framework import routers
-from .viewsets import userViewSet
+# from rest_framework import routers, urlpatterns
+# from .viewsets import UserViewSet
 
-app_name = 'users'
+# app_name = 'users'
 
-router = routers.DefaultRouter()
-router.register('users', userViewSet)
+# router = routers.SimpleRouter()
+# router.register(r'', UserViewSet, basename='accounts')
+# # router.register('profiles', ProfileViewSet)
+# urlpatterns = router.urls
