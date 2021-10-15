@@ -6,6 +6,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Landing from './login-pages/Landing'
 import Login from './login-pages/Login'
 import SignUp from './login-pages/SignUp'
+import Onboard from './screens/onboarding-screens/Onboarding'
 
 const Stack = createNativeStackNavigator()
 
@@ -14,10 +15,23 @@ export default function Navigator(){
   return(
     
     <NavigationContainer>
-    <Stack.Navigator> 
+    <Stack.Navigator
+    screenOptions={{
+      headerStyle: {
+      
+      backgroundColor: 'transparent'},
+      headerTransparent: true,
+      headerTitle: '',
+      headerLeftContainerStyle: {
+        paddingLeft: 20
+      }
+      
+      }}
+    > 
     <Stack.Screen options={{headerShown: false}} name="Landing" component={Landing} />
     <Stack.Screen name="Login" component={Login} />
     <Stack.Screen name="SignUp" component={SignUp} />
+    <Stack.Screen name="Onboarding" component={Onboard} />
     </Stack.Navigator>
     </NavigationContainer>
 
@@ -42,3 +56,19 @@ export default function Navigator(){
 //     justifyContent: 'center',
 //   },
 // });
+
+// const [isLoaded] = useFonts({
+//   "Poppins-Regular": require('./assets/fonts/Poppins-Regular.otf'),
+//   "Poppins-Italic": require('./assets/fonts/Poppins-Italic.otf'),
+//   "Poppins-Semibold": require('./assets/fonts/Poppins-SemiBold.otf'),
+//   "Poppins-Semibold-Italic": require('./assets/fonts/Poppins-SemiBoldItalic.otf'),
+//   "Poppins-Thin": require('./assets/fonts/Poppins-Thin.otf'),
+//   "Poppins-Thin-Italic": require('./assets/fonts/Poppins-ThinItalic.otf'),
+//   "Poppins-Medium": require('./assets/fonts/Poppins-Medium.otf'),
+//   "Poppins-Medium-Italic": require('./assets/fonts/Poppins-MediumItalic.otf'),
+
+// });
+
+// if (!isLoaded) {
+//   return <AppLoading />;
+// }

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
       fontSize: 16,
-      color: '#DEDEDE',
+      color: '#919191',
       textAlign: 'center',
       padding: 10,
   },
