@@ -1,0 +1,10 @@
+# includes.yaml
+---
+
+name: ARCHE-ECHO Backend Test Variables
+description: ARCHE-ECHO Backend Test Variables
+
+variables:
+  host: 127.0.0.1
+  port: 8000
+  id: 1

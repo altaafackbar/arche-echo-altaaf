@@ -1,0 +1,17 @@
+---
+test_name: test create user account
+
+stages:
+  - name: Check if we could create an account
+    request:
+      url: http://127.0.0.1:8000/api/accounts/
+      method: POST
+      json:
+        email: "test@test.com"
+        first_name: "FirstTest"
+        last_name: "LastTest"
+        password: "testpoassword123"
+    response:
+      status_code: 201
+      json:
+        message: "User Created"
