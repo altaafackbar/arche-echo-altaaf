@@ -37,3 +37,7 @@ python manage.py runserver
 ```
 
 
+## Documentation Endpoint
+http://localhost:8000/docs/   (or ipv4/ipv6 address instaed of localhost)
+
+
