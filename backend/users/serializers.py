@@ -1,6 +1,7 @@
 from django.db.models import fields
-from .models import CustomUser
+from .models import CustomUser, Profile
 from rest_framework import serializers
+
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
@@ -13,4 +14,10 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CustomUser
-        fields = ['url', 'id', 'email', 'first_name', 'last_name', 'password']
+        fields = ['id', 'email', 'first_name', 'last_name', 'password']
+
+# class ProfileSerializer(serializers.ModelSerializer):
+
+#     class Meta:
+#         model = Profile
+#         fields = ['url', 'id', 'user', 'image']
