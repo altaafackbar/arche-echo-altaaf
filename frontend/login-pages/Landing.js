@@ -3,6 +3,7 @@ import { Text, View, Button, StyleSheet, Image, SafeAreaView, Pressable } from '
 import { useNavigation } from '@react-navigation/native';
 import Onboarding from 'react-native-onboarding-swiper';
 import MainPhoto from '../assets/images/landing-image.png'
+import * as Google from 'expo-google-app-auth';
 
 export default function Landing ()
 {
@@ -12,6 +13,29 @@ export default function Landing ()
     function navigateToLogin () {
         navigation.navigate('Login')
     }
+
+    function navigateToDisclaimer () {
+      navigation.navigate('Disclaimer')
+  }
+    
+    async function signInWithGoogleAsync() {
+
+        try {
+          const result = await Google.logInAsync({
+            androidClientId: '772373435594-hqgdpesi3riqnjr4aqt641dc8d0ho7t8.apps.googleusercontent.com',
+            scopes: ['profile', 'email'],
+          });
+      
+          if (result.type === 'success') {
+              console.log(result.user.name)
+            return result.accessToken;
+          } else {
+            return { cancelled: true };
+          }
+        } catch (e) {
+          return { error: true };
+        }
+      }
 
     return (
     <SafeAreaView style={styles.container}>
@@ -26,6 +50,39 @@ export default function Landing ()
     <View style={styles.buttonContainer}>
         <Pressable
         style={styles.button}
+        onPress= {()=>navigateToDisclaimer()}
+        >
+        <Text style={styles.buttonText}>Continue as Guest</Text>
+        </Pressable>
+    </View>
+    <View style={styles.buttonContainer}>
+        <Pressable
+        style={styles.button}
+        onPress= {()=>signInWithGoogleAsync()}
+        >
+        <Text style={styles.buttonText}>Google Sign up</Text>
+        </Pressable>
+    </View>
+    <View style={styles.buttonContainer}>
+        <Pressable
+        style={styles.button}
+        onPress= {()=>navigateToLogin()}
+        >
+        <Text style={styles.buttonText}>Apple Sign up</Text>
+        </Pressable>
+    </View>
+    <View style={styles.buttonContainer}>
+        <Pressable
+        style={styles.button}
+        onPress= {()=>navigateToLogin()}
+        >
+        <Text style={styles.buttonText}>Email Sign up</Text>
+        </Pressable>
+    </View>
+    <View style={styles.signInButtonContainer}>
+        <Text style={styles.regularText}>Already have an account?</Text>
+        <Pressable
+        style={styles.signInButton}
         onPress= {()=>navigateToLogin()}
         >
         <Text style={styles.buttonText}>Sign In</Text>
@@ -64,6 +121,12 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       padding: 10,
   },
+  regularText: {
+    fontSize: 16,
+    color: '#1f1f1f',
+    textAlign: 'center',
+    padding: 10,
+},
   mainImage: {
       width: 300,
       height: 300,
@@ -75,15 +138,34 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: '100%',
     padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    
   },
   button: {
       backgroundColor: '#8A76B6',
       borderRadius: 50,
-      width: '100%',
+      width: '60%',
       height: 40,
       justifyContent: 'center',
       alignItems: 'center'
   },
+  signInButtonContainer: {
+    width: '100%',
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
+    
+  },
+  signInButton: {
+    backgroundColor: '#5633a1',
+    borderRadius: 50,
+    width: '30%',
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
+},
   buttonText: {
     color: 'white',
     fontSize: 16,
