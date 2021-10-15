@@ -1,9 +1,13 @@
 import React from 'react';
-import { Text, View, Button, StyleSheet, Image, SafeAreaView, Pressable } from 'react-native';
+import { Text, View, Button, StyleSheet, Image, SafeAreaView, Pressable, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Onboarding from 'react-native-onboarding-swiper';
 import MainPhoto from '../assets/images/landing-image.png'
 import * as Google from 'expo-google-app-auth';
+import GIcon from '../assets/images/Google__G__Logo.svg.png'
+import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
+import Guest from '../assets/images/Profile.png'
+import Email from '../assets/images/email-icon.jpg'
 
 export default function Landing ()
 {
@@ -48,37 +52,57 @@ export default function Landing ()
     </View>
 
     <View style={styles.buttonContainer}>
-        <Pressable
-        style={styles.button}
-        onPress= {()=>navigateToDisclaimer()}
-        >
-        <Text style={styles.buttonText}>Continue as Guest</Text>
-        </Pressable>
+    <TouchableOpacity
+    onPress = {() => navigateToDisclaimer()}
+    style={styles.socialSignUpStyles}>
+        <Image source={Guest} style={{padding: 10,
+        margin: 20,
+        width: 24,
+        height: 24,
+        resizeMode: 'contain'}}/>
+        <Text style={styles.socialIconText}>Continue As Guest</Text>
+    </TouchableOpacity>
+
+
     </View>
-    <View style={styles.buttonContainer}>
-        <Pressable
-        style={styles.button}
-        onPress= {()=>signInWithGoogleAsync()}
-        >
-        <Text style={styles.buttonText}>Google Sign up</Text>
-        </Pressable>
+    {/* Add lines with 'or' section */}
+    <View style={styles.lineContainer}>
+    <View style={styles.horizontalLine} />
+    <View>
+    <Text style={{width: 50, textAlign: 'center', color: '#B9B9B9'}}>Or</Text>
     </View>
-    <View style={styles.buttonContainer}>
-        <Pressable
-        style={styles.button}
-        onPress= {()=>navigateToLogin()}
-        >
-        <Text style={styles.buttonText}>Apple Sign up</Text>
-        </Pressable>
+    <View style={styles.horizontalLine} />
     </View>
-    <View style={styles.buttonContainer}>
-        <Pressable
-        style={styles.button}
-        onPress= {()=>navigateToLogin()}
-        >
-        <Text style={styles.buttonText}>Email Sign up</Text>
-        </Pressable>
+
+    <View style={styles.socialContainer}>
+    <TouchableOpacity
+    onPress = {() => signInWithGoogleAsync()}
+    style={styles.socialSignUpStyles}>
+        <Image source={GIcon} style={styles.socialIcons}/>
+        <Text style={styles.socialIconText}>Sign Up With Google</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity
+    style={styles.socialSignUpStyles}>
+        <Image source={AppleIcon} style={{padding: 10,
+        margin: 20,
+        width: 24,
+        height: 24,
+        resizeMode: 'contain'}}/>
+        <Text style={styles.socialIconText}>Sign Up With Apple</Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+    style={styles.socialSignUpStyles}>
+        <Image source={Email} style={{padding: 10,
+        margin: 20,
+        width: 24,
+        height: 24,
+        resizeMode: 'contain'}}/>
+        <Text style={styles.socialIconText}>Sign Up With Email</Text>
+    </TouchableOpacity>
     </View>
+
+
     <View style={styles.signInButtonContainer}>
         <Text style={styles.regularText}>Already have an account?</Text>
         <Pressable
@@ -169,5 +193,44 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 16,
-  }
+  },
+  lineContainer: {
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    padding: 20,
+},
+horizontalLine: {
+    flex: 1, 
+    height: 0.5, 
+    backgroundColor: '#B9B9B9',
+},
+socialSignUpStyles: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+    borderRadius: 5,
+    borderColor: '#B9B9B9',
+    height: 40,
+    borderWidth: 0.5,
+    margin: 5,
+    marginVertical: 10,
+},
+socialIconText: {
+    color: '#1f1f1f',
+    textAlignVertical: 'center',
+    textAlign: 'center',
+    alignItems: 'center',
+    paddingRight: 15,
+},
+socialIcons: {
+    padding: 10,
+    margin: 20,
+    width: 24,
+    height: 24,
+},
+socialContainer: {
+    width: '60%',
+    padding: 10,
+    marginVertical: 0,
+}
 });
