@@ -8,8 +8,9 @@ import GIcon from '../assets/images/Google__G__Logo.svg.png'
 import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
 import Guest from '../assets/images/Profile.png'
 import Email from '../assets/images/email-icon.jpg'
+import LoginButton from '../components/styles/login-button';
 
-export default function Landing ()
+export default function LandingV2 ()
 {
 
     const navigation = useNavigation();
@@ -22,9 +23,9 @@ export default function Landing ()
       navigation.navigate('Disclaimer')
   }
 
-  function navigateToSignUp () {
-    navigation.navigate('SignUp')
-}
+    function navigateToSignUp (){
+      navigation.navigate('SignUp')
+    }
     
     async function signInWithGoogleAsync() {
 
@@ -55,64 +56,23 @@ export default function Landing ()
         <Text style={styles.subTitle}>All the resources you need to maximize your child's care.</Text>
     </View>
 
-    <View style={styles.buttonContainer}>
-    <TouchableOpacity
-    onPress = {() => navigateToDisclaimer()}
-    style={styles.socialSignUpStyles}>
-        <Image source={Guest} style={{padding: 10,
-        margin: 20,
-        width: 24,
-        height: 24,
-        resizeMode: 'contain'}}/>
-        <Text style={styles.socialIconText}>Continue As Guest</Text>
-    </TouchableOpacity>
+    <LoginButton
+    type='signIn'
+    content='Sign In'
+    onPress={() => navigateToLogin()}
+    ></LoginButton>
 
-
-    </View>
-    {/* Add lines with 'or' section */}
-    <View style={styles.lineContainer}>
-    <View style={styles.horizontalLine} />
-    <View>
-    <Text style={{width: 50, textAlign: 'center', color: '#B9B9B9'}}>Or</Text>
-    </View>
-    <View style={styles.horizontalLine} />
-    </View>
-
-    <View style={styles.socialContainer}>
-    <TouchableOpacity
-    onPress = {() => signInWithGoogleAsync()}
-    style={styles.socialSignUpStyles}>
-        <Image source={GIcon} style={styles.socialIcons}/>
-        <Text style={styles.socialIconText}>Sign Up With Google</Text>
-    </TouchableOpacity>
-
-    <TouchableOpacity
-    style={styles.socialSignUpStyles}>
-        <Image source={AppleIcon} style={{padding: 10,
-        margin: 20,
-        width: 24,
-        height: 24,
-        resizeMode: 'contain'}}/>
-        <Text style={styles.socialIconText}>Sign Up With Apple</Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-    onPress= {()=>navigateToSignUp()}
-    style={styles.socialSignUpStyles}>
-        <Image source={Email} style={{padding: 10,
-        margin: 20,
-        width: 24,
-        height: 24,
-        resizeMode: 'contain'}}/>
-        <Text style={styles.socialIconText}>Sign Up With Email</Text>
-    </TouchableOpacity>
-    </View>
+    <LoginButton
+    type='signUp'
+    content='Sign Up'
+    onPress={() => navigateToSignUp()}
+    ></LoginButton>
 
     {/* This is the 'Don't Have An Account' section at the bottom */}
-    <View style={{width: '90%', padding: 10, alignItems: 'center', paddingBottom: '10%'}}>
-        <Text>
-            Already have an account?   
-            <Text style={{fontStyle: 'italic', color: '#8A76B6', fontWeight: 'bold'}} onPress= {()=>navigateToLogin()}> Sign In.</Text>
-        </Text>
+    <View style={{width: '90%', padding: 10, alignItems: 'center', paddingBottom: '10%', marginTop: '2%'}}>
+        <TouchableOpacity>  
+            <Text style={{fontStyle: 'italic',color: '#1f1f1f', fontWeight: '500', fontSize: 16}} onPress= {()=>navigateToDisclaimer()}>Continue As Guest</Text>
+        </TouchableOpacity>
     </View>
     
     </SafeAreaView>

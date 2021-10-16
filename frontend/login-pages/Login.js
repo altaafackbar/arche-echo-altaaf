@@ -3,17 +3,19 @@ import { useState } from 'react';
 import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CustomInput from '../components/styles/textBox';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import OrBreak from '../components/styles/or_divider'
 import GIcon from '../assets/images/Google__G__Logo.svg.png'
 import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
 import Guest from '../assets/images/Profile.png'
 import * as Google from 'expo-google-app-auth';
+import LoginButton from '../components/styles/login-button';
 
 export default function Login ()
 {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigation = useNavigation();
+    // const [hidePass, setHidePass] = useState(true)
 
     function navigateToOnboarding () {
         navigation.navigate('Onboarding')
@@ -49,7 +51,7 @@ export default function Login ()
     <SafeAreaView style={styles.container}>
     <View style={styles.headerContainer}>
     <Text style={styles.headerText}>Welcome Back!</Text>
-    <Text style={styles.subheaderText}>Enter your account details to get started.</Text>
+    <Text style={styles.subheaderText}>Enter your email and password to get started.</Text>
     </View>
     <CustomInput placeholder='Email' value={email} setValue={setEmail}/>
     <CustomInput 
@@ -58,25 +60,14 @@ export default function Login ()
     setValue={setPassword} 
     secureTextEntry={true}
     ></CustomInput>
-    <View style={styles.buttonContainer}>
-
-        <Pressable 
-        style={styles.button}
-        onPress = {() => navigateToOnboarding()}
-        >
-        <Text style={styles.buttonText}>Sign In</Text>
-        </Pressable>
-
-    </View>
+    <LoginButton
+    type='signIn'
+    content='Sign In'
+    onPress={() => navigateToOnboarding()}
+    ></LoginButton>
 
     {/* Add lines with 'or' section */}
-    <View style={styles.lineContainer}>
-    <View style={styles.horizontalLine} />
-    <View>
-    <Text style={{width: 50, textAlign: 'center', color: '#B9B9B9'}}>Or</Text>
-    </View>
-    <View style={styles.horizontalLine} />
-    </View>
+    <OrBreak></OrBreak>
  
     <View style={styles.socialContainer}>
     <TouchableOpacity
@@ -167,16 +158,6 @@ const styles = StyleSheet.create({
     buttonText: {
     color: 'white',
     fontSize: 16,
-    },
-    lineContainer: {
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        padding: 20,
-    },
-    horizontalLine: {
-        flex: 1, 
-        height: 0.5, 
-        backgroundColor: '#B9B9B9',
     },
     socialIcons: {
         padding: 10,

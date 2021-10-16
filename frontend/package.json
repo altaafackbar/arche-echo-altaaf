@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.0",
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-navigation/native": "^6.0.4",
     "@react-navigation/native-stack": "^6.2.2",
     "@use-expo/font": "^2.0.0",
@@ -22,6 +23,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-maps": "0.28.0",
     "react-native-onboarding-swiper": "^1.1.4",
     "react-native-password-eye": "^1.0.2",
     "react-native-safe-area-context": "3.2.0",

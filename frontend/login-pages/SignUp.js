@@ -1,52 +1,92 @@
 import React from 'react';
-import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity} from 'react-native';
-import CustomInput from '../components/styles/textBox';
 import { useState } from 'react';
+import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import CustomInput from '../components/styles/textBox';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import GIcon from '../assets/images/Google__G__Logo.svg.png'
+import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
+import Guest from '../assets/images/Profile.png'
+import * as Google from 'expo-google-app-auth';
+import LoginButton from '../components/styles/login-button';
+import OrBreak from '../components/styles/or_divider'
 
 
 export default function SignUp ()
 {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const navigation = useNavigation();
-    
-    function navigateToSignUp () {
-        navigation.navigate('SignUp')
+
+    function navigateToOnboarding () {
+        navigation.navigate('Onboarding')
     }
+
+    function navigateToLogin () {
+        navigation.navigate('Login')
+    }
+
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>Welcome to ARCHE | ECHO!</Text>
-            <Text style={styles.subheaderText}>Enter your account details to get started.</Text>
-            </View>
-            <CustomInput placeholder='First Name' value={email} setValue={setFirstName}/>
-            <CustomInput placeholder='Last Name' value={email} setValue={setLastName}/>
-            <CustomInput placeholder='Email' value={email} setValue={setEmail}/>
-            <CustomInput 
-            placeholder='Password' 
-            value={password} 
-            setValue={setPassword} 
-            secureTextEntry={true}
-            ></CustomInput>
+    <SafeAreaView style={styles.container}>
+    <View style={styles.headerContainer}>
+    <Text style={styles.headerText}>Welcome!</Text>
+    <Text style={styles.subheaderText}>Enter your details to get started.</Text>
+    </View>
+    <CustomInput placeholder='First Name' value={firstName} setValue={setFirstName}/>
+    <CustomInput placeholder='Last Name' value={lastName} setValue={setLastName}/>
+    <CustomInput placeholder='Email' value={email} setValue={setEmail}/>
+    <CustomInput 
+    placeholder='Password' 
+    value={password} 
+    setValue={setPassword} 
+    secureTextEntry={true}
+    ></CustomInput>
+    <LoginButton
+    type='signIn'
+    content='Sign Up'
+    onPress={() => navigateToOnboarding()}
+    ></LoginButton>
 
-            <View style={styles.buttonContainer}>
+    <OrBreak></OrBreak>
 
-            <Pressable 
-            style={styles.button}
-            onPress = {() => navigation.navigate('Onboarding')}
-            >
-            <Text style={styles.buttonText}>Sign Up</Text>
-            </Pressable>
+    <View style={styles.socialContainer}>
+    <TouchableOpacity
+    onPress = {() => signInWithGoogleAsync()}
+    style={styles.socialSignUpStyles}>
+        <Image source={GIcon} style={styles.socialIcons}/>
+        <Text style={styles.socialIconText}>Sign Up With Google</Text>
+    </TouchableOpacity>
 
-            </View>
-        </SafeAreaView>
+    <TouchableOpacity
+    style={styles.socialSignUpStyles}>
+        <Image source={AppleIcon} style={{padding: 10,
+        margin: 20,
+        width: 24,
+        height: 24,
+        resizeMode: 'contain'}}/>
+        <Text style={styles.socialIconText}>Sign Up With Apple</Text>
+    </TouchableOpacity>
+    </View>
 
+    <View style={{width: '90%', padding: 10, alignItems: 'center'}}>
+        <Text>
+            Already have an account?  
+            <Text style={{fontStyle: 'italic', color: '#8A76B6', fontWeight: 'bold'}} onPress= {()=>navigateToLogin()}> Sign In.</Text>
+        </Text>
+    </View>
+
+    {/* <Button title="Open SignUp Screen"
+    onPress= {()=>navigateToSignUp()}
+    /> */}
+    
+    </SafeAreaView>
     )
 
 }
+
+
 
 const styles = StyleSheet.create({
 
@@ -55,14 +95,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#fafafa',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 10
     },
     headerContainer: {
         width: '100%',
         textAlign: 'left',
         padding: 20,
         alignSelf: 'flex-end',
-        marginTop: -5,
     },
     headerText:{
         fontSize: 32,
@@ -92,16 +130,6 @@ const styles = StyleSheet.create({
     buttonText: {
     color: 'white',
     fontSize: 16,
-    },
-    lineContainer: {
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        padding: 20,
-    },
-    horizontalLine: {
-        flex: 1, 
-        height: 0.5, 
-        backgroundColor: '#B9B9B9',
     },
     socialIcons: {
         padding: 10,
