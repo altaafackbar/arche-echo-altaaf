@@ -36,7 +36,7 @@ export default function SignUp ()
 
             <Pressable 
             style={styles.button}
-            onPress = {() => navigateToOnboarding()}
+            onPress = {() => navigation.navigate('Onboarding')}
             >
             <Text style={styles.buttonText}>Sign Up</Text>
             </Pressable>
