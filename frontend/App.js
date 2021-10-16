@@ -7,32 +7,35 @@ import Landing from './login-pages/Landing'
 import Login from './login-pages/Login'
 import SignUp from './login-pages/SignUp'
 import Onboard from './screens/onboarding-screens/Onboarding'
+import MainMenu from './menus/MainMenu';
 
 const Stack = createNativeStackNavigator()
 
-export default function Navigator(){
+export default function Navigator() {
 
-  return(
-    
+  return (
+
     <NavigationContainer>
-    <Stack.Navigator
-    screenOptions={{
-      headerStyle: {
-      
-      backgroundColor: 'transparent'},
-      headerTransparent: true,
-      headerTitle: '',
-      headerLeftContainerStyle: {
-        paddingLeft: 20
-      }
-      
-      }}
-    > 
-    <Stack.Screen options={{headerShown: false}} name="Landing" component={Landing} />
-    <Stack.Screen name="Login" component={Login} />
-    <Stack.Screen name="SignUp" component={SignUp} />
-    <Stack.Screen name="Onboarding" component={Onboard} />
-    </Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+
+            backgroundColor: 'transparent'
+          },
+          headerTransparent: true,
+          headerTitle: '',
+          headerLeftContainerStyle: {
+            paddingLeft: 20
+          }
+
+        }}
+      >
+        <Stack.Screen options={{ headerShown: false }} name="Landing" component={Landing} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Onboarding" component={Onboard} />
+        <Stack.Screen name="MainMenu" component={MainMenu} />
+      </Stack.Navigator>
     </NavigationContainer>
 
   )
