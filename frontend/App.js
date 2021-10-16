@@ -9,33 +9,39 @@ import Login from './login-pages/Login'
 import SignUp from './login-pages/SignUp'
 import Onboard from './screens/onboarding-screens/Onboarding'
 import Disclaimer from './login-pages/Disclaimer';
+import MainMenu from './screens/menus/MainMenu';
+import ClinicMap from './screens/clinic_map_screen/ClinicMap';
+
 
 const Stack = createNativeStackNavigator()
 
-export default function Navigator(){
+export default function Navigator() {
 
-  return(
-    
+  return (
+
     <NavigationContainer>
-    <Stack.Navigator
-    screenOptions={{
-      headerStyle: {
-      
-      backgroundColor: 'transparent'},
-      headerTransparent: true,
-      headerTitle: '',
-      headerLeftContainerStyle: {
-        paddingLeft: 20
-      }
-      
-      }}
-    > 
-    <Stack.Screen options={{headerShown: false}} name="Landing" component={LandingV2} />
-    <Stack.Screen name="Login" component={Login} />
-    <Stack.Screen name="SignUp" component={SignUp} />
-    <Stack.Screen name="Onboarding" component={Onboard} />
-    <Stack.Screen name="Disclaimer" component={Disclaimer}/>
-    </Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+
+            backgroundColor: 'transparent'
+          },
+          headerTransparent: true,
+          headerBackTitleVisible: false,
+          headerLeftContainerStyle: {
+          paddingLeft: 20
+          }
+
+        }}
+      >
+        <Stack.Screen options={{ headerShown: false }} name="Landing" component={Landing} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Onboarding" component={Onboard} />
+        <Stack.Screen name="MainMenu" component={MainMenu} />
+        <Stack.Screen name="Find A Clinic" component={ClinicMap} />
+        <Stack.Screen name="Disclaimer" component={Disclaimer}/>
+      </Stack.Navigator>
     </NavigationContainer>
 
   )

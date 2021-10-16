@@ -4,6 +4,7 @@ import Landing from '../login-pages/Landing'
 import Login from '../login-pages/Login'
 import SignUp from '../login-pages/SignUp'
 import Disclaimer from '../login-pages/Disclaimer'
+import MainMenu from '../menus/MainMenu';
 
 const screens = {
     Landing: {
@@ -17,6 +18,8 @@ const screens = {
     },
     Disclaimer: {
         screen: Disclaimer
+    MainMenu: {
+        screen: MainMenu
     }
 }
 const HomeStack = createNativeStackNavigator(screens);
