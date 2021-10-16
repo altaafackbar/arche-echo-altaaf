@@ -11,12 +11,12 @@ from users import serializers
 
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ViewSet):
     permission_classes = [CheckUserPermission]
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
-
+    # GET all users (only for testing)
     def list(self, request):
         try:
             users = CustomUser.objects.all().order_by('id')
@@ -34,8 +34,9 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer = UserSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return Response({"message": "User Created"}, status=status.HTTP_201_CREATED)
-            return Response({"message": "email alrealdy exists, "})
+                content = {"account info": serializer.data, "message": "User Created."}
+                return Response(content, status=status.HTTP_201_CREATED)
+            return Response({"message": "email alrealdy exists, please use another email address."})
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -47,6 +48,19 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+    # DELETE user (for test cases only)
+    def destroy(self, request, pk=None):
+        try:
+            # request.user.is_active = False
+            # request.user.save()
+            user = CustomUser.objects.get(id=pk)
+            user.delete()
+            return Response({"message": "User deactived"})
+
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
 
     # def update(self, request, pk=None):
     #     try:
