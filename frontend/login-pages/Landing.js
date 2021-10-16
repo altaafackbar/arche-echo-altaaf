@@ -21,6 +21,10 @@ export default function Landing ()
     function navigateToDisclaimer () {
       navigation.navigate('Disclaimer')
   }
+
+  function navigateToSignUp () {
+    navigation.navigate('SignUp')
+}
     
     async function signInWithGoogleAsync() {
 
@@ -92,6 +96,7 @@ export default function Landing ()
         <Text style={styles.socialIconText}>Sign Up With Apple</Text>
     </TouchableOpacity>
     <TouchableOpacity
+    onPress= {()=>navigateToSignUp()}
     style={styles.socialSignUpStyles}>
         <Image source={Email} style={{padding: 10,
         margin: 20,
