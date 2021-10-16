@@ -36,6 +36,7 @@ class UserCreationForm(forms.ModelForm):
         return user
 
 class UserChangeForm(forms.ModelForm):
+    # password in hash
     password = ReadOnlyPasswordHashField()
 
     class Meta:
@@ -48,12 +49,12 @@ class UserAdminConfig(BaseUserAdmin):
 
     ordering = ('-start_date',)
     search_fields = ('email',)
-    list_display = ('email', 'first_name', 'last_name', 'is_active', 'is_admin')
+    list_display = ('email', 'first_name', 'last_name', 'is_active', 'is_admin', "is_superuser")
     list_filter = ('last_name', 'is_admin')
 
     fieldsets = (
         (None, {'fields': ('email', 'first_name', 'last_name')}),
-        ('Permissions', {'fields': ('is_active', 'is_admin')})
+        ('Permissions', {'fields': ('is_active', 'is_admin', "is_superuser")})
     )
 
     add_fieldsets = (

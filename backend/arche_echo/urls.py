@@ -15,16 +15,34 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from users import router as users_api_router
-from django.conf import settings
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
+
+# Django REST Documentation
+schema_view = get_schema_view(
+   openapi.Info(
+      title="ARCHE-ECHO API",
+      default_version='v1',
+      description="An api for arche-echo backend",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="contact@arche-echo.local"),
+      license=openapi.License(name="BSD License"),
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
+
+
+# URLS for oauth2
 auth_api_urls = [
     path(r'', include('rest_framework_social_oauth2.urls')),
 ]
 
 
-if settings.DEBUG:
-    auth_api_urls.append(path(r'verify/', include('rest_framework.urls')))
+# if settings.DEBUG:
+#     auth_api_urls.append(path(r'verify/', include('rest_framework.urls')))
 
 api_url_patterns = [
     path('', include('users.urls')),
@@ -34,5 +52,6 @@ api_url_patterns = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(api_url_patterns)),
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     
 ]

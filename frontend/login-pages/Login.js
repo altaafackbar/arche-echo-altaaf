@@ -41,6 +41,10 @@ export default function Login ()
           return { error: true };
         }
       }
+    function navigateToMainMenu () {
+        navigation.navigate('MainMenu')
+    }
+
     return (
     <SafeAreaView style={styles.container}>
     <View style={styles.headerContainer}>
@@ -91,7 +95,8 @@ export default function Login ()
         <Text style={styles.socialIconText}>Sign In With Apple</Text>
     </TouchableOpacity>
     <TouchableOpacity
-    style={styles.socialSignUpStyles}>
+    style={styles.socialSignUpStyles}
+    onPress={()=>navigateToMainMenu()}>
         <Image source={Guest} style={{padding: 10,
         margin: 20,
         width: 24,

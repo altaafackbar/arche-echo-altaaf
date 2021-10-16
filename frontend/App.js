@@ -8,6 +8,7 @@ import Login from './login-pages/Login'
 import SignUp from './login-pages/SignUp'
 import Onboard from './screens/onboarding-screens/Onboarding'
 import Disclaimer from './login-pages/Disclaimer';
+import MainMenu from './screens/menus/MainMenu';
 
 const Stack = createNativeStackNavigator()
 
@@ -34,6 +35,7 @@ export default function Navigator() {
     <Stack.Screen name="SignUp" component={SignUp} />
     <Stack.Screen name="Onboarding" component={Onboard} />
     <Stack.Screen name="Disclaimer" component={Disclaimer} />
+    <Stack.Screen name="MainMenu" component={MainMenu} />
     </Stack.Navigator>
     </NavigationContainer>
 
