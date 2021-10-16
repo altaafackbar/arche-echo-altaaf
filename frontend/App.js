@@ -8,6 +8,7 @@ import Login from './login-pages/Login'
 import SignUp from './login-pages/SignUp'
 import Onboard from './screens/onboarding-screens/Onboarding'
 import MainMenu from './screens/menus/MainMenu';
+import ClinicMap from './screens/clinic_map_screen/ClinicMap';
 
 const Stack = createNativeStackNavigator()
 
@@ -23,9 +24,9 @@ export default function Navigator() {
             backgroundColor: 'transparent'
           },
           headerTransparent: true,
-          headerTitle: '',
+          headerBackTitleVisible: false,
           headerLeftContainerStyle: {
-            paddingLeft: 20
+          paddingLeft: 20
           }
 
         }}
@@ -35,6 +36,7 @@ export default function Navigator() {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Onboarding" component={Onboard} />
         <Stack.Screen name="MainMenu" component={MainMenu} />
+        <Stack.Screen name="Find A Clinic" component={ClinicMap} />
       </Stack.Navigator>
     </NavigationContainer>
 

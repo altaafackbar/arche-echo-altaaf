@@ -1,9 +1,16 @@
 import React from 'react';
-import { Text, Button, Pressable, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, Button, Pressable, StyleSheet, TouchableOpacity, View, Touchable, SafeAreaView } from 'react-native';
+// import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+
+
 export default function MainMenu ()
 {
+    const navigation = useNavigation();
+
+    function naviagteToClinicMap() {
+        navigation.navigate('Find A Clinic')
+    }
 
     return(
         <SafeAreaView style={styles.container}>
@@ -18,7 +25,9 @@ export default function MainMenu ()
             </View>
 
             <View style={styles.containerRow2}>
-                <Pressable style={styles.button}>
+                <Pressable 
+                    style={styles.button}
+                    onPress={() => naviagteToClinicMap()}>
                     <Text style={styles.text}>Find a Clinic Map</Text>
                 </Pressable>
                 <Pressable style={styles.button}>
