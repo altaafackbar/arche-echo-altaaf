@@ -11,6 +11,7 @@ import Onboard from './screens/onboarding-screens/Onboarding'
 import Disclaimer from './login-pages/Disclaimer';
 import MainMenu from './screens/menus/MainMenu';
 import ClinicMap from './screens/clinic_map_screen/ClinicMap';
+import SymptomChecker from './screens/symptom_checker-screen/SymptomChecker';
 
 
 const Stack = createNativeStackNavigator()
@@ -40,6 +41,7 @@ export default function Navigator() {
     <Stack.Screen name="Disclaimer" component={Disclaimer} />
     <Stack.Screen name="MainMenu" component={MainMenu} />
     <Stack.Screen name="Find A Clinic" component={ClinicMap} />
+    <Stack.Screen name="SymptomChecker" component={SymptomChecker} />
     </Stack.Navigator>
     </NavigationContainer>
 
