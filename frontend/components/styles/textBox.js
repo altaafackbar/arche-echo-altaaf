@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TextInput, StyleSheet, SafeAreaView, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+// Creating a custom input component
 export default function CustomInput({value, setValue, placeholder, secureTextEntry}) {
 
   // const [hidePass, setHidePass] = useState('')

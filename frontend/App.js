@@ -15,6 +15,7 @@ import ClinicMap from './screens/clinic_map_screen/ClinicMap';
 
 const Stack = createNativeStackNavigator()
 
+// Creating the navigation function
 export default function Navigator() {
 
   return (
@@ -29,55 +30,23 @@ export default function Navigator() {
           headerTransparent: true,
           headerBackTitleVisible: false,
           headerLeftContainerStyle: {
-          paddingLeft: 20
+          paddingLeft: 20,
           }
 
         }}
       >
-        <Stack.Screen options={{ headerShown: false }} name="Landing" component={Landing} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Onboarding" component={Onboard} />
-        <Stack.Screen name="MainMenu" component={MainMenu} />
-        <Stack.Screen name="Find A Clinic" component={ClinicMap} />
-        <Stack.Screen name="Disclaimer" component={Disclaimer}/>
+
+        {/* Setting up all the screens in the stack navigator */}
+        <Stack.Screen options={{headerShown: false }} name="Landing" component={LandingV2} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Login" component={Login} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="SignUp" component={SignUp} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Onboarding" component={Onboard} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="MainMenu" component={MainMenu} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Find A Clinic" component={ClinicMap} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Disclaimer" component={Disclaimer}/>
       </Stack.Navigator>
     </NavigationContainer>
 
   )
 
 }
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fafafa',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
-// const [isLoaded] = useFonts({
-//   "Poppins-Regular": require('./assets/fonts/Poppins-Regular.otf'),
-//   "Poppins-Italic": require('./assets/fonts/Poppins-Italic.otf'),
-//   "Poppins-Semibold": require('./assets/fonts/Poppins-SemiBold.otf'),
-//   "Poppins-Semibold-Italic": require('./assets/fonts/Poppins-SemiBoldItalic.otf'),
-//   "Poppins-Thin": require('./assets/fonts/Poppins-Thin.otf'),
-//   "Poppins-Thin-Italic": require('./assets/fonts/Poppins-ThinItalic.otf'),
-//   "Poppins-Medium": require('./assets/fonts/Poppins-Medium.otf'),
-//   "Poppins-Medium-Italic": require('./assets/fonts/Poppins-MediumItalic.otf'),
-
-// });
-
-// if (!isLoaded) {
-//   return <AppLoading />;
-// }

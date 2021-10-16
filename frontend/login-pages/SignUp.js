@@ -1,12 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity} from 'react-native';
+import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity, Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CustomInput from '../components/styles/textBox';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import GIcon from '../assets/images/Google__G__Logo.svg.png'
 import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
-import Guest from '../assets/images/Profile.png'
 import * as Google from 'expo-google-app-auth';
 import LoginButton from '../components/styles/login-button';
 import OrBreak from '../components/styles/or_divider'
@@ -19,20 +18,49 @@ export default function SignUp ()
     const [password, setPassword] = useState('')
     const navigation = useNavigation();
 
+
+    // Setting up navigation using React Navigation
+
+    // Navigate to the Onboarding Screens from Sign Up
     function navigateToOnboarding () {
         navigation.navigate('Onboarding')
     }
 
+    // Navigate to the Login page from Sign Up
     function navigateToLogin () {
         navigation.navigate('Login')
     }
 
+    async function signInWithGoogleAsync() {
+
+        try {
+          const result = await Google.logInAsync({
+            androidClientId: '772373435594-hqgdpesi3riqnjr4aqt641dc8d0ho7t8.apps.googleusercontent.com',
+            scopes: ['profile', 'email'],
+          });
+      
+          if (result.type === 'success') {
+              console.log(result.user.name)
+            return result.accessToken;
+          } else {
+            return { cancelled: true };
+          }
+        } catch (e) {
+          return { error: true };
+        }
+      }
+
+    // Renders the elements on the screen
     return (
+    
+    //Entire screen container. Welcome header and subtext as well.
     <SafeAreaView style={styles.container}>
     <View style={styles.headerContainer}>
     <Text style={styles.headerText}>Welcome!</Text>
     <Text style={styles.subheaderText}>Enter your details to get started.</Text>
     </View>
+
+    {/* Setting Up Text Inputs: First Name, Last Name, Email, and Password. Using a CustomInput component created in textBox.js */}
     <CustomInput placeholder='First Name' value={firstName} setValue={setFirstName}/>
     <CustomInput placeholder='Last Name' value={lastName} setValue={setLastName}/>
     <CustomInput placeholder='Email' value={email} setValue={setEmail}/>
@@ -42,15 +70,21 @@ export default function SignUp ()
     setValue={setPassword} 
     secureTextEntry={true}
     ></CustomInput>
+
+    {/* Sign Up Button Component */}
     <LoginButton
     type='signIn'
     content='Sign Up'
     onPress={() => navigateToOnboarding()}
     ></LoginButton>
 
+    {/* Line Break with 'Or' in between two lines. Created as a component. */}
     <OrBreak></OrBreak>
 
+    {/* Setting up sign up with Google and Apple. */}
     <View style={styles.socialContainer}>
+
+    {/* Sign Up with Google Button */}
     <TouchableOpacity
     onPress = {() => signInWithGoogleAsync()}
     style={styles.socialSignUpStyles}>
@@ -58,6 +92,7 @@ export default function SignUp ()
         <Text style={styles.socialIconText}>Sign Up With Google</Text>
     </TouchableOpacity>
 
+    {/* Sign Up With Apple button */}
     <TouchableOpacity
     style={styles.socialSignUpStyles}>
         <Image source={AppleIcon} style={{padding: 10,
@@ -69,6 +104,7 @@ export default function SignUp ()
     </TouchableOpacity>
     </View>
 
+    {/* Already Have An Account dialog at the bottom */}
     <View style={{width: '90%', padding: 10, alignItems: 'center'}}>
         <Text>
             Already have an account?  
@@ -76,9 +112,6 @@ export default function SignUp ()
         </Text>
     </View>
 
-    {/* <Button title="Open SignUp Screen"
-    onPress= {()=>navigateToSignUp()}
-    /> */}
     
     </SafeAreaView>
     )
@@ -86,7 +119,7 @@ export default function SignUp ()
 }
 
 
-
+// Setting up stylesheet
 const styles = StyleSheet.create({
 
     container: {
@@ -139,6 +172,7 @@ const styles = StyleSheet.create({
     socialSignUpStyles: {
         flexDirection: 'row',
         alignItems: 'center',
+        textAlign: 'center',
         backgroundColor: 'transparent',
         borderRadius: 5,
         borderColor: '#B9B9B9',
