@@ -33,14 +33,14 @@ export default function ClinicMap() {
         },
     ];
 
-    function Item({name, distance}) {
-        return (
-            <TouchableOpacity style={styles.listItem}>
-                <Text style={styles.listName}>{name}{"\n"}</Text>
-                <Text style={styles.listDistance}>{distance}</Text>
-            </TouchableOpacity>
-        )
-    };
+    // function Item({name, distance}) {
+    //     return (
+    //         <TouchableOpacity style={styles.listItem}>
+    //             <Text style={styles.listName}>{name}{"\n"}</Text>
+    //             <Text style={styles.listDistance}>{distance}</Text>
+    //         </TouchableOpacity>
+    //     )
+    // };
 
     return (
         <SafeAreaView style={styles.safeview}>
@@ -72,7 +72,9 @@ export default function ClinicMap() {
                 <FlatList
                     data={Clinics}
                     renderItem={({ item }) => (<Text style={styles.listName}>{item.name}{"\n"}{item.distance}</Text>)}
-                ></FlatList>
+                    keyExtractor = { (item, index) => index.toString() }
+                >
+                </FlatList>
 
             </View>
                     
@@ -129,18 +131,7 @@ export default function ClinicMap() {
         borderRadius: 15,
         backgroundColor: '#F3F9FA',
     },
-    listItem: {
-        flex: 1,
-        // flexDirection: "column",
-        
-        width: Dimensions.get('window').width,
-        // height: Dimensions.get('window').height,
-        // justifyContent: "center",
 
-        // flexDirection: "",
-        marginVertical: 20,
-        padding: 10,
-    },
     listName: {
         flex: 1,
         backgroundColor: "#E7ECF2",
@@ -150,10 +141,7 @@ export default function ClinicMap() {
 
         // alignItems: "flex-start",
     },
-    listDistance: {
-        flex: 0.5,
-        // alignItems: "flex-end",
-    },
+
     flatlistContainer: {
         flex: 1,
         // flexDirection: 'row',
