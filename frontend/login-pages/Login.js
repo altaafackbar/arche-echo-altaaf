@@ -25,6 +25,10 @@ export default function Login ()
         navigation.navigate('SignUp')
     }
 
+    function navigateToMainMenu () {
+        navigation.navigate('MainMenu')
+    }
+
     async function signInWithGoogleAsync() {
 
         try {
@@ -43,9 +47,6 @@ export default function Login ()
           return { error: true };
         }
       }
-    function navigateToMainMenu () {
-        navigation.navigate('MainMenu')
-    }
 
     return (
     <SafeAreaView style={styles.container}>
