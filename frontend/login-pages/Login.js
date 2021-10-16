@@ -22,6 +22,10 @@ export default function Login ()
         navigation.navigate('SignUp')
     }
 
+    function navigateToMainMenu(){
+        navigation.navigate("MainMenu")
+    }
+
     return (
     <SafeAreaView style={styles.container}>
     <View style={styles.headerContainer}>
@@ -77,7 +81,9 @@ export default function Login ()
         width: 24,
         height: 24,
         resizeMode: 'contain'}}/>
-        <Text style={styles.socialIconText}>Continue As Guest</Text>
+        <Text style={styles.socialIconText} onPress = {()=>navigateToMainMenu()}>
+            Continue As Guest
+        </Text>
     </TouchableOpacity>
     </View>
 
