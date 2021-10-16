@@ -9,7 +9,7 @@ import SignUp from './login-pages/SignUp'
 import Onboard from './screens/onboarding-screens/Onboarding'
 import MainMenu from './menus/MainMenu';
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export default function Navigator() {
 
