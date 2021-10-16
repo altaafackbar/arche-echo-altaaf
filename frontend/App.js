@@ -7,7 +7,7 @@ import Landing from './login-pages/Landing'
 import Login from './login-pages/Login'
 import SignUp from './login-pages/SignUp'
 import Onboard from './screens/onboarding-screens/Onboarding'
-import MainMenu from './menus/MainMenu';
+import MainMenu from './screens/menus/MainMenu';
 
 const Stack = createNativeStackNavigator()
 
