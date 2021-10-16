@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import GIcon from '../assets/images/Google__G__Logo.svg.png'
 import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
 import Guest from '../assets/images/Profile.png'
+import * as Google from 'expo-google-app-auth';
 
 export default function Login ()
 {
@@ -22,6 +23,24 @@ export default function Login ()
         navigation.navigate('SignUp')
     }
 
+    async function signInWithGoogleAsync() {
+
+        try {
+          const result = await Google.logInAsync({
+            androidClientId: '772373435594-hqgdpesi3riqnjr4aqt641dc8d0ho7t8.apps.googleusercontent.com',
+            scopes: ['profile', 'email'],
+          });
+      
+          if (result.type === 'success') {
+              console.log(result.user.name)
+            return result.accessToken;
+          } else {
+            return { cancelled: true };
+          }
+        } catch (e) {
+          return { error: true };
+        }
+      }
     return (
     <SafeAreaView style={styles.container}>
     <View style={styles.headerContainer}>
@@ -57,6 +76,7 @@ export default function Login ()
  
     <View style={styles.socialContainer}>
     <TouchableOpacity
+    onPress = {() => signInWithGoogleAsync()}
     style={styles.socialSignUpStyles}>
         <Image source={GIcon} style={styles.socialIcons}/>
         <Text style={styles.socialIconText}>Sign In With Google</Text>
