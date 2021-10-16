@@ -9,6 +9,12 @@ export default function Disclaimer ()
 {
     const [isSelected, setSelection] = useState(false);
     const [selectedValue, setSelectedValue] = useState("english");
+    const navigation = useNavigation();
+
+    function navigateToMainMenu () {
+      navigation.navigate('MainMenu')
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.boldText}>DISCLAIMER</Text>
@@ -42,9 +48,8 @@ export default function Disclaimer ()
 
       <View style={styles.buttonContainer}>
         <Pressable
-        style={styles.button}
-        
-        >
+        style={styles.button} 
+        onPress={()=>navigateToMainMenu()}>
         <Text style={styles.buttonText}>Continue</Text>
         </Pressable>
     </View>

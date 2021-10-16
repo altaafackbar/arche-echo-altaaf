@@ -18,6 +18,7 @@ const screens = {
     },
     Disclaimer: {
         screen: Disclaimer
+    },
     MainMenu: {
         screen: MainMenu
     }
