@@ -40,7 +40,6 @@ export default function Navigator() {
     <Stack.Screen name="Disclaimer" component={Disclaimer} />
     <Stack.Screen name="MainMenu" component={MainMenu} />
     <Stack.Screen name="Find A Clinic" component={ClinicMap} />
-    <Stack.Screen name="Disclaimer" component={Disclaimer}/>
     </Stack.Navigator>
     </NavigationContainer>
 
