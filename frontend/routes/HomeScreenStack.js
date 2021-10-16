@@ -4,7 +4,8 @@ import Landing from '../login-pages/Landing'
 import Login from '../login-pages/Login'
 import SignUp from '../login-pages/SignUp'
 import Disclaimer from '../login-pages/Disclaimer'
-import MainMenu from '../menus/MainMenu';
+import MainMenu from '../screens/menus/MainMenu';
+import ClinicMap from '../screens/clinic_map_screen/ClinicMap';
 
 const screens = {
     Landing: {
@@ -21,7 +22,10 @@ const screens = {
     },
     MainMenu: {
         screen: MainMenu
-    }
+    },
+    ClinicMap: {
+        screen: ClinicMap
+    },
 }
 const HomeStack = createNativeStackNavigator(screens);
 

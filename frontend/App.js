@@ -14,7 +14,7 @@ import ClinicMap from './screens/clinic_map_screen/ClinicMap';
 import SymptomChecker from './screens/symptom_checker-screen/SymptomChecker';
 
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export default function Navigator() {
 
