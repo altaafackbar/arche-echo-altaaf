@@ -11,10 +11,10 @@ import Disclaimer from './login-pages/Disclaimer';
 
 const Stack = createNativeStackNavigator()
 
-export default function Navigator(){
+export default function Navigator() {
 
-  return(
-    
+  return (
+
     <NavigationContainer>
     <Stack.Navigator
     screenOptions={{
