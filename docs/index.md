@@ -1,17 +1,12 @@
-# Welcome to MkDocs
+# ARCHE | ECHO App
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## Project Overview
 
-## Commands
+This project involves developing an app for parents managing their child's acute illness. The ARCHE and ECHO groups have been co-developing parental health resources (i.e. KT tools such as interactive infographics, videos, and eBooks). These resources are played in healthcare setting across Canada including Alberta’s HUTV platform which results in exposure to almost a million viewers each month.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+Our goal is to increase the accessibility and visibility of these tools to parents by housing them in a publicly available app. So far, we have been gathering and analyzing parents' preferences around health app content and features (e.g. a map of hospitals with ER wait times), and would like to translate this information into a working prototype.
 
-## Project layout
+The app will support two languages: English and French.
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+
+### Meeting Minutes can be found at our [Wiki](https://github.com/UAlberta-CMPUT401/arche-echo/wiki)

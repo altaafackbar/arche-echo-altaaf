@@ -1,0 +1,90 @@
+---
+test_name: test create user account
+
+stages:
+  - name: Check if we could create an account
+    request:
+      url: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/api/accounts/
+      method: POST
+      json:
+        email: "test@test.com"
+        first_name: "FirstTest"
+        last_name: "LastTest"
+        password: "testpoassword123"
+    response:
+      status_code: 201
+
+
+
+---
+test_name: test create user account with the same email
+
+stages:
+  - name: Check we can't create an user account with the same email address
+    request:
+      url: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/api/accounts/
+      method: POST
+      json:
+        email: "test@test.com"
+        first_name: "FirstTest"
+        last_name: "LastTest"
+        password: "testpoassword123"
+    response:
+      status_code: 200
+      json:
+        message: "email alrealdy exists, please use another email address."
+
+
+---
+test_name: test retreive user info
+
+stages:
+  - name: Check if we could get current user's info
+    request:
+      url: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]}/api/accounts/1/
+      method: GET
+    response:
+      status_code: 200
+      json:
+        id: 1
+        email: "junyan4@ualberta.ca"
+        first_name: "Jun"
+        last_name: "Li"
+
+---
+test_name: test get user jwt token (user login)
+
+stages:
+  - name: Check if user can signin and get jwt token
+    request:
+      url: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/api/auth/token/
+      method: POST
+      json:
+        username: "test@test.com"
+        password: "testpoassword123"
+        grant_type: "password"
+        client_id: "rA9o542u1kNioo5ZccgjQuT8neEWFQ9G17fKHoM9"
+        client_secret: "ULXZEpWjnQp6Hj4qaNFjoQKYZx4LOJK1CWlxKchFTmAt7unHaepZinbJjx1jXCJ3q3LXnUi6PGExuMUVU0JsjqBdN1oePH5bdSHWJybPc9JKbHVQCpiW0Rc6RruX0Hh4"
+    response:
+      status_code: 200
+
+---
+test_name: test user sign in not success (wrong password), no token provided
+
+stages:
+  - name: Check when user provided wrong password, not jwt token provided
+    request:
+      url: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/api/auth/token/
+      method: POST
+      json:
+        username: "test@test.com"
+        password: "wrongpassword"
+        grant_type: "password"
+        client_id: "rA9o542u1kNioo5ZccgjQuT8neEWFQ9G17fKHoM9"
+        client_secret: "ULXZEpWjnQp6Hj4qaNFjoQKYZx4LOJK1CWlxKchFTmAt7unHaepZinbJjx1jXCJ3q3LXnUi6PGExuMUVU0JsjqBdN1oePH5bdSHWJybPc9JKbHVQCpiW0Rc6RruX0Hh4"
+    response:
+      status_code: 400
+      json:
+        error: "invalid_grant"
+        error_description: "Invalid credentials given."
+

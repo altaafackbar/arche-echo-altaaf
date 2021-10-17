@@ -1,6 +1,7 @@
 site_name: ARCHE | ECHO
 site_url: https://ualberta-cmput401.github.io/arche-echo/
 nav:
+    - Home: index.md
     - Project Requirements: requirements.md
     - Software Design: software-design.md
     - Project Management: project-management.md

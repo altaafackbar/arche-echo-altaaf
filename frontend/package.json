@@ -1,0 +1,47 @@
+{
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@expo-google-fonts/poppins": "^0.2.0",
+    "@react-native-async-storage/async-storage": "~1.15.0",
+    "@react-navigation/native": "^6.0.4",
+    "@react-navigation/native-stack": "^6.2.2",
+    "@use-expo/font": "^2.0.0",
+    "expo": "^42.0.4",
+    "expo-app-loading": "1.1.2",
+    "expo-font": "~9.2.1",
+    "expo-google-app-auth": "^8.2.2",
+    "expo-google-sign-in": "~9.2.1",
+    "expo-splash-screen": "~0.11.2",
+    "expo-status-bar": "~1.0.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-maps": "0.28.0",
+    "react-native-onboarding-swiper": "^1.1.4",
+    "react-native-password-eye": "^1.0.2",
+    "react-native-safe-area-context": "3.2.0",
+    "react-native-screens": "~3.4.0",
+    "react-native-vector-icons": "^8.1.0",
+    "react-native-web": "^0.17.5"
+  },
+  "devDependencies": {
+    "@testing-library/react-native": "^8.0.0",
+    "jest-expo": "^42.1.0",
+    "react-test-renderer": "^17.0.2"
+  },
+  "private": true,
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ]
+  }
+}
