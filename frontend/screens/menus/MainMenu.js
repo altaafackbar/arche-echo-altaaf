@@ -11,6 +11,9 @@ export default function MainMenu ()
     function naviagteToClinicMap() {
         navigation.navigate('Find A Clinic')
     }
+    function naviagteToSymptomChecker() {
+        navigation.navigate('SymptomChecker')
+    }
 
     return(
         <SafeAreaView style={styles.container}>
@@ -19,7 +22,9 @@ export default function MainMenu ()
                 <Pressable style={styles.button}>
                     <Text style={styles.text}>Tools and Resources</Text>
                 </Pressable>
-                <Pressable style={styles.button}>
+                <Pressable 
+                onPress={() => naviagteToSymptomChecker()}
+                style={styles.button}>
                     <Text style={styles.text}>Symptom Checker</Text>
                 </Pressable>
             </View>

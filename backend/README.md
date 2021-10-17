@@ -1,3 +1,8 @@
+### Backend has deployed on Cybera
+private ipv4: 10.2.11.229
+
+ipv6: 2605:fd00:4:1001:f816:3eff:fe5e:ba3b
+
 ## Installation 
 
 Set up Python3 Virtual environment 
@@ -13,7 +18,7 @@ Install required packages
 pip install -r requirements.txt
 ```
 
-#### IF you dont have postgresql installed, you can simply go to setting.py change database to default sqlite3 data for testing
+### IF you dont have postgresql installed, you can simply go to setting.py change database to default sqlite3 data for testing
 
 ```
 DATABASES = {
@@ -38,6 +43,8 @@ python manage.py runserver
 
 
 ## Documentation Endpoint
-http://localhost:8000/docs/   (or ipv4/ipv6 address instaed of localhost)
+ipv4 (private): http://10.2.11.229/docs
+ipv6: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/docs
+
 
 

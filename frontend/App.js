@@ -11,9 +11,10 @@ import Onboard from './screens/onboarding-screens/Onboarding'
 import Disclaimer from './login-pages/Disclaimer';
 import MainMenu from './screens/menus/MainMenu';
 import ClinicMap from './screens/clinic_map_screen/ClinicMap';
+import SymptomChecker from './screens/symptom_checker-screen/SymptomChecker';
 
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 // Creating the navigation function
 export default function Navigator() {
@@ -28,22 +29,21 @@ export default function Navigator() {
             backgroundColor: 'transparent'
           },
           headerTransparent: true,
-          headerBackTitleVisible: false,
+          headerTitle: '',
           headerLeftContainerStyle: {
-          paddingLeft: 20,
+            paddingLeft: 20
           }
 
         }}
       >
-
-        {/* Setting up all the screens in the stack navigator */}
-        <Stack.Screen options={{headerShown: false }} name="Landing" component={LandingV2} />
-        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Login" component={Login} />
-        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="SignUp" component={SignUp} />
-        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Onboarding" component={Onboard} />
-        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="MainMenu" component={MainMenu} />
-        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Find A Clinic" component={ClinicMap} />
-        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Disclaimer" component={Disclaimer}/>
+        <Stack.Screen options={{ headerShown: false }} name="Landing" component={Landing} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Onboarding" component={Onboard} />
+        <Stack.Screen name="Disclaimer" component={Disclaimer} />
+        <Stack.Screen name="MainMenu" component={MainMenu} />
+        <Stack.Screen name="Find A Clinic" component={ClinicMap} />
+        <Stack.Screen name="SymptomChecker" component={SymptomChecker} />
       </Stack.Navigator>
     </NavigationContainer>
 

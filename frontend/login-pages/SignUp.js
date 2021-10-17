@@ -10,6 +10,7 @@ import * as Google from 'expo-google-app-auth';
 import LoginButton from '../components/styles/login-button';
 import OrBreak from '../components/styles/or_divider'
 
+
 export default function SignUp ()
 {
     const [firstName, setFirstName] = useState('')

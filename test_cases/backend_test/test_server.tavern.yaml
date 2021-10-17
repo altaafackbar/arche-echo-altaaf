@@ -1,13 +1,10 @@
 ---
 test_name: test create user account
 
-includes:
-  - !include includes.yaml
-
 stages:
   - name: Check if we could create an account
     request:
-      url: http://{host:s}:{port:d}/api/accounts/
+      url: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/api/accounts/
       method: POST
       json:
         email: "test@test.com"
@@ -22,13 +19,10 @@ stages:
 ---
 test_name: test create user account with the same email
 
-includes:
-  - !include includes.yaml
-
 stages:
   - name: Check we can't create an user account with the same email address
     request:
-      url: http://{host:s}:{port:d}/api/accounts/
+      url: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/api/accounts/
       method: POST
       json:
         email: "test@test.com"
@@ -44,13 +38,10 @@ stages:
 ---
 test_name: test retreive user info
 
-includes:
-  - !include includes.yaml
-
 stages:
   - name: Check if we could get current user's info
     request:
-      url: http://{host:s}:{port:d}/api/accounts/1/
+      url: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]}/api/accounts/1/
       method: GET
     response:
       status_code: 200
@@ -63,13 +54,10 @@ stages:
 ---
 test_name: test get user jwt token (user login)
 
-includes:
-  - !include includes.yaml
-
 stages:
   - name: Check if user can signin and get jwt token
     request:
-      url: http://{host:s}:{port:d}/api/auth/token/
+      url: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/api/auth/token/
       method: POST
       json:
         username: "test@test.com"
@@ -83,13 +71,10 @@ stages:
 ---
 test_name: test user sign in not success (wrong password), no token provided
 
-includes:
-  - !include includes.yaml
-
 stages:
   - name: Check when user provided wrong password, not jwt token provided
     request:
-      url: http://{host:s}:{port:d}/api/auth/token/
+      url: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/api/auth/token/
       method: POST
       json:
         username: "test@test.com"

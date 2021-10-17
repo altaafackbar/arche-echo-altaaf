@@ -4,7 +4,7 @@ This page provides a general overview of the Story Map, the overall Project Plan
 
 ## Story Map
 
-![story map](https://user-images.githubusercontent.com/20648179/137535798-5c7313a5-c04d-442b-9a6e-0934e3438bb9.png)
+![ARCHE ECHO story-map](https://user-images.githubusercontent.com/20648179/137605107-6c20d78d-1f21-4dc7-a684-20509abd9818.png)
 
 
 ## Project Plan
@@ -25,16 +25,21 @@ This page provides a general overview of the Story Map, the overall Project Plan
 
 #### Due: October 16th
 
+##### Scrum Roles
+
+- Product Owner: Jason Branch-Allen
+- Scrum Master: Natalia Hassan
+
 | Rubric Description   | Task-to-Do                       | Assigned To                                   | Date To Complete By |
 |----------------------|----------------------------------|-----------------------------------------------|---------------------|
 | Revised Requirements | Documentation                    | Entire Team                                   | October 16, 2021    |
 | Detailed Design      | Documentation                    | Entire Team                                   | October 16, 2021    |
 | Codebase             | US 01.01.01 Login/ User Creation | Altaaf Ackbar, Kevin Zhu                      | October 10, 2021    |
 | Codebase             | US 02.01.01 - Splash Screen      | Jason Branch-Allen                            | October 10, 2021    |
-| Codebase             | US 03.01.01 - Navigation Menu    | Natalia Hasan, Jason Branch-Allen, Jayden Cho | October 10, 2021    |
+| Codebase             | US 03.01.01 - Navigation Menu    | Natalia Hassan, Jason Branch-Allen, Jayden Cho | October 10, 2021    |
 | React Native Setup   | Setup                            | Jayden Cho                                    | October 10, 2021    |
 | Codebase             | US 08.01 Symptom Checker         | Altaaf Ackbar, Kevin Zhu                      | November 10, 2021   |
-| Codebase             | US 05.01 - Tools and resources   | Jun Li, Natalia Hasan                         | November 10, 2021   |
+| Codebase             | US 05.01 - Tools and resources   | Jun Li, Natalia Hassan                         | November 10, 2021   |
 | Codebase             | US 07.01 - Find a Clinic         | Jun Li, Kevin Zhu                             | November 10, 2021   |
 | Database Setup       | Setup                            | Jun Li, Altaaf Ackbar, Kevin Zhu              | October 15th, 2021  |
 
@@ -64,4 +69,4 @@ This page provides a general overview of the Story Map, the overall Project Plan
 | Codebase                                 | US 01.03.01 - Create and attach a child’s profile to one specific account | Jun Li      | November 23rd, 2021 |
 
 ## Team Canvas
-![Team Canvas](https://github.com/UAlberta-CMPUT401/arche-echo/raw/main/docs/images/Team%20Canvas.png)
+![Team Canvas](https://user-images.githubusercontent.com/20648179/137604394-ed07eba9-3c2a-4a4a-bdd3-d407a2c0b135.png)
