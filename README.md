@@ -50,7 +50,7 @@ ipv6: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/docs
 # ARCHE | ECHO App
 
 ## Deployment Website
-https://ualberta-cmput401.github.io/arche-echo/requirements/
+https://ualberta-cmput401.github.io/arche-echo/
 
 ## Project Overview
 
