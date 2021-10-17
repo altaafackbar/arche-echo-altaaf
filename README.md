@@ -1,6 +1,7 @@
 # Sprint 2 Release
 ## Frontend deployment
 
+Deployed on EXPO_CLI
 link TBC
 
 ## Backend deployment
