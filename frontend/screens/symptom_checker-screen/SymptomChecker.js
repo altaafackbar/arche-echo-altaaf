@@ -33,8 +33,8 @@ export default function SymptomChecker() {
     return (
         <SafeAreaView style={styles.safeview}>
             <View style={styles.titles}>
-                <Text style={styles.headerTitle}>Welcome to ARCHE | ECHO!</Text>
-                <Text style={styles.subTitle}>All the resources you need to maximize your child's care.</Text>
+                <Text style={styles.headerTitle}>Symptom Checker</Text>
+                <Text style={styles.subTitle}>Please select a body part to get started.</Text>
             </View>
             <View style={styles.imageContainer}>
                 {/*head check */}
