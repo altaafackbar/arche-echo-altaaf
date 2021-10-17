@@ -4,7 +4,7 @@
 Deployed on EXPO_CLI
 
 
-link TBC
+link: https://expo.dev/@jaydenjunhyeoncho/arche-echo
 
 ## Backend deployment
 ### Backend has deployed on Cybera
