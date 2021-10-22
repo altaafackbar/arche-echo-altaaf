@@ -20,6 +20,8 @@
 //   }
 // });
 
+-----
+
 // const [isLoaded] = useFonts({
 //   "Poppins-Regular": require('./assets/fonts/Poppins-Regular.otf'),
 //   "Poppins-Italic": require('./assets/fonts/Poppins-Italic.otf'),
@@ -35,3 +37,20 @@
 // if (!isLoaded) {
 //   return <AppLoading />;
 // }
+
+------
+
+Continue As Guest
+
+<TouchableOpacity
+                    style={styles.socialSignUpStyles}
+                    onPress={() => navigateToMainMenu()}>
+                    <Image source={Guest} style={{
+                        padding: 10,
+                        margin: 20,
+                        width: 24,
+                        height: 24,
+                        resizeMode: 'contain'
+                    }} />
+                    <Text style={styles.socialIconText}>Continue As Guest</Text>
+                </TouchableOpacity>

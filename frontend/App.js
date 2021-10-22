@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Landing from './login-pages/Landing'
 import LandingV2 from './login-pages/Landing-V2';
 import Login from './login-pages/Login'
@@ -36,13 +36,42 @@ export default function Navigator() {
 
         }}
       >
-        <Stack.Screen options={{ headerShown: false }} name="Landing" component={Landing} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Onboarding" component={Onboard} />
-        <Stack.Screen name="Disclaimer" component={Disclaimer} />
-        <Stack.Screen name="MainMenu" component={MainMenu} />
-        <Stack.Screen name="Find A Clinic" component={ClinicMap} />
+        <Stack.Screen options={{ headerShown: false }} name="Landing" component={LandingV2} />
+        <Stack.Screen 
+        options={{
+          headerTitle: '', 
+          headerShadowVisible: false,
+          headerRight: () => (
+            <TouchableOpacity
+            onPress={() => navigateToDisclaimer()}
+            style={{backgroundColor: 'transparent'}}
+            >
+              <Text style={{color: '#1f1f1f', fontSize: 16}}>Continue As Guest</Text>
+            </TouchableOpacity>
+          )}} 
+        name="Login" 
+        component={Login} />
+        
+        <Stack.Screen 
+        options={{
+          headerTitle: '', 
+          headerShadowVisible: false,
+          headerRight: () => (
+            <TouchableOpacity
+            onPress={() => navigateToDisclaimer()}
+            style={{backgroundColor: 'transparent'}}
+            >
+              <Text style={{color: '#1f1f1f', fontSize: 16}}>Continue As Guest</Text>
+            </TouchableOpacity>
+          )}} 
+        name="SignUp" 
+        component={SignUp} />
+        
+        
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Onboarding" component={Onboard} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="MainMenu" component={MainMenu} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Find A Clinic" component={ClinicMap} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Disclaimer" component={Disclaimer}/>
         <Stack.Screen name="SymptomChecker" component={SymptomChecker} />
       </Stack.Navigator>
     </NavigationContainer>

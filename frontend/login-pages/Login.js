@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity } from 'react-native';
+import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CustomInput from '../components/styles/textBox';
 import OrBreak from '../components/styles/or_divider'
@@ -9,17 +9,19 @@ import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
 import Guest from '../assets/images/Profile.png'
 import * as Google from 'expo-google-app-auth';
 import LoginButton from '../components/styles/login-button';
+import ForgotPassword from '../components/styles/forgot-password';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigation = useNavigation();
-    // const [hidePass, setHidePass] = useState(true)
+    const [hidePass, setHidePass] = useState(true)
 
     navigateToOnboarding = () => navigation.navigate('Onboarding');
     navigateToSignUp = () => navigation.navigate('SignUp');
 
     navigateToMainMenu = () => navigation.navigate('MainMenu')
+    navigateToDisclaimer = () => navigation.navigate('Disclaimer')
 
     // Sign In With Google Information
     async function signInWithGoogleAsync() {
@@ -54,11 +56,15 @@ export default function Login() {
                 setValue={setPassword}
                 secureTextEntry={true}
             ></CustomInput>
+
+            <ForgotPassword></ForgotPassword>
+
             <LoginButton
                 type='signIn'
                 content='Sign In'
                 onPress={() => navigateToOnboarding()}
             ></LoginButton>
+            
 
             {/* Add lines with 'or' section */}
             <OrBreak></OrBreak>
@@ -80,18 +86,6 @@ export default function Login() {
                         resizeMode: 'contain'
                     }} />
                     <Text style={styles.socialIconText}>Sign In With Apple</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.socialSignUpStyles}
-                    onPress={() => navigateToMainMenu()}>
-                    <Image source={Guest} style={{
-                        padding: 10,
-                        margin: 20,
-                        width: 24,
-                        height: 24,
-                        resizeMode: 'contain'
-                    }} />
-                    <Text style={styles.socialIconText}>Continue As Guest</Text>
                 </TouchableOpacity>
             </View>
 
