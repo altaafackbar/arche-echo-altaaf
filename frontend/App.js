@@ -12,6 +12,7 @@ import Disclaimer from './login-pages/Disclaimer';
 import MainMenu from './screens/menus/MainMenu';
 import ClinicMap from './screens/clinic_map_screen/ClinicMap';
 import SymptomChecker from './screens/symptom_checker-screen/SymptomChecker';
+import ToolsAndResources from './screens/tools_and_resources_screen/ToolsAndResources';
 
 
 const Stack = createNativeStackNavigator();
@@ -72,7 +73,9 @@ export default function Navigator() {
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="MainMenu" component={MainMenu} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Find A Clinic" component={ClinicMap} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Disclaimer" component={Disclaimer}/>
-        <Stack.Screen name="SymptomChecker" component={SymptomChecker} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="SymptomChecker" component={SymptomChecker}/>
+        <Stack.Screen options={{headerTitle: 'Tools And Resources', headerShadowVisible: false}} name="ToolsAndResources" component={ToolsAndResources}/>
+        {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -14,12 +14,17 @@ export default function MainMenu ()
     function naviagteToSymptomChecker() {
         navigation.navigate('SymptomChecker')
     }
+    function navigateToToolsAndResources() {
+        navigation.navigate('ToolsAndResources')
+    }
 
     return(
         <SafeAreaView style={styles.container}>
 
             <View style={styles.containerRow1}>
-                <Pressable style={styles.button}>
+                <Pressable 
+                    style={styles.button}
+                    onPress={() => navigateToToolsAndResources()}>
                     <Text style={styles.text}>Tools and Resources</Text>
                 </Pressable>
                 <Pressable 

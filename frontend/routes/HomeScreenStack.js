@@ -6,6 +6,9 @@ import SignUp from '../login-pages/SignUp'
 import Disclaimer from '../login-pages/Disclaimer'
 import MainMenu from '../screens/menus/MainMenu';
 import ClinicMap from '../screens/clinic_map_screen/ClinicMap';
+import SymptomChecker from '../screens/symptom_checker-screen/SymptomChecker';
+import ToolsAndResources from '../screens/tools_and_resources_screen/ToolsAndResources';
+
 
 const screens = {
     Landing: {
@@ -25,6 +28,12 @@ const screens = {
     },
     ClinicMap: {
         screen: ClinicMap
+    },
+    SymptomChecker: {
+        screen: SymptomChecker
+    },
+    ToolsAndResources: {
+        screen: ToolsAndResources
     },
 }
 const HomeStack = createNativeStackNavigator(screens);
