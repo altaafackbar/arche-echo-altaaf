@@ -21,7 +21,8 @@ export default function Login() {
     navigateToSignUp = () => navigation.navigate('SignUp');
 
     navigateToMainMenu = () => navigation.navigate('MainMenu')
-    navigateToDisclaimer = () => navigation.navigate('Disclaimer')
+    navigateToDisclaimer = () => navigation.navigate('DisclaimerModal')
+    
 
     // Sign In With Google Information
     async function signInWithGoogleAsync() {
@@ -62,7 +63,7 @@ export default function Login() {
             <LoginButton
                 type='signIn'
                 content='Sign In'
-                onPress={() => navigateToOnboarding()}
+                onPress={() => navigateToMainMenu()}
             ></LoginButton>
             
 

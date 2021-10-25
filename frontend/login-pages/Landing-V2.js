@@ -20,7 +20,7 @@ export default function LandingV2 ()
     }
 
     function navigateToDisclaimer () {
-      navigation.navigate('Disclaimer')
+      navigation.navigate('DisclaimerModal')
   }
 
     function navigateToSignUp (){
