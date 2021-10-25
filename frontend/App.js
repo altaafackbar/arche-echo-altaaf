@@ -10,6 +10,8 @@ import SignUp from './login-pages/SignUp'
 import Onboard from './screens/onboarding-screens/Onboarding'
 import Disclaimer from './login-pages/Disclaimer';
 import MainMenu from './screens/menus/MainMenu';
+import DisclaimerModal from './screens/modals/disclaimer-modal';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ClinicMap from './screens/clinic_map_screen/ClinicMap';
 import SymptomChecker from './screens/symptom_checker-screen/SymptomChecker';
 import ToolsAndResources from './screens/tools_and_resources_screen/ToolsAndResources';
@@ -67,12 +69,27 @@ export default function Navigator() {
           )}} 
         name="SignUp" 
         component={SignUp} />
+
+        <Stack.Screen 
+        options={{
+          headerTitle: '',
+          presentation: 'fullScreenModal', 
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+            onPress={() => goBack()}
+            style={{backgroundColor: 'transparent'}}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )}} 
+        name="DisclaimerModal" 
+        component={DisclaimerModal} />
         
         
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Onboarding" component={Onboard} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="MainMenu" component={MainMenu} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Find A Clinic" component={ClinicMap} />
-        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Disclaimer" component={Disclaimer}/>
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="SymptomChecker" component={SymptomChecker}/>
         <Stack.Screen options={{headerTitle: 'Tools And Resources', headerShadowVisible: false}} name="ToolsAndResources" component={ToolsAndResources}/>
         {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
