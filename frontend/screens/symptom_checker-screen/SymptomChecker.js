@@ -1,21 +1,26 @@
 import React from "react";
 import { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList, Image, Picker } from "react-native";;
+import { View, Text, ActivityIndicator, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList, Image, Picker } from "react-native";;
 import bodyImage from '../../assets/images/Body.png'
 import bodyImageHead from '../../assets/images/Body-Head.png'
 import bodyImageArms from '../../assets/images/Body-Arms.png'
 import bodyImageBody from '../../assets/images/Body-Body.png'
 import bodyImageLegs from '../../assets/images/Body-Legs.png'
-
+import TouchableScale from 'react-native-touchable-scale';
+import { ListItem } from 'react-native-elements';
+import symptoms from './symptoms.json'
 export default function SymptomChecker() {
 
     const [currentImage, setCurrentImage] = useState(bodyImage)
     const [selectedValue, setSelectedValue] = useState("none");
+    const [symptomsList, setSymptomsList] = useState(symptoms['symptoms']);
+
 
     function updateBody (itemValue) {
         setSelectedValue(itemValue)
         if (itemValue == 'head'){
             setCurrentImage(bodyImageHead)
+            console.log(symptomsList)
         }
         else if (itemValue == 'body'){
             setCurrentImage(bodyImageBody)
@@ -28,10 +33,10 @@ export default function SymptomChecker() {
         }
     }
 
-    
+
 
     return (
-        <SafeAreaView style={styles.safeview}>
+        <ScrollView>
             <View style={styles.titles}>
                 <Text style={styles.headerTitle}>Symptom Checker</Text>
                 <Text style={styles.subTitle}>Select a body part to get started.</Text>
@@ -60,10 +65,10 @@ export default function SymptomChecker() {
                 <TouchableOpacity 
                 onPress = {() => updateBody('legs')}
                 style={styles.legsRectangle}></TouchableOpacity>
-                <Image source={currentImage} style={styles.bodyImage}></Image>
+                <Image source={currentImage} style={styles.bodyImage}/>
                 
             </View>
-            <View style={{ borderWidth: 1, borderColor: 'black', borderRadius: 10 }}>
+            <View style={{ borderWidth: 1, borderColor: 'black', borderRadius: 10, marginHorizontal:130}}>
                 <Picker
                     selectedValue={selectedValue}
                     style={{ height: 50, width: 150 }}
@@ -75,9 +80,37 @@ export default function SymptomChecker() {
                     <Picker.Item label="Arms" value="arms" />
                 </Picker>
             </View>
-            
+            <FlatList
+                style={{ borderRadius: 50, overflow: 'hidden', paddingVertical: 10, paddingBottom: 10}}
+                nestedScrollEnabled ={true}
                 
-        </SafeAreaView>
+                data={symptomsList}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => 
+                <ListItem 
+                    containerStyle={{backgroundColor: "#E7ECF2"}}
+                    bottomDivider
+                    Component={TouchableScale}
+                    friction={90}
+                    tension={100}
+                    activeScale={0.95}
+                >
+
+                    <ListItem.Content>
+                        <ListItem.Title>{item.name}</ListItem.Title>
+                    </ListItem.Content>
+                    <ListItem.CheckBox color="black" solid/>
+                </ListItem>
+                }
+
+            />
+            <TouchableOpacity>
+                <Text>
+                    Check Symptoms
+                </Text>
+            </TouchableOpacity>
+
+        </ScrollView>
         
 
 
@@ -86,14 +119,14 @@ export default function SymptomChecker() {
   
   const styles = StyleSheet.create({
     safeview:{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'    
+        flex: 1,  
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        backgroundColor: '#fff',
+        
     },
     container: {
-        flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
     },
     titles: {
         marginTop: '10%',
@@ -112,13 +145,14 @@ export default function SymptomChecker() {
         padding: 10,
     },
     imageContainer: {
-        width: '100%',
+        height: '15%',
         alignItems: 'center',
+        paddingBottom: 10
     },
     bodyImage: {
         margin: 20,
-        width: '70%',
-        height: '70%',
+        width: '95%',
+        height: '95%',
         resizeMode: 'contain'
 
     },
