@@ -8,6 +8,7 @@ import bodyImageBody from '../../assets/images/Body-Body.png'
 import bodyImageLegs from '../../assets/images/Body-Legs.png'
 import TouchableScale from 'react-native-touchable-scale';
 import { ListItem } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 import symptoms from './symptoms.json'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from "lodash"
@@ -15,11 +16,13 @@ import _ from "lodash"
 
 export default function SymptomChecker() {
 
+    const navigation = useNavigation();
     const [currentImage, setCurrentImage] = useState(bodyImage)
     const [selectedValue, setSelectedValue] = useState("none");
     const [symptomsList, setSymptomsList] = useState(symptoms['symptoms']);
     const [isSelected, setSelection] = useState(false);
     const [checked, setChecked] = useState([]);
+    const [causes, setCauses] = useState([])
 
     let primary = '#007bff'
     const [toggleIcon, setToggle] = useState(true)
@@ -29,7 +32,6 @@ export default function SymptomChecker() {
         setSelectedValue(itemValue)
         if (itemValue == 'head'){
             setCurrentImage(bodyImageHead)
-            console.log(symptomsList)
         }
         else if (itemValue == 'body'){
             setCurrentImage(bodyImageBody)
@@ -51,18 +53,25 @@ export default function SymptomChecker() {
     }
     function getCauses(){
         const finalCauses = []
+        const causesDic = []
         checked.forEach(element => {
             symptomsList[element].conditions.forEach(element => {
                 const exists = finalCauses.indexOf(element)
                 if (exists == -1) {
                     finalCauses.push(element)
+                    causesDic.push({
+                        "id" : finalCauses.indexOf(element),
+                        "name" : element
+                    })
                   }
             });
         }); 
             
         
         //console.log(_.union(finalCauses[0], finalCauses[1]));
-        console.log(finalCauses)
+        navigation.navigate('RelatedCauses', {
+            relatedCauses : causesDic
+        })
     }
 
     return (

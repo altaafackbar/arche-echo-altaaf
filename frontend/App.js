@@ -14,6 +14,7 @@ import DisclaimerModal from './screens/modals/disclaimer-modal';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ClinicMap from './screens/clinic_map_screen/ClinicMap';
 import SymptomChecker from './screens/symptom_checker-screen/SymptomChecker';
+import RelatedCauses from './screens/symptom_checker-screen/RelatedCauses';
 import ToolsAndResources from './screens/tools_and_resources_screen/ToolsAndResources';
 
 
@@ -91,6 +92,7 @@ export default function Navigator() {
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="MainMenu" component={MainMenu} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Find A Clinic" component={ClinicMap} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="SymptomChecker" component={SymptomChecker}/>
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="RelatedCauses" component={RelatedCauses}/>
         <Stack.Screen options={{headerTitle: 'Tools And Resources', headerShadowVisible: false}} name="ToolsAndResources" component={ToolsAndResources}/>
         {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
       </Stack.Navigator>
