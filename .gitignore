@@ -19,7 +19,7 @@ packages/*/build/
 unlinked-packages/*/build/
 
 # expo
-**/.expo/**
+**/.expo
 
 
 # Logs
