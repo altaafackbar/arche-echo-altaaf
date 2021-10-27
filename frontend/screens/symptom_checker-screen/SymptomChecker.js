@@ -4,7 +4,9 @@ import { View, Text, ActivityIndicator, StyleSheet, Dimensions, SafeAreaView, Sc
 import bodyImage from '../../assets/images/Body.png'
 import bodyImageHead from '../../assets/images/Body-Head.png'
 import bodyImageArms from '../../assets/images/Body-Arms.png'
-import bodyImageBody from '../../assets/images/Body-Body.png'
+import bodyImageChest from '../../assets/images/Body-Chest.png'
+import bodyImageStomach from '../../assets/images/Body-Stomach.png'
+import bodyImagePelvis from '../../assets/images/Body-Pelvis.png'
 import bodyImageLegs from '../../assets/images/Body-Legs.png'
 import TouchableScale from 'react-native-touchable-scale';
 import { ListItem } from 'react-native-elements';
@@ -33,8 +35,14 @@ export default function SymptomChecker() {
         if (itemValue == 'head'){
             setCurrentImage(bodyImageHead)
         }
-        else if (itemValue == 'body'){
-            setCurrentImage(bodyImageBody)
+        else if (itemValue == 'chest'){
+            setCurrentImage(bodyImageChest)
+        }
+        else if (itemValue == 'stomach'){
+            setCurrentImage(bodyImageStomach)
+        }
+        else if (itemValue == 'pelvis'){
+            setCurrentImage(bodyImagePelvis)
         }
         else if (itemValue == 'arms'){
             setCurrentImage(bodyImageArms)
@@ -95,10 +103,20 @@ export default function SymptomChecker() {
                 onPress = {() => updateBody('arms')}
                 style={styles.rightArmRectangle}></TouchableOpacity>
 
-                {/*body check */}
+                {/*chest check */}
                 <TouchableOpacity 
-                onPress = {() => updateBody('body')}
-                style={styles.bodyRectangle}></TouchableOpacity>
+                onPress = {() => updateBody('chest')}
+                style={styles.chestRectangle}></TouchableOpacity>
+
+                {/*stomach check */}
+                <TouchableOpacity 
+                onPress = {() => updateBody('stomach')}
+                style={styles.stomachRectangle}></TouchableOpacity>
+
+                {/*pelvis check */}
+                <TouchableOpacity 
+                onPress = {() => updateBody('pelvis')}
+                style={styles.pelvisRectangle}></TouchableOpacity>
 
                 {/*legs check */}
                 <TouchableOpacity 
@@ -114,7 +132,9 @@ export default function SymptomChecker() {
                     onValueChange={(itemValue, itemIndex) => updateBody(itemValue)}>
                     <Picker.Item label="Select" value="none" />
                     <Picker.Item label="Head" value="head" />
-                    <Picker.Item label="Body" value="body" />
+                    <Picker.Item label="Chest" value="chest" />
+                    <Picker.Item label="Stomach" value="stomach" />
+                    <Picker.Item label="Pelvis" value="pelvis" />
                     <Picker.Item label="Legs" value="legs" />
                     <Picker.Item label="Arms" value="arms" />
                 </Picker>
@@ -228,7 +248,8 @@ export default function SymptomChecker() {
         padding: 10,
     },
     imageContainer: {
-        height: 400,
+        flex:1,
+        height: (1.1 * Dimensions.get('window').width),
         alignItems: 'center',
         paddingBottom: 10
     },
@@ -240,52 +261,72 @@ export default function SymptomChecker() {
 
     },
     legsRectangle: {
-        height: 188,
-        width: 90,
+        height: '33%',
+        width: '20%',
         backgroundColor: 'rgba(52, 52, 52, 0)',
         position: 'absolute', 
         zIndex: 90,
-        transform: [{translateY: -30}, {translateX: -2}],
+        transform: [{translateY: 70}, {translateX: -0}],
         top: '50%',
         left: '40%'
       },
       headRectangle: {
-        height: 90,
-        width: 90,
+        height: '25%',
+        width: '20%',
         backgroundColor: 'rgba(52, 52, 52, 0)',
         position: 'absolute', 
         zIndex: 90,
-        transform: [{translateY: -300}, {translateX: -2}],
+        transform: [{translateY: -190}, {translateX: -2}],
         top: '50%',
         left: '40%'
       },
-      bodyRectangle: {
-        height: 150,
-        width: 90,
+      chestRectangle: {
+        height: '18%',
+        width: '20%',
         backgroundColor: 'rgba(52, 52, 52, 0)',
         position: 'absolute', 
         zIndex: 90,
-        transform: [{translateY: -170}, {translateX: -2}],
+        transform: [{translateY: -74}],
+        top: '50%',
+        left: '40%'
+      },
+      stomachRectangle: {
+        height: '8%',
+        width: '20%',
+        backgroundColor: 'rgba(52, 52, 52, 0)',
+        position: 'absolute', 
+        zIndex: 90,
+        transform: [{translateY: 10}],
+        top: '50%',
+        left: '40%'
+      },
+      pelvisRectangle: {
+        height: '6%',
+        width: '20%',
+        backgroundColor: 'rgba(52, 52, 52, 0)',
+        position: 'absolute', 
+        zIndex: 90,
+        transform: [{translateY: 43}],
         top: '50%',
         left: '40%'
       },
       leftArmRectangle: {
-        height: 150,
-        width: 35,
+        height: '30%',
+        width: '7%',
         backgroundColor: 'rgba(52, 52, 52, 0)',
         position: 'absolute', 
         zIndex: 90,
-        transform: [{translateY: -150}, {translateX: -45}, {rotate: '15deg'}],
+        transform: [{translateY: -60}, {translateX: -33}, {rotate: '15deg'}],
         top: '50%',
         left: '40%'
       },
       rightArmRectangle: {
-        height: 150,
-        width: 35,
+        height: '30%',
+        width: '7%',
         backgroundColor: 'rgba(52, 52, 52, 0)',
         position: 'absolute', 
         zIndex: 90,
-        transform: [{translateY: -150}, {translateX: 95}, {rotate: '-15deg'}],
+        transform: [{translateY: -60}, {translateX: 88}, {rotate: '-15deg'}],
         top: '50%',
         left: '40%'
       },
