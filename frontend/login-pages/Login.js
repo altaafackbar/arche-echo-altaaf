@@ -29,7 +29,7 @@ export default function Login() {
 
         try {
             const result = await Google.logInAsync({
-                androidClientId: '772373435594-hqgdpesi3riqnjr4aqt641dc8d0ho7t8.apps.googleusercontent.com',
+                androidClientId: '370906179427-g4a6l0r1arabjh4oqai6msvds02vrd9p.apps.googleusercontent.com',
                 scopes: ['profile', 'email'],
             });
 

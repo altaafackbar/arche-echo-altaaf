@@ -9,11 +9,20 @@ import bodyImageLegs from '../../assets/images/Body-Legs.png'
 import TouchableScale from 'react-native-touchable-scale';
 import { ListItem } from 'react-native-elements';
 import symptoms from './symptoms.json'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import _ from "lodash"
+
+
 export default function SymptomChecker() {
 
     const [currentImage, setCurrentImage] = useState(bodyImage)
     const [selectedValue, setSelectedValue] = useState("none");
     const [symptomsList, setSymptomsList] = useState(symptoms['symptoms']);
+    const [isSelected, setSelection] = useState(false);
+    const [checked, setChecked] = useState([]);
+
+    let primary = '#007bff'
+    const [toggleIcon, setToggle] = useState(true)
 
 
     function updateBody (itemValue) {
@@ -32,8 +41,29 @@ export default function SymptomChecker() {
             setCurrentImage(bodyImageLegs)
         }
     }
-
-
+    function itemChecked(id){
+        const index = checked.indexOf(id);
+        if (index > -1) {
+          return true; 
+        } else {
+          return false
+        }
+    }
+    function getCauses(){
+        const finalCauses = []
+        checked.forEach(element => {
+            symptomsList[element].conditions.forEach(element => {
+                const exists = finalCauses.indexOf(element)
+                if (exists == -1) {
+                    finalCauses.push(element)
+                  }
+            });
+        }); 
+            
+        
+        //console.log(_.union(finalCauses[0], finalCauses[1]));
+        console.log(finalCauses)
+    }
 
     return (
         <ScrollView>
@@ -85,30 +115,74 @@ export default function SymptomChecker() {
                 nestedScrollEnabled ={true}
                 
                 data={symptomsList}
+                extraData={checked}
                 keyExtractor={(item) => item.id}
-                renderItem={({ item }) => 
+                renderItem={({ item, index }) => 
+
+                <View style={{padding:5}}>
+                    <TouchableOpacity style={
+                        {flex: 1,flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center', backgroundColor: "#E7ECF2", borderRadius: 10, height: 40}
+                    }>
+                        <Text style={{alignItems:'flex-start', paddingLeft:30, marginRight: 50}}>
+                        {item.name}
+                        </Text>
+                        <TouchableOpacity style={{backgroundColor: 'transparent', paddingRight: 20}} 
+                        isChecked={checked.includes(item.id)}
+                        onPress={() => {
+                          const newIds = [...checked];
+                          const index = newIds.indexOf(item.id);
+                          if (index > -1) {
+                            newIds.splice(index, 1); 
+                          } else {
+                            newIds.push(item.id)
+                          }
+                          setChecked(newIds)
+
+                        }}
+                    >
+                            <Icon name={!itemChecked(item.id) ? 'checkbox-blank-circle-outline' : 'check-circle'} size={24} color={!itemChecked(item.id) ? '#dadada' : primary}></Icon>
+                        </TouchableOpacity>
+                    </TouchableOpacity>
+
+                </View>
+                /*
                 <ListItem 
-                    containerStyle={{backgroundColor: "#E7ECF2"}}
+                    containerStyle={{backgroundColor: "#E7ECF2", borderRadius: 10}}
                     bottomDivider
                     Component={TouchableScale}
                     friction={90}
                     tension={100}
                     activeScale={0.95}
+                    
                 >
 
                     <ListItem.Content>
                         <ListItem.Title>{item.name}</ListItem.Title>
                     </ListItem.Content>
-                    <ListItem.CheckBox color="black" solid/>
-                </ListItem>
+                    <ListItem.CheckBox color="black" solid
+                        checked={isSelected}
+                        style={styles.checkbox}/>
+
+                </ListItem>*/
                 }
 
             />
-            <TouchableOpacity>
-                <Text>
-                    Check Symptoms
-                </Text>
-            </TouchableOpacity>
+                <View style={{padding:5, marginHorizontal:120}}>
+                    <TouchableOpacity 
+                    onPress = {() => getCauses()}
+                    style={
+                        {alignItems: 'center', 
+                        backgroundColor: "#96bdeb", 
+                        borderRadius: 10, height: 40, 
+                        justifyContent: 'center',
+                        borderWidth: 1}
+                        
+                    }>
+                        
+                        <Text>Find Causes</Text>
+                    </TouchableOpacity>
+
+                </View>
 
         </ScrollView>
         
@@ -145,7 +219,7 @@ export default function SymptomChecker() {
         padding: 10,
     },
     imageContainer: {
-        height: '15%',
+        height: 400,
         alignItems: 'center',
         paddingBottom: 10
     },
@@ -205,6 +279,9 @@ export default function SymptomChecker() {
         transform: [{translateY: -150}, {translateX: 95}, {rotate: '-15deg'}],
         top: '50%',
         left: '40%'
+      },
+      checkbox: {
+        alignSelf: "center",
       },
     
 
