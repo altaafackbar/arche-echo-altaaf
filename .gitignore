@@ -1,6 +1,5 @@
 node_modules
 .DS_Store
-.expo
 .eslintcache
 .tags*
 .git-crypt-key
@@ -18,6 +17,10 @@ npm-debug.log
 
 packages/*/build/
 unlinked-packages/*/build/
+
+# expo
+**/.expo/**
+
 
 # Logs
 packages/*/logs/
