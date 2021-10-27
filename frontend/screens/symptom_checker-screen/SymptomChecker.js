@@ -30,36 +30,36 @@ export default function SymptomChecker() {
     const [toggleIcon, setToggle] = useState(true)
 
 
-    function updateBody (itemValue) {
+    function updateBody(itemValue) {
         setSelectedValue(itemValue)
-        if (itemValue == 'head'){
+        if (itemValue == 'head') {
             setCurrentImage(bodyImageHead)
         }
-        else if (itemValue == 'chest'){
+        else if (itemValue == 'chest') {
             setCurrentImage(bodyImageChest)
         }
-        else if (itemValue == 'stomach'){
+        else if (itemValue == 'stomach') {
             setCurrentImage(bodyImageStomach)
         }
-        else if (itemValue == 'pelvis'){
+        else if (itemValue == 'pelvis') {
             setCurrentImage(bodyImagePelvis)
         }
-        else if (itemValue == 'arms'){
+        else if (itemValue == 'arms') {
             setCurrentImage(bodyImageArms)
         }
-        else if (itemValue == 'legs'){
+        else if (itemValue == 'legs') {
             setCurrentImage(bodyImageLegs)
         }
     }
-    function itemChecked(id){
+    function itemChecked(id) {
         const index = checked.indexOf(id);
         if (index > -1) {
-          return true; 
+            return true;
         } else {
-          return false
+            return false
         }
     }
-    function getCauses(){
+    function getCauses() {
         const finalCauses = []
         const causesDic = []
         checked.forEach(element => {
@@ -68,17 +68,17 @@ export default function SymptomChecker() {
                 if (exists == -1) {
                     finalCauses.push(element)
                     causesDic.push({
-                        "id" : finalCauses.indexOf(element),
-                        "name" : element
+                        "id": finalCauses.indexOf(element),
+                        "name": element
                     })
-                  }
+                }
             });
-        }); 
-            
-        
+        });
+
+
         //console.log(_.union(finalCauses[0], finalCauses[1]));
         navigation.navigate('RelatedCauses', {
-            relatedCauses : causesDic
+            relatedCauses: causesDic
         })
     }
 
@@ -90,42 +90,42 @@ export default function SymptomChecker() {
             </View>
             <View style={styles.imageContainer}>
                 {/*head check */}
-                <TouchableOpacity 
-                onPress = {() => updateBody('head')}
-                style={styles.headRectangle}></TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => updateBody('head')}
+                    style={styles.headRectangle}></TouchableOpacity>
 
                 {/*left arm check */}
-                <TouchableOpacity 
-                onPress = {() => updateBody('arms')}
-                style={styles.leftArmRectangle}></TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => updateBody('arms')}
+                    style={styles.leftArmRectangle}></TouchableOpacity>
                 {/*right arm check */}
-                <TouchableOpacity 
-                onPress = {() => updateBody('arms')}
-                style={styles.rightArmRectangle}></TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => updateBody('arms')}
+                    style={styles.rightArmRectangle}></TouchableOpacity>
 
                 {/*chest check */}
-                <TouchableOpacity 
-                onPress = {() => updateBody('chest')}
-                style={styles.chestRectangle}></TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => updateBody('chest')}
+                    style={styles.chestRectangle}></TouchableOpacity>
 
                 {/*stomach check */}
-                <TouchableOpacity 
-                onPress = {() => updateBody('stomach')}
-                style={styles.stomachRectangle}></TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => updateBody('stomach')}
+                    style={styles.stomachRectangle}></TouchableOpacity>
 
                 {/*pelvis check */}
-                <TouchableOpacity 
-                onPress = {() => updateBody('pelvis')}
-                style={styles.pelvisRectangle}></TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => updateBody('pelvis')}
+                    style={styles.pelvisRectangle}></TouchableOpacity>
 
                 {/*legs check */}
-                <TouchableOpacity 
-                onPress = {() => updateBody('legs')}
-                style={styles.legsRectangle}></TouchableOpacity>
-                <Image source={currentImage} style={styles.bodyImage}/>
-                
+                <TouchableOpacity
+                    onPress={() => updateBody('legs')}
+                    style={styles.legsRectangle}></TouchableOpacity>
+                <Image source={currentImage} style={styles.bodyImage} />
+
             </View>
-            <View style={{ borderWidth: 1, borderColor: 'black', borderRadius: 10, marginHorizontal:130}}>
+            <View style={{ borderWidth: 1, borderColor: 'black', borderRadius: 10, marginHorizontal: 130 }}>
                 <Picker
                     selectedValue={selectedValue}
                     style={{ height: 50, width: 150 }}
@@ -140,93 +140,95 @@ export default function SymptomChecker() {
                 </Picker>
             </View>
             <FlatList
-                style={{ borderRadius: 50, overflow: 'hidden', paddingVertical: 10, paddingBottom: 10}}
-                nestedScrollEnabled ={true}
-                
+                style={{ borderRadius: 50, overflow: 'hidden', paddingVertical: 10, paddingBottom: 10 }}
+                nestedScrollEnabled={true}
+
                 data={symptomsList}
                 extraData={checked}
                 keyExtractor={(item) => item.id}
-                renderItem={({ item, index }) => 
+                renderItem={({ item, index }) =>
 
-                <View style={{padding:5}}>
-                    <TouchableOpacity style={
-                        {flex: 1,flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center', backgroundColor: "#E7ECF2", borderRadius: 10, height: 40}
-                    }>
-                        <Text style={{alignItems:'flex-start', paddingLeft:30, marginRight: 50}}>
-                        {item.name}
-                        </Text>
-                        <TouchableOpacity style={{backgroundColor: 'transparent', paddingRight: 20}} 
-                        isChecked={checked.includes(item.id)}
-                        onPress={() => {
-                          const newIds = [...checked];
-                          const index = newIds.indexOf(item.id);
-                          if (index > -1) {
-                            newIds.splice(index, 1); 
-                          } else {
-                            newIds.push(item.id)
-                          }
-                          setChecked(newIds)
+                    <View style={{ padding: 5 }}>
+                        <TouchableOpacity style={
+                            { flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: "#E7ECF2", borderRadius: 10, height: 40 }
+                        }>
+                            <Text style={{ alignItems: 'flex-start', paddingLeft: 30, marginRight: 50 }}>
+                                {item.name}
+                            </Text>
+                            <TouchableOpacity style={{ backgroundColor: 'transparent', paddingRight: 20 }}
+                                isChecked={checked.includes(item.id)}
+                                onPress={() => {
+                                    const newIds = [...checked];
+                                    const index = newIds.indexOf(item.id);
+                                    if (index > -1) {
+                                        newIds.splice(index, 1);
+                                    } else {
+                                        newIds.push(item.id)
+                                    }
+                                    setChecked(newIds)
 
-                        }}
-                    >
-                            <Icon name={!itemChecked(item.id) ? 'checkbox-blank-circle-outline' : 'check-circle'} size={24} color={!itemChecked(item.id) ? '#dadada' : primary}></Icon>
+                                }}
+                            >
+                                <Icon name={!itemChecked(item.id) ? 'checkbox-blank-circle-outline' : 'check-circle'} size={24} color={!itemChecked(item.id) ? '#dadada' : primary}></Icon>
+                            </TouchableOpacity>
                         </TouchableOpacity>
-                    </TouchableOpacity>
 
-                </View>
-                /*
-                <ListItem 
-                    containerStyle={{backgroundColor: "#E7ECF2", borderRadius: 10}}
-                    bottomDivider
-                    Component={TouchableScale}
-                    friction={90}
-                    tension={100}
-                    activeScale={0.95}
-                    
-                >
-
-                    <ListItem.Content>
-                        <ListItem.Title>{item.name}</ListItem.Title>
-                    </ListItem.Content>
-                    <ListItem.CheckBox color="black" solid
-                        checked={isSelected}
-                        style={styles.checkbox}/>
-
-                </ListItem>*/
+                    </View>
+                    /*
+                    <ListItem 
+                        containerStyle={{backgroundColor: "#E7ECF2", borderRadius: 10}}
+                        bottomDivider
+                        Component={TouchableScale}
+                        friction={90}
+                        tension={100}
+                        activeScale={0.95}
+                        
+                    >
+    
+                        <ListItem.Content>
+                            <ListItem.Title>{item.name}</ListItem.Title>
+                        </ListItem.Content>
+                        <ListItem.CheckBox color="black" solid
+                            checked={isSelected}
+                            style={styles.checkbox}/>
+    
+                    </ListItem>*/
                 }
 
             />
-                <View style={{padding:5, marginHorizontal:120}}>
-                    <TouchableOpacity 
-                    onPress = {() => getCauses()}
+            <View style={{ padding: 5, marginHorizontal: 120 }}>
+                <TouchableOpacity
+                    onPress={() => getCauses()}
                     style={
-                        {alignItems: 'center', 
-                        backgroundColor: "#96bdeb", 
-                        borderRadius: 10, height: 40, 
-                        justifyContent: 'center',
-                        borderWidth: 1}
-                        
-                    }>
-                        
-                        <Text>Find Causes</Text>
-                    </TouchableOpacity>
+                        {
+                            alignItems: 'center',
+                            backgroundColor: "#96bdeb",
+                            borderRadius: 10, height: 40,
+                            justifyContent: 'center',
+                            borderWidth: 1
+                        }
 
-                </View>
+                    }>
+
+                    <Text>Find Causes</Text>
+                </TouchableOpacity>
+
+            </View>
 
         </ScrollView>
-        
+
 
 
     );
-  }
-  
-  const styles = StyleSheet.create({
-    safeview:{
-        flex: 1,  
+}
+const transparency_hitbox = 0.3;
+const styles = StyleSheet.create({
+    safeview: {
+        flex: 1,
         flexDirection: 'column',
         justifyContent: 'space-around',
         backgroundColor: '#fff',
-        
+
     },
     container: {
         backgroundColor: '#fff',
@@ -248,7 +250,7 @@ export default function SymptomChecker() {
         padding: 10,
     },
     imageContainer: {
-        flex:1,
+        flex: 1,
         height: (1.1 * Dimensions.get('window').width),
         alignItems: 'center',
         paddingBottom: 10
@@ -263,76 +265,76 @@ export default function SymptomChecker() {
     legsRectangle: {
         height: '33%',
         width: '20%',
-        backgroundColor: 'rgba(52, 52, 52, 0)',
-        position: 'absolute', 
+        backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
+        position: 'absolute',
         zIndex: 90,
-        transform: [{translateY: 70}, {translateX: -0}],
+        transform: [{ translateY: 70 }, { translateX: -0 }],
         top: '50%',
         left: '40%'
-      },
-      headRectangle: {
+    },
+    headRectangle: {
         height: '25%',
         width: '20%',
-        backgroundColor: 'rgba(52, 52, 52, 0)',
-        position: 'absolute', 
+        backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
+        position: 'absolute',
         zIndex: 90,
-        transform: [{translateY: -190}, {translateX: -2}],
+        transform: [{ translateY: -190 }, { translateX: -2 }],
         top: '50%',
         left: '40%'
-      },
-      chestRectangle: {
+    },
+    chestRectangle: {
         height: '18%',
         width: '20%',
-        backgroundColor: 'rgba(52, 52, 52, 0)',
-        position: 'absolute', 
+        backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
+        position: 'absolute',
         zIndex: 90,
-        transform: [{translateY: -74}],
+        transform: [{ translateY: -74 }],
         top: '50%',
         left: '40%'
-      },
-      stomachRectangle: {
+    },
+    stomachRectangle: {
         height: '8%',
         width: '20%',
-        backgroundColor: 'rgba(52, 52, 52, 0)',
-        position: 'absolute', 
+        backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
+        position: 'absolute',
         zIndex: 90,
-        transform: [{translateY: 10}],
+        transform: [{ translateY: 10 }],
         top: '50%',
         left: '40%'
-      },
-      pelvisRectangle: {
+    },
+    pelvisRectangle: {
         height: '6%',
         width: '20%',
-        backgroundColor: 'rgba(52, 52, 52, 0)',
-        position: 'absolute', 
+        backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
+        position: 'absolute',
         zIndex: 90,
-        transform: [{translateY: 43}],
+        transform: [{ translateY: 43 }],
         top: '50%',
         left: '40%'
-      },
-      leftArmRectangle: {
+    },
+    leftArmRectangle: {
         height: '30%',
         width: '7%',
-        backgroundColor: 'rgba(52, 52, 52, 0)',
-        position: 'absolute', 
+        backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
+        position: 'absolute',
         zIndex: 90,
-        transform: [{translateY: -60}, {translateX: -33}, {rotate: '15deg'}],
+        transform: [{ translateY: -60 }, { translateX: -33 }, { rotate: '15deg' }],
         top: '50%',
         left: '40%'
-      },
-      rightArmRectangle: {
+    },
+    rightArmRectangle: {
         height: '30%',
         width: '7%',
-        backgroundColor: 'rgba(52, 52, 52, 0)',
-        position: 'absolute', 
+        backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
+        position: 'absolute',
         zIndex: 90,
-        transform: [{translateY: -60}, {translateX: 88}, {rotate: '-15deg'}],
+        transform: [{ translateY: -60 }, { translateX: 88 }, { rotate: '-15deg' }],
         top: '50%',
         left: '40%'
-      },
-      checkbox: {
+    },
+    checkbox: {
         alignSelf: "center",
-      },
-    
+    },
 
-  });
+
+});
