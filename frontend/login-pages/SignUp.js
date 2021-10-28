@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity, Platform} from 'react-native';
+import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity, Platform, Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CustomInput from '../components/styles/textBox';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -9,6 +9,9 @@ import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
 import * as Google from 'expo-google-app-auth';
 import LoginButton from '../components/styles/login-button';
 import OrBreak from '../components/styles/or_divider'
+// import { auth } from '../Firebase';
+import { firebase } from '../Firebase';
+import "firebase/firestore"
 
 
 export default function SignUp ()
@@ -32,16 +35,104 @@ export default function SignUp ()
         navigation.navigate('Login')
     }
 
+    function isUserEqual(googleUser, firebaseUser) {
+        if (firebaseUser) {
+          var providerData = firebaseUser.providerData;
+          for (var i = 0; i < providerData.length; i++) {
+            if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+                providerData[i].uid === googleUser.getBasicProfile().getId()) {
+              // We don't need to reauth the Firebase connection.
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+    function onSignIn(googleUser) {
+        console.log('Google Auth Response', googleUser);
+        // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+        var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
+          unsubscribe();
+          // Check if we are already signed-in Firebase with the correct user.
+          if (!isUserEqual(googleUser, firebaseUser)) {
+            // Build Firebase credential with the Google ID token.
+            var credential = firebase.auth.GoogleAuthProvider.credential(
+                googleUser.idToken,
+                googleUser.accessToken
+                // googleUser.getAuthResponse().id_token);
+            );
+                // googleUser.getAuthResponse().id_token);
+      
+            // Sign in with credential from the Google user.
+            firebase.auth()
+                .signInWithCredential(credential)
+                .then(function(result) {
+                    console.log('user signed in')
+                    // const currentUser = firebase.auth().currentUser;
+                })
+                .catch((error) => {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    // ...
+                });
+          } else {
+            console.log('User already signed-in Firebase.');
+          }
+        });
+      }
+
     async function signInWithGoogleAsync() {
 
         try {
           const result = await Google.logInAsync({
-            androidClientId: '772373435594-hqgdpesi3riqnjr4aqt641dc8d0ho7t8.apps.googleusercontent.com',
+            iosClientId: '382032993333-iirilhp0hb7uglsjj5tqjlr0n0putv17.apps.googleusercontent.com',
+            androidClientId: '382032993333-bc2mqr2c4vbi9q1fql7qlie9iock098a.apps.googleusercontent.com',
             scopes: ['profile', 'email'],
           });
       
           if (result.type === 'success') {
+            //   onSignIn(result);
               console.log(result.user.name)
+              const {idToken, accessToken} = result
+              const credential = firebase.auth.GoogleAuthProvider.credential(
+                  idToken,
+                  accessToken
+              )
+              firebase.auth()
+                .signInWithCredential(credential)
+                .then(userCredentials => {
+                    const user = userCredentials.user;
+                    const currentUser = firebase.auth().currentUser;
+                    const db = firebase.firestore()
+                    // console.log(result.user.email)
+                    // console.log(result.user.givenName)
+                    db
+                        .collection('users')
+                        .doc(currentUser.uid)
+                        .set({
+                            email: currentUser.email,
+                            firstName: result.user.givenName,
+                            lastName: result.user.familyName
+                        })
+                })
+                .catch((error) => {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    // ...
+                })
+            //   const currentUser = firebase.auth().currentUser;
+            //   console.log(currentUser)
             return result.accessToken;
           } else {
             return { cancelled: true };
@@ -50,72 +141,134 @@ export default function SignUp ()
           return { error: true };
         }
       }
+    
+    const handlesSignUp = () => {
+        // Creating user on firebase authentication
+        firebase.auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                const currentUser = firebase.auth().currentUser;
+                console.log(currentUser.email)
+                // creating user profile on firestore
+                // using user uid as a unique key to connect user profile
+                const db = firebase.firestore()
+                db
+                    .collection("users")
+                    .doc(currentUser.uid)
+                    .set({
+                        email: currentUser.email,
+                        firstName: firstName,
+                        lastName: lastName
+                    })
+                    .then(() => {
+                        console.log('User created');
+                    })
+                    .catch((error) => {
+                        console.error('Error writing document: ', error);
+                    });
+            })
+            .catch(error => {
+                // Check if the email address already exist
+                if (error.code === 'auth/email-already-in-use') {
+                    console.log('That email address is already in use!');
+                    Alert.alert('Error', 'This email address already in use, please Login instead.',[
+                        {text: 'OK', onPress: () => console.log('OK pressed')}
+                    ]);
+                }
+                // Check if the email address is valid
+                if (error.code === 'auth/invalid-email') {
+                    console.log('email address is invalid.');
+                    Alert.alert('Error', 'This email address is invalid, please enter a correct email address.',[
+                        {text: 'OK', onPress: () => console.log('OK pressed')}
+                    ]);
+                }
+            console.error(error)
+            });
+    }
 
     // Renders the elements on the screen
     return (
     
-    //Entire screen container. Welcome header and subtext as well.
-    <SafeAreaView style={styles.container}>
-    <View style={styles.headerContainer}>
-    <Text style={styles.headerText}>Welcome!</Text>
-    <Text style={styles.subheaderText}>Enter your details to get started.</Text>
-    </View>
+        //Entire screen container. Welcome header and subtext as well.
+        <SafeAreaView style={styles.container}>
+        <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>Welcome!</Text>
+        <Text style={styles.subheaderText}>Enter your details to get started.</Text>
+        </View>
 
-    {/* Setting Up Text Inputs: First Name, Last Name, Email, and Password. Using a CustomInput component created in textBox.js */}
-    <CustomInput placeholder='First Name' value={firstName} setValue={setFirstName}/>
-    <CustomInput placeholder='Last Name' value={lastName} setValue={setLastName}/>
-    <CustomInput placeholder='Email' value={email} setValue={setEmail}/>
-    <CustomInput 
-    placeholder='Password' 
-    value={password} 
-    setValue={setPassword} 
-    secureTextEntry={true}
-    ></CustomInput>
+        {/* Setting Up Text Inputs: First Name, Last Name, Email, and Password. Using a CustomInput component created in textBox.js */}
+        <CustomInput 
+            placeholder='First Name' 
+            value={firstName} 
+            setValue={setFirstName}
+            onChangeText={text => setFirstName(text)}
+        />
+        <CustomInput 
+            placeholder='Last Name' 
+            value={lastName} 
+            setValue={setLastName}
+            onChangeText={text => setLastName(text)}
+        />
+        <CustomInput 
+            placeholder='Email' 
+            value={email} 
+            setValue={setEmail}
+            onChangeText={text => setEmail(text)}
+        />
+        <CustomInput 
+            placeholder='Password' 
+            value={password} 
+            setValue={setPassword} 
+            secureTextEntry={true}
+            onChangeText={text => setPassword(text)}
+        />
 
-    {/* Sign Up Button Component */}
-    <LoginButton
-    type='signIn'
-    content='Sign Up'
-    onPress={() => navigateToOnboarding()}
-    ></LoginButton>
+        {/* Sign Up Button Component */}
+        <LoginButton
+            type='signIn'
+            content='Sign Up'
+            onPress={ () => {handlesSignUp(); navigateToOnboarding()}}
+        >
+        </LoginButton>
 
-    {/* Line Break with 'Or' in between two lines. Created as a component. */}
-    <OrBreak></OrBreak>
+        {/* Line Break with 'Or' in between two lines. Created as a component. */}
+        <OrBreak></OrBreak>
 
-    {/* Setting up sign up with Google and Apple. */}
-    <View style={styles.socialContainer}>
+        {/* Setting up sign up with Google and Apple. */}
+        <View style={styles.socialContainer}>
 
-    {/* Sign Up with Google Button */}
-    <TouchableOpacity
-    onPress = {() => signInWithGoogleAsync()}
-    style={styles.socialSignUpStyles}>
-        <Image source={GIcon} style={styles.socialIcons}/>
-        <Text style={styles.socialIconText}>Sign Up With Google</Text>
-    </TouchableOpacity>
+        {/* Sign Up with Google Button */}
+        <TouchableOpacity
+        onPress = {() => signInWithGoogleAsync()}
+        style={styles.socialSignUpStyles}>
+            <Image source={GIcon} style={styles.socialIcons}/>
+            <Text style={styles.socialIconText}>Sign Up With Google</Text>
+        </TouchableOpacity>
 
-    {/* Sign Up With Apple button */}
-    <TouchableOpacity
-    style={styles.socialSignUpStyles}>
-        <Image source={AppleIcon} style={{padding: 10,
-        margin: 20,
-        width: 24,
-        height: 24,
-        resizeMode: 'contain'}}/>
-        <Text style={styles.socialIconText}>Sign Up With Apple</Text>
-    </TouchableOpacity>
-    </View>
+        {/* Sign Up With Apple button */}
+        <TouchableOpacity
+        style={styles.socialSignUpStyles}>
+            <Image source={AppleIcon} style={{padding: 10,
+            margin: 20,
+            width: 24,
+            height: 24,
+            resizeMode: 'contain'}}/>
+            <Text style={styles.socialIconText}>Sign Up With Apple</Text>
+        </TouchableOpacity>
+        </View>
 
-    {/* Already Have An Account dialog at the bottom */}
-    <View style={{width: '90%', padding: 10, alignItems: 'center'}}>
-        <Text>
-            Already have an account?  
-            <Text style={{fontStyle: 'italic', color: '#8A76B6', fontWeight: 'bold'}} onPress= {()=>navigateToLogin()}> Sign In.</Text>
-        </Text>
-    </View>
+        {/* Already Have An Account dialog at the bottom */}
+        <View style={{width: '90%', padding: 10, alignItems: 'center'}}>
+            <Text>
+                Already have an account?  
+                <Text style={{fontStyle: 'italic', color: '#8A76B6', fontWeight: 'bold'}} onPress= {()=>navigateToLogin()}> Sign In.</Text>
+            </Text>
+        </View>
 
-    
-    </SafeAreaView>
-    )
+        
+        </SafeAreaView>
+        )
 
 }
 
