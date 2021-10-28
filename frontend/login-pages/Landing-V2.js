@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View, Button, StyleSheet, Image, SafeAreaView, Pressable, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Onboarding from 'react-native-onboarding-swiper';
@@ -9,76 +9,132 @@ import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
 import Guest from '../assets/images/Profile.png'
 import Email from '../assets/images/email-icon.jpg'
 import LoginButton from '../components/styles/login-button';
+import { firebase } from '../Firebase';
 
-export default function LandingV2 ()
-{
 
-    const navigation = useNavigation();
+class LandingV2 extends Component {
 
-    function navigateToLogin () {
-        navigation.navigate('Login')
-    }
+  // navigation = useNavigation();
 
-    function navigateToDisclaimer () {
-      navigation.navigate('DisclaimerModal')
+  componentDidMount() {
+    this.checkIfLoggedIn()
   }
 
-    function navigateToSignUp (){
-      navigation.navigate('SignUp')
-    }
-    
-    async function signInWithGoogleAsync() {
-
-        try {
-          const result = await Google.logInAsync({
-            androidClientId: '370906179427-g4a6l0r1arabjh4oqai6msvds02vrd9p.apps.googleusercontent.com',
-            scopes: ['profile', 'email'],
-          });
-      
-          if (result.type === 'success') {
-              console.log(result.user.name)
-            return result.accessToken;
-          } else {
-            return { cancelled: true };
-          }
-        } catch (e) {
-          return { error: true };
-        }
+  checkIfLoggedIn = () => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.props.navigation.replace('MainMenu')
+      } else {
+        this.props.navigation.navigate('Landing')
       }
+    })
+  };
 
+
+  
+  navigateToLogin = () => {
+    this.props.navigation.navigate('Login')
+  }
+
+  navigateToDisclaimer = () => {
+    this.props.navigation.navigate('DisclaimerModal')
+  }
+
+  navigateToSignUp = () => {
+    this.props.navigation.navigate('SignUp')
+  }
+
+  render() {
     return (
-    <SafeAreaView style={styles.container}>
-    <View style={styles.imageContainer}>
-        <Image source={MainPhoto} style={styles.mainImage}></Image>
-    </View>
-    <View style={styles.titles}>
-        <Text style={styles.headerTitle}>Welcome to ARCHE | ECHO!</Text>
-        <Text style={styles.subTitle}>All the resources you need to maximize your child's care.</Text>
-    </View>
-
-    <LoginButton
-    type='signIn'
-    content='Sign In'
-    onPress={() => navigateToLogin()}
-    ></LoginButton>
-
-    <LoginButton
-    type='signUp'
-    content='Sign Up'
-    onPress={() => navigateToSignUp()}
-    ></LoginButton>
-
-    {/* This is the 'Don't Have An Account' section at the bottom */}
-    <View style={{width: '90%', padding: 10, alignItems: 'center', paddingBottom: '10%', marginTop: '2%'}}>
-        <TouchableOpacity>  
-            <Text style={{fontStyle: 'italic',color: '#1f1f1f', fontWeight: '500', fontSize: 16}} onPress= {()=>navigateToDisclaimer()}>Continue As Guest</Text>
-        </TouchableOpacity>
-    </View>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.imageContainer}>
+            <Image source={MainPhoto} style={styles.mainImage}></Image>
+        </View>
+        <View style={styles.titles}>
+            <Text style={styles.headerTitle}>Welcome to ARCHE | ECHO!</Text>
+            <Text style={styles.subTitle}>All the resources you need to maximize your child's care.</Text>
+        </View>
     
-    </SafeAreaView>
+        <LoginButton
+        type='signIn'
+        content='Sign In'
+        onPress={() => this.navigateToLogin()}
+        ></LoginButton>
+    
+        <LoginButton
+        type='signUp'
+        content='Sign Up'
+        onPress={() => this.navigateToSignUp()}
+        ></LoginButton>
+    
+        {/* This is the 'Don't Have An Account' section at the bottom */}
+        <View style={{width: '90%', padding: 10, alignItems: 'center', paddingBottom: '10%', marginTop: '2%'}}>
+            <TouchableOpacity>  
+                <Text style={{fontStyle: 'italic',color: '#1f1f1f', fontWeight: '500', fontSize: 16}} onPress= {()=>this.navigateToDisclaimer()}>Continue As Guest</Text>
+            </TouchableOpacity>
+        </View>
+        
+      </SafeAreaView>
     )
+  }
 
-}
+};
+
+export default LandingV2
+
+
+    
+
+//     const navigation = useNavigation();
+
+//     function navigateToLogin () {
+//         navigation.navigate('Login')
+//     }
+
+//     function navigateToDisclaimer () {
+//       navigation.navigate('DisclaimerModal')
+//   }
+
+//     function navigateToSignUp (){
+//       navigation.navigate('SignUp')
+//     }
+    
+//     render() {
+//       return (
+//         <SafeAreaView style={styles.container}>
+//         <View style={styles.imageContainer}>
+//             <Image source={MainPhoto} style={styles.mainImage}></Image>
+//         </View>
+//         <View style={styles.titles}>
+//             <Text style={styles.headerTitle}>Welcome to ARCHE | ECHO!</Text>
+//             <Text style={styles.subTitle}>All the resources you need to maximize your child's care.</Text>
+//         </View>
+    
+//         <LoginButton
+//         type='signIn'
+//         content='Sign In'
+//         onPress={() => navigateToLogin()}
+//         ></LoginButton>
+    
+//         <LoginButton
+//         type='signUp'
+//         content='Sign Up'
+//         onPress={() => navigateToSignUp()}
+//         ></LoginButton>
+    
+//         {/* This is the 'Don't Have An Account' section at the bottom */}
+//         <View style={{width: '90%', padding: 10, alignItems: 'center', paddingBottom: '10%', marginTop: '2%'}}>
+//             <TouchableOpacity>  
+//                 <Text style={{fontStyle: 'italic',color: '#1f1f1f', fontWeight: '500', fontSize: 16}} onPress= {()=>navigateToDisclaimer()}>Continue As Guest</Text>
+//             </TouchableOpacity>
+//         </View>
+        
+//         </SafeAreaView>
+//         );
+//     };
+    
+
+// }
 
 
 const styles = StyleSheet.create({

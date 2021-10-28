@@ -18,6 +18,10 @@ export default function MainMenu ()
         navigation.navigate('ToolsAndResources')
     }
 
+    function navigateToSettings() {
+        navigation.navigate('SettingsScreen')
+    }
+
     return(
         <SafeAreaView style={styles.container}>
 
@@ -49,7 +53,10 @@ export default function MainMenu ()
                 <Pressable style={styles.button}>
                     <Text style={styles.text}>Saved Locations</Text>
                 </Pressable>
-                <Pressable style={styles.button}>
+                <Pressable 
+                    style={styles.button}
+                    onPress={() => navigateToSettings()}
+                    >
                     <Text style={styles.text}>Settings Menu</Text>
                 </Pressable>
             </View>
