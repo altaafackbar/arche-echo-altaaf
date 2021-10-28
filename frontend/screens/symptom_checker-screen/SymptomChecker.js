@@ -12,6 +12,7 @@ import TouchableScale from 'react-native-touchable-scale';
 import { ListItem } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import symptoms from './symptoms.json'
+import parts from './parts.json'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from "lodash"
 
@@ -22,9 +23,11 @@ export default function SymptomChecker() {
     const [currentImage, setCurrentImage] = useState(bodyImage)
     const [selectedValue, setSelectedValue] = useState("none");
     const [symptomsList, setSymptomsList] = useState(symptoms['symptoms']);
+    const [partsList, setPartsList] = useState(parts['parts']);
     const [isSelected, setSelection] = useState(false);
     const [checked, setChecked] = useState([]);
     const [causes, setCauses] = useState([])
+    const [highlighted, setHilighted] = useState([]) 
 
     let primary = '#007bff'
     const [toggleIcon, setToggle] = useState(true)
@@ -34,21 +37,28 @@ export default function SymptomChecker() {
         setSelectedValue(itemValue)
         if (itemValue == 'head') {
             setCurrentImage(bodyImageHead)
+            console.log(partsList)
+            setHilighted(partsList["Head/neck"].sID)
         }
         else if (itemValue == 'chest') {
             setCurrentImage(bodyImageChest)
+            setHilighted(partsList["Chest/upper back"].sID)
         }
         else if (itemValue == 'stomach') {
             setCurrentImage(bodyImageStomach)
+            setHilighted(partsList["Stomach/lower back"].sID)
         }
         else if (itemValue == 'pelvis') {
             setCurrentImage(bodyImagePelvis)
+            setHilighted(partsList["Pelvis"].sID)
         }
         else if (itemValue == 'arms') {
             setCurrentImage(bodyImageArms)
+            setHilighted(partsList["Arms/legs"].sID)
         }
         else if (itemValue == 'legs') {
             setCurrentImage(bodyImageLegs)
+            setHilighted(partsList["Arms/legs"].sID)
         }
     }
     function itemChecked(id) {
@@ -56,6 +66,20 @@ export default function SymptomChecker() {
         if (index > -1) {
             return true;
         } else {
+            return false
+        }
+    }
+
+    function itemHighlight(id){
+        //console.log(highlighted)
+        //console.log(typeof id)
+        const index = highlighted.indexOf(parseInt(id));
+        //console.log(id)
+        if (index > -1) {
+            console.log('true')
+            return true;
+        } else {
+            console.log('false')
             return false
         }
     }
@@ -150,7 +174,7 @@ export default function SymptomChecker() {
 
                     <View style={{ padding: 5 }}>
                         <TouchableOpacity style={
-                            { flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: "#E7ECF2", borderRadius: 10, height: 40 }
+                            { flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: itemHighlight(item.id) ? '#79aeed' : "#E7ECF2", borderRadius: 10, height: 40 }
                         }>
                             <Text style={{ alignItems: 'flex-start', paddingLeft: 30, marginRight: 50 }}>
                                 {item.name}
@@ -221,7 +245,7 @@ export default function SymptomChecker() {
 
     );
 }
-const transparency_hitbox = 0.3;
+const transparency_hitbox = 0;
 const styles = StyleSheet.create({
     safeview: {
         flex: 1,

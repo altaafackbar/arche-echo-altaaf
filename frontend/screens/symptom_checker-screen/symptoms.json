@@ -2,6 +2,13 @@
    "symptoms":[
       {
          "id":"0",
+         "name":"1 or more poop accidents a week ",
+         "conditions":[
+            "Functional constipation"
+         ]
+      },
+      {
+         "id":"1",
          "name":"agitated, crying, fussy, or irritable",
          "conditions":[
             "Chronic pain",
@@ -12,21 +19,21 @@
          ]
       },
       {
-         "id":"1",
+         "id":"2",
          "name":"back pain",
          "conditions":[
             "UTIs"
          ]
       },
       {
-         "id":"2",
+         "id":"3",
          "name":"blue fingertips",
          "conditions":[
             "Croup"
          ]
       },
       {
-         "id":"3",
+         "id":"4",
          "name":"breathing problems",
          "conditions":[
             "Anaphylaxis",
@@ -36,7 +43,7 @@
          ]
       },
       {
-         "id":"4",
+         "id":"5",
          "name":"chest pain",
          "conditions":[
             "Anaphylaxis",
@@ -45,14 +52,14 @@
          ]
       },
       {
-         "id":"5",
+         "id":"6",
          "name":"cold hands or feet",
          "conditions":[
             "Gastroenteritis"
          ]
       },
       {
-         "id":"6",
+         "id":"7",
          "name":"coughing",
          "conditions":[
             "Anaphylaxis",
@@ -62,7 +69,7 @@
          ]
       },
       {
-         "id":"7",
+         "id":"8",
          "name":"diarrhea",
          "conditions":[
             "Anaphylaxis",
@@ -70,14 +77,14 @@
          ]
       },
       {
-         "id":"8",
+         "id":"9",
          "name":"difficult or painful poops",
          "conditions":[
             "Functional constipation"
          ]
       },
       {
-         "id":"9",
+         "id":"10",
          "name":"difficulty sleeping",
          "conditions":[
             "Bronchiolitis",
@@ -87,7 +94,7 @@
          ]
       },
       {
-         "id":"10",
+         "id":"11",
          "name":"dizziness",
          "conditions":[
             "Anaphylaxis",
@@ -95,14 +102,14 @@
          ]
       },
       {
-         "id":"11",
+         "id":"12",
          "name":"drooling or swallowing problems",
          "conditions":[
             "Croup"
          ]
       },
       {
-         "id":"12",
+         "id":"13",
          "name":"dry mouth",
          "conditions":[
             "Bronchiolitis",
@@ -110,14 +117,14 @@
          ]
       },
       {
-         "id":"13",
+         "id":"14",
          "name":"ear pain or pulling on ear",
          "conditions":[
             "Ear infections"
          ]
       },
       {
-         "id":"14",
+         "id":"15",
          "name":"fast breathing or fast heart beat",
          "conditions":[
             "Anaphylaxis",
@@ -126,7 +133,7 @@
          ]
       },
       {
-         "id":"15",
+         "id":"16",
          "name":"fever",
          "conditions":[
             "Bronchiolitis",
@@ -138,42 +145,42 @@
          ]
       },
       {
-         "id":"16",
+         "id":"17",
          "name":"hoarse voice",
          "conditions":[
             "Croup"
          ]
       },
       {
-         "id":"17",
+         "id":"18",
          "name":"holding in poop",
          "conditions":[
             "Functional constipation"
          ]
       },
       {
-         "id":"18",
+         "id":"19",
          "name":"itching",
          "conditions":[
             "Anaphylaxis"
          ]
       },
       {
-         "id":"19",
+         "id":"20",
          "name":"light-headed",
          "conditions":[
             "Anaphylaxis"
          ]
       },
       {
-         "id":"20",
+         "id":"21",
          "name":"lower belly pain",
          "conditions":[
             "UTIs"
          ]
       },
       {
-         "id":"21",
+         "id":"22",
          "name":"nausea",
          "conditions":[
             "Anaphylaxis",
@@ -181,14 +188,14 @@
          ]
       },
       {
-         "id":"22",
+         "id":"23",
          "name":"no bladder control",
          "conditions":[
             "UTIs"
          ]
       },
       {
-         "id":"23",
+         "id":"24",
          "name":"no tears",
          "conditions":[
             "Bronchiolitis",
@@ -197,7 +204,7 @@
          ]
       },
       {
-         "id":"24",
+         "id":"25",
          "name":"no wet diapers",
          "conditions":[
             "Bronchiolitis",
@@ -205,7 +212,7 @@
          ]
       },
       {
-         "id":"25",
+         "id":"26",
          "name":"not peeing or not peeing often",
          "conditions":[
             "Bronchiolitis",
@@ -214,49 +221,49 @@
          ]
       },
       {
-         "id":"26",
+         "id":"27",
          "name":"pain lasting a long time",
          "conditions":[
             "Chronic pain"
          ]
       },
       {
-         "id":"27",
+         "id":"28",
          "name":"pain without a known cause",
          "conditions":[
             "Chronic pain"
          ]
       },
       {
-         "id":"28",
+         "id":"29",
          "name":"painful or burning pee",
          "conditions":[
             "UTIs"
          ]
       },
       {
-         "id":"29",
+         "id":"30",
          "name":"pee is pink, red, brown, or cloudy",
          "conditions":[
             "UTIs"
          ]
       },
       {
-         "id":"30",
+         "id":"31",
          "name":"pee smells strange",
          "conditions":[
             "UTIs"
          ]
       },
       {
-         "id":"31",
+         "id":"32",
          "name":"peeing often",
          "conditions":[
             "UTIs"
          ]
       },
       {
-         "id":"32",
+         "id":"33",
          "name":"rashes or hives",
          "conditions":[
             "Anaphylaxis",
@@ -264,7 +271,7 @@
          ]
       },
       {
-         "id":"33",
+         "id":"34",
          "name":"refusing to eat, drink, or nap",
          "conditions":[
             "Bronchiolitis",
@@ -275,7 +282,7 @@
          ]
       },
       {
-         "id":"34",
+         "id":"35",
          "name":"runny nose",
          "conditions":[
             "Anaphylaxis",
@@ -284,7 +291,7 @@
          ]
       },
       {
-         "id":"35",
+         "id":"36",
          "name":"sleepy/very tired",
          "conditions":[
             "Asthma",
@@ -296,7 +303,7 @@
          ]
       },
       {
-         "id":"36",
+         "id":"37",
          "name":"stomach pain",
          "conditions":[
             "Anaphylaxis",
@@ -305,7 +312,7 @@
          ]
       },
       {
-         "id":"37",
+         "id":"38",
          "name":"sunken eyes",
          "conditions":[
             "Bronchiolitis",
@@ -313,35 +320,35 @@
          ]
       },
       {
-         "id":"38",
+         "id":"39",
          "name":"sunken soft spot on top of head",
          "conditions":[
             "Bronchiolitis"
          ]
       },
       {
-         "id":"39",
+         "id":"40",
          "name":"swelling of eyes, face, or lips",
          "conditions":[
             "Anaphylaxis"
          ]
       },
       {
-         "id":"40",
+         "id":"41",
          "name":"thirsty",
          "conditions":[
             "Gastroenteritis"
          ]
       },
       {
-         "id":"41",
+         "id":"42",
          "name":"throat tightness",
          "conditions":[
             "Anaphylaxis"
          ]
       },
       {
-         "id":"42",
+         "id":"43",
          "name":"throwing up",
          "conditions":[
             "Anaphylaxis",
@@ -351,14 +358,14 @@
          ]
       },
       {
-         "id":"43",
+         "id":"44",
          "name":"tingling mouth",
          "conditions":[
             "Anaphylaxis"
          ]
       },
       {
-         "id":"44",
+         "id":"45",
          "name":"trouble breathing in, sucking in of the skin around the collarbones and between the ribs when breathing",
          "conditions":[
             "Asthma",
@@ -366,14 +373,14 @@
          ]
       },
       {
-         "id":"45",
+         "id":"46",
          "name":"very large poops",
          "conditions":[
             "Functional constipation"
          ]
       },
       {
-         "id":"46",
+         "id":"47",
          "name":"watery eyes",
          "conditions":[
             "Anaphylaxis"
