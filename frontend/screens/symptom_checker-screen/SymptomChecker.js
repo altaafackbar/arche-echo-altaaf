@@ -37,7 +37,7 @@ export default function SymptomChecker() {
         setSelectedValue(itemValue)
         if (itemValue == 'head') {
             setCurrentImage(bodyImageHead)
-            console.log(partsList)
+
             setHilighted(partsList["Head/neck"].sID)
         }
         else if (itemValue == 'chest') {
@@ -71,15 +71,13 @@ export default function SymptomChecker() {
     }
 
     function itemHighlight(id){
-        //console.log(highlighted)
-        //console.log(typeof id)
+
         const index = highlighted.indexOf(parseInt(id));
-        //console.log(id)
         if (index > -1) {
-            console.log('true')
+
             return true;
         } else {
-            console.log('false')
+
             return false
         }
     }
@@ -100,7 +98,7 @@ export default function SymptomChecker() {
         });
 
 
-        //console.log(_.union(finalCauses[0], finalCauses[1]));
+
         navigation.navigate('RelatedCauses', {
             relatedCauses: causesDic
         })
