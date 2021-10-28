@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CustomInput from '../components/styles/textBox';
 import OrBreak from '../components/styles/or_divider'
@@ -10,6 +10,7 @@ import Guest from '../assets/images/Profile.png'
 import * as Google from 'expo-google-app-auth';
 import LoginButton from '../components/styles/login-button';
 import ForgotPassword from '../components/styles/forgot-password';
+import { firebase } from '../Firebase';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -22,19 +23,70 @@ export default function Login() {
 
     navigateToMainMenu = () => navigation.navigate('MainMenu')
     navigateToDisclaimer = () => navigation.navigate('DisclaimerModal')
+
+    const handleLogIn = () => {
+        firebase.auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log('Logged in with: ', user.email)
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                Alert.alert('Error', errorMessage, [
+                    {text: 'OK', onPress: () => console.log('OK pressed')}
+                ]);
+            })
+    }
     
 
     // Sign In With Google Information
+
     async function signInWithGoogleAsync() {
 
         try {
             const result = await Google.logInAsync({
-                androidClientId: '772373435594-hqgdpesi3riqnjr4aqt641dc8d0ho7t8.apps.googleusercontent.com',
+                // behavior: 'web',
+                iosClientId: '382032993333-iirilhp0hb7uglsjj5tqjlr0n0putv17.apps.googleusercontent.com',
+                androidClientId: '382032993333-bc2mqr2c4vbi9q1fql7qlie9iock098a.apps.googleusercontent.com',
                 scopes: ['profile', 'email'],
             });
 
             if (result.type === 'success') {
                 console.log(result.user.name)
+                const {idToken, accessToken} = result
+                const credential = firebase.auth.GoogleAuthProvider.credential(
+                    idToken,
+                    accessToken
+                )
+                firebase.auth()
+                    .signInWithCredential(credential)
+                    .then(userCredentials => {
+                        const user = userCredentials.user;
+                        const currentUser = firebase.auth().currentUser;
+                        const db = firebase.firestore()
+                        // console.log(result.user.email)
+                        // console.log(result.user.givenName)
+                        db
+                            .collection('users')
+                            .doc(currentUser.uid)
+                            .set({
+                                email: currentUser.email,
+                                firstName: result.user.givenName,
+                                lastName: result.user.familyName
+                            })
+                    })
+                    .catch((error) => {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        // The email of the user's account used.
+                        var email = error.email;
+                        // The firebase.auth.AuthCredential type that was used.
+                        var credential = error.credential;
+                        // ...
+                    })
                 return result.accessToken;
             } else {
                 return { cancelled: true };
@@ -50,12 +102,18 @@ export default function Login() {
                 <Text style={styles.headerText}>Welcome Back!</Text>
                 <Text style={styles.subheaderText}>Enter your email and password to get started.</Text>
             </View>
-            <CustomInput placeholder='Email' value={email} setValue={setEmail} />
+            <CustomInput 
+                placeholder='Email' 
+                value={email} 
+                setValue={setEmail} 
+                onChangeText={text => setEmail(text)}
+            />
             <CustomInput
                 placeholder='Password'
                 value={password}
                 setValue={setPassword}
                 secureTextEntry={true}
+                onChangeText={text => setPassword(text)}
             ></CustomInput>
 
             <ForgotPassword></ForgotPassword>
@@ -63,7 +121,7 @@ export default function Login() {
             <LoginButton
                 type='signIn'
                 content='Sign In'
-                onPress={() => navigateToMainMenu()}
+                onPress={() => {handleLogIn()}}
             ></LoginButton>
             
 

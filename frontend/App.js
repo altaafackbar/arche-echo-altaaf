@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ClinicMap from './screens/clinic_map_screen/ClinicMap';
 import SymptomChecker from './screens/symptom_checker-screen/SymptomChecker';
 import ToolsAndResources from './screens/tools_and_resources_screen/ToolsAndResources';
+import SettingsScreen from './screens/settings_screen/SettingsScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -92,6 +93,7 @@ export default function Navigator() {
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Find A Clinic" component={ClinicMap} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="SymptomChecker" component={SymptomChecker}/>
         <Stack.Screen options={{headerTitle: 'Tools And Resources', headerShadowVisible: false}} name="ToolsAndResources" component={ToolsAndResources}/>
+        <Stack.Screen options={{headerTitle: 'Settings', headerShadowVisible: false}} name="SettingsScreen" component={SettingsScreen}/>
         {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
       </Stack.Navigator>
     </NavigationContainer>

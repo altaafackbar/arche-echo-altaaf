@@ -8,11 +8,16 @@ import MainMenu from '../screens/menus/MainMenu';
 import ClinicMap from '../screens/clinic_map_screen/ClinicMap';
 import SymptomChecker from '../screens/symptom_checker-screen/SymptomChecker';
 import ToolsAndResources from '../screens/tools_and_resources_screen/ToolsAndResources';
+import SettingsScreen from '../screens/settings_screen/SettingsScreen';
+import LandingV2 from '../login-pages/Landing-V2';
 
 
 const screens = {
     Landing: {
         screen: Landing
+    },
+    LandingV2: {
+        screen: LandingV2
     },
     Login: {
         screen: Login
@@ -35,6 +40,9 @@ const screens = {
     ToolsAndResources: {
         screen: ToolsAndResources
     },
+    Settings: {
+        screen: SettingsScreen
+    }
 }
 const HomeStack = createNativeStackNavigator(screens);
 
