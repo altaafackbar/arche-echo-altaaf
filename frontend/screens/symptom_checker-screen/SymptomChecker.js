@@ -268,8 +268,7 @@ const styles = StyleSheet.create({
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        transform: [{ translateY: 70 }, { translateX: -0 }],
-        top: '50%',
+        top: '66%',
         left: '40%'
     },
     headRectangle: {
@@ -278,8 +277,7 @@ const styles = StyleSheet.create({
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        transform: [{ translateY: -190 }, { translateX: -2 }],
-        top: '50%',
+        top: '7%',
         left: '40%'
     },
     chestRectangle: {
@@ -288,8 +286,7 @@ const styles = StyleSheet.create({
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        transform: [{ translateY: -74 }],
-        top: '50%',
+        top: '34%',
         left: '40%'
     },
     stomachRectangle: {
@@ -298,8 +295,7 @@ const styles = StyleSheet.create({
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        transform: [{ translateY: 10 }],
-        top: '50%',
+        top: '52%',
         left: '40%'
     },
     pelvisRectangle: {
@@ -308,8 +304,8 @@ const styles = StyleSheet.create({
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        transform: [{ translateY: 43 }],
-        top: '50%',
+        //transform: [{ translateY: 43 }],
+        top: '60%',
         left: '40%'
     },
     leftArmRectangle: {
@@ -318,9 +314,9 @@ const styles = StyleSheet.create({
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        transform: [{ translateY: -60 }, { translateX: -33 }, { rotate: '15deg' }],
-        top: '50%',
-        left: '40%'
+        transform: [{ rotate: '15deg' }],
+        top: '36%',
+        left: '32%'
     },
     rightArmRectangle: {
         height: '30%',
@@ -328,9 +324,9 @@ const styles = StyleSheet.create({
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        transform: [{ translateY: -60 }, { translateX: 88 }, { rotate: '-15deg' }],
-        top: '50%',
-        left: '40%'
+        transform: [{ rotate: '-15deg' }],
+        top: '36%',
+        left: '61%'
     },
     checkbox: {
         alignSelf: "center",
