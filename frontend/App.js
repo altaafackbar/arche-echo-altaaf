@@ -87,8 +87,8 @@ export default function Navigator() {
         component={DisclaimerModal} />
         
         
-        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Onboarding" component={Onboard} />
-        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="MainMenu" component={MainMenu} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false, headerBackVisible: false}} name="Onboarding" component={Onboard} />
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false, headerBackVisible: false}} name="MainMenu" component={MainMenu} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Find A Clinic" component={ClinicMap} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="SymptomChecker" component={SymptomChecker}/>
         <Stack.Screen options={{headerTitle: 'Tools And Resources', headerShadowVisible: false}} name="ToolsAndResources" component={ToolsAndResources}/>
