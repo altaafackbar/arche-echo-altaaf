@@ -15,6 +15,7 @@ import DisclaimerModal from './screens/modals/disclaimer-modal';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ClinicMap from './screens/clinic_map_screen/ClinicMap';
 import SymptomChecker from './screens/symptom_checker-screen/SymptomChecker';
+import RelatedCauses from './screens/symptom_checker-screen/RelatedCauses';
 import ToolsAndResources from './screens/tools_and_resources_screen/ToolsAndResources';
 import SettingsScreen from './screens/settings_screen/SettingsScreen';
 import MainMenuV2 from './screens/menus/MainMenu-V2';
@@ -101,6 +102,7 @@ export default function Navigator() {
         <Stack.Screen options={{headerShown: false, headerShadowVisible: false, headerBackVisible: false}} name="MainMenu" component={App} />
         {/* <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Find A Clinic" component={ClinicMap} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="SymptomChecker" component={SymptomChecker}/>
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="RelatedCauses" component={RelatedCauses}/>
         <Stack.Screen options={{headerTitle: 'Tools And Resources', headerShadowVisible: false}} name="ToolsAndResources" component={ToolsAndResources}/>
         <Stack.Screen options={{headerTitle: 'Settings', headerShadowVisible: false}} name="SettingsScreen" component={SettingsScreen}/> */}
         <Stack.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false}} name="StarredResources" component={StarredResources}/>
