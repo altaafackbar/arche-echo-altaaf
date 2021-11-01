@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity, TextInput, ScrollView, TouchableOpacityBase } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { firebase } from '../../Firebase';
 
 const DisclaimerModal = () => {
 
@@ -16,6 +17,22 @@ const DisclaimerModal = () => {
         setToggle(!toggleIcon)
     }
     let primary = '#007bff'
+
+    const updateUserProfile = () => {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                const currentUser = firebase.auth().currentUser
+                firebase.firestore()
+                    .collection('users')
+                    .doc(currentUser.uid)
+                    .update({
+                        disclaimer: true,
+                    })
+            } else {
+                console.log('no current user')
+            }
+        })
+    };
 
     const disclaimer = 'Please remember that ARCHE | ECHO cannot give medical advice. ARCHE | ECHO does not replace your doctor. Call 911 immediately in the event of an emergency.'
     const disclaimerAgree = "I agree to ARCHE | ECHO's terms and conditions and confirm that I have read the disclaimer statement above."
@@ -36,7 +53,7 @@ const DisclaimerModal = () => {
         </View>
 
         <View style={styles.buttonContainer}>
-            <TouchableOpacity style={toggleIcon ? styles.continueButtonDisabled : styles.continueButton} disabled={toggleIcon ? true : false} onPress={() => navigateToOnboarding()}>
+            <TouchableOpacity style={toggleIcon ? styles.continueButtonDisabled : styles.continueButton} disabled={toggleIcon ? true : false} onPress={() => {updateUserProfile(); navigateToOnboarding()}}>
                 <Text style={toggleIcon ? styles.buttonTextDisabled : styles.buttonText}>Continue</Text>
             </TouchableOpacity>
         </View>

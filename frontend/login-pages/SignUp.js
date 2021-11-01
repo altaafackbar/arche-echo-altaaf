@@ -118,7 +118,8 @@ export default function SignUp ()
                         .set({
                             email: currentUser.email,
                             firstName: result.user.givenName,
-                            lastName: result.user.familyName
+                            lastName: result.user.familyName,
+                            disclaimer: false,
                         })
                 })
                 .catch((error) => {
@@ -159,7 +160,8 @@ export default function SignUp ()
                     .set({
                         email: currentUser.email,
                         firstName: firstName,
-                        lastName: lastName
+                        lastName: lastName,
+                        disclaimer: false,
                     })
                     .then(() => {
                         console.log('User created');
@@ -185,7 +187,22 @@ export default function SignUp ()
                 }
             console.error(error)
             });
-    }
+    };
+
+    const handleAnonymousSignIn = () => {
+        firebase.auth()
+            .signInAnonymously()
+            .then(() => {
+                console.log('User signed in anonymously');
+            })
+            .catch(error => {
+                if (error.code === 'auth/operation-not-allowed') {
+                    console.log('Enable anonymous in your firebase console.');
+                }
+
+                console.error(error);
+            })
+    };
 
     // Renders the elements on the screen
     return (
@@ -228,7 +245,7 @@ export default function SignUp ()
         <LoginButton
             type='signIn'
             content='Sign Up'
-            onPress={ () => {handlesSignUp(); navigateToOnboarding()}}
+            onPress={ () => {handlesSignUp()}}
         >
         </LoginButton>
 
