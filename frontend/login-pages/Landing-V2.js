@@ -66,6 +66,9 @@ class LandingV2 extends Component {
         .signInAnonymously()
         .then((userCredentials) => {
             const user = userCredentials.user
+            user.updateProfile({
+              displayName: 'Guest',
+            })
             console.log('User signed in anonymously');
             const db = firebase.firestore()
                 db
@@ -73,7 +76,7 @@ class LandingV2 extends Component {
                     .doc(user.uid)
                     .set({
                         email: 'AnonymousEmail',
-                        firstName: 'Anonymous',
+                        firstName: 'Guest',
                         lastName: 'Anonymous',
                         disclaimer: false,
                     })

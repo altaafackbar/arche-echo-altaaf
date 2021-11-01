@@ -11,7 +11,8 @@ import SavedLocations from '../../assets/images/saved-locations.png'
 import Settings from '../../assets/images/settings-menu.png'
 import SymptomCheck from '../../assets/images/symptom-checker.png'
 import MenuGreeting from '../../components/styles/MenuGreeting';
-import { Dimensions } from 'react-native';
+import { Dimensions } from 'react-native'
+import { firebase } from '../../Firebase';
 
 export default function MainMenuV2() {
 
@@ -26,20 +27,24 @@ export default function MainMenuV2() {
 
     var hour = new Date().getHours()
     var message;
+    const user = firebase.auth().currentUser
+    var userName = user.displayName
+    // console.log(user.displayName)
+
 
     if (hour >= 0 && hour < 12) {
-        message = 'Good Morning,'
+        message = 'Good Morning' + (userName == '' ? '' : (', ' + userName))
     }
     if (hour >= 12 && hour < 18) {
-        message = 'Good Afternoon,'
+        message = 'Good Afternoon' + (userName == '' ? '' : (', ' + userName))
     }
     if (hour >= 18 && hour < 21) {
-        message = 'Good Evening,'
+        message = 'Good Evening' + (userName == '' ? '' : (', ' + userName))
     }
     if (hour >= 21 && hour < 24) {
-        message = 'Good Night,'
+        message = 'Good Night' + (userName == '' ? '' : (', ' + userName))
     }
-
+    console.log(message)
     const navigation = useNavigation();
 
     function navigateToClinicMap() {
