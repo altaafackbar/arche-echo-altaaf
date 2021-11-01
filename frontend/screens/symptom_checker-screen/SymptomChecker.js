@@ -33,6 +33,7 @@ export default function SymptomChecker() {
     useEffect(() => {
         LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
       }, [])
+    const [highlighted, setHilighted] = useState([])
 
     let primary = '#007bff'
     const [toggleIcon, setToggle] = useState(true)
@@ -75,7 +76,7 @@ export default function SymptomChecker() {
         }
     }
 
-    function itemHighlight(id){
+    function itemHighlight(id) {
 
         const index = highlighted.indexOf(parseInt(id));
         if (index > -1) {
@@ -248,7 +249,7 @@ export default function SymptomChecker() {
 
     );
 }
-const transparency_hitbox = 0;
+const transparency_hitbox = 0.3;
 const styles = StyleSheet.create({
     safeview: {
         flex: 1,
@@ -290,30 +291,30 @@ const styles = StyleSheet.create({
 
     },
     legsRectangle: {
-        height: '33%',
-        width: '20%',
+        height: '35%',
+        width: '26%',
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        top: '66%',
-        left: '40%'
+        top: '62%',
+        left: '37%'
     },
     headRectangle: {
-        height: '25%',
-        width: '20%',
+        height: '27%',
+        width: '26%',
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        top: '7%',
-        left: '40%'
+        top: '3%',
+        left: '37%'
     },
     chestRectangle: {
-        height: '18%',
+        height: '17%',
         width: '20%',
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        top: '34%',
+        top: '32%',
         left: '40%'
     },
     stomachRectangle: {
@@ -322,32 +323,32 @@ const styles = StyleSheet.create({
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
-        top: '52%',
+        top: '49%',
         left: '40%'
     },
     pelvisRectangle: {
-        height: '6%',
+        height: '5%',
         width: '20%',
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
         //transform: [{ translateY: 43 }],
-        top: '60%',
+        top: '57%',
         left: '40%'
     },
     leftArmRectangle: {
         height: '30%',
-        width: '7%',
+        width: '9%',
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
         transform: [{ rotate: '15deg' }],
         top: '36%',
-        left: '32%'
+        left: '30%'
     },
     rightArmRectangle: {
         height: '30%',
-        width: '7%',
+        width: '9%',
         backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
         position: 'absolute',
         zIndex: 90,
