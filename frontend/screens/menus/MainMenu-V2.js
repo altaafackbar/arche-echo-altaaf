@@ -11,10 +11,10 @@ import SavedLocations from '../../assets/images/saved-locations.png'
 import Settings from '../../assets/images/settings-menu.png'
 import SymptomCheck from '../../assets/images/symptom-checker.png'
 import MenuGreeting from '../../components/styles/MenuGreeting';
+import { Dimensions } from 'react-native';
 
-export default function MainMenuV2 ()
-{
-    
+export default function MainMenuV2() {
+
 
     // if (user != null){
     //     name = user.displayName
@@ -27,16 +27,16 @@ export default function MainMenuV2 ()
     var hour = new Date().getHours()
     var message;
 
-    if (hour >= 0 && hour < 12){
+    if (hour >= 0 && hour < 12) {
         message = 'Good Morning,'
     }
-    if (hour >= 12 && hour < 18){
+    if (hour >= 12 && hour < 18) {
         message = 'Good Afternoon,'
     }
-    if (hour >= 18 && hour < 21){
+    if (hour >= 18 && hour < 21) {
         message = 'Good Evening,'
     }
-    if (hour >= 21 && hour < 24){
+    if (hour >= 21 && hour < 24) {
         message = 'Good Night,'
     }
 
@@ -49,54 +49,54 @@ export default function MainMenuV2 ()
         navigation.navigate('Symptom Checker')
     }
     function navigateToToolsAndResources() {
-        navigation.navigate('Tools And Resources', {screen: 'Tools And Resources'})
+        navigation.navigate('Tools And Resources', { screen: 'Tools And Resources' })
     }
 
     function navigateToSettings() {
         navigation.navigate('Settings')
     }
 
-    function navigateToStarredResources(){
+    function navigateToStarredResources() {
         navigation.navigate('StarredResources')
     }
 
-    function navigateToSavedLocations(){
+    function navigateToSavedLocations() {
         navigation.navigate('SavedLocations')
     }
 
     const [items, setItems] = React.useState([
-        {name: 'Tools and Resources', image: ToolsAndResources},
-        {name: 'Symptom Checker', image: SymptomCheck},
-        {name: 'Find A Clinic', image: FindAClinic},
-        {name: 'Starred Resources', image: StarredResources},
-        {name: 'Saved Locations', image: SavedLocations},
-        {name: 'Settings', image: Settings}
+        { name: 'Tools and Resources', image: ToolsAndResources },
+        { name: 'Symptom Checker', image: SymptomCheck },
+        { name: 'Find A Clinic', image: FindAClinic },
+        { name: 'Starred Resources', image: StarredResources },
+        { name: 'Saved Locations', image: SavedLocations },
+        { name: 'Settings', image: Settings }
     ]);
 
-    return(
+    return (
         <SafeAreaView style={styles.container}>
-                <FlatGrid
-                itemDimension={140}
+            <FlatGrid
+                itemDimension={Dimensions.get('window').width / 375 * 140}
                 data={items}
                 style={styles.gridView}
                 spacing={10}
                 ListHeaderComponent={() => <Text style={styles.messageText}>{message}</Text>}
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.itemContainer} onPress={() => 
-                    {if (item.name === 'Tools and Resources'){navigateToToolsAndResources()}
-                    {if (item.name === 'Symptom Checker'){navigateToSymptomChecker()}}
-                    {if (item.name === 'Find A Clinic'){navigateToClinicMap()}}
-                    {if (item.name === 'Starred Resources'){navigateToStarredResources()}}
-                    {if (item.name === 'Saved Locations'){navigateToSavedLocations()}}
-                    {if (item.name === 'Settings'){navigateToSettings()}}
+                    <TouchableOpacity style={styles.itemContainer} onPress={() => {
+                        if (item.name === 'Tools and Resources') { navigateToToolsAndResources() }
+                        { if (item.name === 'Symptom Checker') { navigateToSymptomChecker() } }
+                        { if (item.name === 'Find A Clinic') { navigateToClinicMap() } }
+                        { if (item.name === 'Starred Resources') { navigateToStarredResources() } }
+                        { if (item.name === 'Saved Locations') { navigateToSavedLocations() } }
+                        { if (item.name === 'Settings') { navigateToSettings() } }
                     }}>
                         <Image source={item.image} style={styles.imageDetails}></Image>
                         <Text style={styles.textStyle}>{item.name}</Text>
                     </TouchableOpacity>
                 )}
-                >
+            >
 
-                </FlatGrid>
+            </FlatGrid>
         </SafeAreaView>
 
     )
@@ -111,23 +111,23 @@ const styles = StyleSheet.create({
     },
     gridView: {
         flex: 1,
-      },
-    containerRow1:{
+    },
+    containerRow1: {
         flex: 1,
         marginBottom: '-50%',
         paddingTop: '20%',
         paddingRight: '5%',
         flexDirection: 'row',
         justifyContent: 'center',
-    }, 
-    containerRow2:{
+    },
+    containerRow2: {
         flex: 1,
         marginBottom: '-50%',
         paddingRight: '5%',
         flexDirection: 'row',
         justifyContent: 'center',
     },
-    containerRow3:{
+    containerRow3: {
         flex: 1,
         marginBottom: '-35%',
         paddingRight: '5%',
@@ -135,20 +135,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     button: {
-     alignItems: 'center',
-     justifyContent: 'center',
-     width: "45%",
-     height: "45%",
-     marginLeft: "5%",
-     borderRadius: 15,
-     backgroundColor: '#8A76B6',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: "45%",
+        height: "45%",
+        marginLeft: "5%",
+        borderRadius: 15,
+        backgroundColor: '#8A76B6',
     },
     text: {
         justifyContent: 'center',
         fontSize: 15,
         lineHeight: 25,
         fontWeight: 'bold',
-        letterSpacing: 0.25, 
+        letterSpacing: 0.25,
         color: 'white',
     },
     itemContainer: {
@@ -159,22 +159,22 @@ const styles = StyleSheet.create({
         backgroundColor: '#fafafa',
         borderColor: '#d1d1d6',
         borderWidth: 2,
-      },
-      imageDetails: {
-          resizeMode: 'center',
-          alignItems: 'center',
-          width: '100%',
-          height: '100%'
-      },
-      textStyle: {
-          fontSize: 14,
-          color: '#1f1f1f',
-          fontWeight: '600',
-          textAlign: 'center',
-          alignItems: 'center',
-          marginBottom: 5,
-      },
-      headerContainer: {
+    },
+    imageDetails: {
+        resizeMode: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%'
+    },
+    textStyle: {
+        fontSize: 14,
+        color: '#1f1f1f',
+        fontWeight: '600',
+        textAlign: 'center',
+        alignItems: 'center',
+        marginBottom: 5,
+    },
+    headerContainer: {
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         ...Platform.select({
@@ -199,5 +199,5 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: '#1f1f1f',
     }
-      
-  });
+
+});
