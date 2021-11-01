@@ -38,8 +38,22 @@ export default function Login() {
                     {text: 'OK', onPress: () => console.log('OK pressed')}
                 ]);
             })
-    }
+    };
     
+    const handleAnonymousSignIn = () => {
+        firebase.auth()
+            .signInAnonymously()
+            .then(() => {
+                console.log('User signed in anonymously');
+            })
+            .catch(error => {
+                if (error.code === 'auth/operation-not-allowed') {
+                    console.log('Enable anonymous in your firebase console.');
+                }
+
+                console.error(error);
+            })
+    };
 
     // Sign In With Google Information
 
@@ -74,7 +88,8 @@ export default function Login() {
                             .set({
                                 email: currentUser.email,
                                 firstName: result.user.givenName,
-                                lastName: result.user.familyName
+                                lastName: result.user.familyName,
+                                disclaimer: true,
                             })
                     })
                     .catch((error) => {
