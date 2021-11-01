@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { LogBox } from 'react-native';
 import { View, Text, ActivityIndicator, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList, Image, Picker } from "react-native";;
 import bodyImage from '../../assets/images/Body.png'
 import bodyImageHead from '../../assets/images/Body-Head.png'
@@ -28,6 +29,10 @@ export default function SymptomChecker() {
     const [checked, setChecked] = useState([]);
     const [causes, setCauses] = useState([])
     const [highlighted, setHilighted] = useState([])
+
+    useEffect(() => {
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
+    }, [])
 
     let primary = '#007bff'
     const [toggleIcon, setToggle] = useState(true)

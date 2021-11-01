@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Button, StyleSheet, Image, SafeAreaView, Pressable, TouchableOpacity } from 'react-native';
+import { Text, View, Button, StyleSheet, Image, SafeAreaView, Pressable, TouchableOpacity, ViewPagerAndroidBase } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Onboarding from 'react-native-onboarding-swiper';
 import MainPhoto from '../assets/images/landing-image.png'
@@ -23,7 +23,24 @@ class LandingV2 extends Component {
   checkIfLoggedIn = () => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.props.navigation.replace('MainMenu')
+        const currentUser = firebase.auth().currentUser;
+        console.log(currentUser.uid)
+        
+        firebase.firestore().collection('users').doc(user.uid).get().then(doc => {
+          if (doc.exists) {
+            console.log(doc.data().disclaimer)
+            const userDisclaimer = doc.data().disclaimer
+            // Check if user has agreed to the disclaimer
+            // User has to agreed to the disclaimer to continue using the app
+            if (userDisclaimer === true) {
+              this.props.navigation.replace('MainMenu')
+            } else {
+              this.props.navigation.replace('DisclaimerModal')
+            }
+          }
+        })
+        
+
       } else {
         this.props.navigation.navigate('Landing')
       }
@@ -37,12 +54,47 @@ class LandingV2 extends Component {
   }
 
   navigateToDisclaimer = () => {
-    this.props.navigation.navigate('DisclaimerModal')
+    this.props.navigation.replace('DisclaimerModal')
   }
 
   navigateToSignUp = () => {
     this.props.navigation.navigate('SignUp')
   }
+
+  handleAnonymousSignIn = () => {
+    firebase.auth()
+        .signInAnonymously()
+        .then((userCredentials) => {
+            const user = userCredentials.user
+            user.updateProfile({
+              displayName: 'Guest',
+            })
+            console.log('User signed in anonymously');
+            const db = firebase.firestore()
+                db
+                    .collection("users")
+                    .doc(user.uid)
+                    .set({
+                        email: 'AnonymousEmail',
+                        firstName: 'Guest',
+                        lastName: 'Anonymous',
+                        disclaimer: false,
+                    })
+                    .then(() => {
+                        console.log('User created');
+                    })
+                    .catch((error) => {
+                        console.error('Error writing document: ', error);
+                    });
+        })
+        .catch(error => {
+            if (error.code === 'auth/operation-not-allowed') {
+                console.log('Enable anonymous in your firebase console.');
+            }
+
+            console.error(error);
+        })
+  };
 
   render() {
     return (
@@ -70,7 +122,7 @@ class LandingV2 extends Component {
         {/* This is the 'Don't Have An Account' section at the bottom */}
         <View style={{width: '90%', padding: 10, alignItems: 'center', paddingBottom: '10%', marginTop: '2%'}}>
             <TouchableOpacity>  
-                <Text style={{fontStyle: 'italic',color: '#1f1f1f', fontWeight: '500', fontSize: 16}} onPress= {()=>this.navigateToDisclaimer()}>Continue As Guest</Text>
+                <Text style={{fontStyle: 'italic',color: '#1f1f1f', fontWeight: '500', fontSize: 16}} onPress= {()=>{this.handleAnonymousSignIn(); this.navigateToDisclaimer()}}>Continue As Guest</Text>
             </TouchableOpacity>
         </View>
         

@@ -35,11 +35,25 @@ export default function Login() {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 Alert.alert('Error', errorMessage, [
-                    { text: 'OK', onPress: () => console.log('OK pressed') }
+                    {text: 'OK', onPress: () => console.log('OK pressed')}
                 ]);
             })
-    }
+    };
+    
+    const handleAnonymousSignIn = () => {
+        firebase.auth()
+            .signInAnonymously()
+            .then(() => {
+                console.log('User signed in anonymously');
+            })
+            .catch(error => {
+                if (error.code === 'auth/operation-not-allowed') {
+                    console.log('Enable anonymous in your firebase console.');
+                }
 
+                console.error(error);
+            })
+    };
 
     // Sign In With Google Information
 
@@ -55,7 +69,7 @@ export default function Login() {
 
             if (result.type === 'success') {
                 console.log(result.user.name)
-                const { idToken, accessToken } = result
+                const {idToken, accessToken} = result
                 const credential = firebase.auth.GoogleAuthProvider.credential(
                     idToken,
                     accessToken
@@ -64,6 +78,9 @@ export default function Login() {
                     .signInWithCredential(credential)
                     .then(userCredentials => {
                         const user = userCredentials.user;
+                        user.updateProfile({
+                            displayName: result.user.givenName,
+                            })
                         const currentUser = firebase.auth().currentUser;
                         const db = firebase.firestore()
                         // console.log(result.user.email)
@@ -74,7 +91,8 @@ export default function Login() {
                             .set({
                                 email: currentUser.email,
                                 firstName: result.user.givenName,
-                                lastName: result.user.familyName
+                                lastName: result.user.familyName,
+                                disclaimer: true,
                             })
                     })
                     .catch((error) => {
@@ -102,10 +120,10 @@ export default function Login() {
                 <Text style={styles.headerText}>Welcome Back!</Text>
                 <Text style={styles.subheaderText}>Enter your email and password to get started.</Text>
             </View>
-            <CustomInput
-                placeholder='Email'
-                value={email}
-                setValue={setEmail}
+            <CustomInput 
+                placeholder='Email' 
+                value={email} 
+                setValue={setEmail} 
                 onChangeText={text => setEmail(text)}
             />
             <CustomInput
@@ -121,9 +139,9 @@ export default function Login() {
             <LoginButton
                 type='signIn'
                 content='Sign In'
-                onPress={() => { handleLogIn() }}
+                onPress={() => {handleLogIn()}}
             ></LoginButton>
-
+            
 
             {/* Add lines with 'or' section */}
             <OrBreak></OrBreak>
