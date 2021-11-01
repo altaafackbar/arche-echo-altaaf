@@ -35,11 +35,11 @@ export default function Login() {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 Alert.alert('Error', errorMessage, [
-                    {text: 'OK', onPress: () => console.log('OK pressed')}
+                    { text: 'OK', onPress: () => console.log('OK pressed') }
                 ]);
             })
     }
-    
+
 
     // Sign In With Google Information
 
@@ -55,7 +55,7 @@ export default function Login() {
 
             if (result.type === 'success') {
                 console.log(result.user.name)
-                const {idToken, accessToken} = result
+                const { idToken, accessToken } = result
                 const credential = firebase.auth.GoogleAuthProvider.credential(
                     idToken,
                     accessToken
@@ -102,10 +102,10 @@ export default function Login() {
                 <Text style={styles.headerText}>Welcome Back!</Text>
                 <Text style={styles.subheaderText}>Enter your email and password to get started.</Text>
             </View>
-            <CustomInput 
-                placeholder='Email' 
-                value={email} 
-                setValue={setEmail} 
+            <CustomInput
+                placeholder='Email'
+                value={email}
+                setValue={setEmail}
                 onChangeText={text => setEmail(text)}
             />
             <CustomInput
@@ -121,9 +121,9 @@ export default function Login() {
             <LoginButton
                 type='signIn'
                 content='Sign In'
-                onPress={() => {handleLogIn()}}
+                onPress={() => { handleLogIn() }}
             ></LoginButton>
-            
+
 
             {/* Add lines with 'or' section */}
             <OrBreak></OrBreak>

@@ -8,6 +8,7 @@
     "eject": "expo eject",
     "test": "jest"
   },
+  "type": "module",
   "dependencies": {
     "@expo-google-fonts/poppins": "^0.2.0",
     "@react-native-async-storage/async-storage": "~1.15.0",
@@ -17,7 +18,7 @@
     "expo": "^42.0.4",
     "expo-app-loading": "1.1.2",
     "expo-font": "~9.2.1",
-    "expo-google-app-auth": "^8.2.2",
+    "expo-google-app-auth": "^8.2.5",
     "expo-google-sign-in": "~9.2.1",
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
@@ -38,6 +39,14 @@
   },
   "devDependencies": {
     "@testing-library/react-native": "^8.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.1.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-expo": "^6.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-native": "^3.11.0",
     "jest-expo": "^42.1.0",
     "react-test-renderer": "^17.0.2"
   },
@@ -45,7 +54,10 @@
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|sentry-expo|native-base)"
     ]
+  },
+  "eslintConfig": {
+    "extends": "expo"
   }
 }
