@@ -28,12 +28,11 @@ export default function SymptomChecker() {
     const [isSelected, setSelection] = useState(false);
     const [checked, setChecked] = useState([]);
     const [causes, setCauses] = useState([])
-    const [highlighted, setHilighted] = useState([]) 
-    
+    const [highlighted, setHilighted] = useState([])
+
     useEffect(() => {
         LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
-      }, [])
-    const [highlighted, setHilighted] = useState([])
+    }, [])
 
     let primary = '#007bff'
     const [toggleIcon, setToggle] = useState(true)

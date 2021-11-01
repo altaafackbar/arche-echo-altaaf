@@ -11,6 +11,7 @@ export default function CustomInput({value, setValue, placeholder, secureTextEnt
   return (
     <View style={styles.container}> 
     <TextInput
+      selectionColor={'#1f1f1f'}
       style={styles.input}
       onChangeText={setValue}
       value={value}
