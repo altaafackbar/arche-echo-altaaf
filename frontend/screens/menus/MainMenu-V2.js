@@ -11,6 +11,7 @@ import SavedLocations from '../../assets/images/saved-locations.png'
 import Settings from '../../assets/images/settings-menu.png'
 import SymptomCheck from '../../assets/images/symptom-checker.png'
 import MenuGreeting from '../../components/styles/MenuGreeting';
+import { Dimensions } from 'react-native';
 
 export default function MainMenuV2 ()
 {
@@ -27,6 +28,9 @@ export default function MainMenuV2 ()
     var hour = new Date().getHours()
     var message;
 
+    const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
+
     if (hour >= 0 && hour < 12){
         message = 'Good Morning,'
     }
@@ -39,6 +43,8 @@ export default function MainMenuV2 ()
     if (hour >= 21 && hour < 24){
         message = 'Good Night,'
     }
+
+    var screenSize;
 
     const navigation = useNavigation();
 
@@ -76,7 +82,7 @@ export default function MainMenuV2 ()
     return(
         <SafeAreaView style={styles.container}>
                 <FlatGrid
-                itemDimension={140}
+                itemDimension={windowWidth / 3}
                 data={items}
                 style={styles.gridView}
                 spacing={10}

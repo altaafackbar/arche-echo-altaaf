@@ -4,13 +4,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Landing from './login-pages/Landing'
 import LandingV2 from './login-pages/Landing-V2';
 import Login from './login-pages/Login'
 import SignUp from './login-pages/SignUp'
 import Onboard from './screens/onboarding-screens/Onboarding'
-import Disclaimer from './login-pages/Disclaimer';
-import MainMenu from './screens/menus/MainMenu';
 import DisclaimerModal from './screens/modals/disclaimer-modal';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ClinicMap from './screens/clinic_map_screen/ClinicMap';
@@ -24,6 +21,7 @@ import Tabs from './components/styles/Tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as IconlyPack from 'react-native-iconly';
 import { MaterialIcons } from '@expo/vector-icons';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
 const Stack = createNativeStackNavigator();
@@ -157,3 +155,6 @@ function App(){
 )
   
 }
+
+const Drawer = createDrawerNavigator();
+ 
