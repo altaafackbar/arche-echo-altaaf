@@ -78,6 +78,9 @@ export default function Login() {
                     .signInWithCredential(credential)
                     .then(userCredentials => {
                         const user = userCredentials.user;
+                        user.updateProfile({
+                            displayName: result.user.givenName,
+                            })
                         const currentUser = firebase.auth().currentUser;
                         const db = firebase.firestore()
                         // console.log(result.user.email)

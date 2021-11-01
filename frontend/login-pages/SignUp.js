@@ -11,7 +11,7 @@ import LoginButton from '../components/styles/login-button';
 import OrBreak from '../components/styles/or_divider'
 // import { auth } from '../Firebase';
 import { firebase } from '../Firebase';
-import "firebase/firestore"
+
 
 
 export default function SignUp ()
@@ -108,6 +108,9 @@ export default function SignUp ()
                 .signInWithCredential(credential)
                 .then(userCredentials => {
                     const user = userCredentials.user;
+                    user.updateProfile({
+                        displayName: result.user.givenName,
+                        })
                     const currentUser = firebase.auth().currentUser;
                     const db = firebase.firestore()
                     // console.log(result.user.email)
@@ -149,6 +152,9 @@ export default function SignUp ()
             .createUserWithEmailAndPassword(email, password)
             .then(userCredentials => {
                 const user = userCredentials.user;
+                user.updateProfile({
+                    displayName: firstName,
+                })
                 const currentUser = firebase.auth().currentUser;
                 console.log(currentUser.email)
                 // creating user profile on firestore
