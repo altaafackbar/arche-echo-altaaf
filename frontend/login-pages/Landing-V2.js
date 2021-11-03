@@ -24,8 +24,7 @@ class LandingV2 extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const currentUser = firebase.auth().currentUser;
-        console.log(currentUser.uid)
-        
+        // console.log(currentUser.uid)
         firebase.firestore().collection('users').doc(user.uid).get().then(doc => {
           if (doc.exists) {
             console.log(doc.data().disclaimer)
@@ -35,7 +34,7 @@ class LandingV2 extends Component {
             if (userDisclaimer === true) {
               this.props.navigation.replace('MainMenu')
             } else {
-              this.props.navigation.replace('DisclaimerModal')
+              this.props.navigation.navigate('DisclaimerModal')
             }
           }
         })

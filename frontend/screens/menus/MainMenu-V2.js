@@ -44,7 +44,7 @@ export default function MainMenuV2() {
     if (hour >= 21 && hour < 24) {
         message = 'Good Night' + (userName == '' ? '' : (', ' + userName))
     }
-    console.log(message)
+    // console.log(message)
     const navigation = useNavigation();
 
     function navigateToClinicMap() {
