@@ -133,6 +133,9 @@ function App(){
       tabBarLabelStyle: {textAlign: 'center', fontWeight: '600', overflow: 'visible'},
       tabBarActiveTintColor: primary,
       tabBarInactiveTintColor: gray,
+      headerTitleContainerStyle: {
+        paddingRight: 20
+      },
       headerLeftContainerStyle: {
             paddingLeft: 20
           },
