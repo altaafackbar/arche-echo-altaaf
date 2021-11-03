@@ -61,6 +61,10 @@ class LandingV2 extends Component {
     this.props.navigation.navigate('SignUp')
   }
 
+  goBack = () => {
+    this.props.navigation.goBack()
+  }
+
   handleAnonymousSignIn = () => {
     firebase.auth()
         .signInAnonymously()
