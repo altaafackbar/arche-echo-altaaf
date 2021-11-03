@@ -10,7 +10,7 @@ class SettingsScreen extends Component {
             <SafeAreaView style={styles.container}>
                 <Button 
                     title="Log Out"
-                    onPress={() => firebase.auth().signOut()}
+                    onPress={() => {firebase.auth().signOut()}}
                 >
                 </Button>
             </SafeAreaView>

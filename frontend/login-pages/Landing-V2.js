@@ -98,7 +98,7 @@ class LandingV2 extends Component {
 
             console.error(error);
         })
-};
+  };
 
   render() {
     return (
