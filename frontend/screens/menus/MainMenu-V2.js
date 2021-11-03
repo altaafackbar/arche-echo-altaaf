@@ -81,7 +81,7 @@ export default function MainMenuV2() {
     return (
         <SafeAreaView style={styles.container}>
             <FlatGrid
-                itemDimension={Dimensions.get('window').width / 375 * 140}
+                itemDimension={Dimensions.get('window').width / 3}
                 data={items}
                 style={styles.gridView}
                 spacing={10}

@@ -7,8 +7,8 @@ const OnboardingScreen = () => {
     const navigation = useNavigation()
     return (
         <Onboarding
-        onSkip={() => navigation.replace('MainMenu')}
-        onDone={() => navigation.replace('MainMenu')}
+        onSkip={() => navigation.reset('MainMenu')}
+        onDone={() => navigation.reset('MainMenu')}
         pages={[
             {
                 backgroundColor: '#ffd44d',
