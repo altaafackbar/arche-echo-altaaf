@@ -25,16 +25,15 @@ import Tabs from './components/styles/Tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as IconlyPack from 'react-native-iconly';
 import { MaterialIcons } from '@expo/vector-icons';
-
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
 // Creating the navigation function
-export default function Navigator() {
+function Navigator() {
 
   return (
-
-    <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
@@ -109,8 +108,6 @@ export default function Navigator() {
         <Stack.Screen options={{headerTitle: 'SavedLocations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/>
         {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
       </Stack.Navigator>
-      
-    </NavigationContainer>
 
   )
 
@@ -123,6 +120,12 @@ function App(){
   const primary = '#8A76B6'
   const gray = '#d1d1d6'
 
+  const navigation = useNavigation()
+
+  function openDrawer() {
+    navigation.openDrawer()
+  }
+
   return (
     <Tab.Navigator
     screenOptions={{
@@ -130,12 +133,22 @@ function App(){
       tabBarLabelStyle: {textAlign: 'center', fontWeight: '600', overflow: 'visible'},
       tabBarActiveTintColor: primary,
       tabBarInactiveTintColor: gray,
+      headerLeftContainerStyle: {
+            paddingLeft: 20
+          },
+      headerLeft: () => (
+            <TouchableOpacity
+            onPress={() => openDrawer()}
+            style={{backgroundColor: 'transparent'}}
+            >
+              <Icon name='menu' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>),
     }}
     >
         <Tab.Screen name="Home" component={MainMenuV2} options={{
           tabBarIcon: ({focused}) => (
             <IconlyPack.Home set='bold' primaryColor={focused ? '#8A76B6' : '#d1d1d6'} />
-          ), headerTitle: 'ARCHE | ECHO Home', headerShadowVisible: false, headerTitleAlign: 'center'}} />
+          ), headerTitle: 'ARCHE | ECHO Home', headerShadowVisible: false, headerTitleAlign: 'center',}} />
 
           
         <Tab.Screen name="Tools And Resources" component={ToolsAndResources} options={{tabBarIcon: ({focused}) => (
@@ -158,4 +171,23 @@ function App(){
     </Tab.Navigator>
 )
   
+}
+
+const Drawer = createDrawerNavigator()
+
+export default function DrawerNav () {
+
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator
+      screenOptions={{
+        headerShown: false,
+        swipeEdgeWidth: 0,
+        }}
+      >
+        <Drawer.Screen name="Home" component={Navigator} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  )
+
 }
