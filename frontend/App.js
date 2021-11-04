@@ -21,6 +21,7 @@ import SettingsScreen from './screens/settings_screen/SettingsScreen';
 import MainMenuV2 from './screens/menus/MainMenu-V2';
 import SavedLocations from './screens/saved_locations_screen/SavedLocations';
 import StarredResources from './screens/starred_resources-screen/StarredResources';
+import ToolDetail from './screens/tools_and_resources_screen/ToolDetail';
 import Tabs from './components/styles/Tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as IconlyPack from 'react-native-iconly';
@@ -28,6 +29,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import { firebase } from './Firebase';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -143,6 +145,7 @@ function Navigator() {
         <Stack.Screen options={{headerTitle: 'Settings', headerShadowVisible: false}} name="SettingsScreen" component={SettingsScreen}/> */}
         <Stack.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false}} name="StarredResources" component={StarredResources}/>
         <Stack.Screen options={{headerTitle: 'SavedLocations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/>
+        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="ToolDetails" component={ToolDetail}/>
         {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
       </Stack.Navigator>
 

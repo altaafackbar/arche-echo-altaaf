@@ -10,6 +10,7 @@ import SymptomChecker from '../screens/symptom_checker-screen/SymptomChecker';
 import ToolsAndResources from '../screens/tools_and_resources_screen/ToolsAndResources';
 import SettingsScreen from '../screens/settings_screen/SettingsScreen';
 import LandingV2 from '../login-pages/Landing-V2';
+import ToolDetails from '../screens/tools_and_resources_screen/ToolDetail';
 
 
 const screens = {
@@ -42,7 +43,10 @@ const screens = {
     },
     Settings: {
         screen: SettingsScreen
-    }
+    },
+    ToolDetails: {
+        screen: ToolDetails
+    },
 }
 const HomeStack = createNativeStackNavigator(screens);
 

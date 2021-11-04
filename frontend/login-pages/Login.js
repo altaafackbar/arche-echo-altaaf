@@ -20,6 +20,7 @@ export default function Login() {
 
     navigateToOnboarding = () => navigation.navigate('Onboarding');
     navigateToSignUp = () => navigation.navigate('SignUp');
+    navigateToLanding = () => navigation.navigate('Landing')
 
     navigateToMainMenu = () => navigation.navigate('MainMenu')
     navigateToDisclaimer = () => navigation.navigate('DisclaimerModal')
@@ -139,7 +140,7 @@ export default function Login() {
             <LoginButton
                 type='signIn'
                 content='Sign In'
-                onPress={() => {handleLogIn()}}
+                onPress={() => {handleLogIn(); navigateToLanding()}}
             ></LoginButton>
             
 

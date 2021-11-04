@@ -100,9 +100,11 @@ class ToolsAndResources extends Component {
     getToolsData = (item) => {
         var tool = item.name;
 
-        Alert.alert('Test', tool, [
-            {text: 'OK', onPress: () => console.log('OK pressed')}
-        ]);
+        this.props.navigation.navigate('ToolDetails')
+
+        // Alert.alert('Test', tool, [
+        //     {text: 'OK', onPress: () => console.log('OK pressed')}
+        // ]);
     };
 
     render() {
@@ -110,7 +112,7 @@ class ToolsAndResources extends Component {
             <SafeAreaView style={styles.container}>
             {/* <Text>Hello World</Text> */}
             {/* <SearchBar placeholder="Search Tools..." lightTheme round editable={true}/> */}
-                <SearchBar placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query}/>
+                <SearchBar inputContainerStyle={{height: 40}} placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query}/>
                 <FlatList
                     
                 data={this.state.data}
@@ -118,7 +120,7 @@ class ToolsAndResources extends Component {
                 renderItem={({ item }) => 
                 <TouchableOpacity onPress={this.getToolsData.bind(this,item)}>
                     <Card containerStyle={styles.card_item}>
-                    <Card.Title h4>{item.name}</Card.Title>
+                    <Card.Title h4 style={{color: '#8A76B6',}}>{item.name}</Card.Title>
                     <Card.Divider></Card.Divider>
                     <View>
                         <Text>{item.details}</Text>
@@ -126,21 +128,6 @@ class ToolsAndResources extends Component {
                     </Card>
                 </TouchableOpacity>
                 }
-                    // ItemSeparatorComponent={this.renderSeparator}
-                    // ListHeaderComponent={this.renderHeader}
-                    // ListFooterComponent={this.renderFooter}
-                    // data={tools}
-                    // renderItem={({ item }) => (
-                    //     <TouchableOpacity>
-                    //         <ListItem
-                    //             key={item.id}
-                    //             title={item.name}
-                    //             subtitle={item.details}
-                    //         />
-                    //         {/* <Text style={styles.flat_list_item}>{item.name}</Text> */}
-                    //     </TouchableOpacity>
-                        
-                    // )}
                 />
             </SafeAreaView>
         );
