@@ -21,54 +21,21 @@ import SettingsScreen from './screens/settings_screen/SettingsScreen';
 import MainMenuV2 from './screens/menus/MainMenu-V2';
 import SavedLocations from './screens/saved_locations_screen/SavedLocations';
 import StarredResources from './screens/starred_resources-screen/StarredResources';
+import AboutUs from './screens/settings_screen/AboutUs';
+import ContactUs from './screens/settings_screen/ContactUs';
 import Tabs from './components/styles/Tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as IconlyPack from 'react-native-iconly';
 import { MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
-import { firebase } from './Firebase';
-
+import CustomDrawer from './components/styles/CustomDrawer';
+import { Dimensions } from 'react-native'
 
 const Stack = createNativeStackNavigator();
 
 // Creating the navigation function
 function Navigator() {
-
-  handleAnonymousSignIn = () => {
-    firebase.auth()
-        .signInAnonymously()
-        .then((userCredentials) => {
-            const user = userCredentials.user
-            user.updateProfile({
-              displayName: 'Guest',
-            })
-            console.log('User signed in anonymously');
-            const db = firebase.firestore()
-                db
-                    .collection("users")
-                    .doc(user.uid)
-                    .set({
-                        email: 'AnonymousEmail',
-                        firstName: 'Guest',
-                        lastName: 'Anonymous',
-                        disclaimer: false,
-                    })
-                    .then(() => {
-                        console.log('User created');
-                    })
-                    .catch((error) => {
-                        console.error('Error writing document: ', error);
-                    });
-        })
-        .catch(error => {
-            if (error.code === 'auth/operation-not-allowed') {
-                console.log('Enable anonymous in your firebase console.');
-            }
-
-            console.error(error);
-        })
-  };
 
   return (
       <Stack.Navigator
@@ -92,7 +59,7 @@ function Navigator() {
           headerShadowVisible: false,
           headerRight: () => (
             <TouchableOpacity
-            onPress={() => handleAnonymousSignIn()}
+            onPress={() => navigateToDisclaimer()}
             style={{backgroundColor: 'transparent'}}
             >
               <Text style={{color: '#1f1f1f', fontSize: 16}}>Continue As Guest</Text>
@@ -107,7 +74,7 @@ function Navigator() {
           headerShadowVisible: false,
           headerRight: () => (
             <TouchableOpacity
-            onPress={() => handleAnonymousSignIn()}
+            onPress={() => navigateToDisclaimer()}
             style={{backgroundColor: 'transparent'}}
             >
               <Text style={{color: '#1f1f1f', fontSize: 16}}>Continue As Guest</Text>
@@ -141,8 +108,8 @@ function Navigator() {
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="RelatedCauses" component={RelatedCauses}/>
         <Stack.Screen options={{headerTitle: 'Tools And Resources', headerShadowVisible: false}} name="ToolsAndResources" component={ToolsAndResources}/>
         <Stack.Screen options={{headerTitle: 'Settings', headerShadowVisible: false}} name="SettingsScreen" component={SettingsScreen}/> */}
-        <Stack.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false}} name="StarredResources" component={StarredResources}/>
-        <Stack.Screen options={{headerTitle: 'SavedLocations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/>
+        {/* <Stack.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false}} name="StarredResources" component={StarredResources}/>
+        <Stack.Screen options={{headerTitle: 'SavedLocations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/> */}
         {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
       </Stack.Navigator>
 
@@ -203,15 +170,21 @@ function App(){
         <Tab.Screen options={{tabBarIcon: ({focused}) => (
           <IconlyPack.Location set='bold' primaryColor={focused ? '#8A76B6' : '#d1d1d6'} />
         ), headerTitle: 'Find A Clinic Map', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: true}} name="Find A Clinic" component={ClinicMap} />
-        {/* <Tab.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false, headerTitleAlign: 'center'}} name="StarredResources" component={StarredResources} />
-        <Tab.Screen options={{headerTitle: 'Saved Locations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/> */}
+        
         <Tab.Screen name="Settings" component={SettingsScreen} options={{tabBarIcon: ({focused}) => (
           <IconlyPack.Setting set='bold' primaryColor={focused ? '#8A76B6' : '#d1d1d6'} />
         ), headerTitle: 'Settings', headerShadowVisible: false, headerTitleAlign: 'center'}} />
+
+        <Tab.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false}} name="StarredResources" component={StarredResources}/>
+        <Tab.Screen options={{headerTitle: 'Saved Locations', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false}} name="SavedLocations" component={SavedLocations}/> 
+        <Tab.Screen options={{headerTitle: 'About Us', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false}} name="AboutUs" component={AboutUs}/> 
+        <Tab.Screen options={{headerTitle: 'Contact Us', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false}} name="ContactUs" component={ContactUs}/>  
     </Tab.Navigator>
 )
   
 }
+
+
 
 const Drawer = createDrawerNavigator()
 
@@ -223,9 +196,17 @@ export default function DrawerNav () {
       screenOptions={{
         headerShown: false,
         swipeEdgeWidth: 0,
+        drawerActiveBackgroundColor: '#e8e4f0',
+        drawerActiveTintColor: '#8a76b6'
         }}
+        
+        drawerContent={props => <CustomDrawer {...props} />}
       >
-        <Drawer.Screen name="Home" component={Navigator} />
+        <Drawer.Screen name="Home" component={Navigator} initialParams={{screen: 'Home'}}/>
+        <Drawer.Screen name="Symptom Checker" component={App} initialParams={{screen: 'Symptom Checker'}} />
+        <Drawer.Screen name="Find A Clinic Map" component={App} initialParams={{screen: 'Find A Clinic'}}/>
+        <Drawer.Screen name="About Us" component={App} initialParams={{screen: 'AboutUs'}} />
+        <Drawer.Screen name="Contact Us" component={App} initialParams={{screen: 'ContactUs'}} />
       </Drawer.Navigator>
     </NavigationContainer>
   )
