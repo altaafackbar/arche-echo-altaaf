@@ -99,8 +99,9 @@ class ToolsAndResources extends Component {
 
     getToolsData = (item) => {
         var tool = item.name;
+        // console.log(tool)
 
-        this.props.navigation.navigate('ToolDetails')
+        this.props.navigation.navigate('ToolDetails', {toolName: tool})
 
         // Alert.alert('Test', tool, [
         //     {text: 'OK', onPress: () => console.log('OK pressed')}

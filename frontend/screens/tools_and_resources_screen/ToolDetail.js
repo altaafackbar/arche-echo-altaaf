@@ -1,8 +1,11 @@
-import React, { Component, useCallback, useRef, useState } from "react";
-import { Text, StyleSheet, View, Alert } from "react-native";
-import { ButtonGroup } from "react-native-elements";
+import React, { Component, useCallback, useState, useEffect } from "react";
+import { Text, StyleSheet, View, Alert, Button, TouchableOpacity, FlatList } from "react-native";
+import { ButtonGroup, ListItem } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import YoutubePlayer from "react-native-youtube-iframe";
+import * as WebBrowser from "expo-web-browser";
+import { useRoute } from '@react-navigation/native';
+import TouchableScale from 'react-native-touchable-scale';
 
 import { firebase } from "../../Firebase";
 
@@ -18,6 +21,55 @@ function ToolDetails() {
     // }
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [playing, setPlaying] = useState(false)
+    const [tool, setTool] = useState([])
+    const [eBooks, setEBooks] = useState([])
+
+    const route = useRoute();
+    var toolName = route.params.toolName
+
+
+    // firebase.firestore()
+    //     .collection('tools')
+    //     .doc(toolName)
+    //     .get()
+    //     .then(documentSnapshot => {
+    //         // console.log('User exists: ', documentSnapshot.exists);
+    //         if (documentSnapshot.exists) {
+    //             // console.log('Tools Data: ', documentSnapshot.data())
+    //             setTool(documentSnapshot.data())
+    //         }
+    //     })
+    
+    // console.log(tool)
+    
+
+    useEffect(() => {
+        const subscriber = firebase.firestore()
+            .collection('tools')
+            .doc(toolName)
+            .onSnapshot(documentSnapshot => {
+                // console.log('Tool Data: ', documentSnapshot.data());
+                setTool(documentSnapshot.data())
+
+            })
+
+
+        const eBookSub = firebase.firestore()
+            .collection('tools')
+            .doc(toolName)
+            .collection('eBookCollection')
+            .onSnapshot(querySnapshot => {
+                const ebook = []
+                querySnapshot.forEach(documentSnapshot => {
+                    // console.log(documentSnapshot.data())
+                    ebook.push({...documentSnapshot.data()})
+                })
+                setEBooks(ebook)
+        })
+    
+        return () => {subscriber(), eBookSub()}
+    }, [])
+
 
 
     const updateIndex = (selectedIndex) => {
@@ -31,8 +83,14 @@ function ToolDetails() {
         }
     }, [])
 
+    const handleeBook = (item) => {
+        // console.log(item.link)
+        WebBrowser.openBrowserAsync(item.link)
+    }
 
-    
+    const handleInfoGraphic = () => {
+        WebBrowser.openBrowserAsync(tool.infographicLink)
+    }    
 
     const component1 = () => <Text>Video</Text>
     const component2 = () => <Text>eBook</Text>
@@ -44,8 +102,8 @@ function ToolDetails() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.titles}>
-                <Text style={styles.headerTitle}>Anaphylaxis</Text>
-                <Text style={styles.subTitle}>Anaphylaxis is a sever allergic reaction that involves two or more parts of the body and happens quickly.</Text>
+                <Text style={styles.headerTitle}>{tool.name}</Text>
+                <Text style={styles.subTitle}>{tool.details}</Text>
             </View>
             <ButtonGroup
                 onPress = {updateIndex}
@@ -56,29 +114,109 @@ function ToolDetails() {
             {/* If user selected video */}
             {selectedIndex === 0 &&
             <>
-                <View style={styles.textView}>
-                    <Text style={styles.infoTitle}>Understanding and managing your child's anaphylaxis</Text>
-                    <Text style={styles.infoSubTitle}>This video provides information on the symptoms of anaphylaxis, how to manage it at home, and when to seek emergency care.</Text>
-                </View>
+                {tool.video === true &&
+                <>
+                    <View style={styles.textView}>
+                    <Text style={styles.infoTitle}>{tool.videoTitle}</Text>
+                    <Text style={styles.infoSubTitle}>{tool.videoInfo}</Text>
+                    </View>
 
-                <View style={styles.subView}>
-                    <YoutubePlayer
-                        height={500}
-                        play={playing}
-                        videoId={"qewxzi53zBQ"}
-                        onChangeState={onStateChange}
-                    />    
-                </View>
+                    <View style={styles.subView}>
+                        <YoutubePlayer
+                            height={500}
+                            play={playing}
+                            videoId={tool.youtubeVideoID}
+                            onChangeState={onStateChange}
+                        />    
+                    </View>
+                </>
+                }
+                {tool.video === false &&
+                    <View style={styles.textView}>
+                    <Text style={styles.infoTitle}>Video is coming soon</Text>
+                    </View>
+                }
+                
 
             </>
             }
-
+            {/* If user selected eBook */}
             {selectedIndex === 1 &&
             <>
-                <View style={styles.textView}>
-                    <Text style={styles.infoTitle}>Understanding and managing your child's anaphylaxis</Text>
-                    <Text style={styles.infoSubTitle}>This eBook provides information on the symptoms of anaphylaxis, how to manage it at home, and when to seek emergency care.</Text>
-                </View>
+                {tool.eBook === true &&
+                <>
+                    <FlatList
+                    data={eBooks}
+                    keyExtractor={(item) => item.name}
+                    style={{paddingTop: "5%", paddingHorizontal: "3%"}}
+                    renderItem={({ item }) => 
+                    <ListItem 
+                        bottomDivider 
+                        Component={TouchableScale}
+                        firction={90}
+                        tension={100}
+                        activeScale={0.95}
+                        onPress={handleeBook.bind(this,item)}
+                        containerStyle={{borderRadius: 15, backgroundColor: "#E7ECF2", marginTop: 10,}}
+                    >
+                        <ListItem.Content>
+                            <ListItem.Title style={styles.listItemTitle}>{item.name}</ListItem.Title>
+                            <ListItem.Title style={styles.listItemInfo}>{item.info}</ListItem.Title>
+                        </ListItem.Content>
+                        {/* <ListItem.Chevron/> */}
+                    </ListItem>
+                    }
+                    />
+                    {/* <View style={styles.textView}>
+                    <Text style={styles.infoTitle}>{tool.eBookTitle}</Text>
+                    <Text style={styles.infoSubTitle}>{tool.eBookInfo}</Text>
+                    </View>
+
+                    <View style={styles.subView}>
+                        <Button
+                            title = "Click Here to open eBook"
+                            onPress = {handleeBook}
+                        ></Button>  
+                    </View> */}
+                </>
+                }
+                {tool.eBook === false &&
+                <>
+                    <View style={styles.textView}>
+                    <Text style={styles.infoTitle}>eBook is coming soon</Text>
+                    </View>
+                </>
+                }
+                
+            </>
+            }
+
+            {selectedIndex === 2 &&
+            <>
+                {tool.infographic === true &&
+                <>
+                    <View style={styles.textView}>
+                    <Text style={styles.infoTitle}>{tool.infographicTitle}</Text>
+                    <Text style={styles.infoSubTitle}>{tool.infographicInfo}</Text>
+                    </View>
+
+                    <View style={styles.subView}>
+                        {/* <Text style={{textAlign: "center"}}>InfoGraphic is coming soon</Text>   */}
+                        <Button
+                            title = "Click Here to open InfoGraphic"
+                            onPress = {handleInfoGraphic}
+                        ></Button> 
+                    </View>
+                </>
+                }
+                {tool.infographic === false &&
+                <>
+                    <View style={styles.textView}>
+                    <Text style={styles.infoTitle}>infoGraphic is coming soon</Text>
+                    </View>
+                </>
+                }
+           
             </>
             }
             
@@ -115,8 +253,8 @@ const styles = StyleSheet.create({
     },
     subView: {
         flex: 1,
-        paddingTop: 40,
-        justifyContent: 'center',
+        paddingTop: "4%",
+        // justifyContent: 'center',
     },
     infoTitle: {
         fontSize: 20,
@@ -132,5 +270,14 @@ const styles = StyleSheet.create({
         color: '#1f1f1f',
         textAlign: 'center',
         padding: 10,
-    }
+    },
+    listItemTitle: {
+        fontSize: 20,
+        color: '#8A76B6',
+        textAlign: 'center',
+    },
+    listItemInfo: {
+        fontSize: 15,
+        color: '#1f1f1f',
+    },
 })
