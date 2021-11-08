@@ -16,15 +16,6 @@ import { firebase } from '../../Firebase';
 
 export default function MainMenuV2() {
 
-
-    // if (user != null){
-    //     name = user.displayName
-    //     email = user.email
-    //     photoUrl = user.photoURL
-    //     emailVerified = user.emailVerified
-    //     uid = user.uid
-    // }
-
     var hour = new Date().getHours()
     const user = firebase.auth().currentUser
     var userName = user.displayName
@@ -35,7 +26,6 @@ export default function MainMenuV2() {
     if (hour >= 21 && hour < 24) message += 'Night'
     if (userName != 'Guest') message += `, ${userName}`
 
-    console.log(message)
     const navigation = useNavigation();
 
     function navigateToClinicMap() {
@@ -72,7 +62,7 @@ export default function MainMenuV2() {
     return (
         <SafeAreaView style={styles.container}>
             <FlatGrid
-                itemDimension={Dimensions.get('window').width / 375 * 140}
+                itemDimension={Dimensions.get('window').width / 3}
                 data={items}
                 style={styles.gridView}
                 spacing={10}
