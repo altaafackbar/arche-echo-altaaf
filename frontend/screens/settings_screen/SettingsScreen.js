@@ -33,7 +33,7 @@ class SettingsScreen extends Component {
             <SafeAreaView style={styles.container}>
                 <Button 
                     title="Log Out"
-                    onPress={() => {this.handleLogOut()}}
+                    onPress={() => {this.handleLogOut(); this.props.navigation.replace('Landing')}}
                 >
                 </Button>
             </SafeAreaView>
