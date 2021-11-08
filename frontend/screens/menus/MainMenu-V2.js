@@ -16,15 +16,6 @@ import { firebase } from '../../Firebase';
 
 export default function MainMenuV2() {
 
-
-    // if (user != null){
-    //     name = user.displayName
-    //     email = user.email
-    //     photoUrl = user.photoURL
-    //     emailVerified = user.emailVerified
-    //     uid = user.uid
-    // }
-
     var hour = new Date().getHours()
     var message;
     const user = firebase.auth().currentUser
