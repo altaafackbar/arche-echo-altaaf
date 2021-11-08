@@ -16,35 +16,16 @@ import { firebase } from '../../Firebase';
 
 export default function MainMenuV2() {
 
-
-    // if (user != null){
-    //     name = user.displayName
-    //     email = user.email
-    //     photoUrl = user.photoURL
-    //     emailVerified = user.emailVerified
-    //     uid = user.uid
-    // }
-
     var hour = new Date().getHours()
-    var message;
     const user = firebase.auth().currentUser
     var userName = user.displayName
-    // console.log(user.displayName)
+    var message = 'Good '
+    if (hour >= 0 && hour < 12) message += 'Morning'
+    if (hour >= 12 && hour < 18) message += 'Afternoon'
+    if (hour >= 18 && hour < 21) message += 'Evening'
+    if (hour >= 21 && hour < 24) message += 'Night'
+    if (userName != 'Guest') message += `, ${userName}`
 
-
-    if (hour >= 0 && hour < 12) {
-        message = 'Good Morning' + (userName == '' ? '' : (', ' + userName))
-    }
-    if (hour >= 12 && hour < 18) {
-        message = 'Good Afternoon' + (userName == '' ? '' : (', ' + userName))
-    }
-    if (hour >= 18 && hour < 21) {
-        message = 'Good Evening' + (userName == '' ? '' : (', ' + userName))
-    }
-    if (hour >= 21 && hour < 24) {
-        message = 'Good Night' + (userName == '' ? '' : (', ' + userName))
-    }
-    // console.log(message)
     const navigation = useNavigation();
 
     function navigateToClinicMap() {
