@@ -36,7 +36,7 @@ class ToolsAndResources extends Component {
                 const tools = []
                 querySnapshot.forEach(documentSnapshot => {
                     // console.log(documentSnapshot.data())
-                    tools.push({...documentSnapshot.data()})
+                    tools.push({ ...documentSnapshot.data() })
                 })
                 this.setState({
                     loading: false,
@@ -44,7 +44,7 @@ class ToolsAndResources extends Component {
                     fullData: tools,
                 })
             })
-        
+
     };
 
     contains = ({ name, details }, query) => {
@@ -77,7 +77,7 @@ class ToolsAndResources extends Component {
     };
 
     renderHeader = () => {
-        return <SearchBar placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query}/>
+        return <SearchBar placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query} />
     };
 
     renderFooter = () => {
@@ -91,7 +91,7 @@ class ToolsAndResources extends Component {
                     borderColor: "#CED0CE",
                 }}
             >
-                <ActivityIndicator animating size='large'/>
+                <ActivityIndicator animating size='large' />
             </View>
 
         );
@@ -101,7 +101,7 @@ class ToolsAndResources extends Component {
         var tool = item.name;
         // console.log(tool)
 
-        this.props.navigation.navigate('ToolDetails', {toolName: tool})
+        this.props.navigation.navigate('ToolDetails', { toolName: tool })
 
         // Alert.alert('Test', tool, [
         //     {text: 'OK', onPress: () => console.log('OK pressed')}
@@ -111,30 +111,30 @@ class ToolsAndResources extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-            {/* <Text>Hello World</Text> */}
-            {/* <SearchBar placeholder="Search Tools..." lightTheme round editable={true}/> */}
-                <SearchBar inputContainerStyle={{height: 40}} placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query}/>
+                {/* <Text>Hello World</Text> */}
+                {/* <SearchBar placeholder="Search Tools..." lightTheme round editable={true}/> */}
+                <SearchBar containerStyle={styles.SearchBar} inputContainerStyle={{ height: 40 }} placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query} />
                 <FlatList
-                    
-                data={this.state.data}
-                keyExtractor={(item) => item.name}
-                renderItem={({ item }) => 
-                <TouchableOpacity onPress={this.getToolsData.bind(this,item)}>
-                    <Card containerStyle={styles.card_item}>
-                    <Card.Title h4 style={{color: '#8A76B6',}}>{item.name}</Card.Title>
-                    <Card.Divider></Card.Divider>
-                    <View>
-                        <Text>{item.details}</Text>
-                    </View>
-                    </Card>
-                </TouchableOpacity>
-                }
+
+                    data={this.state.data}
+                    keyExtractor={(item) => item.name}
+                    renderItem={({ item }) =>
+                        <TouchableOpacity onPress={this.getToolsData.bind(this, item)}>
+                            <Card containerStyle={styles.card_item}>
+                                <Card.Title h4 style={{ color: '#8A76B6', }}>{item.name}</Card.Title>
+                                <Card.Divider></Card.Divider>
+                                <View>
+                                    <Text>{item.details}</Text>
+                                </View>
+                            </Card>
+                        </TouchableOpacity>
+                    }
                 />
             </SafeAreaView>
         );
     }
 
-    
+
 
     // keyExtractor = (item, index) => index.toString()
 
@@ -167,5 +167,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#E7ECF2",
         borderRadius: 15,
         margin: 15,
+    },
+    SearchBar: {
+        top: '-2%',
+        marginBottom: '-3%'
     },
 });
