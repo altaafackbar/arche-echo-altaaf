@@ -26,21 +26,6 @@ function ToolDetails() {
 
     const route = useRoute();
     var toolName = route.params.toolName
-
-
-    // firebase.firestore()
-    //     .collection('tools')
-    //     .doc(toolName)
-    //     .get()
-    //     .then(documentSnapshot => {
-    //         // console.log('User exists: ', documentSnapshot.exists);
-    //         if (documentSnapshot.exists) {
-    //             // console.log('Tools Data: ', documentSnapshot.data())
-    //             setTool(documentSnapshot.data())
-    //         }
-    //     })
-    
-    // console.log(tool)
     
 
     useEffect(() => {

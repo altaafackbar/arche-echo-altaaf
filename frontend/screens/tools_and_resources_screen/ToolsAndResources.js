@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { useState } from "react";
 import { Text, StyleSheet, FlatList, TouchableOpacity, View, ActivityIndicator, Alert } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
-import { SearchBar, ListItem, Card } from 'react-native-elements';
+import { SearchBar, ListItem, Card, FAB, Icon } from 'react-native-elements';
+import { AntDesign } from '@expo/vector-icons';
 import _ from 'lodash';
 import { firebase } from '../../Firebase';
 
@@ -22,8 +23,12 @@ class ToolsAndResources extends Component {
             error: null,
             query: "",
             fullData: [],
+            userData: [],
+            starTools: [],
         }
     };
+
+    user = firebase.auth().currentUser
 
     componentDidMount() {
         this.makeRemoteRequest();
@@ -36,7 +41,7 @@ class ToolsAndResources extends Component {
                 const tools = []
                 querySnapshot.forEach(documentSnapshot => {
                     // console.log(documentSnapshot.data())
-                    tools.push({...documentSnapshot.data()})
+                    tools.push({ ...documentSnapshot.data() })
                 })
                 this.setState({
                     loading: false,
@@ -44,7 +49,17 @@ class ToolsAndResources extends Component {
                     fullData: tools,
                 })
             })
-        
+
+
+        // console.log(user.uid)
+        firebase.firestore().collection('users').doc(this.user.uid)
+            .onSnapshot(documentSnapshot => {
+                this.setState({
+                    userData: documentSnapshot.data(),
+                    starTools: documentSnapshot.data().starTools
+                })
+            })
+
     };
 
     contains = ({ name, details }, query) => {
@@ -65,76 +80,100 @@ class ToolsAndResources extends Component {
         this.setState({ query: formateQuery, data })
     };
 
-    renderSeparator = () => {
-        return (
-            <View
-                style={{
-                    height: 1,
-                    backgroundColor: "#CED0CE",
-                }}
-            />
-        );
-    };
-
-    renderHeader = () => {
-        return <SearchBar placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query}/>
-    };
-
-    renderFooter = () => {
-        if (!this.state.loading) return null;
-
-        return (
-            <View
-                style={{
-                    paddingVertical: 20,
-                    borderTopWidth: 1,
-                    borderColor: "#CED0CE",
-                }}
-            >
-                <ActivityIndicator animating size='large'/>
-            </View>
-
-        );
-    };
-
     getToolsData = (item) => {
         var tool = item.name;
         // console.log(tool)
 
-        this.props.navigation.navigate('ToolDetails', {toolName: tool})
+        this.props.navigation.navigate('ToolDetails', { toolName: tool })
 
         // Alert.alert('Test', tool, [
         //     {text: 'OK', onPress: () => console.log('OK pressed')}
         // ]);
     };
 
+    handleEdit = () => {
+        Alert.alert('Click Test')
+    }
+
+    handleStarTool = (item) => {
+        var starred = [...this.state.starTools]
+        starred.push(item.name)
+        // console.log(this.state.starTools)
+        firebase.firestore().collection('users').doc(this.user.uid)
+            .update({
+                starTools: starred,
+            })
+    }
+
+    handleUnstartool = (item) => {
+        var starred = [...this.state.starTools]
+        var index = starred.indexOf(item.name)
+        if (index > -1) {
+            starred.splice(index, 1)
+        }
+        // console.log(starred)
+        firebase.firestore().collection('users').doc(this.user.uid)
+            .update({
+                starTools: starred,
+            })
+    }
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
-            {/* <Text>Hello World</Text> */}
-            {/* <SearchBar placeholder="Search Tools..." lightTheme round editable={true}/> */}
-                <SearchBar inputContainerStyle={{height: 40}} placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query}/>
+                {/* <Text>Hello World</Text> */}
+                {/* <SearchBar placeholder="Search Tools..." lightTheme round editable={true}/> */}
+                <SearchBar containerStyle={styles.SearchBar} inputContainerStyle={{ height: 35 }} placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query} />
                 <FlatList
-                    
-                data={this.state.data}
-                keyExtractor={(item) => item.name}
-                renderItem={({ item }) => 
-                <TouchableOpacity onPress={this.getToolsData.bind(this,item)}>
-                    <Card containerStyle={styles.card_item}>
-                    <Card.Title h4 style={{color: '#8A76B6',}}>{item.name}</Card.Title>
-                    <Card.Divider></Card.Divider>
-                    <View>
-                        <Text>{item.details}</Text>
-                    </View>
-                    </Card>
-                </TouchableOpacity>
-                }
+
+                    data={this.state.data}
+                    containerStyle={styles.FlatList}
+                    keyExtractor={(item) => item.name}
+                    renderItem={({ item }) =>
+                        <TouchableOpacity onPress={this.getToolsData.bind(this, item)}>
+                            <Card containerStyle={styles.card_item}>
+                                <Card.Title h4 style={{ color: '#8A76B6', }}>{item.name}</Card.Title>
+                                <Card.Divider></Card.Divider>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ flex: 0.9 }}>{item.details}</Text>
+                                    {/* starred tools */}
+                                    {this.state.starTools.includes(item.name) === true &&
+                                        <>
+                                            <TouchableOpacity style={{ flex: 0.1, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={this.handleUnstartool.bind(this, item)}>
+                                                <AntDesign name="star" size={35} color="black" />
+                                                {/* <AntDesign name="staro" size={35} color="black"/> */}
+                                            </TouchableOpacity>
+                                        </>
+                                    }
+                                    {/* unstarred tools */}
+                                    {this.state.starTools.includes(item.name) === false &&
+                                        <>
+                                            <TouchableOpacity style={{ flex: 0.1, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={this.handleStarTool.bind(this, item)}>
+                                                <AntDesign name="staro" size={35} color="black" />
+                                            </TouchableOpacity>
+                                        </>
+                                    }
+
+
+                                </View>
+                            </Card>
+                        </TouchableOpacity>
+                    }
                 />
+                {this.state.userData.admin === true &&
+                    <FAB
+                        title="Edit"
+                        placement='right'
+                        onPress={this.handleEdit}
+                        containerStyle={styles.fab}
+                    >
+                    </FAB>
+                }
             </SafeAreaView>
         );
     }
 
-    
+
 
     // keyExtractor = (item, index) => index.toString()
 
@@ -156,8 +195,8 @@ export default ToolsAndResources
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // paddingTop: 40,
         paddingHorizontal: 5,
+        backgroundColor: '#fafafa',
     },
     flat_list_item: {
         backgroundColor: "#E7ECF2",
@@ -167,5 +206,21 @@ const styles = StyleSheet.create({
         backgroundColor: "#E7ECF2",
         borderRadius: 15,
         margin: 15,
+    },
+    SearchBar: {
+        top: -20,
+        marginTop: 0,
+        marginVertical: 0,
+
+
+    },
+    FlatList: {     // may not work well on small devices
+        padding: 0,
+        margin: 0,
+
+    },
+    fab: {
+        padding: 0,
+        margin: 0,
     },
 });
