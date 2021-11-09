@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Landing from './login-pages/Landing'
@@ -31,7 +31,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import CustomDrawer from './components/styles/CustomDrawer';
-import { Dimensions } from 'react-native'
+import ForgotPassword from './screens/modals/ForgotPasswordModal';
 
 
 const Stack = createNativeStackNavigator();
@@ -104,6 +104,24 @@ function Navigator() {
         }}
         name="DisclaimerModal"
         component={DisclaimerModal} />
+
+        <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name="ForgotPassword"
+        component={ForgotPassword} />
 
 
       <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false, headerBackVisible: false }} name="Onboarding" component={Onboard} />
