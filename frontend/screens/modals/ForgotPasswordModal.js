@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity, TextInput, ScrollView, TouchableOpacityBase } from 'react-native';
+import { Text, View, Button, StyleSheet, SafeAreaView, Pressable, Image, TouchableOpacity, TextInput, ScrollView, TouchableOpacityBase, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { firebase } from '../../Firebase';
@@ -13,19 +13,28 @@ An email will be sent to you allowing you to change your password.`
     const navigation = useNavigation()
     goBack = () => navigation.goBack()
 
-    const [email, changeEmail] = React.useState('');
+    const [email, setEmail] = React.useState('');
 
     const checkInput = !email.trim().length == 0
 
     //Here's the Password Reset Stuff for Firebase
 
     function sendResetPassword(email) {
+        // console.log(email)
         firebase.auth().sendPasswordResetEmail(email)
-        .then(function (){
-            alert('Please check your email')
-        }).catch(function (e) {
-            console.log(e)
-        })
+            .then(() => {
+                Alert.alert('Please check your email')
+                goBack()
+            }).catch((error) => {
+                console.log(error.code)
+                console.log(error.message)
+                if (error.code === 'auth/user-not-found') {
+                    Alert.alert('There is no user record corresponding to this email. Please enter a correct email address.')
+                }
+                if (error.code === 'auth/invalid-email') {
+                    Alert.alert('Please enter a valid email address.')
+                }
+            })
     }
 
 
@@ -43,7 +52,8 @@ An email will be sent to you allowing you to change your password.`
                 selectionColor={'#a5a5a5'}
                 placeholder='Email address'
                 value={email}
-                onChangeText={changeEmail}
+                setValue={setEmail}
+                onChangeText={text => setEmail(text)}
                 >
                 </TextInput>
             </View>
@@ -52,7 +62,7 @@ An email will be sent to you allowing you to change your password.`
                 <TouchableOpacity
                 style={checkInput ? styles.button : styles.buttonDisabled}
                 disabled={checkInput ? false : true}
-                onPress={() => sendResetPassword()}
+                onPress={() => {sendResetPassword(email)}}
 
                 >
                 <Text style={styles.buttonText}>Change Password</Text>
