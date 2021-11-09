@@ -127,6 +127,7 @@ class ToolsAndResources extends Component {
                 <FlatList
 
                     data={this.state.data}
+                    containerStyle={styles.FlatList}
                     keyExtractor={(item) => item.name}
                     renderItem={({ item }) =>
                         <TouchableOpacity onPress={this.getToolsData.bind(this, item)}>
@@ -164,6 +165,7 @@ class ToolsAndResources extends Component {
                         title="Edit"
                         placement='right'
                         onPress={this.handleEdit}
+                        containerStyle={styles.fab}
                     >
                     </FAB>
                 }
@@ -206,7 +208,19 @@ const styles = StyleSheet.create({
         margin: 15,
     },
     SearchBar: {
-        top: '-2%',
-        marginBottom: '-3%'
+        top: -20,
+        marginTop: 0,
+        marginVertical: 0,
+
+
+    },
+    FlatList: {     // may not work well on small devices
+        padding: 0,
+        margin: 0,
+
+    },
+    fab: {
+        padding: 0,
+        margin: 0,
     },
 });
