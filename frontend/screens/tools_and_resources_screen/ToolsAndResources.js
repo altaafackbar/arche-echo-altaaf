@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { useState } from "react";
 import { Text, StyleSheet, FlatList, TouchableOpacity, View, ActivityIndicator, Alert } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context";
-import { SearchBar, ListItem, Card } from 'react-native-elements';
+import { SearchBar, ListItem, Card, FAB, Icon } from 'react-native-elements';
+import { AntDesign } from '@expo/vector-icons';
 import _ from 'lodash';
 import { firebase } from '../../Firebase';
 
@@ -22,8 +23,12 @@ class ToolsAndResources extends Component {
             error: null,
             query: "",
             fullData: [],
+            userData: [],
+            starTools: [],
         }
     };
+
+    user = firebase.auth().currentUser
 
     componentDidMount() {
         this.makeRemoteRequest();
@@ -42,6 +47,16 @@ class ToolsAndResources extends Component {
                     loading: false,
                     data: tools,
                     fullData: tools,
+                })
+            })
+
+        
+        // console.log(user.uid)
+        firebase.firestore().collection('users').doc(this.user.uid)
+            .onSnapshot(documentSnapshot => {
+                this.setState({
+                    userData: documentSnapshot.data(),
+                    starTools: documentSnapshot.data().starTools
                 })
             })
         
@@ -65,38 +80,6 @@ class ToolsAndResources extends Component {
         this.setState({ query: formateQuery, data })
     };
 
-    renderSeparator = () => {
-        return (
-            <View
-                style={{
-                    height: 1,
-                    backgroundColor: "#CED0CE",
-                }}
-            />
-        );
-    };
-
-    renderHeader = () => {
-        return <SearchBar placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query}/>
-    };
-
-    renderFooter = () => {
-        if (!this.state.loading) return null;
-
-        return (
-            <View
-                style={{
-                    paddingVertical: 20,
-                    borderTopWidth: 1,
-                    borderColor: "#CED0CE",
-                }}
-            >
-                <ActivityIndicator animating size='large'/>
-            </View>
-
-        );
-    };
-
     getToolsData = (item) => {
         var tool = item.name;
         // console.log(tool)
@@ -108,12 +91,39 @@ class ToolsAndResources extends Component {
         // ]);
     };
 
+    handleEdit = () => {
+        Alert.alert('Click Test')
+    }
+
+    handleStarTool = (item) => {
+        var starred = [...this.state.starTools]
+        starred.push(item.name)
+        // console.log(this.state.starTools)
+        firebase.firestore().collection('users').doc(this.user.uid)
+            .update({
+                starTools: starred,
+            })
+    }
+
+    handleUnstartool = (item) => {
+        var starred = [...this.state.starTools]
+        var index = starred.indexOf(item.name)
+        if (index > -1) {
+            starred.splice(index, 1)
+        }
+        // console.log(starred)
+        firebase.firestore().collection('users').doc(this.user.uid)
+            .update({
+                starTools: starred,
+            })
+    }
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
             {/* <Text>Hello World</Text> */}
             {/* <SearchBar placeholder="Search Tools..." lightTheme round editable={true}/> */}
-                <SearchBar inputContainerStyle={{height: 40}} placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query}/>
+                <SearchBar inputContainerStyle={{height: 35}} placeholder="Search Tools..." lightTheme round onChangeText={this.handleSearch} value={this.state.query}/>
                 <FlatList
                     
                 data={this.state.data}
@@ -123,13 +133,40 @@ class ToolsAndResources extends Component {
                     <Card containerStyle={styles.card_item}>
                     <Card.Title h4 style={{color: '#8A76B6',}}>{item.name}</Card.Title>
                     <Card.Divider></Card.Divider>
-                    <View>
-                        <Text>{item.details}</Text>
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={{flex: 0.9}}>{item.details}</Text>
+                        {/* starred tools */}
+                        {this.state.starTools.includes(item.name) === true && 
+                        <>
+                            <TouchableOpacity style={{flex: 0.1, alignContent: 'center', alignItems: 'center', paddingTop: '5%'}} onPress={this.handleUnstartool.bind(this,item)}>
+                            <AntDesign name="star" size={35} color="black"/>
+                            {/* <AntDesign name="staro" size={35} color="black"/> */}
+                            </TouchableOpacity>
+                        </>
+                        }
+                        {/* unstarred tools */}
+                        {this.state.starTools.includes(item.name) === false &&
+                        <>
+                            <TouchableOpacity style={{flex: 0.1, alignContent: 'center', alignItems: 'center', paddingTop: '5%'}} onPress={this.handleStarTool.bind(this,item)}>
+                            <AntDesign name="staro" size={35} color="black"/>
+                            </TouchableOpacity>
+                        </>
+                        }
+                        
+                        
                     </View>
                     </Card>
                 </TouchableOpacity>
                 }
                 />
+                {this.state.userData.admin === true &&
+                    <FAB
+                        title="Edit"
+                        placement='right'
+                        onPress={this.handleEdit}
+                    >
+                    </FAB>
+                }
             </SafeAreaView>
         );
     }
@@ -156,8 +193,8 @@ export default ToolsAndResources
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // paddingTop: 40,
         paddingHorizontal: 5,
+        backgroundColor: '#fafafa',
     },
     flat_list_item: {
         backgroundColor: "#E7ECF2",

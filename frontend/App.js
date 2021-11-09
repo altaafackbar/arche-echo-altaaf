@@ -31,13 +31,49 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import CustomDrawer from './components/styles/CustomDrawer';
-import { Dimensions } from 'react-native'
+import { Dimensions } from 'react-native';
+import { firebase } from './Firebase';
 
 
 const Stack = createNativeStackNavigator();
 
 // Creating the navigation function
 function Navigator() {
+
+  const handleAnonymousSignIn = () => {
+    firebase.auth()
+        .signInAnonymously()
+        .then((userCredentials) => {
+            const user = userCredentials.user
+            user.updateProfile({
+              displayName: 'Guest',
+            })
+            console.log('User signed in anonymously');
+            const db = firebase.firestore()
+                db
+                    .collection("users")
+                    .doc(user.uid)
+                    .set({
+                        email: 'AnonymousEmail',
+                        firstName: 'Guest',
+                        lastName: 'Anonymous',
+                        disclaimer: false,
+                    })
+                    .then(() => {
+                        console.log('User created');
+                    })
+                    .catch((error) => {
+                        console.error('Error writing document: ', error);
+                    });
+        })
+        .catch(error => {
+            if (error.code === 'auth/operation-not-allowed') {
+                console.log('Enable anonymous in your firebase console.');
+            }
+
+            console.error(error);
+        })
+  };
 
   return (
     <Stack.Navigator
@@ -61,7 +97,7 @@ function Navigator() {
           headerShadowVisible: false,
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => navigateToDisclaimer()}
+              onPress={() => handleAnonymousSignIn()}
               style={{ backgroundColor: 'transparent' }}
             >
               <Text style={{ color: '#1f1f1f', fontSize: 16 }}>Continue As Guest</Text>
@@ -77,7 +113,7 @@ function Navigator() {
           headerShadowVisible: false,
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => navigateToDisclaimer()}
+              onPress={() => handleAnonymousSignIn()}
               style={{ backgroundColor: 'transparent' }}
             >
               <Text style={{ color: '#1f1f1f', fontSize: 16 }}>Continue As Guest</Text>
