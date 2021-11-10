@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, SafeAreaView, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import { firebase } from '../../Firebase'
 import { Card } from 'react-native-elements'
+import { AntDesign } from '@expo/vector-icons';
 
 class StarredResources extends Component {
 
@@ -11,6 +12,7 @@ class StarredResources extends Component {
         this.state = {
             loading: false,
             data: [],
+            starTools: [],
         }
     };
 
@@ -24,6 +26,9 @@ class StarredResources extends Component {
         this.setState({loading: true})
         firebase.firestore().collection('users').doc(this.user.uid)
             .onSnapshot(documentSnapshot => {
+                this.setState({
+                    starTools: documentSnapshot.data().starTools,
+                })
                 firebase.firestore().collection('tools').where('name', 'in', documentSnapshot.data().starTools)
                     .onSnapshot(querySnapshot => {
                         const tools = []
@@ -55,6 +60,19 @@ class StarredResources extends Component {
         // ]);
     };
 
+    handleUnstartool = (item) => {
+        var starred = [...this.state.starTools]
+        var index = starred.indexOf(item.name)
+        if (index > -1) {
+            starred.splice(index, 1)
+        }
+        // console.log(starred)
+        firebase.firestore().collection('users').doc(this.user.uid)
+            .update({
+                starTools: starred,
+            })
+    }
+
 
 
     render() {
@@ -70,7 +88,11 @@ class StarredResources extends Component {
                         <Card.Title h4 style={{color: '#8A76B6',}}>{item.name}</Card.Title>
                         <Card.Divider></Card.Divider>
                         <View style={{flexDirection: 'row'}}>
-                            <Text style={{flex: 1}}>{item.details}</Text>
+                            <Text style={{flex: 0.8}}>{item.details}</Text>
+                            <TouchableOpacity style={{ flex: 0.2, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={this.handleUnstartool.bind(this, item)}>
+                                <AntDesign name="star" size={35} color="black" />
+                                {/* <AntDesign name="staro" size={35} color="black"/> */}
+                            </TouchableOpacity>
                         </View>
                         </Card>
                     </TouchableOpacity>
