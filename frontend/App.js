@@ -60,6 +60,8 @@ function Navigator() {
                         firstName: 'Guest',
                         lastName: 'Anonymous',
                         disclaimer: false,
+                        admin: false,
+                        starTools: ['empty'],
                     })
                     .then(() => {
                         console.log('User created');
