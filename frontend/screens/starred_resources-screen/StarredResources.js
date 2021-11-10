@@ -44,6 +44,18 @@ class StarredResources extends Component {
 
     }
 
+    getToolsData = (item) => {
+        var tool = item.name;
+        // console.log(tool)
+
+        this.props.navigation.navigate('ToolDetails', { toolName: tool })
+
+        // Alert.alert('Test', tool, [
+        //     {text: 'OK', onPress: () => console.log('OK pressed')}
+        // ]);
+    };
+
+
 
     render() {
         // console.log(this.state.starTools)
@@ -53,12 +65,12 @@ class StarredResources extends Component {
                     data={this.state.data}
                     keyExtractor={(item) => item.name}
                     renderItem={({ item }) => 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.getToolsData.bind(this, item)}>
                         <Card containerStyle={styles.card_item}>
                         <Card.Title h4 style={{color: '#8A76B6',}}>{item.name}</Card.Title>
                         <Card.Divider></Card.Divider>
                         <View style={{flexDirection: 'row'}}>
-                            <Text style={{flex: 0.9}}>{item.details}</Text>
+                            <Text style={{flex: 1}}>{item.details}</Text>
                         </View>
                         </Card>
                     </TouchableOpacity>

@@ -24,6 +24,8 @@ import StarredResources from './screens/starred_resources-screen/StarredResource
 import ToolDetail from './screens/tools_and_resources_screen/ToolDetail';
 import AboutUs from './screens/settings_screen/AboutUs';
 import ContactUs from './screens/settings_screen/ContactUs';
+import EditToolsAdmin from './screens/admin_screens/EditToolsAdmin';
+import AddToolModal from './screens/modals/AddToolModal';
 import Tabs from './components/styles/Tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as IconlyPack from 'react-native-iconly';
@@ -141,6 +143,25 @@ function Navigator() {
         name="DisclaimerModal"
         component={DisclaimerModal} />
 
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='AddToolModal'
+        component={AddToolModal}
+      />
+
 
       <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false, headerBackVisible: false }} name="Onboarding" component={Onboard} />
       <Stack.Screen options={{ headerShown: false, headerShadowVisible: false, headerBackVisible: false }} name="MainMenu" component={App} />
@@ -152,6 +173,7 @@ function Navigator() {
       <Stack.Screen options={{ headerTitle: 'Starred Resources', headerShadowVisible: false }} name="StarredResources" component={StarredResources} />
       <Stack.Screen options={{ headerTitle: 'SavedLocations', headerShadowVisible: false }} name="SavedLocations" component={SavedLocations} />
       <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false }} name="ToolDetails" component={ToolDetail} />
+      <Stack.Screen options={{ headerTitle: 'Admin Screen', headerShadowVisible: false }} name="EditToolsAdmin" component={EditToolsAdmin} />
       {/* <Stack.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false}} name="StarredResources" component={StarredResources}/>
         <Stack.Screen options={{headerTitle: 'SavedLocations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/> */}
       {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}

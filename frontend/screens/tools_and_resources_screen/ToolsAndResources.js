@@ -92,7 +92,8 @@ class ToolsAndResources extends Component {
     };
 
     handleEdit = () => {
-        Alert.alert('Click Test')
+        // Alert.alert('Click Test')
+        this.props.navigation.navigate('EditToolsAdmin')
     }
 
     handleStarTool = (item) => {
@@ -135,11 +136,11 @@ class ToolsAndResources extends Component {
                                 <Card.Title h4 style={{ color: '#8A76B6', }}>{item.name}</Card.Title>
                                 <Card.Divider></Card.Divider>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={{ flex: 0.9 }}>{item.details}</Text>
+                                    <Text style={{ flex: 0.8 }}>{item.details}</Text>
                                     {/* starred tools */}
                                     {this.state.starTools.includes(item.name) === true &&
                                         <>
-                                            <TouchableOpacity style={{ flex: 0.1, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={this.handleUnstartool.bind(this, item)}>
+                                            <TouchableOpacity style={{ flex: 0.2, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={this.handleUnstartool.bind(this, item)}>
                                                 <AntDesign name="star" size={35} color="black" />
                                                 {/* <AntDesign name="staro" size={35} color="black"/> */}
                                             </TouchableOpacity>
@@ -148,7 +149,7 @@ class ToolsAndResources extends Component {
                                     {/* unstarred tools */}
                                     {this.state.starTools.includes(item.name) === false &&
                                         <>
-                                            <TouchableOpacity style={{ flex: 0.1, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={this.handleStarTool.bind(this, item)}>
+                                            <TouchableOpacity style={{ flex: 0.2, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={this.handleStarTool.bind(this, item)}>
                                                 <AntDesign name="staro" size={35} color="black" />
                                             </TouchableOpacity>
                                         </>
