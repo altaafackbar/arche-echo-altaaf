@@ -1,62 +1,109 @@
-import React from "react";
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList } from "react-native";
-import MapView from 'react-native-maps';
-// import { SafeAreaView } from "react-native-safe-area-context";
+import { GoogleMap, GoogleApiWrapper, InfoWindow, Marker} from 'google-maps-react';
 
-export default function ClinicMap() {
+import CurrentLocation from './LocationMap';
 
-    const Clinics = [
-        {
-            id: 1,
-            name: "Medicine Place Pharmacy",
-            distance: "700m - 3 mins",
-        },
-        {
-            id: 2,
-            name: "Downtown Medical Clinic",
-            distance: "1.7km - 6 mins",
-        },
-        {
-            id: 3,
-            name: "RaiN MedClinic",
-            distance: "1.8km - 7 mins",
-        },
-        {
-            id: 4,
-            name: "Downtown Medicentre",
-            distance: "1.8km - 7 mins",
-        },
-        {
-            id: 5,
-            name: "Alberta Avenue Medical Clinic",
-            distance: "2.9km - 11 mins",
-        },
-    ];
+export class MapContainer extends Component {
 
-    // function Item({name, distance}) {
-    //     return (
-    //         <TouchableOpacity style={styles.listItem}>
-    //             <Text style={styles.listName}>{name}{"\n"}</Text>
-    //             <Text style={styles.listDistance}>{distance}</Text>
-    //         </TouchableOpacity>
-    //     )
-    // };
+    // map state
+    state = {
+        showingInfoWindow: false,
+        activeMarker: {},
+        selectedPlace: {},
+        currentLocation: {
+            lat: 53.5461,
+            lng: -113.4938,
+        },
+        clinicsResult: []
+    };
 
-    return (
-        <SafeAreaView style={styles.safeview}>
-            <View style={styles.container}>
-                <MapView 
-                    style={styles.map}
-                    provider = { MapView.PROVIDER_GOOGLE }
-                    initialRegion={{
-                        latitude: 53.5461,
-                        longitude: -113.4938,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421,
-                    }}
-                />
-            </View>
-            <View style={styles.buttoncontainer}>
+    // event handlers
+    onMarkerClick = (props, marker, e) => 
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        });
+
+    onClose = props => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                showingInfoWindow: false,
+                activeMarker: null
+            });
+        }
+    };
+
+    // get list of clinics near the user's current location
+    onMapLoad = map => {
+        // retrieve current position
+        navigator.geolocation.getCurrentPosition(pos => {
+            const coords = pos.coords;
+            this.setState({
+                currentLocation: {
+                    lat: coords.latitude,
+                    lng: coords.longitude
+                }
+            });
+        });
+
+        // request details of health related services nearby
+        const latitude = state.latitude;
+        const longitude = state.longitude;
+        const type = 'health';
+        const radius = 50000;
+
+        
+        const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&radius=' + radius + '&type=' + type + '&key=' + 'AIzaSyB7IherL6RNS-XYn87NWahcAFNA-D8ALcM';
+
+        fetch(url)
+            .then(res => {
+                return res.json()
+            })
+            .then(res => {
+                // for each service returned retrieve its details, put details in clinics list
+                this.setState({
+                    clinicsResult: res
+                })
+            })
+
+            // catch any errors
+            .catch(error => {
+                console.log(error);
+            });
+
+    };
+
+    render() {
+
+        //show nearby clinics and add to list
+        console.log(this.state.clinicsResult.res)
+
+        return(
+            <SafeAreaView style={styles.safeview}>
+                {/* map */}
+                <View style={styles.container}>
+                    <CurrentLocation
+                        centerAroundCurrentLocation
+                        map = {this.map}
+                        google={this.props.google}>
+                            <Marker
+                                onClick={this.onMarkerClick}
+                                name={...state.selectedPlace.name}/>
+                            <InfoWindow
+                                marker={this.state.activeMarker}
+                                visible={this.state.showingInfoWindow}
+                                onClose={this.onClose}>
+                                <div>
+                                    <h4{...state.selectedPlace.name}></h4>
+                                </div>
+                            </InfoWindow>
+                    </CurrentLocation>
+                </View>
+
+                {/* buttons to switch between saved locations and proximity search*/}
+                <View style={styles.buttoncontainer}>
                 <TouchableOpacity style={styles.button1}>
                     <Text>Sorted By:</Text>
                     <Text>Proximity</Text>
@@ -65,32 +112,29 @@ export default function ClinicMap() {
                     <Text>Saved</Text>
                     <Text>Locations</Text>
                 </TouchableOpacity>
-
-                
             </View>
+
+            {/* list of clinics */}
             <View style={styles.flatlistContainer}>
                 <FlatList
-                    data={Clinics}
-                    renderItem={({ item }) => (<Text style={styles.listName}>{item.name}{"\n"}{item.distance}</Text>)}
-                    keyExtractor = { (item, index) => index.toString() }
+                    data={this.state.clinicsResult.res}
+                    keyExtractor = { (item) => item.place_id }
+                    renderItem={({ item }) => 
+                    (<Text style={styles.listName}>{item.name}{"\n"}{item.distance}</Text>)}
                 >
                 </FlatList>
 
             </View>
-                    
-                    
+            </SafeAreaView>
+        );
+    }
+}
 
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyB7IherL6RNS-XYn87NWahcAFNA-D8ALcM'
+})(MapContainer);
 
-            
-                
-        </SafeAreaView>
-        
-
-
-    );
-  }
-  
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     safeview:{
         flex: 1,
     },
@@ -101,8 +145,9 @@ export default function ClinicMap() {
     },
     map: {
         ...StyleSheet.absoluteFillObject,
-    //   width: Dimensions.get('window').width,
-    //   height: Dimensions.get('window').height,
+        //position: 'absolute',
+        //width: Dimensions.get('window').width,
+        //height: Dimensions.get('window').height,
     },
     buttoncontainer: {
         flex: 1,
