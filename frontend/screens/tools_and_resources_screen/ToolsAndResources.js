@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { useState } from "react";
-import { Text, StyleSheet, FlatList, TouchableOpacity, View, ActivityIndicator, Alert } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Text, StyleSheet, FlatList, TouchableOpacity, View, ActivityIndicator, Alert, SafeAreaView } from "react-native"
 import { SearchBar, ListItem, Card, FAB, Icon } from 'react-native-elements';
 import { AntDesign } from '@expo/vector-icons';
 import _ from 'lodash';
@@ -209,11 +208,8 @@ const styles = StyleSheet.create({
         margin: 15,
     },
     SearchBar: {
-        top: -20,
         marginTop: 0,
         marginVertical: 0,
-
-
     },
     FlatList: {     // may not work well on small devices
         padding: 0,
