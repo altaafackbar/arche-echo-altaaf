@@ -24,6 +24,8 @@ import StarredResources from './screens/starred_resources-screen/StarredResource
 import ToolDetail from './screens/tools_and_resources_screen/ToolDetail';
 import AboutUs from './screens/settings_screen/AboutUs';
 import ContactUs from './screens/settings_screen/ContactUs';
+import EditToolsAdmin from './screens/admin_screens/EditToolsAdmin';
+import AddToolModal from './screens/modals/AddToolModal';
 import Tabs from './components/styles/Tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as IconlyPack from 'react-native-iconly';
@@ -31,13 +33,51 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import CustomDrawer from './components/styles/CustomDrawer';
-import { Dimensions } from 'react-native'
+import { Dimensions } from 'react-native';
+import { firebase } from './Firebase';
 
 
 const Stack = createNativeStackNavigator();
 
 // Creating the navigation function
 function Navigator() {
+
+  const handleAnonymousSignIn = () => {
+    firebase.auth()
+        .signInAnonymously()
+        .then((userCredentials) => {
+            const user = userCredentials.user
+            user.updateProfile({
+              displayName: 'Guest',
+            })
+            console.log('User signed in anonymously');
+            const db = firebase.firestore()
+                db
+                    .collection("users")
+                    .doc(user.uid)
+                    .set({
+                        email: 'AnonymousEmail',
+                        firstName: 'Guest',
+                        lastName: 'Anonymous',
+                        disclaimer: false,
+                        admin: false,
+                        starTools: ['empty'],
+                    })
+                    .then(() => {
+                        console.log('User created');
+                    })
+                    .catch((error) => {
+                        console.error('Error writing document: ', error);
+                    });
+        })
+        .catch(error => {
+            if (error.code === 'auth/operation-not-allowed') {
+                console.log('Enable anonymous in your firebase console.');
+            }
+
+            console.error(error);
+        })
+  };
 
   return (
     <Stack.Navigator
@@ -61,7 +101,7 @@ function Navigator() {
           headerShadowVisible: false,
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => navigateToDisclaimer()}
+              onPress={() => handleAnonymousSignIn()}
               style={{ backgroundColor: 'transparent' }}
             >
               <Text style={{ color: '#1f1f1f', fontSize: 16 }}>Continue As Guest</Text>
@@ -77,7 +117,7 @@ function Navigator() {
           headerShadowVisible: false,
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => navigateToDisclaimer()}
+              onPress={() => handleAnonymousSignIn()}
               style={{ backgroundColor: 'transparent' }}
             >
               <Text style={{ color: '#1f1f1f', fontSize: 16 }}>Continue As Guest</Text>
@@ -105,6 +145,25 @@ function Navigator() {
         name="DisclaimerModal"
         component={DisclaimerModal} />
 
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='AddToolModal'
+        component={AddToolModal}
+      />
+
 
       <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false, headerBackVisible: false }} name="Onboarding" component={Onboard} />
       <Stack.Screen options={{ headerShown: false, headerShadowVisible: false, headerBackVisible: false }} name="MainMenu" component={App} />
@@ -116,6 +175,7 @@ function Navigator() {
       <Stack.Screen options={{ headerTitle: 'Starred Resources', headerShadowVisible: false }} name="StarredResources" component={StarredResources} />
       <Stack.Screen options={{ headerTitle: 'SavedLocations', headerShadowVisible: false }} name="SavedLocations" component={SavedLocations} />
       <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false }} name="ToolDetails" component={ToolDetail} />
+      <Stack.Screen options={{ headerTitle: 'Admin Screen', headerShadowVisible: false }} name="EditToolsAdmin" component={EditToolsAdmin} />
       {/* <Stack.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false}} name="StarredResources" component={StarredResources}/>
         <Stack.Screen options={{headerTitle: 'SavedLocations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/> */}
       {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}

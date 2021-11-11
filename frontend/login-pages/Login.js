@@ -94,6 +94,8 @@ export default function Login() {
                                 firstName: result.user.givenName,
                                 lastName: result.user.familyName,
                                 disclaimer: true,
+                                admin: false,
+                                starTools: ['empty'],
                             })
                     })
                     .catch((error) => {
