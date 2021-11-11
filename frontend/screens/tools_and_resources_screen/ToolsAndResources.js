@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { useState } from "react";
-import { Text, StyleSheet, FlatList, TouchableOpacity, View, ActivityIndicator, Alert } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Text, StyleSheet, FlatList, TouchableOpacity, View, ActivityIndicator, Alert, SafeAreaView } from "react-native"
 import { SearchBar, ListItem, Card, FAB, Icon } from 'react-native-elements';
 import { AntDesign } from '@expo/vector-icons';
 import _ from 'lodash';
@@ -93,7 +92,7 @@ class ToolsAndResources extends Component {
 
     handleEdit = () => {
         // Alert.alert('Click Test')
-        this.props.navigation.navigate('EditToolsAdmin')
+        this.props.navigation.navigate('AddToolModal')
     }
 
     handleStarTool = (item) => {
@@ -163,7 +162,7 @@ class ToolsAndResources extends Component {
                 />
                 {this.state.userData.admin === true &&
                     <FAB
-                        title="Edit"
+                        title="Add Tool"
                         placement='right'
                         onPress={this.handleEdit}
                         containerStyle={styles.fab}
@@ -196,7 +195,7 @@ export default ToolsAndResources
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 5,
+        paddingHorizontal: '2%',
         backgroundColor: '#fafafa',
     },
     flat_list_item: {
@@ -209,10 +208,11 @@ const styles = StyleSheet.create({
         margin: 15,
     },
     SearchBar: {
-        top: -20,
+        // top: -20,
+        backgroundColor: 'transparent',
         marginTop: 0,
         marginVertical: 0,
-
+        borderStartWidth: 0,
 
     },
     FlatList: {     // may not work well on small devices

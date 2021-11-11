@@ -12,6 +12,7 @@ import SettingsScreen from '../screens/settings_screen/SettingsScreen';
 import LandingV2 from '../login-pages/Landing-V2';
 import ToolDetails from '../screens/tools_and_resources_screen/ToolDetail';
 import EditToolsAdmin from '../screens/admin_screens/EditToolsAdmin';
+import UpdateToolsAdmin from '../screens/admin_screens/UpdateToolsAdmin';
 
 
 const screens = {
@@ -50,7 +51,10 @@ const screens = {
     },
     EditToolsAdmin: {
         screen: EditToolsAdmin
-    }
+    },
+    UpdateToolsAdmin: {
+        screen: UpdateToolsAdmin
+    },
 }
 const HomeStack = createNativeStackNavigator(screens);
 
