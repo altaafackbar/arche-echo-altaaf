@@ -16,7 +16,8 @@ import symptoms from './symptoms.json'
 import parts from './parts.json'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from "lodash"
-
+import { useTheme } from '@react-navigation/native';
+import themeContext from "../../components/styles/ThemeContext";
 
 export default function SymptomChecker() {
 
@@ -29,6 +30,8 @@ export default function SymptomChecker() {
     const [checked, setChecked] = useState([]);
     const [causes, setCauses] = useState([])
     const [highlighted, setHilighted] = useState([])
+    const { setTheme, theme } = React.useContext(themeContext);
+    const {colors, isDark} = useTheme();
 
     useEffect(() => {
         LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
@@ -112,7 +115,7 @@ export default function SymptomChecker() {
     return (
         <ScrollView>
             <View style={styles.titles}>
-                <Text style={styles.headerTitle}>Symptom Checker</Text>
+                <Text style={[styles.headerTitle, {color: colors.text}]}>Symptom Checker</Text>
                 <Text style={styles.subTitle}>Select a body part to get started.</Text>
             </View>
             <View style={styles.imageContainer}>
@@ -267,7 +270,6 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 24,
-        color: '#1f1f1f',
         textAlign: 'center',
     },
     subTitle: {

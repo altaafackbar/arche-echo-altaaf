@@ -1,13 +1,20 @@
-import React from 'react'
-import { View, Text, StyleSheet, Platform } from 'react-native'
+import React, {useState} from 'react'
+import { View, Text, StyleSheet, Platform, Button } from 'react-native'
 import { DrawerContentScrollView, DrawerItem, DrawerItemList} from '@react-navigation/drawer'
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Linking from 'expo-linking';
 import LogoutDrawerItem from './LogoutDrawerItem';
-
+import { Switch } from 'react-native-paper';
+import { useTheme } from '@react-navigation/native';
+import themeContext from './ThemeContext'
+import { DarkThemeToggle } from './DarkThemeToggle';
 
 const CustomDrawer = (props) => {
+
+    const { setTheme, theme } = React.useContext(themeContext);
+
+    const {colors, isDark} = useTheme();
 
 
     function dialNumber (number) {
@@ -19,11 +26,13 @@ const CustomDrawer = (props) => {
         Linking.openURL(phoneNumber);
     }
 
+    const checkMode = theme === 'Light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'
+
     return (
         <View style={{flex: 1}}>
             <DrawerContentScrollView {...props}>
             <View>
-                <Text style={styles.drawerHeader}>Child Care Aid</Text>
+                <Text style={[styles.drawerHeader, {color: colors.text}]}>Child Care Aid</Text>
                 <Text style={styles.subheaderText}>Call 911 for Emergencies and 811 for Nurse Help</Text>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
@@ -44,6 +53,15 @@ const CustomDrawer = (props) => {
             <View style={styles.horizontalLine} />
             
             <DrawerItemList {...props} />
+            {/* <Button
+                title="Switch Theme"
+                onPress={() => setTheme(theme === 'Light' ? 'Dark' : 'Light')}
+            /> */}
+            <View style={[styles.horizontalLine, {marginBottom: 10}]} />
+            <View style={styles.switchThemeContainer}>
+                <Text style={styles.switchThemeHeaderText}>{checkMode}</Text>
+                <DarkThemeToggle></DarkThemeToggle>
+            </View>
             </DrawerContentScrollView>
             <LogoutDrawerItem></LogoutDrawerItem>
         </View>
@@ -113,5 +131,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#f6b9b9',
         bottom: 0,
         width: '100%',
+    },
+    switchThemeContainer: {
+        flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        marginTop: 10,
+    },
+    switchThemeHeaderText: {
+        fontSize: 14,
+        color: '#bcbcc1',
+        marginRight: 38,
     }
 })

@@ -4,9 +4,9 @@ import { ButtonGroup, ListItem } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import YoutubePlayer from "react-native-youtube-iframe";
 import * as WebBrowser from "expo-web-browser";
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useTheme } from '@react-navigation/native';
 import TouchableScale from 'react-native-touchable-scale';
-
+import themeContext from "../../components/styles/ThemeContext";
 import { firebase } from "../../Firebase";
 
 
@@ -26,6 +26,12 @@ function ToolDetails() {
 
     const route = useRoute();
     var toolName = route.params.toolName
+
+    const { setTheme, theme } = React.useContext(themeContext);
+
+    const {colors, isDark} = useTheme();
+
+    const textColor = colors.text
 
 
     // firebase.firestore()
@@ -100,9 +106,9 @@ function ToolDetails() {
     // const {selectedIndex} = this.state
     // const {playing} = this.state
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, {backgroundColor: colors.background}]}>
             <View style={styles.titles}>
-                <Text style={styles.headerTitle}>{tool.name}</Text>
+                <Text style={[styles.headerTitle, {color: colors.text}]}>{tool.name}</Text>
                 <Text style={styles.subTitle}>{tool.details}</Text>
             </View>
             <ButtonGroup
@@ -118,7 +124,7 @@ function ToolDetails() {
                 <>
                     <View style={styles.textView}>
                     <Text style={styles.infoTitle}>{tool.videoTitle}</Text>
-                    <Text style={styles.infoSubTitle}>{tool.videoInfo}</Text>
+                    <Text style={{fontSize: 15, textAlign: 'center', padding: 10, color: textColor}}>{tool.videoInfo}</Text>
                     </View>
 
                     <View style={styles.subView}>
@@ -197,7 +203,7 @@ function ToolDetails() {
                 <>
                     <View style={styles.textView}>
                     <Text style={styles.infoTitle}>{tool.infographicTitle}</Text>
-                    <Text style={styles.infoSubTitle}>{tool.infographicInfo}</Text>
+                    <Text style={{fontSize: 15, textAlign: 'center', padding: 10, color: textColor}}>{tool.infographicInfo}</Text>
                     </View>
 
                     <View style={styles.subView}>
@@ -229,7 +235,6 @@ export default ToolDetails
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fafafa',
         paddingHorizontal: 5,
         // alignItems: 'center',
         // justifyContent: 'center',
@@ -241,7 +246,6 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 24,
-        color: '#1f1f1f',
         textAlign: 'center',
     },
     subTitle: {
@@ -267,7 +271,7 @@ const styles = StyleSheet.create({
     },
     infoSubTitle: {
         fontSize: 15,
-        color: '#1f1f1f',
+        // color: '#1f1f1f',
         textAlign: 'center',
         padding: 10,
     },
