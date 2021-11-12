@@ -9,6 +9,7 @@ import bodyImageChest from '../../assets/images/Body-Chest.png'
 import bodyImageStomach from '../../assets/images/Body-Stomach.png'
 import bodyImagePelvis from '../../assets/images/Body-Pelvis.png'
 import bodyImageLegs from '../../assets/images/Body-Legs.png'
+import emergencyImage from '../../assets/images/emergency.png'
 import TouchableScale from 'react-native-touchable-scale';
 import { ListItem } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
@@ -16,6 +17,7 @@ import symptoms from './symptoms.json'
 import parts from './parts.json'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from "lodash"
+import { firebase } from '../../Firebase';
 
 
 export default function SymptomChecker() {
@@ -23,8 +25,8 @@ export default function SymptomChecker() {
     const navigation = useNavigation();
     const [currentImage, setCurrentImage] = useState(bodyImage)
     const [selectedValue, setSelectedValue] = useState("none");
-    const [symptomsList, setSymptomsList] = useState(symptoms['symptoms']);
-    const [partsList, setPartsList] = useState(parts['parts']);
+    const [symptomsList, setSymptomsList] = useState([]);
+    const [partsList, setPartsList] = useState({});
     const [isSelected, setSelection] = useState(false);
     const [checked, setChecked] = useState([]);
     const [causes, setCauses] = useState([])
@@ -32,6 +34,31 @@ export default function SymptomChecker() {
 
     useEffect(() => {
         LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
+        /firebase.firestore().collection('symptoms')
+        .onSnapshot(querySnapshot => {
+            const symp = []
+            querySnapshot.forEach(documentSnapshot => {
+                
+                symp.push(documentSnapshot.data())
+                
+                //console.log(documentSnapshot.data())
+            })
+            setSymptomsList(symp)
+        })
+        
+        firebase.firestore().collection('bodymap')
+        .onSnapshot(querySnapshot => {
+            const parts = {}
+            querySnapshot.forEach(documentSnapshot => {
+                const data = {}
+                parts[documentSnapshot.id] = documentSnapshot.data()
+                
+                
+                
+                //console.log(documentSnapshot.data())
+            })
+            setPartsList(parts)
+        })
     }, [])
 
     let primary = '#007bff'
@@ -43,15 +70,15 @@ export default function SymptomChecker() {
         if (itemValue == 'head') {
             setCurrentImage(bodyImageHead)
 
-            setHilighted(partsList["Head/neck"].sID)
+            setHilighted(partsList["Head or neck"].sID)
         }
         else if (itemValue == 'chest') {
             setCurrentImage(bodyImageChest)
-            setHilighted(partsList["Chest/upper back"].sID)
+            setHilighted(partsList["Chest or upper back"].sID)
         }
         else if (itemValue == 'stomach') {
             setCurrentImage(bodyImageStomach)
-            setHilighted(partsList["Stomach/lower back"].sID)
+            setHilighted(partsList["Stomach or lower back"].sID)
         }
         else if (itemValue == 'pelvis') {
             setCurrentImage(bodyImagePelvis)
@@ -59,11 +86,15 @@ export default function SymptomChecker() {
         }
         else if (itemValue == 'arms') {
             setCurrentImage(bodyImageArms)
-            setHilighted(partsList["Arms/legs"].sID)
+            setHilighted(partsList["Arms or legs"].sID)
         }
         else if (itemValue == 'legs') {
             setCurrentImage(bodyImageLegs)
-            setHilighted(partsList["Arms/legs"].sID)
+            setHilighted(partsList["Arms or legs"].sID)
+        }
+        else if (itemValue == 'emergency') {
+            setCurrentImage(bodyImage)
+            setHilighted(partsList["Emergency symptom"].sID)
         }
     }
     function itemChecked(id) {
@@ -103,10 +134,33 @@ export default function SymptomChecker() {
         });
 
 
-
+        
         navigation.navigate('RelatedCauses', {
             relatedCauses: causesDic
         })
+        
+
+        /*partsList2.forEach(element => {
+            const key = Object.keys(element)[0]
+            console.log(element)
+            //console.log(element[key.toString()])
+            
+            firebase.firestore()
+            .collection('bodymap')
+            .doc(key.toString())
+            .set(element[key.toString()])
+            .then(() => {
+
+            });
+            
+        
+
+        });*/
+        
+
+    
+
+
     }
 
     return (
@@ -115,6 +169,18 @@ export default function SymptomChecker() {
                 <Text style={styles.headerTitle}>Symptom Checker</Text>
                 <Text style={styles.subTitle}>Select a body part to get started.</Text>
             </View>
+
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+            <TouchableOpacity
+                onPress={() => updateBody('emergency')}
+                style={styles.emergency}>
+                    <Image source={emergencyImage} style={styles.emergencyImage} 
+                    onPress={() => updateBody('emergency')}/>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                    onPress={() => updateBody('emergency')}
+                    style={styles.emergency}></TouchableOpacity>
             <View style={styles.imageContainer}>
                 {/*head check */}
                 <TouchableOpacity
@@ -152,6 +218,8 @@ export default function SymptomChecker() {
                 <Image source={currentImage} style={styles.bodyImage} />
 
             </View>
+            </View>
+
             <View style={{ borderWidth: 1, borderColor: 'black', borderRadius: 10, marginHorizontal: 130 }}>
                 <Picker
                     selectedValue={selectedValue}
@@ -177,7 +245,7 @@ export default function SymptomChecker() {
 
                     <View style={{ padding: 5 }}>
                         <TouchableOpacity style={
-                            { flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: itemHighlight(item.id) ? '#79aeed' : "#E7ECF2", borderRadius: 10, height: 40 }
+                            { flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: itemHighlight(item.id) ? '#b2cded' : "#E7ECF2", borderRadius: 10, height: 40 }
                         }>
                             <Text style={{ alignItems: 'flex-start', paddingLeft: 30, marginRight: 50 }}>
                                 {item.name}
@@ -237,7 +305,7 @@ export default function SymptomChecker() {
 
                     }>
 
-                    <Text>Find Causes</Text>
+                    <Text>Get Suggestions</Text>
                 </TouchableOpacity>
 
             </View>
@@ -248,7 +316,7 @@ export default function SymptomChecker() {
 
     );
 }
-const transparency_hitbox = 0.3;
+const transparency_hitbox = 0;
 const styles = StyleSheet.create({
     safeview: {
         flex: 1,
@@ -354,6 +422,23 @@ const styles = StyleSheet.create({
         transform: [{ rotate: '-15deg' }],
         top: '36%',
         left: '61%'
+    },
+    emergencyImage: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain',
+        zIndex: 90,
+
+    },
+    emergency: {
+        height: '9%',
+        width: '9%',
+        backgroundColor: `rgba(52, 52, 52, ${transparency_hitbox})`,
+        position: 'absolute',
+        zIndex: 90,
+        top: '18%',
+        left: '69%'
+
     },
     checkbox: {
         alignSelf: "center",
