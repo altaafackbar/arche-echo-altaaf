@@ -1,10 +1,51 @@
 import React from "react";
+import { useState, useEffect, useRef  } from 'react';
 import { View, Text, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList } from "react-native";
 import MapView from 'react-native-maps';
+import { Marker } from 'react-native-maps';
+import * as Location from 'expo-location';
 // import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ClinicMap() {
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+    const mapRef = useRef(null);
+    const [myRegion, setRegion] = useState({
+        latitude: 53.5461,
+        longitude: -113.4938,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      });
+    useEffect(() => {
+        (async () => {
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
+          }
+    
+          let location = await Location.getCurrentPositionAsync({});
+          setLocation(location);
+          setRegion({
+            latitude: location['coords'].latitude,
+            longitude: location['coords'].longitude,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          }
+          )
+          console.log(myRegion)
+          mapRef.current.animateToRegion(myRegion, 3 * 1000);
 
+        })();
+      }, []);
+    
+      let text = 'Waiting..';
+      if (errorMsg) {
+        text = errorMsg;
+      } else if (location) {
+        text = JSON.stringify(location);
+        
+      }
     const Clinics = [
         {
             id: 1,
@@ -47,6 +88,7 @@ export default function ClinicMap() {
             <View style={styles.container}>
                 <MapView 
                     style={styles.map}
+                    ref={mapRef}
                     provider = { MapView.PROVIDER_GOOGLE }
                     initialRegion={{
                         latitude: 53.5461,
@@ -54,6 +96,8 @@ export default function ClinicMap() {
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}
+                    
+
                 />
             </View>
             <View style={styles.buttoncontainer}>

@@ -1,9 +1,10 @@
-{
-   "parts":{
-      "Head/neck":{
+[
+   {
+      "Head or neck":{
          "id":"0",
          "sID":[
             1,
+            3,
             4,
             7,
             10,
@@ -30,10 +31,15 @@
             42,
             43,
             44,
-            47
+            47,
+            48,
+            49,
+            50,
+            51
          ],
          "symptoms":[
             "agitated, crying, fussy, or irritable",
+            "blue lips or fingertips",
             "breathing problems",
             "coughing",
             "difficulty sleeping",
@@ -52,18 +58,24 @@
             "rashes or hives",
             "refusing to eat, drink, or nap",
             "runny nose",
-            "sleepy/very tired",
+            "sleepy or very tired",
             "sunken eyes",
             "sunken soft spot on top of head",
             "swelling of eyes, face, or lips",
             "thirsty",
             "throat tightness",
-            "throwing up",
+            "throwing up or vomiting",
             "tingling mouth",
-            "watery eyes"
+            "watery eyes",
+            "passed out or lost consciousness",
+            "less than 3 months old and has a fever",
+            "fluid leaking from ear",
+            "seizure"
          ]
-      },
-      "Chest/upper back":{
+      }
+   },
+   {
+      "Chest or upper back":{
          "id":"1",
          "sID":[
             2,
@@ -92,11 +104,13 @@
             "pain without a known cause",
             "rashes or hives",
             "refusing to eat, drink, or nap",
-            "throwing up",
+            "throwing up or vomiting",
             "trouble breathing in, sucking in of the skin around the collarbones and between the ribs when breathing"
          ]
-      },
-      "Stomach/lower back":{
+      }
+   },
+   {
+      "Stomach or lower back":{
          "id":"2",
          "sID":[
             2,
@@ -128,9 +142,11 @@
             "rashes or hives",
             "stomach pain",
             "thirsty",
-            "throwing up"
+            "throwing up or vomiting"
          ]
-      },
+      }
+   },
+   {
       "Pelvis":{
          "id":"3",
          "sID":[
@@ -154,7 +170,8 @@
             32,
             33,
             34,
-            46
+            46,
+            52
          ],
          "symptoms":[
             "1 or more poop accidents a week ",
@@ -177,10 +194,13 @@
             "peeing often",
             "rashes or hives",
             "refusing to eat, drink, or nap",
-            "very large poops"
+            "very large poops",
+            "not peeing for 8 hours or more"
          ]
-      },
-      "Arms/legs":{
+      }
+   },
+   {
+      "Arms or legs":{
          "id":"4",
          "sID":[
             3,
@@ -192,7 +212,7 @@
             33
          ],
          "symptoms":[
-            "blue fingertips",
+            "blue lips or fingertips",
             "cold hands or feet",
             "fever",
             "itching",
@@ -201,5 +221,58 @@
             "rashes or hives"
          ]
       }
+   },
+   {
+      "Emergency symptom":{
+         "id":"5",
+         "sID":[
+            3,
+            5,
+            7,
+            8,
+            11,
+            13,
+            15,
+            16,
+            20,
+            22,
+            24,
+            33,
+            36,
+            39,
+            42,
+            43,
+            45,
+            48,
+            49,
+            50,
+            51,
+            52
+         ],
+         "symptoms":[
+            "blue lips or fingertips",
+            "chest pain",
+            "coughing",
+            "diarrhea",
+            "dizziness",
+            "dry mouth",
+            "fast breathing or fast heart beat",
+            "fever",
+            "light-headed",
+            "nausea",
+            "no tears",
+            "rashes or hives",
+            "sleepy or very tired",
+            "sunken soft spot on top of head",
+            "throat tightness",
+            "throwing up or vomiting",
+            "trouble breathing in, sucking in of the skin around the collarbones and between the ribs when breathing",
+            "passed out or lost consciousness",
+            "less than 3 months old and has a fever",
+            "fluid leaking from ear",
+            "seizure",
+            "not peeing for 8 hours or more"
+         ]
+      }
    }
-}
+]

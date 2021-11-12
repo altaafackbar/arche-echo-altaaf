@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { SearchBar, ListItem, Card } from 'react-native-elements';
 import _ from 'lodash';
 import { firebase } from '../../Firebase';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -27,6 +28,7 @@ class ToolsAndResources extends Component {
 
     componentDidMount() {
         this.makeRemoteRequest();
+        console.log(this.props)
     }
 
     makeRemoteRequest = () => {
@@ -35,7 +37,7 @@ class ToolsAndResources extends Component {
             .onSnapshot(querySnapshot => {
                 const tools = []
                 querySnapshot.forEach(documentSnapshot => {
-                    // console.log(documentSnapshot.data())
+                    //console.log(documentSnapshot.data())
                     tools.push({...documentSnapshot.data()})
                 })
                 this.setState({
@@ -44,6 +46,7 @@ class ToolsAndResources extends Component {
                     fullData: tools,
                 })
             })
+
         
     };
 
