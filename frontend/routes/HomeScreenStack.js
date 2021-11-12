@@ -11,6 +11,7 @@ import ToolsAndResources from '../screens/tools_and_resources_screen/ToolsAndRes
 import SettingsScreen from '../screens/settings_screen/SettingsScreen';
 import LandingV2 from '../login-pages/Landing-V2';
 import ToolDetails from '../screens/tools_and_resources_screen/ToolDetail';
+import EditToolsAdmin from '../screens/admin_screens/EditToolsAdmin';
 
 
 const screens = {
@@ -47,6 +48,9 @@ const screens = {
     ToolDetails: {
         screen: ToolDetails
     },
+    EditToolsAdmin: {
+        screen: EditToolsAdmin
+    }
 }
 const HomeStack = createNativeStackNavigator(screens);
 
