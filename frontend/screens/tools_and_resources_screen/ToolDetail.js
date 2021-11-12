@@ -12,19 +12,12 @@ import { firebase } from "../../Firebase";
 
 
 function ToolDetails() {
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //         selectedIndex: 0,
-    //         playing: false,
-    //     }
-    //     this.updateIndex = this.updateIndex.bind(this)
-    // }
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [playing, setPlaying] = useState(false)
     const [tool, setTool] = useState([])
     const [eBooks, setEBooks] = useState([])
     const [admin, setAdmin] = useState(false)
+    const [disabledButton, setDisabledButton] = useState([])
 
     const navigation = useNavigation();
     const route = useRoute();
@@ -50,6 +43,28 @@ function ToolDetails() {
                 // console.log('Tool Data: ', documentSnapshot.data());
                 setTool(documentSnapshot.data())
 
+                // for disable button use
+                // const disable = disabledButton
+                // if (documentSnapshot.data().video === false) {
+                //     disable.push(0)
+                //     setDisabledButton(disable)
+                // }
+                // if (documentSnapshot.data().eBook === false) {
+                //     disable.push(1)
+                //     setDisabledButton(disable)
+                // }
+                // if (documentSnapshot.data().infographic === false) {
+                //     disable.push(2)
+                //     setDisabledButton(disable)
+                // }
+
+                if (documentSnapshot.data().video === false) {
+                    if (documentSnapshot.data().eBook === true){
+                        setSelectedIndex(1)
+                    } else if (documentSnapshot.data().infographic === true) {
+                        setSelectedIndex(2)
+                    }
+                }
             })
 
 
@@ -111,12 +126,26 @@ function ToolDetails() {
                 <Text style={styles.headerTitle}>{tool.name}</Text>
                 <Text style={styles.subTitle}>{tool.details}</Text>
             </View>
-            <ButtonGroup
-                onPress = {updateIndex}
-                selectedIndex = {selectedIndex}
-                buttons = {buttons}
-                containerStyle = {{height: 45, borderRadius: 15,}}
-            />
+            {admin === false &&
+            <>
+                <ButtonGroup
+                    onPress = {updateIndex}
+                    selectedIndex = {selectedIndex}
+                    buttons = {buttons}
+                    // disabled={disabledButton}
+                    containerStyle = {{height: 45, borderRadius: 15,}}
+                />
+            </>
+            }
+            {admin === true &&
+                <ButtonGroup
+                    onPress = {updateIndex}
+                    selectedIndex = {selectedIndex}
+                    buttons = {buttons}
+                    // disabled={disabledButton}
+                    containerStyle = {{height: 45, borderRadius: 15,}}
+                />
+            }
             {/* If user selected video */}
             {selectedIndex === 0 &&
             <>
@@ -148,7 +177,7 @@ function ToolDetails() {
                 {tool.video === false &&
                 <>
                     <View style={styles.textView}>
-                        <Text style={styles.infoTitle}>Video is coming soon</Text>
+                        <Text style={styles.infoTitle}>We don't have Video resources yet, Please chckout our eBooks or infoGraphic.</Text>
                     </View>
                     {admin === true &&
                         <FAB
@@ -249,7 +278,7 @@ function ToolDetails() {
                 {tool.eBook === false &&
                 <>
                     <View style={styles.textView}>
-                    <Text style={styles.infoTitle}>eBook is coming soon</Text>
+                    <Text style={styles.infoTitle}>We don't have eBook resources yet, Please chckout our Video or infoGraphic.</Text>
                     </View>
                     {admin === true &&
                     <>
@@ -296,7 +325,7 @@ function ToolDetails() {
                 {tool.infographic === false &&
                 <>
                     <View style={styles.textView}>
-                    <Text style={styles.infoTitle}>infoGraphic is coming soon</Text>
+                    <Text style={styles.infoTitle}>We don't have infoGraphic resources yet, Please chckout our Video or eBooks.</Text>
                     </View>
                     {admin === true &&
                         <FAB
