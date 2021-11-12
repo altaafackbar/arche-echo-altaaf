@@ -92,7 +92,7 @@ class ToolsAndResources extends Component {
 
     handleEdit = () => {
         // Alert.alert('Click Test')
-        this.props.navigation.navigate('EditToolsAdmin')
+        this.props.navigation.navigate('AddToolModal')
     }
 
     handleStarTool = (item) => {
@@ -162,7 +162,7 @@ class ToolsAndResources extends Component {
                 />
                 {this.state.userData.admin === true &&
                     <FAB
-                        title="Edit"
+                        title="Add Tool"
                         placement='right'
                         onPress={this.handleEdit}
                         containerStyle={styles.fab}
@@ -195,7 +195,7 @@ export default ToolsAndResources
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 5,
+        paddingHorizontal: '2%',
         backgroundColor: '#fafafa',
     },
     flat_list_item: {
@@ -208,8 +208,12 @@ const styles = StyleSheet.create({
         margin: 15,
     },
     SearchBar: {
+        // top: -20,
+        backgroundColor: 'transparent',
         marginTop: 0,
         marginVertical: 0,
+        borderStartWidth: 0,
+
     },
     FlatList: {     // may not work well on small devices
         padding: 0,

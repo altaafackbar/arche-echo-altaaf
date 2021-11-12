@@ -26,6 +26,10 @@ import AboutUs from './screens/settings_screen/AboutUs';
 import ContactUs from './screens/settings_screen/ContactUs';
 import EditToolsAdmin from './screens/admin_screens/EditToolsAdmin';
 import AddToolModal from './screens/modals/AddToolModal';
+import UpdateVideo from './screens/modals/UpdateVideo';
+import UpdateInfoGraphic from './screens/modals/UpdateInfoGraphic';
+import UpdateEBook from './screens/modals/UpdateEBook';
+import EditEBook from './screens/modals/EditEBook';
 import Tabs from './components/styles/Tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as IconlyPack from 'react-native-iconly';
@@ -164,6 +168,81 @@ function Navigator() {
         component={AddToolModal}
       />
 
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='UpdateVideo'
+        component={UpdateVideo}
+      />
+
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='UpdateInfoGraphic'
+        component={UpdateInfoGraphic}
+      />
+
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='UpdateEBook'
+        component={UpdateEBook}
+      />
+
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='EditEBook'
+        component={EditEBook}
+      />
 
       <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false, headerBackVisible: false }} name="Onboarding" component={Onboard} />
       <Stack.Screen options={{ headerShown: false, headerShadowVisible: false, headerBackVisible: false }} name="MainMenu" component={App} />

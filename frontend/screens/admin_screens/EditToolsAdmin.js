@@ -3,6 +3,7 @@ import { Alert, FlatList, SafeAreaView, StyleSheet, Text } from "react-native";
 import { ListItem, Button, FAB } from "react-native-elements";
 import { useNavigation } from '@react-navigation/native';
 import { firebase } from "../../Firebase";
+import TouchableScale from 'react-native-touchable-scale';
 
 
 function EditToolsAdmin() {
@@ -10,6 +11,7 @@ function EditToolsAdmin() {
     const navigation = useNavigation()
 
     navigateToAddToolModal = () => navigation.navigate('AddToolModal')
+    navigationToUpdateTools = () => navigation.navigate('UpdateToolsAdmin')
 
     useEffect(() => {
         const subscriber = firebase.firestore().collection('tools')
@@ -47,6 +49,11 @@ function EditToolsAdmin() {
                 renderItem={({ item }) => 
                     <ListItem.Swipeable
                         bottomDivider
+                        Component={TouchableScale}
+                        firction={90}
+                        tension={100}
+                        activeScale={0.95}
+                        onPress={() => {navigationToUpdateTools()}}
                         leftContent={
                             <Button
                                 title="edit"
