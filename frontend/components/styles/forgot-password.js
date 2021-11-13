@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { useState } from 'react';
 import { TextInput, StyleSheet, SafeAreaView, Text, View, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ForgotPassword() {
+
+    const navigation = useNavigation()
+
+    navigateToForgotPassword = () => navigation.navigate('ForgotPassword');
 
     return(
 
@@ -10,7 +15,7 @@ export default function ForgotPassword() {
 
         <TouchableOpacity 
         style={{backgroundColor: 'transparent'}}
-        // onPress={() => onPress()}
+        onPress={() => navigateToForgotPassword()}
         >
         <Text style={styles.textDetails}>Forgot Password?</Text>
         </TouchableOpacity>

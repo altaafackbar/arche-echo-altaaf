@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions, useColorScheme } from 'react-native';
 import Landing from './login-pages/Landing'
 import LandingV2 from './login-pages/Landing-V2';
 import Login from './login-pages/Login'
@@ -37,7 +37,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import CustomDrawer from './components/styles/CustomDrawer';
-import { Dimensions } from 'react-native';
+import ForgotPassword from './screens/modals/ForgotPasswordModal';
+import { AppearanceProvider } from 'react-native-appearance';
+import { ThemeProvider } from './components/styles/ThemeProvider';
+import { useTheme } from '@react-navigation/native';
+import themeContext from './components/styles/ThemeContext';
 import { firebase } from './Firebase';
 
 
@@ -48,39 +52,39 @@ function Navigator() {
 
   const handleAnonymousSignIn = () => {
     firebase.auth()
-        .signInAnonymously()
-        .then((userCredentials) => {
-            const user = userCredentials.user
-            user.updateProfile({
-              displayName: 'Guest',
-            })
-            console.log('User signed in anonymously');
-            const db = firebase.firestore()
-                db
-                    .collection("users")
-                    .doc(user.uid)
-                    .set({
-                        email: 'AnonymousEmail',
-                        firstName: 'Guest',
-                        lastName: 'Anonymous',
-                        disclaimer: false,
-                        admin: false,
-                        starTools: ['empty'],
-                    })
-                    .then(() => {
-                        console.log('User created');
-                    })
-                    .catch((error) => {
-                        console.error('Error writing document: ', error);
-                    });
+      .signInAnonymously()
+      .then((userCredentials) => {
+        const user = userCredentials.user
+        user.updateProfile({
+          displayName: 'Guest',
         })
-        .catch(error => {
-            if (error.code === 'auth/operation-not-allowed') {
-                console.log('Enable anonymous in your firebase console.');
-            }
+        console.log('User signed in anonymously');
+        const db = firebase.firestore()
+        db
+          .collection("users")
+          .doc(user.uid)
+          .set({
+            email: 'AnonymousEmail',
+            firstName: 'Guest',
+            lastName: 'Anonymous',
+            disclaimer: false,
+            admin: false,
+            starTools: ['empty'],
+          })
+          .then(() => {
+            console.log('User created');
+          })
+          .catch((error) => {
+            console.error('Error writing document: ', error);
+          });
+      })
+      .catch(error => {
+        if (error.code === 'auth/operation-not-allowed') {
+          console.log('Enable anonymous in your firebase console.');
+        }
 
-            console.error(error);
-        })
+        console.error(error);
+      })
   };
 
   return (
@@ -148,6 +152,25 @@ function Navigator() {
         }}
         name="DisclaimerModal"
         component={DisclaimerModal} />
+
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name="ForgotPassword"
+        component={ForgotPassword} />
+
 
       <Stack.Screen
         options={{
@@ -251,14 +274,14 @@ function Navigator() {
         <Stack.Screen options={{headerTitle: 'Tools And Resources', headerShadowVisible: false}} name="ToolsAndResources" component={ToolsAndResources}/>
         <Stack.Screen options={{headerTitle: 'Settings', headerShadowVisible: false}} name="SettingsScreen" component={SettingsScreen}/> */}
       <Stack.Screen options={{ headerTitle: 'Starred Resources', headerShadowVisible: false }} name="StarredResources" component={StarredResources} />
-      <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="RelatedCauses" component={RelatedCauses}/>
+      <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false }} name="RelatedCauses" component={RelatedCauses} />
       <Stack.Screen options={{ headerTitle: 'SavedLocations', headerShadowVisible: false }} name="SavedLocations" component={SavedLocations} />
       <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false }} name="ToolDetails" component={ToolDetail} />
       <Stack.Screen options={{ headerTitle: 'Admin Screen', headerShadowVisible: false }} name="EditToolsAdmin" component={EditToolsAdmin} />
       {/* <Stack.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false}} name="StarredResources" component={StarredResources}/>
         <Stack.Screen options={{headerTitle: 'SavedLocations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/> */}
       {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
-    </Stack.Navigator>
+    </Stack.Navigator >
 
   )
 
@@ -266,7 +289,13 @@ function Navigator() {
 
 const Tab = createBottomTabNavigator()
 
-function App() {
+function App(props) {
+
+  const { setTheme, theme } = React.useContext(themeContext);
+
+  const { children } = props;
+
+  const { colors, isDark } = useTheme();
 
   const primary = '#8A76B6'
   const gray = '#d1d1d6'
@@ -277,6 +306,15 @@ function App() {
     navigation.openDrawer()
   }
 
+  let hamburgerIcon;
+
+  if (theme === 'Light') {
+    hamburgerIcon = '#1f1f1f'
+  }
+  else {
+    hamburgerIcon = '#fff'
+  }
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -284,6 +322,15 @@ function App() {
         tabBarLabelStyle: { textAlign: 'center', fontWeight: '600', overflow: 'visible' },
         tabBarActiveTintColor: primary,
         tabBarInactiveTintColor: gray,
+        // tabBarStyle: {
+        //   backgroundColor: colors.border,
+        // },
+        // headerStyle: {
+        //   backgroundColor: colors.border,
+        // },
+        // headerTitleStyle: {
+        //   color: colors.text,
+        // },
         headerTitleContainerStyle: {
           paddingRight: 20
         },
@@ -295,7 +342,7 @@ function App() {
             onPress={() => openDrawer()}
             style={{ backgroundColor: 'transparent' }}
           >
-            <Icon name='menu' size={24} color='#1f1f1f'></Icon>
+            <Icon name='menu' size={24} color={hamburgerIcon}></Icon>
           </TouchableOpacity>),
       }}
     >
@@ -322,7 +369,7 @@ function App() {
       <Tab.Screen options={{
         tabBarIcon: ({ focused }) => (
           <IconlyPack.Location set='bold' primaryColor={focused ? '#8A76B6' : '#d1d1d6'} />
-        ), headerTitle: 'Find A Clinic Map', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: true
+        ), headerTitle: 'Find A Clinic Map', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: true, headerTitleStyle: { color: '#1f1f1f' },
       }} name="Find A Clinic" component={ClinicMap} />
 
       <Tab.Screen name="Settings" component={SettingsScreen} options={{
@@ -346,25 +393,57 @@ const Drawer = createDrawerNavigator()
 
 export default function DrawerNav() {
 
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        screenOptions={{
-          headerShown: false,
-          swipeEdgeWidth: 0,
-          drawerActiveBackgroundColor: '#e8e4f0',
-          drawerActiveTintColor: '#8a76b6'
-        }}
+  const [theme, setTheme] = React.useState('Light');
+  const themeData = { theme, setTheme };
+  // const [isDarkTheme, setIsDarkTheme] = React.useState(false)
 
-        drawerContent={props => <CustomDrawer {...props} />}
-      >
-        <Drawer.Screen name="Home" component={Navigator} initialParams={{ screen: 'Home' }} />
-        <Drawer.Screen name="Symptom Checker" component={App} initialParams={{ screen: 'Symptom Checker' }} />
-        <Drawer.Screen name="Find A Clinic Map" component={App} initialParams={{ screen: 'Find A Clinic' }} />
-        <Drawer.Screen name="About Us" component={App} initialParams={{ screen: 'AboutUs' }} />
-        <Drawer.Screen name="Contact Us" component={App} initialParams={{ screen: 'ContactUs' }} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+  const { colors, isDark } = useTheme();
+
+  const CustomDefaultTheme = {
+    dark: false,
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: '#fff',
+      text: '#1f1f1f',
+    }
+  }
+
+  const CustomDarkTheme = {
+    dark: true,
+    ...DarkTheme,
+    colors: {
+      ...DarkTheme.colors,
+      text: '#fff',
+    }
+  }
+
+
+  return (
+    <themeContext.Provider value={themeData}>
+      <NavigationContainer theme={theme == 'Light' ? CustomDefaultTheme : CustomDarkTheme}>
+        <Drawer.Navigator
+          screenOptions={{
+            headerShown: false,
+            swipeEdgeWidth: 0,
+            drawerActiveBackgroundColor: '#e8e4f0',
+            drawerActiveTintColor: '#8a76b6',
+            drawerInactiveBackgroundColor: 'transparent',
+            drawerInactiveTintColor: '#bcbcc1',
+
+          }}
+
+          drawerContent={props => <CustomDrawer {...props} />}
+        >
+          <Drawer.Screen name="Home" component={Navigator} initialParams={{ screen: 'Home' }} />
+          <Drawer.Screen name="Symptom Checker" component={App} initialParams={{ screen: 'Symptom Checker' }} />
+          <Drawer.Screen name="Find A Clinic Map" component={App} initialParams={{ screen: 'Find A Clinic' }} />
+          <Drawer.Screen name="About Us" component={App} initialParams={{ screen: 'AboutUs' }} />
+          <Drawer.Screen name="Contact Us" component={App} initialParams={{ screen: 'ContactUs' }} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </themeContext.Provider>
+
   )
 
 }

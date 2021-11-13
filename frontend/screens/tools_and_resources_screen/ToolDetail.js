@@ -4,10 +4,9 @@ import { ButtonGroup, ListItem, FAB } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import YoutubePlayer from "react-native-youtube-iframe";
 import * as WebBrowser from "expo-web-browser";
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useTheme, useNavigation } from '@react-navigation/native';
 import TouchableScale from 'react-native-touchable-scale';
-import { useNavigation } from '@react-navigation/native';
-
+import themeContext from "../../components/styles/ThemeContext";
 import { firebase } from "../../Firebase";
 
 
@@ -23,17 +22,23 @@ function ToolDetails() {
     const route = useRoute();
     var toolName = route.params.toolName
 
+    const { setTheme, theme } = React.useContext(themeContext);
+
+    const { colors, isDark } = useTheme();
+
+    const textColor = colors.text
+
     const user = firebase.auth().currentUser
 
-    navigateToUpdateVideo = () => navigation.navigate('UpdateVideo', {toolName: toolName})
-    navigateToUpdateInfoGraphic = () => navigation.navigate('UpdateInfoGraphic', {toolName: toolName})
-    navigateToUpdateEBook = () => navigation.navigate('UpdateEBook', {toolName: toolName})
+    navigateToUpdateVideo = () => navigation.navigate('UpdateVideo', { toolName: toolName })
+    navigateToUpdateInfoGraphic = () => navigation.navigate('UpdateInfoGraphic', { toolName: toolName })
+    navigateToUpdateEBook = () => navigation.navigate('UpdateEBook', { toolName: toolName })
 
     navigateToEditEbook = (item) => {
         // console.log(item.name)
-        navigation.navigate('EditEBook', {toolName: toolName, eBookName: item.name})
+        navigation.navigate('EditEBook', { toolName: toolName, eBookName: item.name })
     }
-    
+
 
     useEffect(() => {
         const subscriber = firebase.firestore()
@@ -59,7 +64,7 @@ function ToolDetails() {
                 // }
 
                 if (documentSnapshot.data().video === false) {
-                    if (documentSnapshot.data().eBook === true){
+                    if (documentSnapshot.data().eBook === true) {
                         setSelectedIndex(1)
                     } else if (documentSnapshot.data().infographic === true) {
                         setSelectedIndex(2)
@@ -76,10 +81,10 @@ function ToolDetails() {
                 const ebook = []
                 querySnapshot.forEach(documentSnapshot => {
                     // console.log(documentSnapshot.data())
-                    ebook.push({...documentSnapshot.data()})
+                    ebook.push({ ...documentSnapshot.data() })
                 })
                 setEBooks(ebook)
-        })
+            })
 
         const userSub = firebase.firestore()
             .collection('users')
@@ -87,8 +92,8 @@ function ToolDetails() {
             .onSnapshot(documentSnapshot => {
                 setAdmin(documentSnapshot.data().admin)
             })
-    
-        return () => {subscriber(), eBookSub(), userSub()}
+
+        return () => { subscriber(), eBookSub(), userSub() }
     }, [])
 
 
@@ -111,7 +116,7 @@ function ToolDetails() {
 
     const handleInfoGraphic = () => {
         WebBrowser.openBrowserAsync(tool.infographicLink)
-    }    
+    }
 
     const component1 = () => <Text>Video</Text>
     const component2 = () => <Text>eBook</Text>
@@ -121,39 +126,37 @@ function ToolDetails() {
     // const {selectedIndex} = this.state
     // const {playing} = this.state
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
             <View style={styles.titles}>
-                <Text style={styles.headerTitle}>{tool.name}</Text>
+                <Text style={[styles.headerTitle, { color: colors.text }]}>{tool.name}</Text>
                 <Text style={styles.subTitle}>{tool.details}</Text>
             </View>
             {admin === false &&
-            <>
-                <ButtonGroup
-                    onPress = {updateIndex}
-                    selectedIndex = {selectedIndex}
-                    buttons = {buttons}
-                    // disabled={disabledButton}
-                    containerStyle = {{height: 45, borderRadius: 15,}}
-                />
-            </>
+                <>
+                    <ButtonGroup
+                        onPress={updateIndex}
+                        selectedIndex={selectedIndex}
+                        buttons={buttons}
+                        // disabled={disabledButton}
+                        containerStyle={{ height: 45, borderRadius: 15, }}
+                    />
+                </>
             }
             {admin === true &&
                 <ButtonGroup
-                    onPress = {updateIndex}
-                    selectedIndex = {selectedIndex}
-                    buttons = {buttons}
+                    onPress={updateIndex}
+                    selectedIndex={selectedIndex}
+                    buttons={buttons}
                     // disabled={disabledButton}
-                    containerStyle = {{height: 45, borderRadius: 15,}}
+                    containerStyle={{ height: 45, borderRadius: 15, }}
                 />
             }
             {/* If user selected video */}
             {selectedIndex === 0 &&
-            <>
-                {tool.video === true &&
                 <>
                     <View style={styles.textView}>
-                    <Text style={styles.infoTitle}>{tool.videoTitle}</Text>
-                    <Text style={styles.infoSubTitle}>{tool.videoInfo}</Text>
+                        <Text style={styles.infoTitle}>{tool.videoTitle}</Text>
+                        <Text style={styles.infoSubTitle}>{tool.videoInfo}</Text>
                     </View>
 
                     <View style={styles.subView}>
@@ -162,19 +165,19 @@ function ToolDetails() {
                             play={playing}
                             videoId={tool.youtubeVideoID}
                             onChangeState={onStateChange}
-                        />    
+                        />
                     </View>
                     {admin === true &&
                         <FAB
                             title="Update Video"
                             placement='right'
-                            onPress={() => {navigateToUpdateVideo()}}
+                            onPress={() => { navigateToUpdateVideo() }}
                         >
                         </FAB>
-                    }     
+                    }
                 </>
-                }
-                {tool.video === false &&
+            }
+            {tool.video === false &&
                 <>
                     <View style={styles.textView}>
                         <Text style={styles.infoTitle}>We don't have Video resources yet, Please chckout our eBooks or infoGraphic.</Text>
@@ -183,164 +186,134 @@ function ToolDetails() {
                         <FAB
                             title="Add Video"
                             placement='right'
-                            onPress={() => {navigateToUpdateVideo()}}
+                            onPress={() => { navigateToUpdateVideo() }}
                         >
                         </FAB>
                     }
-                </>
-                }
-                
 
-            </>
+
+                </>
             }
             {/* If user selected eBook */}
             {selectedIndex === 1 &&
-            <>
-                {tool.eBook === true &&
-                <> 
-                    {admin === false &&
-                    <>
-                        <FlatList
-                        data={eBooks}
-                        keyExtractor={(item) => item.name}
-                        style={{paddingTop: "5%", paddingHorizontal: "3%"}}
-                        renderItem={({ item }) => 
-                        <ListItem 
-                            bottomDivider 
-                            Component={TouchableScale}
-                            firction={90}
-                            tension={100}
-                            activeScale={0.95}
-                            onPress={handleeBook.bind(this,item)}
-                            containerStyle={{borderRadius: 15, backgroundColor: "#E7ECF2", marginTop: 10,}}
-                        >
-                            <ListItem.Content>
-                                <ListItem.Title style={styles.listItemTitle}>{item.name}</ListItem.Title>
-                                <ListItem.Title style={styles.listItemInfo}>{item.info}</ListItem.Title>
-                            </ListItem.Content>
-                            {/* <ListItem.Chevron/> */}
-                        </ListItem>
-                        }
-                        />
-                    </>
-                    }
-                    {admin === true &&
-                    <>
-                        <FlatList
-                        data={eBooks}
-                        keyExtractor={(item) => item.name}
-                        style={{paddingTop: "5%", paddingHorizontal: "3%"}}
-                        renderItem={({ item }) => 
-                        <ListItem.Swipeable 
-                            bottomDivider 
-                            Component={TouchableScale}
-                            firction={90}
-                            tension={100}
-                            activeScale={0.95}
-                            onPress={handleeBook.bind(this,item)}
-                            containerStyle={{borderRadius: 15, backgroundColor: "#E7ECF2", marginTop: 10,}}
-                            leftContent={
-                                <Button
-                                    title="edit"
-                                    icon={{ name: 'info', color: 'white' }}
-                                    buttonStyle={{minHeight: '100%'}}
-                                    onPress={() => {navigateToEditEbook(item)}}
-                                />
+                <>
+                    {tool.eBook === true &&
+                        <>
+                            {admin === false &&
+                                <>
+                                    <FlatList
+                                        data={eBooks}
+                                        keyExtractor={(item) => item.name}
+                                        style={{ paddingTop: "5%", paddingHorizontal: "3%" }}
+                                        renderItem={({ item }) =>
+                                            <ListItem
+                                                bottomDivider
+                                                Component={TouchableScale}
+                                                firction={90}
+                                                tension={100}
+                                                activeScale={0.95}
+                                                onPress={handleeBook.bind(this, item)}
+                                                containerStyle={{ borderRadius: 15, backgroundColor: "#E7ECF2", marginTop: 10, }}
+                                            >
+                                                <ListItem.Content>
+                                                    <ListItem.Title style={styles.listItemTitle}>{item.name}</ListItem.Title>
+                                                    <ListItem.Title style={styles.listItemInfo}>{item.info}</ListItem.Title>
+                                                </ListItem.Content>
+                                                {/* <ListItem.Chevron/> */}
+                                            </ListItem>
+                                        }
+                                    />
+                                </>
                             }
-                            rightContent={
-                                <Button
-                                    title='delete'
-                                    icon={{ name: 'delete', color: 'white' }}
-                                    buttonStyle={{ minHeight: '100%', backgroundColor: 'red' }}
-                                    // onPress={deleteAlert.bind(this, item)}
-                                />
+                            {admin === true &&
+                                <>
+                                    <FlatList
+                                        data={eBooks}
+                                        keyExtractor={(item) => item.name}
+                                        style={{ paddingTop: "5%", paddingHorizontal: "3%" }}
+                                        renderItem={({ item }) =>
+                                            <ListItem.Swipeable
+                                                bottomDivider
+                                                Component={TouchableScale}
+                                                firction={90}
+                                                tension={100}
+                                                activeScale={0.95}
+                                                onPress={handleeBook.bind(this, item)}
+                                                containerStyle={{ borderRadius: 15, backgroundColor: "#E7ECF2", marginTop: 10, }}
+                                                leftContent={
+                                                    <Button
+                                                        title="edit"
+                                                        icon={{ name: 'info', color: 'white' }}
+                                                        buttonStyle={{ minHeight: '100%' }}
+                                                        onPress={() => { navigateToEditEbook(item) }}
+                                                    />
+                                                }
+                                                rightContent={
+                                                    <Button
+                                                        title='delete'
+                                                        icon={{ name: 'delete', color: 'white' }}
+                                                        buttonStyle={{ minHeight: '100%', backgroundColor: 'red' }}
+                                                    // onPress={deleteAlert.bind(this, item)}
+                                                    />
+                                                }
+                                            >
+                                                <ListItem.Content>
+                                                    <ListItem.Title style={styles.listItemTitle}>{item.name}</ListItem.Title>
+                                                    <ListItem.Title style={styles.listItemInfo}>{item.info}</ListItem.Title>
+                                                </ListItem.Content>
+                                                {/* <ListItem.Chevron/> */}
+                                            </ListItem.Swipeable>
+                                        }
+                                    />
+                                    <FAB
+                                        title="Add eBook"
+                                        placement='right'
+                                        onPress={() => { navigateToUpdateEBook() }}
+                                    >
+                                    </FAB>
+                                </>
                             }
-                        >
-                            <ListItem.Content>
-                                <ListItem.Title style={styles.listItemTitle}>{item.name}</ListItem.Title>
-                                <ListItem.Title style={styles.listItemInfo}>{item.info}</ListItem.Title>
-                            </ListItem.Content>
-                            {/* <ListItem.Chevron/> */}
-                        </ListItem.Swipeable>
-                        }
-                        />
-                        <FAB
-                            title="Add eBook"
-                            placement='right'
-                            onPress={() => {navigateToUpdateEBook()}}
-                        >
-                        </FAB>
-                    </>
+
+                        </>
                     }
-                    
+
                 </>
-                }
-                {tool.eBook === false &&
+            }
+            {tool.eBook === false &&
                 <>
                     <View style={styles.textView}>
-                    <Text style={styles.infoTitle}>We don't have eBook resources yet, Please chckout our Video or infoGraphic.</Text>
+                        <Text style={styles.infoTitle}>We don't have eBook resources yet, Please chckout our Video or infoGraphic.</Text>
                     </View>
                     {admin === true &&
-                    <>
-                        <FAB
-                            title="Add eBook"
-                            placement='right'
-                            onPress={() => {navigateToUpdateEBook()}}
-                        >
-                        </FAB>
-                    </>
+                        <>
+                            <FAB
+                                title="Add eBook"
+                                placement='right'
+                                onPress={() => { navigateToUpdateEBook() }}
+                            >
+                            </FAB>
+                        </>
                     }
+
                 </>
-                }
-                
-            </>
             }
 
             {selectedIndex === 2 &&
-            <>
-                {tool.infographic === true &&
                 <>
                     <View style={styles.textView}>
-                    <Text style={styles.infoTitle}>{tool.infographicTitle}</Text>
-                    <Text style={styles.infoSubTitle}>{tool.infographicInfo}</Text>
-                    </View>
-
-                    <View style={styles.subView}>
-                        {/* <Text style={{textAlign: "center"}}>InfoGraphic is coming soon</Text>   */}
-                        <Button
-                            title = "Click Here to open InfoGraphic"
-                            onPress = {handleInfoGraphic}
-                        ></Button> 
-                    </View>
-                    {admin === true &&
-                        <FAB
-                            title="Update infoGraphic"
-                            placement='right'
-                            onPress={() => {navigateToUpdateInfoGraphic()}}
-                        >
-                        </FAB>
-                    }     
-                </>
-                }
-                {tool.infographic === false &&
-                <>
-                    <View style={styles.textView}>
-                    <Text style={styles.infoTitle}>We don't have infoGraphic resources yet, Please chckout our Video or eBooks.</Text>
+                        <Text style={styles.infoTitle}>We don't have infoGraphic resources yet, Please chckout our Video or eBooks.</Text>
                     </View>
                     {admin === true &&
                         <FAB
                             title="Add infoGraphic"
                             placement='right'
-                            onPress={() => {navigateToUpdateInfoGraphic()}}
+                            onPress={() => { navigateToUpdateInfoGraphic() }}
                         >
                         </FAB>
-                    }     
+                    }
                 </>
-                }
-           
-            </>
             }
-            
+
         </SafeAreaView>
     )
 }
@@ -350,7 +323,6 @@ export default ToolDetails
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fafafa',
         paddingHorizontal: 5,
         // alignItems: 'center',
         // justifyContent: 'center',
@@ -362,7 +334,6 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 24,
-        color: '#1f1f1f',
         textAlign: 'center',
     },
     subTitle: {
@@ -388,7 +359,7 @@ const styles = StyleSheet.create({
     },
     infoSubTitle: {
         fontSize: 15,
-        color: '#1f1f1f',
+        // color: '#1f1f1f',
         textAlign: 'center',
         padding: 10,
     },

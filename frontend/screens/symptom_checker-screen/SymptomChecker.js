@@ -17,6 +17,8 @@ import symptoms from './symptoms.json'
 import parts from './parts.json'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from "lodash"
+import { useTheme } from '@react-navigation/native';
+import themeContext from "../../components/styles/ThemeContext";
 import { firebase } from '../../Firebase';
 
 
@@ -31,34 +33,36 @@ export default function SymptomChecker() {
     const [checked, setChecked] = useState([]);
     const [causes, setCauses] = useState([])
     const [highlighted, setHilighted] = useState([])
+    const { setTheme, theme } = React.useContext(themeContext);
+    const { colors, isDark } = useTheme();
 
     useEffect(() => {
         LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
-        /firebase.firestore().collection('symptoms')
-        .onSnapshot(querySnapshot => {
-            const symp = []
-            querySnapshot.forEach(documentSnapshot => {
-                
-                symp.push(documentSnapshot.data())
-                
-                //console.log(documentSnapshot.data())
-            })
-            setSymptomsList(symp)
-        })
-        
+            / firebase.firestore().collection('symptoms')
+                .onSnapshot(querySnapshot => {
+                    const symp = []
+                    querySnapshot.forEach(documentSnapshot => {
+
+                        symp.push(documentSnapshot.data())
+
+                        //console.log(documentSnapshot.data())
+                    })
+                    setSymptomsList(symp)
+                })
+
         firebase.firestore().collection('bodymap')
-        .onSnapshot(querySnapshot => {
-            const parts = {}
-            querySnapshot.forEach(documentSnapshot => {
-                const data = {}
-                parts[documentSnapshot.id] = documentSnapshot.data()
-                
-                
-                
-                //console.log(documentSnapshot.data())
+            .onSnapshot(querySnapshot => {
+                const parts = {}
+                querySnapshot.forEach(documentSnapshot => {
+                    const data = {}
+                    parts[documentSnapshot.id] = documentSnapshot.data()
+
+
+
+                    //console.log(documentSnapshot.data())
+                })
+                setPartsList(parts)
             })
-            setPartsList(parts)
-        })
     }, [])
 
     let primary = '#007bff'
@@ -134,11 +138,11 @@ export default function SymptomChecker() {
         });
 
 
-        
+
         navigation.navigate('RelatedCauses', {
             relatedCauses: causesDic
         })
-        
+
 
         /*partsList2.forEach(element => {
             const key = Object.keys(element)[0]
@@ -156,9 +160,9 @@ export default function SymptomChecker() {
         
 
         });*/
-        
 
-    
+
+
 
 
     }
@@ -166,58 +170,58 @@ export default function SymptomChecker() {
     return (
         <ScrollView>
             <View style={styles.titles}>
-                <Text style={styles.headerTitle}>Symptom Checker</Text>
+                <Text style={[styles.headerTitle, { color: colors.text }]}>Symptom Checker</Text>
                 <Text style={styles.subTitle}>Select a body part to get started.</Text>
             </View>
 
             <View style={{ flex: 1, flexDirection: 'row' }}>
-            <TouchableOpacity
-                onPress={() => updateBody('emergency')}
-                style={styles.emergency}>
-                    <Image source={emergencyImage} style={styles.emergencyImage} 
-                    onPress={() => updateBody('emergency')}/>
-            </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => updateBody('emergency')}
+                    style={styles.emergency}>
+                    <Image source={emergencyImage} style={styles.emergencyImage}
+                        onPress={() => updateBody('emergency')} />
+                </TouchableOpacity>
 
-            <TouchableOpacity
+                <TouchableOpacity
                     onPress={() => updateBody('emergency')}
                     style={styles.emergency}></TouchableOpacity>
-            <View style={styles.imageContainer}>
-                {/*head check */}
-                <TouchableOpacity
-                    onPress={() => updateBody('head')}
-                    style={styles.headRectangle}></TouchableOpacity>
+                <View style={styles.imageContainer}>
+                    {/*head check */}
+                    <TouchableOpacity
+                        onPress={() => updateBody('head')}
+                        style={styles.headRectangle}></TouchableOpacity>
 
-                {/*left arm check */}
-                <TouchableOpacity
-                    onPress={() => updateBody('arms')}
-                    style={styles.leftArmRectangle}></TouchableOpacity>
-                {/*right arm check */}
-                <TouchableOpacity
-                    onPress={() => updateBody('arms')}
-                    style={styles.rightArmRectangle}></TouchableOpacity>
+                    {/*left arm check */}
+                    <TouchableOpacity
+                        onPress={() => updateBody('arms')}
+                        style={styles.leftArmRectangle}></TouchableOpacity>
+                    {/*right arm check */}
+                    <TouchableOpacity
+                        onPress={() => updateBody('arms')}
+                        style={styles.rightArmRectangle}></TouchableOpacity>
 
-                {/*chest check */}
-                <TouchableOpacity
-                    onPress={() => updateBody('chest')}
-                    style={styles.chestRectangle}></TouchableOpacity>
+                    {/*chest check */}
+                    <TouchableOpacity
+                        onPress={() => updateBody('chest')}
+                        style={styles.chestRectangle}></TouchableOpacity>
 
-                {/*stomach check */}
-                <TouchableOpacity
-                    onPress={() => updateBody('stomach')}
-                    style={styles.stomachRectangle}></TouchableOpacity>
+                    {/*stomach check */}
+                    <TouchableOpacity
+                        onPress={() => updateBody('stomach')}
+                        style={styles.stomachRectangle}></TouchableOpacity>
 
-                {/*pelvis check */}
-                <TouchableOpacity
-                    onPress={() => updateBody('pelvis')}
-                    style={styles.pelvisRectangle}></TouchableOpacity>
+                    {/*pelvis check */}
+                    <TouchableOpacity
+                        onPress={() => updateBody('pelvis')}
+                        style={styles.pelvisRectangle}></TouchableOpacity>
 
-                {/*legs check */}
-                <TouchableOpacity
-                    onPress={() => updateBody('legs')}
-                    style={styles.legsRectangle}></TouchableOpacity>
-                <Image source={currentImage} style={styles.bodyImage} />
+                    {/*legs check */}
+                    <TouchableOpacity
+                        onPress={() => updateBody('legs')}
+                        style={styles.legsRectangle}></TouchableOpacity>
+                    <Image source={currentImage} style={styles.bodyImage} />
 
-            </View>
+                </View>
             </View>
 
             <View style={{ borderWidth: 1, borderColor: 'black', borderRadius: 10, marginHorizontal: 130 }}>
@@ -335,7 +339,6 @@ const styles = StyleSheet.create({
     },
     headerTitle: {
         fontSize: 24,
-        color: '#1f1f1f',
         textAlign: 'center',
     },
     subTitle: {
