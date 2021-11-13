@@ -128,6 +128,7 @@ const AddToolModal = () => {
                             <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='Tool Name'
+                                placeholderTextColor="#8a8686"
                                 value={toolName}
                                 setValue={toolName}
                                 onChangeText={text => setToolName(text)}
@@ -140,6 +141,7 @@ const AddToolModal = () => {
                             <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='Tool Detail'
+                                placeholderTextColor="#8a8686"
                                 value={toolDetail}
                                 setValue={toolDetail}
                                 onChangeText={text => setToolDetail(text)}
@@ -175,6 +177,7 @@ const AddToolModal = () => {
                                 <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='Video Title'
+                                placeholderTextColor="#8a8686"
                                 value={videoTitle}
                                 setValue={videoTitle}
                                 onChangeText={text => setVideoTitle(text)}
@@ -187,6 +190,7 @@ const AddToolModal = () => {
                                 <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='Video Description'
+                                placeholderTextColor="#8a8686"
                                 value={videoInfo}
                                 setValue={videoInfo}
                                 onChangeText={text => setVideoInfo(text)}
@@ -199,6 +203,7 @@ const AddToolModal = () => {
                                 <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='YouTube Video ID'
+                                placeholderTextColor="#8a8686"
                                 value={youtubeVideoID}
                                 setValue={youtubeVideoID}
                                 onChangeText={text => setYoutubeVideoID(text)}
@@ -233,6 +238,7 @@ const AddToolModal = () => {
                                 <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='eBook Title'
+                                placeholderTextColor="#8a8686"
                                 value={eBookTitle}
                                 setValue={eBookTitle}
                                 onChangeText={text => setEBookTitle(text)}
@@ -245,6 +251,7 @@ const AddToolModal = () => {
                                 <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='eBook Description'
+                                placeholderTextColor="#8a8686"
                                 value={eBookInfo}
                                 setValue={eBookInfo}
                                 onChangeText={text => setEBookInfo(text)}
@@ -257,6 +264,7 @@ const AddToolModal = () => {
                                 <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='eBook Link'
+                                placeholderTextColor="#8a8686"
                                 value={eBookLink}
                                 setValue={eBookLink}
                                 onChangeText={text => setEBookLink(text)}
@@ -291,6 +299,7 @@ const AddToolModal = () => {
                                 <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='infoGraphic Title'
+                                placeholderTextColor="#8a8686"
                                 value={infoGraphicTitile}
                                 setValue={infoGraphicTitile}
                                 onChangeText={text => setInfoGraphicTitle(text)}
@@ -303,6 +312,7 @@ const AddToolModal = () => {
                                 <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='infoGraphic Description'
+                                placeholderTextColor="#8a8686"
                                 value={infoGraphicInfo}
                                 setValue={infoGraphicInfo}
                                 onChangeText={text => setInfoGraphicInfo(text)}
@@ -315,6 +325,7 @@ const AddToolModal = () => {
                                 <TextInput
                                 selectionColor={'#a5a5a5'}
                                 placeholder='infoGraphic Link'
+                                placeholderTextColor="#8a8686"
                                 value={infoGraphicLink}
                                 setValue={infoGraphicLink}
                                 onChangeText={text => setInfoGraphicLink(text)}
