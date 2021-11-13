@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
-import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { firebase } from '../../Firebase';
 
 const UpdateVideo = () => {
@@ -34,46 +34,51 @@ const UpdateVideo = () => {
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>Add or Update Video</Text>
             </View>
-
-            <View style={styles.textContainer}>
-                <TextInput
-                    fontSize={16}
-                    selectionColor={'#a5a5a5'}
-                    placeholder='Video Title'
-                    multiline={true}
-                    numberOfLines={3}
-                    value={videoTitle}
-                    setValue={videoTitle}
-                    onChangeText={text => setVideoTitle(text)}
-                >
-                </TextInput>
-            </View>
-            <View style={styles.bigTextContainer}>
-                <TextInput
-                    fontSize={16}
-                    selectionColor={'#a5a5a5'}
-                    placeholder='Video Description'
-                    multiline={true}
-                    numberOfLines={6}
-                    value={videoInfo}
-                    setValue={videoInfo}
-                    onChangeText={text => setVideoInfo(text)}
-                >
-                </TextInput>
-            </View>
-            <View style={styles.textContainer}>
-                <TextInput
-                    fontSize={16}
-                    selectionColor={'#a5a5a5'}
-                    placeholder='YouTube Video ID'
-                    multiline={true}
-                    numberOfLines={3}
-                    value={youtubeVideoID}
-                    setValue={youtubeVideoID}
-                    onChangeText={text => setYoutubeVideoID(text)}
-                >
-                </TextInput>
-            </View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.textContainer}>
+                    <TextInput
+                        fontSize={16}
+                        selectionColor={'#a5a5a5'}
+                        placeholder='Video Title'
+                        multiline={true}
+                        numberOfLines={3}
+                        value={videoTitle}
+                        setValue={videoTitle}
+                        onChangeText={text => setVideoTitle(text)}
+                    >
+                    </TextInput>
+                </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.bigTextContainer}>
+                    <TextInput
+                        fontSize={16}
+                        selectionColor={'#a5a5a5'}
+                        placeholder='Video Description'
+                        multiline={true}
+                        numberOfLines={6}
+                        value={videoInfo}
+                        setValue={videoInfo}
+                        onChangeText={text => setVideoInfo(text)}
+                    >
+                    </TextInput>
+                </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.textContainer}>
+                    <TextInput
+                        fontSize={16}
+                        selectionColor={'#a5a5a5'}
+                        placeholder='YouTube Video ID'
+                        multiline={true}
+                        numberOfLines={3}
+                        value={youtubeVideoID}
+                        setValue={youtubeVideoID}
+                        onChangeText={text => setYoutubeVideoID(text)}
+                    >
+                    </TextInput>
+                </View>
+            </TouchableWithoutFeedback>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} onPress={() => {handleNewVideo()}}>
                     <Text style={styles.buttonText}>Save Video</Text>

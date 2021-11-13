@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
-import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { firebase } from '../../Firebase';
 
 const UpdateEBook =() => {
@@ -36,46 +36,51 @@ const UpdateEBook =() => {
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>Update eBook</Text>
             </View>
-
-            <View style={styles.textContainer}>
-                <TextInput
-                    fontSize={16}
-                    selectionColor={'#a5a5a5'}
-                    placeholder='eBook Title'
-                    multiline={true}
-                    numberOfLines={3}
-                    value={eBookTitle}
-                    setValue={eBookTitle}
-                    onChangeText={text => setEBookTitle(text)}
-                >
-                </TextInput>
-            </View>
-            <View style={styles.bigTextContainer}>
-                <TextInput
-                    fontSize={16}
-                    selectionColor={'#a5a5a5'}
-                    placeholder='eBook Description'
-                    multiline={true}
-                    numberOfLines={6}
-                    value={eBookInfo}
-                    setValue={eBookInfo}
-                    onChangeText={text => setEBookInfo(text)}
-                >
-                </TextInput>
-            </View>
-            <View style={styles.textContainer}>
-                <TextInput
-                    fontSize={16}
-                    selectionColor={'#a5a5a5'}
-                    placeholder='eBook Link'
-                    multiline={true}
-                    numberOfLines={3}
-                    value={eBookLink}
-                    setValue={eBookLink}
-                    onChangeText={text => setEBookLink(text)}
-                >
-                </TextInput>
-            </View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.textContainer}>
+                    <TextInput
+                        fontSize={16}
+                        selectionColor={'#a5a5a5'}
+                        placeholder='eBook Title'
+                        multiline={true}
+                        numberOfLines={3}
+                        value={eBookTitle}
+                        setValue={eBookTitle}
+                        onChangeText={text => setEBookTitle(text)}
+                    >
+                    </TextInput>
+                </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.bigTextContainer}>
+                    <TextInput
+                        fontSize={16}
+                        selectionColor={'#a5a5a5'}
+                        placeholder='eBook Description'
+                        multiline={true}
+                        numberOfLines={6}
+                        value={eBookInfo}
+                        setValue={eBookInfo}
+                        onChangeText={text => setEBookInfo(text)}
+                    >
+                    </TextInput>
+                </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <View style={styles.textContainer}>
+                    <TextInput
+                        fontSize={16}
+                        selectionColor={'#a5a5a5'}
+                        placeholder='eBook Link'
+                        multiline={true}
+                        numberOfLines={3}
+                        value={eBookLink}
+                        setValue={eBookLink}
+                        onChangeText={text => setEBookLink(text)}
+                    >
+                    </TextInput>
+                </View>
+            </TouchableWithoutFeedback>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} onPress={() => {handleNeweBook()}}>
                     <Text style={styles.buttonText}>Save eBook</Text>

@@ -20,6 +20,7 @@ import { Dimensions } from 'react-native'
 import { firebase } from '../../Firebase';
 import { useTheme } from '@react-navigation/native';
 import themeContext from "../../components/styles/ThemeContext";
+import { StatusBar } from 'expo-status-bar';
 
 export default function MainMenuV2(props) {
 
@@ -92,6 +93,7 @@ export default function MainMenuV2(props) {
 
     return (
         <SafeAreaView style={[styles.container, {backgroundColor: background}]}>
+            <StatusBar style='auto'/>
             {children}
             <FlatGrid
                 itemDimension={Dimensions.get('window').width / 3}

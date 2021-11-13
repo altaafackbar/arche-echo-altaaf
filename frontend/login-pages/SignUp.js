@@ -9,7 +9,7 @@ import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
 import * as Google from 'expo-google-app-auth';
 import LoginButton from '../components/styles/login-button';
 import OrBreak from '../components/styles/or_divider'
-// import { auth } from '../Firebase';
+import { StatusBar } from 'expo-status-bar';
 import { firebase } from '../Firebase';
 
 
@@ -219,6 +219,7 @@ export default function SignUp ()
     
         //Entire screen container. Welcome header and subtext as well.
         <SafeAreaView style={styles.container}>
+        <StatusBar style='auto'/>
         <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Welcome!</Text>
         <Text style={styles.subheaderText}>Enter your details to get started.</Text>
