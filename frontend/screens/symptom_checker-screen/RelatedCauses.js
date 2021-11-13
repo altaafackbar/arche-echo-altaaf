@@ -13,29 +13,35 @@ export default function RelatedCauses({ route }) {
 
     const navigation = useNavigation();
     const [causes, setCauses] = useState(route.params.relatedCauses)
-    //const user = firebase.firestore().collection('tools').doc(causes[0].name).get();
+    const[ toolsList, setToolsList] = useState([])
+
     
     useEffect(() => {
-        //console.log(causes)
-        causes.forEach(element => {
-            firebase.firestore()
-            .collection('tools')
-            .doc(element.name)
-            .get()
-            .then(documentSnapshot => {
-              console.log('User exists: ', documentSnapshot.exists);
-              const details = documentSnapshot.data()['details']
-          
-              if (documentSnapshot.exists) {
-                console.log('User data: ', documentSnapshot.data());
-                element['exists'] = 'true'
-                element['details'] = details
-              }
-            });
-            
-        }, [])
-        //console.log(causes)
-    });
+        firebase.firestore().collection('tools')
+        .onSnapshot(querySnapshot => {
+            const tools = []
+            var id = 0
+            querySnapshot.forEach(documentSnapshot => {
+                const temp = documentSnapshot.data()
+                temp['id'] = id.toString()
+                causes.forEach(element => {
+                    //console.log(element.name, temp['lower_name'])
+                    if(element.name == temp['lower_name']){
+                        temp['exists'] = true
+                        tools.push(temp)
+                    }
+
+
+                });
+                id = id + 1
+
+            })
+
+            setToolsList(tools)
+        })
+
+    }, [])
+    
 
     function getToolsData(item){
         var tool = item.name;
@@ -55,20 +61,21 @@ export default function RelatedCauses({ route }) {
                 <Text style={styles.subTitle}>Find possible causes below</Text>
                 <FlatList
                 
-                data={causes}
-                keyExtractor={(item) => item.name}
+                data={toolsList}
+                keyExtractor={(item) => item.id}
                 renderItem={({ item }) => 
                 <TouchableOpacity onPress={() => {
                     if(item.exists){
                         getToolsData(item)
                     }
+                    return(item)
                     
                 }}>
                     <Card containerStyle={styles.card_item}>
                     <Card.Title h4 style={{color: '#8A76B6',}}>{item.name}</Card.Title>
                     <Card.Divider></Card.Divider>
                     <View>
-                        <Text>{item.exists? item.details : 'Resource coming soon!'}</Text>
+                        <Text>{item.details}</Text>
                     </View>
                     </Card>
                 </TouchableOpacity>

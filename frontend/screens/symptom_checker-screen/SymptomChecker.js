@@ -34,7 +34,7 @@ export default function SymptomChecker() {
 
     useEffect(() => {
         LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
-        /firebase.firestore().collection('symptoms')
+        firebase.firestore().collection('symptoms')
         .onSnapshot(querySnapshot => {
             const symp = []
             querySnapshot.forEach(documentSnapshot => {
@@ -45,6 +45,7 @@ export default function SymptomChecker() {
             })
             setSymptomsList(symp)
         })
+        console.log(symptomsList)
         
         firebase.firestore().collection('bodymap')
         .onSnapshot(querySnapshot => {
@@ -59,6 +60,7 @@ export default function SymptomChecker() {
             })
             setPartsList(parts)
         })
+        
     }, [])
 
     let primary = '#007bff'
@@ -66,6 +68,7 @@ export default function SymptomChecker() {
 
 
     function updateBody(itemValue) {
+        console.log(symptomsList)
         setSelectedValue(itemValue)
         if (itemValue == 'head') {
             setCurrentImage(bodyImageHead)
