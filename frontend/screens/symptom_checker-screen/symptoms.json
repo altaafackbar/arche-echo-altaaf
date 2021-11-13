@@ -1,13 +1,15 @@
-{
-   "symptoms":[
-      {
+[
+   {
+      "1 or more poop accidents a week ":{
          "id":"0",
          "name":"1 or more poop accidents a week ",
          "conditions":[
             "Functional constipation"
          ]
-      },
-      {
+      }
+   },
+   {
+      "agitated, crying, fussy, or irritable":{
          "id":"1",
          "name":"agitated, crying, fussy, or irritable",
          "conditions":[
@@ -17,22 +19,28 @@
             "Fever",
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "back pain":{
          "id":"2",
          "name":"back pain",
          "conditions":[
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "blue lips or fingertips":{
          "id":"3",
-         "name":"blue fingertips",
+         "name":"blue lips or fingertips",
          "conditions":[
             "Croup"
          ]
-      },
-      {
+      }
+   },
+   {
+      "breathing problems":{
          "id":"4",
          "name":"breathing problems",
          "conditions":[
@@ -41,8 +49,10 @@
             "Bronchiolitis",
             "Croup"
          ]
-      },
-      {
+      }
+   },
+   {
+      "chest pain":{
          "id":"5",
          "name":"chest pain",
          "conditions":[
@@ -50,15 +60,19 @@
             "Asthma",
             "Bronchiolitis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "cold hands or feet":{
          "id":"6",
          "name":"cold hands or feet",
          "conditions":[
             "Gastroenteritis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "coughing":{
          "id":"7",
          "name":"coughing",
          "conditions":[
@@ -67,23 +81,29 @@
             "Bronchiolitis",
             "Croup"
          ]
-      },
-      {
+      }
+   },
+   {
+      "diarrhea":{
          "id":"8",
          "name":"diarrhea",
          "conditions":[
             "Anaphylaxis",
             "Gastroenteritis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "difficult or painful poops":{
          "id":"9",
          "name":"difficult or painful poops",
          "conditions":[
             "Functional constipation"
          ]
-      },
-      {
+      }
+   },
+   {
+      "difficulty sleeping":{
          "id":"10",
          "name":"difficulty sleeping",
          "conditions":[
@@ -92,38 +112,48 @@
             "Ear infections",
             "Fever"
          ]
-      },
-      {
+      }
+   },
+   {
+      "dizziness":{
          "id":"11",
          "name":"dizziness",
          "conditions":[
             "Anaphylaxis",
             "Croup"
          ]
-      },
-      {
+      }
+   },
+   {
+      "drooling or swallowing problems":{
          "id":"12",
          "name":"drooling or swallowing problems",
          "conditions":[
             "Croup"
          ]
-      },
-      {
+      }
+   },
+   {
+      "dry mouth":{
          "id":"13",
          "name":"dry mouth",
          "conditions":[
             "Bronchiolitis",
             "Gastroenteritis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "ear pain or pulling on ear":{
          "id":"14",
          "name":"ear pain or pulling on ear",
          "conditions":[
             "Ear infections"
          ]
-      },
-      {
+      }
+   },
+   {
+      "fast breathing or fast heart beat":{
          "id":"15",
          "name":"fast breathing or fast heart beat",
          "conditions":[
@@ -131,8 +161,10 @@
             "Asthma",
             "Bronchiolitis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "fever":{
          "id":"16",
          "name":"fever",
          "conditions":[
@@ -143,58 +175,74 @@
             "Gastroenteritis",
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "hoarse voice":{
          "id":"17",
          "name":"hoarse voice",
          "conditions":[
             "Croup"
          ]
-      },
-      {
+      }
+   },
+   {
+      "holding in poop":{
          "id":"18",
          "name":"holding in poop",
          "conditions":[
             "Functional constipation"
          ]
-      },
-      {
+      }
+   },
+   {
+      "itching":{
          "id":"19",
          "name":"itching",
          "conditions":[
             "Anaphylaxis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "light-headed":{
          "id":"20",
          "name":"light-headed",
          "conditions":[
             "Anaphylaxis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "lower belly pain":{
          "id":"21",
          "name":"lower belly pain",
          "conditions":[
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "nausea":{
          "id":"22",
          "name":"nausea",
          "conditions":[
             "Anaphylaxis",
             "Gastroenteritis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "no bladder control":{
          "id":"23",
          "name":"no bladder control",
          "conditions":[
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "no tears":{
          "id":"24",
          "name":"no tears",
          "conditions":[
@@ -202,16 +250,20 @@
             "Gastroenteritis",
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "no wet diapers":{
          "id":"25",
          "name":"no wet diapers",
          "conditions":[
             "Bronchiolitis",
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "not peeing or not peeing often":{
          "id":"26",
          "name":"not peeing or not peeing often",
          "conditions":[
@@ -219,58 +271,74 @@
             "Gastroenteritis",
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "pain lasting a long time":{
          "id":"27",
          "name":"pain lasting a long time",
          "conditions":[
             "Chronic pain"
          ]
-      },
-      {
+      }
+   },
+   {
+      "pain without a known cause":{
          "id":"28",
          "name":"pain without a known cause",
          "conditions":[
             "Chronic pain"
          ]
-      },
-      {
+      }
+   },
+   {
+      "painful or burning pee":{
          "id":"29",
          "name":"painful or burning pee",
          "conditions":[
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "pee is pink, red, brown, or cloudy":{
          "id":"30",
          "name":"pee is pink, red, brown, or cloudy",
          "conditions":[
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "pee smells strange":{
          "id":"31",
          "name":"pee smells strange",
          "conditions":[
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "peeing often":{
          "id":"32",
          "name":"peeing often",
          "conditions":[
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "rashes or hives":{
          "id":"33",
          "name":"rashes or hives",
          "conditions":[
             "Anaphylaxis",
             "Fever"
          ]
-      },
-      {
+      }
+   },
+   {
+      "refusing to eat, drink, or nap":{
          "id":"34",
          "name":"refusing to eat, drink, or nap",
          "conditions":[
@@ -280,8 +348,10 @@
             "Fever",
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "runny nose":{
          "id":"35",
          "name":"runny nose",
          "conditions":[
@@ -289,10 +359,12 @@
             "Bronchiolitis",
             "Croup"
          ]
-      },
-      {
+      }
+   },
+   {
+      "sleepy or very tired":{
          "id":"36",
-         "name":"sleepy/very tired",
+         "name":"sleepy or very tired",
          "conditions":[
             "Asthma",
             "Bronchiolitis",
@@ -301,8 +373,10 @@
             "Gastroenteritis",
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "stomach pain":{
          "id":"37",
          "name":"stomach pain",
          "conditions":[
@@ -310,81 +384,154 @@
             "Chronic pain",
             "Gastroenteritis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "sunken eyes":{
          "id":"38",
          "name":"sunken eyes",
          "conditions":[
             "Bronchiolitis",
             "Gastroenteritis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "sunken soft spot on top of head":{
          "id":"39",
          "name":"sunken soft spot on top of head",
          "conditions":[
             "Bronchiolitis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "swelling of eyes, face, or lips":{
          "id":"40",
          "name":"swelling of eyes, face, or lips",
          "conditions":[
             "Anaphylaxis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "thirsty":{
          "id":"41",
          "name":"thirsty",
          "conditions":[
             "Gastroenteritis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "throat tightness":{
          "id":"42",
          "name":"throat tightness",
          "conditions":[
             "Anaphylaxis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "throwing up or vomiting":{
          "id":"43",
-         "name":"throwing up",
+         "name":"throwing up or vomiting",
          "conditions":[
             "Anaphylaxis",
             "Bronchiolitis",
             "Gastroenteritis",
             "UTIs"
          ]
-      },
-      {
+      }
+   },
+   {
+      "tingling mouth":{
          "id":"44",
          "name":"tingling mouth",
          "conditions":[
             "Anaphylaxis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "trouble breathing in, sucking in of the skin around the collarbones and between the ribs when breathing":{
          "id":"45",
          "name":"trouble breathing in, sucking in of the skin around the collarbones and between the ribs when breathing",
          "conditions":[
             "Asthma",
             "Bronchiolitis"
          ]
-      },
-      {
+      }
+   },
+   {
+      "very large poops":{
          "id":"46",
          "name":"very large poops",
          "conditions":[
             "Functional constipation"
          ]
-      },
-      {
+      }
+   },
+   {
+      "watery eyes":{
          "id":"47",
          "name":"watery eyes",
          "conditions":[
             "Anaphylaxis"
          ]
       }
-   ]
-}
+   },
+   {
+      "passed out or lost consciousness":{
+         "id":"48",
+         "name":"passed out or lost consciousness",
+         "conditions":[
+            "Anaphylaxis",
+            "Croup"
+         ]
+      }
+   },
+   {
+      "less than 3 months old and has a fever":{
+         "id":"49",
+         "name":"less than 3 months old and has a fever",
+         "conditions":[
+            "Bronchiolitis",
+            "Fever",
+            "Gastroenteritis",
+            "UTIs"
+         ]
+      }
+   },
+   {
+      "fluid leaking from ear":{
+         "id":"50",
+         "name":"fluid leaking from ear",
+         "conditions":[
+            "Ear infections"
+         ]
+      }
+   },
+   {
+      "seizure":{
+         "id":"51",
+         "name":"seizure",
+         "conditions":[
+            "Ear infections",
+            "Fever",
+            "Gastroenteritis"
+         ]
+      }
+   },
+   {
+      "not peeing for 8 hours or more":{
+         "id":"52",
+         "name":"not peeing for 8 hours or more",
+         "conditions":[
+            "Bronchiolitis",
+            "Fever",
+            "UTIs"
+         ]
+      }
+   }
+]

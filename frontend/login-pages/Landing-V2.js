@@ -9,6 +9,7 @@ import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
 import Guest from '../assets/images/Profile.png'
 import Email from '../assets/images/email-icon.jpg'
 import LoginButton from '../components/styles/login-button';
+import { StatusBar } from 'expo-status-bar';
 import { firebase } from '../Firebase';
 
 
@@ -82,6 +83,8 @@ class LandingV2 extends Component {
                         firstName: 'Guest',
                         lastName: 'Anonymous',
                         disclaimer: false,
+                        admin: false,
+                        starTools: ['empty'],
                     })
                     .then(() => {
                         console.log('User created');
@@ -102,6 +105,7 @@ class LandingV2 extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        <StatusBar style='auto'/>
         <View style={styles.imageContainer}>
             <Image source={MainPhoto} style={styles.mainImage}></Image>
         </View>

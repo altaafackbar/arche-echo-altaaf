@@ -10,6 +10,7 @@ import Guest from '../assets/images/Profile.png'
 import * as Google from 'expo-google-app-auth';
 import LoginButton from '../components/styles/login-button';
 import ForgotPassword from '../components/styles/forgot-password';
+import { StatusBar } from 'expo-status-bar';
 import { firebase } from '../Firebase';
 
 export default function Login() {
@@ -94,6 +95,8 @@ export default function Login() {
                                 firstName: result.user.givenName,
                                 lastName: result.user.familyName,
                                 disclaimer: true,
+                                admin: false,
+                                starTools: ['empty'],
                             })
                     })
                     .catch((error) => {
@@ -117,6 +120,7 @@ export default function Login() {
 
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar style='auto'/>
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>Welcome Back!</Text>
                 <Text style={styles.subheaderText}>Enter your email and password to get started.</Text>
