@@ -5,6 +5,7 @@ import { SearchBar, ListItem, Card, FAB, Icon } from 'react-native-elements';
 import { AntDesign } from '@expo/vector-icons';
 import _ from 'lodash';
 import { firebase } from '../../Firebase';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -31,6 +32,7 @@ class ToolsAndResources extends Component {
 
     componentDidMount() {
         this.makeRemoteRequest();
+        console.log(this.props)
     }
 
     makeRemoteRequest = () => {
@@ -92,7 +94,7 @@ class ToolsAndResources extends Component {
 
     handleEdit = () => {
         // Alert.alert('Click Test')
-        this.props.navigation.navigate('AddToolModal')
+        this.props.navigation.navigate('EditToolsAdmin')
     }
 
     handleStarTool = (item) => {
@@ -162,7 +164,7 @@ class ToolsAndResources extends Component {
                 />
                 {this.state.userData.admin === true &&
                     <FAB
-                        title="Add Tool"
+                        title="Edit"
                         placement='right'
                         onPress={this.handleEdit}
                         containerStyle={styles.fab}
@@ -195,7 +197,7 @@ export default ToolsAndResources
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: '2%',
+        paddingHorizontal: 5,
         backgroundColor: '#fafafa',
     },
     flat_list_item: {
@@ -208,12 +210,8 @@ const styles = StyleSheet.create({
         margin: 15,
     },
     SearchBar: {
-        // top: -20,
-        backgroundColor: 'transparent',
         marginTop: 0,
         marginVertical: 0,
-        borderStartWidth: 0,
-
     },
     FlatList: {     // may not work well on small devices
         padding: 0,
