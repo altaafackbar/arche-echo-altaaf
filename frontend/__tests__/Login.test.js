@@ -1,8 +1,12 @@
 import React from "react";
-import { render } from "@testing-library/react-native";
+import renderer from 'react-test-renderer';
 
-import Login from "../login-pages/Login";
+import LandingV2 from "../login-pages/Landing-V2";
 
-test("renders correctly", async () => {
-    console.log(render(<Login />));
+
+describe('<App />', () => {
+    it('has 1 child', () => {
+        const tree = renderer.create(<LandingV2 />).toJSON();
+        console.log(tree);
+    });
 });
