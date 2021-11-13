@@ -45,7 +45,6 @@ export default function SymptomChecker() {
             })
             setSymptomsList(symp)
         })
-        console.log(symptomsList)
         
         firebase.firestore().collection('bodymap')
         .onSnapshot(querySnapshot => {
@@ -68,7 +67,6 @@ export default function SymptomChecker() {
 
 
     function updateBody(itemValue) {
-        console.log(symptomsList)
         setSelectedValue(itemValue)
         if (itemValue == 'head') {
             setCurrentImage(bodyImageHead)
@@ -123,8 +121,16 @@ export default function SymptomChecker() {
     function getCauses() {
         const finalCauses = []
         const causesDic = []
+        //console.log(symptomsList)
         checked.forEach(element => {
-            symptomsList[element].conditions.forEach(element => {
+            //console.log(symptomsList[element])
+            var symptoms = null
+            symptomsList.forEach(symptomID => {
+                if(symptomID['id'] == element){
+                    symptoms = symptomID
+                }
+            });
+            symptoms.conditions.forEach(element => {
                 const exists = finalCauses.indexOf(element)
                 if (exists == -1) {
                     finalCauses.push(element)

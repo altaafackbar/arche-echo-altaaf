@@ -26,7 +26,7 @@ export default function RelatedCauses({ route }) {
                 temp['id'] = id.toString()
                 causes.forEach(element => {
                     //console.log(element.name, temp['lower_name'])
-                    if(element.name == temp['lower_name']){
+                    if(element.name == temp['name']){
                         temp['exists'] = true
                         tools.push(temp)
                     }
