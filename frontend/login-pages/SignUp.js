@@ -123,6 +123,8 @@ export default function SignUp ()
                             firstName: result.user.givenName,
                             lastName: result.user.familyName,
                             disclaimer: false,
+                            admin: false,
+                            starTools: ['empty'],
                         })
                 })
                 .catch((error) => {
@@ -168,6 +170,8 @@ export default function SignUp ()
                         firstName: firstName,
                         lastName: lastName,
                         disclaimer: false,
+                        admin: false,
+                        starTools: ['empty'],
                     })
                     .then(() => {
                         console.log('User created');

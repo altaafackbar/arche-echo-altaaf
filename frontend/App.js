@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions, useColorScheme } from 'react-native';
 import Landing from './login-pages/Landing'
 import LandingV2 from './login-pages/Landing-V2';
 import Login from './login-pages/Login'
@@ -24,6 +24,12 @@ import StarredResources from './screens/starred_resources-screen/StarredResource
 import ToolDetail from './screens/tools_and_resources_screen/ToolDetail';
 import AboutUs from './screens/settings_screen/AboutUs';
 import ContactUs from './screens/settings_screen/ContactUs';
+import EditToolsAdmin from './screens/admin_screens/EditToolsAdmin';
+import AddToolModal from './screens/modals/AddToolModal';
+import UpdateVideo from './screens/modals/UpdateVideo';
+import UpdateInfoGraphic from './screens/modals/UpdateInfoGraphic';
+import UpdateEBook from './screens/modals/UpdateEBook';
+import EditEBook from './screens/modals/EditEBook';
 import Tabs from './components/styles/Tabs';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as IconlyPack from 'react-native-iconly';
@@ -32,16 +38,54 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import CustomDrawer from './components/styles/CustomDrawer';
 import ForgotPassword from './screens/modals/ForgotPasswordModal';
-import { useColorScheme } from 'react-native';
-import {AppearanceProvider} from 'react-native-appearance';
-import { ThemeProvider} from './components/styles/ThemeProvider';
+import { AppearanceProvider } from 'react-native-appearance';
+import { ThemeProvider } from './components/styles/ThemeProvider';
 import { useTheme } from '@react-navigation/native';
 import themeContext from './components/styles/ThemeContext';
+import { firebase } from './Firebase';
+
 
 const Stack = createNativeStackNavigator();
 
 // Creating the navigation function
 function Navigator() {
+
+  const handleAnonymousSignIn = () => {
+    firebase.auth()
+      .signInAnonymously()
+      .then((userCredentials) => {
+        const user = userCredentials.user
+        user.updateProfile({
+          displayName: 'Guest',
+        })
+        console.log('User signed in anonymously');
+        const db = firebase.firestore()
+        db
+          .collection("users")
+          .doc(user.uid)
+          .set({
+            email: 'AnonymousEmail',
+            firstName: 'Guest',
+            lastName: 'Anonymous',
+            disclaimer: false,
+            admin: false,
+            starTools: ['empty'],
+          })
+          .then(() => {
+            console.log('User created');
+          })
+          .catch((error) => {
+            console.error('Error writing document: ', error);
+          });
+      })
+      .catch(error => {
+        if (error.code === 'auth/operation-not-allowed') {
+          console.log('Enable anonymous in your firebase console.');
+        }
+
+        console.error(error);
+      })
+  };
 
   return (
     <Stack.Navigator
@@ -65,7 +109,7 @@ function Navigator() {
           headerShadowVisible: false,
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => navigateToDisclaimer()}
+              onPress={() => handleAnonymousSignIn()}
               style={{ backgroundColor: 'transparent' }}
             >
               <Text style={{ color: '#1f1f1f', fontSize: 16 }}>Continue As Guest</Text>
@@ -81,7 +125,7 @@ function Navigator() {
           headerShadowVisible: false,
           headerRight: () => (
             <TouchableOpacity
-              onPress={() => navigateToDisclaimer()}
+              onPress={() => handleAnonymousSignIn()}
               style={{ backgroundColor: 'transparent' }}
             >
               <Text style={{ color: '#1f1f1f', fontSize: 16 }}>Continue As Guest</Text>
@@ -109,7 +153,7 @@ function Navigator() {
         name="DisclaimerModal"
         component={DisclaimerModal} />
 
-        <Stack.Screen
+      <Stack.Screen
         options={{
           headerTitle: '',
           headerTitleStyle: { color: 'transparent' },
@@ -128,20 +172,116 @@ function Navigator() {
         component={ForgotPassword} />
 
 
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='AddToolModal'
+        component={AddToolModal}
+      />
+
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='UpdateVideo'
+        component={UpdateVideo}
+      />
+
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='UpdateInfoGraphic'
+        component={UpdateInfoGraphic}
+      />
+
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='UpdateEBook'
+        component={UpdateEBook}
+      />
+
+      <Stack.Screen
+        options={{
+          headerTitle: '',
+          headerTitleStyle: { color: 'transparent' },
+          presentation: 'fullScreenModal',
+          headerShadowVisible: false,
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => goBack()}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Icon name='close' size={24} color='#1f1f1f'></Icon>
+            </TouchableOpacity>
+          )
+        }}
+        name='EditEBook'
+        component={EditEBook}
+      />
+
       <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false, headerBackVisible: false }} name="Onboarding" component={Onboard} />
       <Stack.Screen options={{ headerShown: false, headerShadowVisible: false, headerBackVisible: false }} name="MainMenu" component={App} />
       {/* <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="Find A Clinic" component={ClinicMap} />
         <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="SymptomChecker" component={SymptomChecker}/>
-        <Stack.Screen options={{headerTitle: '', headerShadowVisible: false}} name="RelatedCauses" component={RelatedCauses}/>
         <Stack.Screen options={{headerTitle: 'Tools And Resources', headerShadowVisible: false}} name="ToolsAndResources" component={ToolsAndResources}/>
         <Stack.Screen options={{headerTitle: 'Settings', headerShadowVisible: false}} name="SettingsScreen" component={SettingsScreen}/> */}
       <Stack.Screen options={{ headerTitle: 'Starred Resources', headerShadowVisible: false }} name="StarredResources" component={StarredResources} />
+      <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false }} name="RelatedCauses" component={RelatedCauses} />
       <Stack.Screen options={{ headerTitle: 'SavedLocations', headerShadowVisible: false }} name="SavedLocations" component={SavedLocations} />
       <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false }} name="ToolDetails" component={ToolDetail} />
+      <Stack.Screen options={{ headerTitle: 'Admin Screen', headerShadowVisible: false }} name="EditToolsAdmin" component={EditToolsAdmin} />
       {/* <Stack.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false}} name="StarredResources" component={StarredResources}/>
         <Stack.Screen options={{headerTitle: 'SavedLocations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/> */}
       {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
-    </Stack.Navigator>
+    </Stack.Navigator >
 
   )
 
@@ -153,9 +293,9 @@ function App(props) {
 
   const { setTheme, theme } = React.useContext(themeContext);
 
-  const {children} = props;
+  const { children } = props;
 
-  const {colors, isDark} = useTheme();
+  const { colors, isDark } = useTheme();
 
   const primary = '#8A76B6'
   const gray = '#d1d1d6'
@@ -168,8 +308,8 @@ function App(props) {
 
   let hamburgerIcon;
 
-  if (theme === 'Light'){
-      hamburgerIcon = '#1f1f1f'
+  if (theme === 'Light') {
+    hamburgerIcon = '#1f1f1f'
   }
   else {
     hamburgerIcon = '#fff'
@@ -229,7 +369,7 @@ function App(props) {
       <Tab.Screen options={{
         tabBarIcon: ({ focused }) => (
           <IconlyPack.Location set='bold' primaryColor={focused ? '#8A76B6' : '#d1d1d6'} />
-        ), headerTitle: 'Find A Clinic Map', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: true, headerTitleStyle: {color: '#1f1f1f'},
+        ), headerTitle: 'Find A Clinic Map', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: true, headerTitleStyle: { color: '#1f1f1f' },
       }} name="Find A Clinic" component={ClinicMap} />
 
       <Tab.Screen name="Settings" component={SettingsScreen} options={{
@@ -257,7 +397,7 @@ export default function DrawerNav() {
   const themeData = { theme, setTheme };
   // const [isDarkTheme, setIsDarkTheme] = React.useState(false)
 
-  const {colors, isDark} = useTheme();
+  const { colors, isDark } = useTheme();
 
   const CustomDefaultTheme = {
     dark: false,
@@ -277,33 +417,33 @@ export default function DrawerNav() {
       text: '#fff',
     }
   }
-  
+
 
   return (
     <themeContext.Provider value={themeData}>
       <NavigationContainer theme={theme == 'Light' ? CustomDefaultTheme : CustomDarkTheme}>
-      <Drawer.Navigator
-        screenOptions={{
-          headerShown: false,
-          swipeEdgeWidth: 0,
-          drawerActiveBackgroundColor: '#e8e4f0',
-          drawerActiveTintColor: '#8a76b6',
-          drawerInactiveBackgroundColor: 'transparent',
-          drawerInactiveTintColor: '#bcbcc1',
-          
-        }}
+        <Drawer.Navigator
+          screenOptions={{
+            headerShown: false,
+            swipeEdgeWidth: 0,
+            drawerActiveBackgroundColor: '#e8e4f0',
+            drawerActiveTintColor: '#8a76b6',
+            drawerInactiveBackgroundColor: 'transparent',
+            drawerInactiveTintColor: '#bcbcc1',
 
-        drawerContent={props => <CustomDrawer {...props} />}
-      >
-        <Drawer.Screen name="Home" component={Navigator} initialParams={{ screen: 'Home' }} />
-        <Drawer.Screen name="Symptom Checker" component={App} initialParams={{ screen: 'Symptom Checker' }} />
-        <Drawer.Screen name="Find A Clinic Map" component={App} initialParams={{ screen: 'Find A Clinic' }} />
-        <Drawer.Screen name="About Us" component={App} initialParams={{ screen: 'AboutUs' }} />
-        <Drawer.Screen name="Contact Us" component={App} initialParams={{ screen: 'ContactUs' }} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+          }}
+
+          drawerContent={props => <CustomDrawer {...props} />}
+        >
+          <Drawer.Screen name="Home" component={Navigator} initialParams={{ screen: 'Home' }} />
+          <Drawer.Screen name="Symptom Checker" component={App} initialParams={{ screen: 'Symptom Checker' }} />
+          <Drawer.Screen name="Find A Clinic Map" component={App} initialParams={{ screen: 'Find A Clinic' }} />
+          <Drawer.Screen name="About Us" component={App} initialParams={{ screen: 'AboutUs' }} />
+          <Drawer.Screen name="Contact Us" component={App} initialParams={{ screen: 'ContactUs' }} />
+        </Drawer.Navigator>
+      </NavigationContainer>
     </themeContext.Provider>
-      
+
   )
 
 }
