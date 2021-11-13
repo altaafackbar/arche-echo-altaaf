@@ -1,15 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { Text, Button, Pressable, StyleSheet, TouchableOpacity, View, Touchable, SafeAreaView, ScrollView, Image, Platform } from 'react-native';
-// import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { FlatGrid } from 'react-native-super-grid';
-// import ToolsAndResources from '../../assets/images/tools-resources-menu.png'
-// import FindAClinic from '../../assets/images/find-clinic-menu.png'
-// import StarredResources from '../../assets/images/starred-resources-menu.png'
-// import SavedLocations from '../../assets/images/saved-locations.png'
-// import Settings from '../../assets/images/settings-menu.png'
-// import SymptomCheck from '../../assets/images/symptom-checker.png'
 import ToolsAndResources from '../../assets/Menu-Images/ToolsandResources.png'
 import FindAClinic from '../../assets/Menu-Images/Map.png'
 import StarredResources from '../../assets/Menu-Images/StarredResources.png'
@@ -32,18 +25,6 @@ export default function MainMenuV2(props) {
     const color = colors.text
     
     const { setTheme, theme } = React.useContext(themeContext);
-
-    // const containerStyle = {
-    //     flex: 1,
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     /* 
-    //     * the colors.background value will change dynamicly with
-    //     * so if we wanna change its value we can go directly to the pallet
-    //     * this will make super easy to change and maintain mid or end project
-    //     */
-    //     backgroundColor: colors.background,
-    // };
 
     var hour = new Date().getHours()
     const user = firebase.auth().currentUser
