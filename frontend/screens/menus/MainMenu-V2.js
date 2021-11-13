@@ -4,17 +4,46 @@ import { Text, Button, Pressable, StyleSheet, TouchableOpacity, View, Touchable,
 // import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { FlatGrid } from 'react-native-super-grid';
-import ToolsAndResources from '../../assets/images/tools-resources-menu.png'
-import FindAClinic from '../../assets/images/find-clinic-menu.png'
-import StarredResources from '../../assets/images/starred-resources-menu.png'
-import SavedLocations from '../../assets/images/saved-locations.png'
-import Settings from '../../assets/images/settings-menu.png'
-import SymptomCheck from '../../assets/images/symptom-checker.png'
-import MenuGreeting from '../../components/styles/MenuGreeting';
+// import ToolsAndResources from '../../assets/images/tools-resources-menu.png'
+// import FindAClinic from '../../assets/images/find-clinic-menu.png'
+// import StarredResources from '../../assets/images/starred-resources-menu.png'
+// import SavedLocations from '../../assets/images/saved-locations.png'
+// import Settings from '../../assets/images/settings-menu.png'
+// import SymptomCheck from '../../assets/images/symptom-checker.png'
+import ToolsAndResources from '../../assets/Menu-Images/ToolsandResources.png'
+import FindAClinic from '../../assets/Menu-Images/Map.png'
+import StarredResources from '../../assets/Menu-Images/StarredResources.png'
+import SavedLocations from '../../assets/Menu-Images/SavedLocations.png'
+import Settings from '../../assets/Menu-Images/Settings.png'
+import SymptomCheck from '../../assets/Menu-Images/SymptomChecker.png'
 import { Dimensions } from 'react-native'
 import { firebase } from '../../Firebase';
+import { useTheme } from '@react-navigation/native';
+import themeContext from "../../components/styles/ThemeContext";
+import { StatusBar } from 'expo-status-bar';
 
-export default function MainMenuV2() {
+export default function MainMenuV2(props) {
+
+    const {children} = props;
+
+    const {colors, isDark} = useTheme();
+
+    const background = colors.background
+    const color = colors.text
+    
+    const { setTheme, theme } = React.useContext(themeContext);
+
+    // const containerStyle = {
+    //     flex: 1,
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //     /* 
+    //     * the colors.background value will change dynamicly with
+    //     * so if we wanna change its value we can go directly to the pallet
+    //     * this will make super easy to change and maintain mid or end project
+    //     */
+    //     backgroundColor: colors.background,
+    // };
 
     var hour = new Date().getHours()
     const user = firebase.auth().currentUser
@@ -50,6 +79,9 @@ export default function MainMenuV2() {
         navigation.navigate('SavedLocations')
     }
 
+    const cardColor = theme === 'Light' ? '#ffffff' : '#313131'
+
+
     const [items, setItems] = React.useState([
         { name: 'Tools and Resources', image: ToolsAndResources },
         { name: 'Symptom Checker', image: SymptomCheck },
@@ -60,15 +92,17 @@ export default function MainMenuV2() {
     ]);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, {backgroundColor: background}]}>
+            <StatusBar style='auto'/>
+            {children}
             <FlatGrid
                 itemDimension={Dimensions.get('window').width / 3}
                 data={items}
                 style={styles.gridView}
-                spacing={10}
-                ListHeaderComponent={() => <Text style={styles.messageText}>{message}</Text>}
+                spacing={15}
+                ListHeaderComponent={() => <Text style={[styles.messageText, {color: color}]}>{message}</Text>}
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.itemContainer} onPress={() => {
+                    <TouchableOpacity style={[styles.itemContainer, {backgroundColor: cardColor}]} onPress={() => {
                         if (item.name === 'Tools and Resources') { navigateToToolsAndResources() }
                         { if (item.name === 'Symptom Checker') { navigateToSymptomChecker() } }
                         { if (item.name === 'Find A Clinic') { navigateToClinicMap() } }
@@ -77,7 +111,7 @@ export default function MainMenuV2() {
                         { if (item.name === 'Settings') { navigateToSettings() } }
                     }}>
                         <Image source={item.image} style={styles.imageDetails}></Image>
-                        <Text style={styles.textStyle}>{item.name}</Text>
+                        <Text style={[styles.textStyle, {color: colors.text}]}>{item.name}</Text>
                     </TouchableOpacity>
                 )}
             >
@@ -91,7 +125,6 @@ export default function MainMenuV2() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -142,9 +175,16 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         height: 150,
-        backgroundColor: '#fafafa',
-        borderColor: '#d1d1d6',
-        borderWidth: 2,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.10,
+        shadowRadius: 20, 
+        elevation: 5,
+        // borderColor: '#d1d1d6',
+        // borderWidth: 2,
     },
     imageDetails: {
         resizeMode: 'center',
@@ -154,7 +194,6 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 14,
-        color: '#1f1f1f',
         fontWeight: '600',
         textAlign: 'center',
         alignItems: 'center',
@@ -175,7 +214,6 @@ const styles = StyleSheet.create({
     messageText: {
         fontSize: 24,
         fontWeight: '700',
-        color: '#1f1f1f',
         marginBottom: 40,
         alignItems: 'center',
         textAlign: 'center',

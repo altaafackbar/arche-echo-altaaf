@@ -3,8 +3,21 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { DrawerContentScrollView, DrawerItem, DrawerItemList} from '@react-navigation/drawer'
 import * as IconlyPack from 'react-native-iconly';
 import { firebase } from "../../Firebase";
+import { useTheme } from '@react-navigation/native';
+import themeContext from './ThemeContext'
 
 const LogoutDrawerItem = () => {
+
+    const { setTheme, theme } = React.useContext(themeContext);
+
+    let logoutText;
+
+    if (theme === 'Light'){
+        logoutText = '#1f1f1f'
+    }
+    else {
+        logoutText = '#ffffff'
+    }
 
     function handleLogOut () {
         // Get current user
@@ -35,8 +48,8 @@ const LogoutDrawerItem = () => {
             onPress={() => handleLogOut()}
             style={{ bottom: 0, position: 'absolute', width: '100%', marginBottom: '5%' }}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection:'row', alignItems: 'center' }}>
-            <IconlyPack.Logout set='bold' style={{marginRight: 10, color: '#1f1f1f'}} size={16} />
-            <Text style={{color: '#1f1f1f', fontWeight: '600'}}>Logout</Text>
+            <IconlyPack.Logout set='bold' style={{marginRight: 10, color: logoutText}} size={16} />
+            <Text style={{color: logoutText, fontWeight: '600'}}>Logout</Text>
             </View>
         </TouchableOpacity>
     )
@@ -48,8 +61,7 @@ export default LogoutDrawerItem
 const style = StyleSheet.create({
     topContainer: {
         bottom: 0, 
-        position: 
-        'absolute', 
+        position: 'absolute', 
         width: '100%', 
         marginBottom: '5%', 
     },
