@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Linking from 'expo-linking';
 import LogoutDrawerItem from './LogoutDrawerItem';
-import { Switch } from 'react-native-paper';
 import { useTheme } from '@react-navigation/native';
 import themeContext from './ThemeContext'
 import { DarkThemeToggle } from './DarkThemeToggle';
@@ -53,10 +52,6 @@ const CustomDrawer = (props) => {
             <View style={styles.horizontalLine} />
             
             <DrawerItemList {...props} />
-            {/* <Button
-                title="Switch Theme"
-                onPress={() => setTheme(theme === 'Light' ? 'Dark' : 'Light')}
-            /> */}
             <View style={[styles.horizontalLine, {marginBottom: 10}]} />
             <View style={styles.switchThemeContainer}>
                 <Text style={styles.switchThemeHeaderText}>{checkMode}</Text>

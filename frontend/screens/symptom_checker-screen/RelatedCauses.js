@@ -8,12 +8,17 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from "lodash"
 import { useNavigation } from '@react-navigation/native';
 import { firebase } from '../../Firebase';
+import themeContext from "../../components/styles/ThemeContext";
+import { useTheme } from "@react-navigation/native";
 
 export default function RelatedCauses({ route }) {
 
     const navigation = useNavigation();
     const [causes, setCauses] = useState(route.params.relatedCauses)
     //const user = firebase.firestore().collection('tools').doc(causes[0].name).get();
+
+    const { setTheme, theme } = React.useContext(themeContext);
+    const {colors, isDark} = useTheme();
     
     useEffect(() => {
         //console.log(causes)
@@ -51,7 +56,7 @@ export default function RelatedCauses({ route }) {
     return (
         <SafeAreaView>
             <View style={styles.titles}>
-                <Text style={styles.headerTitle}>Related Causes</Text>
+                <Text style={[styles.headerTitle, {color: colors.text}]}>Related Causes</Text>
                 <Text style={styles.subTitle}>Find possible causes below</Text>
                 <FlatList
                 

@@ -5,8 +5,8 @@ import { SearchBar, ListItem, Card, FAB, Icon } from 'react-native-elements';
 import { AntDesign } from '@expo/vector-icons';
 import _ from 'lodash';
 import { firebase } from '../../Firebase';
-
-
+import themeContext from '../../components/styles/ThemeContext';
+import { useTheme } from '@react-navigation/native';
 
 
 

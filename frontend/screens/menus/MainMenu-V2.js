@@ -1,15 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { Text, Button, Pressable, StyleSheet, TouchableOpacity, View, Touchable, SafeAreaView, ScrollView, Image, Platform } from 'react-native';
-// import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { FlatGrid } from 'react-native-super-grid';
-// import ToolsAndResources from '../../assets/images/tools-resources-menu.png'
-// import FindAClinic from '../../assets/images/find-clinic-menu.png'
-// import StarredResources from '../../assets/images/starred-resources-menu.png'
-// import SavedLocations from '../../assets/images/saved-locations.png'
-// import Settings from '../../assets/images/settings-menu.png'
-// import SymptomCheck from '../../assets/images/symptom-checker.png'
 import ToolsAndResources from '../../assets/Menu-Images/ToolsandResources.png'
 import FindAClinic from '../../assets/Menu-Images/Map.png'
 import StarredResources from '../../assets/Menu-Images/StarredResources.png'
