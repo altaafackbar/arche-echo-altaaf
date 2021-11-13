@@ -425,7 +425,7 @@ export default function DrawerNav() {
         <Drawer.Navigator
           screenOptions={{
             headerShown: false,
-            swipeEdgeWidth: 0,
+            swipeEdgeWidth: 50,
             drawerActiveBackgroundColor: '#e8e4f0',
             drawerActiveTintColor: '#8a76b6',
             drawerInactiveBackgroundColor: 'transparent',
