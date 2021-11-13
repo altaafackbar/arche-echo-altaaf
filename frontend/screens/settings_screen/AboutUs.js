@@ -105,7 +105,7 @@ class AboutUs extends Component {
                         />
                     </View>
 
-                    {/* Button */}
+                    {/* Button hided as requested
                     <View style={{ paddingTop: 20 }}>
                         <Pressable
                             style={({ pressed }) => [
@@ -119,7 +119,7 @@ class AboutUs extends Component {
                                 View Our Partners
                             </Text>
                         </Pressable>
-                    </View>
+                    </View> */}
 
                     {/* About */}
                     <View style={{ paddingTop: 20 }}>
