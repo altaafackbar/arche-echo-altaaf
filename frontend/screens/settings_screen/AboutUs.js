@@ -16,7 +16,7 @@ export default function AboutUs(props) {
             flex: 1,
             backgroundColor: "#fff",     // #f0f7f8
             alignItems: 'center',
-            height: h,
+            // height: h,
             // justifyContent: 'center', // put things centered on vertical axis
         },
 
@@ -55,7 +55,8 @@ export default function AboutUs(props) {
             "borderRadius": 27,
             borderWidth: 1,
             borderColor: "rgba(139, 117, 181, 255)",
-            "backgroundColor": "#fff"
+            "backgroundColor": "#fff",
+            marginBottom: 20,
         },
 
         aboutTitleText:
