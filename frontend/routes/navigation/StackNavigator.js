@@ -83,7 +83,7 @@ export default function Navigator() {
   
         }}
       >
-        <Stack.Screen options={{ headerShown: false, }} name="Landing" component={LandingV2} />
+        <Stack.Screen options={{ headerShown: false,}} name="Landing" component={LandingV2} />
         <Stack.Screen
           options={{
             headerTitle: '',
