@@ -105,8 +105,8 @@ class AboutUs extends Component {
                         />
                     </View>
 
-                    {/* Button hided as requested
-                    <View style={{ paddingTop: 20 }}>
+                    {/* Button hided as requested */}
+                    {/* <View style={{ paddingTop: 20 }}>
                         <Pressable
                             style={({ pressed }) => [
                                 {
