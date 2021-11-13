@@ -55,7 +55,7 @@ export default function RelatedCauses({ route }) {
     };
     //const user = await firestore().collection('Users').doc('ABC').get();
     return (
-        <SafeAreaView>
+        <SafeAreaView style={styles.safeview}>
             <View style={styles.titles}>
                 <Text style={styles.headerTitle}>Related Causes</Text>
                 <Text style={styles.subTitle}>Find possible causes below</Text>
@@ -102,7 +102,7 @@ export default function RelatedCauses({ route }) {
         backgroundColor: '#fff',
     },
     titles: {
-        marginTop: '10%',
+        marginTop: '1%',
         width: '100%',
         textAlign: 'center'
     },
