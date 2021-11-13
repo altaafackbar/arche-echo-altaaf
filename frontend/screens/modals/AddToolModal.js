@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 
 import { firebase } from '../../Firebase'
@@ -123,26 +123,30 @@ const AddToolModal = () => {
                 ></CheckBox>
                 {toolBoolean === true &&
                 <>
-                    <View style={styles.textContainer}>
-                        <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='Tool Name'
-                            value={toolName}
-                            setValue={toolName}
-                            onChangeText={text => setToolName(text)}
-                        >
-                        </TextInput>
-                    </View>
-                    <View style={styles.textContainer}>
-                        <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='Tool Detail'
-                            value={toolDetail}
-                            setValue={toolDetail}
-                            onChangeText={text => setToolDetail(text)}
-                        >
-                        </TextInput>
-                    </View>
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                        <View style={styles.textContainer}>
+                            <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='Tool Name'
+                                value={toolName}
+                                setValue={toolName}
+                                onChangeText={text => setToolName(text)}
+                            >
+                            </TextInput>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                        <View style={styles.textContainer}>
+                            <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='Tool Detail'
+                                value={toolDetail}
+                                setValue={toolDetail}
+                                onChangeText={text => setToolDetail(text)}
+                            >
+                            </TextInput>
+                        </View>
+                    </TouchableWithoutFeedback>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.button} onPress={() => {handleNewTool()}}>
                             <Text style={styles.buttonText}>Save Tool</Text>
@@ -166,36 +170,42 @@ const AddToolModal = () => {
                     {/* If admin wants to add a video */}
                     {video === true &&
                     <>
-                        <View style={styles.textContainer}>
-                            <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='Video Title'
-                            value={videoTitle}
-                            setValue={videoTitle}
-                            onChangeText={text => setVideoTitle(text)}
-                            >
-                            </TextInput>
-                        </View>
-                        <View style={styles.textContainer}>
-                            <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='Video Info'
-                            value={videoInfo}
-                            setValue={videoInfo}
-                            onChangeText={text => setVideoInfo(text)}
-                            >
-                            </TextInput>
-                        </View>
-                        <View style={styles.textContainer}>
-                            <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='YouTube Video ID'
-                            value={youtubeVideoID}
-                            setValue={youtubeVideoID}
-                            onChangeText={text => setYoutubeVideoID(text)}
-                            >
-                            </TextInput>
-                        </View>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                            <View style={styles.textContainer}>
+                                <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='Video Title'
+                                value={videoTitle}
+                                setValue={videoTitle}
+                                onChangeText={text => setVideoTitle(text)}
+                                >
+                                </TextInput>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                            <View style={styles.textContainer}>
+                                <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='Video Description'
+                                value={videoInfo}
+                                setValue={videoInfo}
+                                onChangeText={text => setVideoInfo(text)}
+                                >
+                                </TextInput>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                            <View style={styles.textContainer}>
+                                <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='YouTube Video ID'
+                                value={youtubeVideoID}
+                                setValue={youtubeVideoID}
+                                onChangeText={text => setYoutubeVideoID(text)}
+                                >
+                                </TextInput>
+                            </View>
+                        </TouchableWithoutFeedback>
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity style={saveTool ? styles.button : styles.buttonDisabled} disabled={saveTool ? false : true} onPress={() => {handleNewVideo()}}>
                                 <Text style={styles.buttonText}>Save Video</Text>
@@ -218,36 +228,42 @@ const AddToolModal = () => {
                     ></CheckBox>
                     {eBook === true &&
                     <>
-                        <View style={styles.textContainer}>
-                            <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='eBook Title'
-                            value={eBookTitle}
-                            setValue={eBookTitle}
-                            onChangeText={text => setEBookTitle(text)}
-                            >
-                            </TextInput>
-                        </View>
-                        <View style={styles.textContainer}>
-                            <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='eBook Info'
-                            value={eBookInfo}
-                            setValue={eBookInfo}
-                            onChangeText={text => setEBookInfo(text)}
-                            >
-                            </TextInput>
-                        </View>
-                        <View style={styles.textContainer}>
-                            <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='eBook Link'
-                            value={eBookLink}
-                            setValue={eBookLink}
-                            onChangeText={text => setEBookLink(text)}
-                            >
-                            </TextInput>
-                        </View>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                            <View style={styles.textContainer}>
+                                <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='eBook Title'
+                                value={eBookTitle}
+                                setValue={eBookTitle}
+                                onChangeText={text => setEBookTitle(text)}
+                                >
+                                </TextInput>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                            <View style={styles.textContainer}>
+                                <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='eBook Description'
+                                value={eBookInfo}
+                                setValue={eBookInfo}
+                                onChangeText={text => setEBookInfo(text)}
+                                >
+                                </TextInput>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                            <View style={styles.textContainer}>
+                                <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='eBook Link'
+                                value={eBookLink}
+                                setValue={eBookLink}
+                                onChangeText={text => setEBookLink(text)}
+                                >
+                                </TextInput>
+                            </View>
+                        </TouchableWithoutFeedback>
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity style={saveTool ? styles.button : styles.buttonDisabled} disabled={saveTool ? false : true} onPress={() => {handleNeweBook()}}>
                                 <Text style={styles.buttonText}>Save eBook</Text>
@@ -270,36 +286,42 @@ const AddToolModal = () => {
                     ></CheckBox>
                     {infoGraphic == true &&
                     <>
-                        <View style={styles.textContainer}>
-                            <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='infoGraphic Title'
-                            value={infoGraphicTitile}
-                            setValue={infoGraphicTitile}
-                            onChangeText={text => setInfoGraphicTitle(text)}
-                            >
-                            </TextInput>
-                        </View>
-                        <View style={styles.textContainer}>
-                            <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='infoGraphic Info'
-                            value={infoGraphicInfo}
-                            setValue={infoGraphicInfo}
-                            onChangeText={text => setInfoGraphicInfo(text)}
-                            >
-                            </TextInput>
-                        </View>
-                        <View style={styles.textContainer}>
-                            <TextInput
-                            selectionColor={'#a5a5a5'}
-                            placeholder='infoGraphic Link'
-                            value={infoGraphicLink}
-                            setValue={infoGraphicLink}
-                            onChangeText={text => setInfoGraphicLink(text)}
-                            >
-                            </TextInput>
-                        </View>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                            <View style={styles.textContainer}>
+                                <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='infoGraphic Title'
+                                value={infoGraphicTitile}
+                                setValue={infoGraphicTitile}
+                                onChangeText={text => setInfoGraphicTitle(text)}
+                                >
+                                </TextInput>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                            <View style={styles.textContainer}>
+                                <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='infoGraphic Description'
+                                value={infoGraphicInfo}
+                                setValue={infoGraphicInfo}
+                                onChangeText={text => setInfoGraphicInfo(text)}
+                                >
+                                </TextInput>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                            <View style={styles.textContainer}>
+                                <TextInput
+                                selectionColor={'#a5a5a5'}
+                                placeholder='infoGraphic Link'
+                                value={infoGraphicLink}
+                                setValue={infoGraphicLink}
+                                onChangeText={text => setInfoGraphicLink(text)}
+                                >
+                                </TextInput>
+                            </View>
+                        </TouchableWithoutFeedback>
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity style={saveTool ? styles.button : styles.buttonDisabled} disabled={saveTool ? false : true} onPress={() => {handleNewInfoGraphic()}}>
                                 <Text style={styles.buttonText}>Save infoGraphic</Text>

@@ -23,13 +23,13 @@ An email will be sent to you allowing you to change your password.`
         // console.log(email)
         firebase.auth().sendPasswordResetEmail(email)
             .then(() => {
-                Alert.alert('Please check your email')
-                goBack()
+                Alert.alert('If we have an account matching your email address, you will receive an email with a link to reset your password.')
+                
             }).catch((error) => {
                 console.log(error.code)
                 console.log(error.message)
                 if (error.code === 'auth/user-not-found') {
-                    Alert.alert('There is no user record corresponding to this email. Please enter a correct email address.')
+                    Alert.alert('If we have an account matching your email address, you will receive an email with a link to reset your password.')
                 }
                 if (error.code === 'auth/invalid-email') {
                     Alert.alert('Please enter a valid email address.')
