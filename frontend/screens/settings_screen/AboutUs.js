@@ -7,6 +7,9 @@ import { useTheme } from '../../components/styles/ThemeProvider';
 
 export default function AboutUs(props) {
 
+    const w = Math.floor(Dimensions.get('window').width)
+    const h = Math.floor(Dimensions.get('window').height)
+
     const styles = StyleSheet.create({
         container:
         {
@@ -78,11 +81,8 @@ export default function AboutUs(props) {
     });
 
     const { children } = props;
-
     const { colors, isDark } = useTheme();
-
-    const w = Math.floor(Dimensions.get('window').width)
-    const h = Math.floor(Dimensions.get('window').height)
+    const [ready, setReady] = useState(false);
 
     return (
         // <SafeAreaView style={{ flex: 1, }}>
@@ -90,14 +90,14 @@ export default function AboutUs(props) {
             <View style={styles.container}>
                 {/* Video */}
                 <View style={styles.playerView}>
-                    {!this.state.ready && <>
+                    {!ready && <>
                         <Text>Video will arrive shortly ..</Text>
                     </>}
                     <YoutubeIFrame
                         width={w * 0.8}
                         height={w * 9 / 20}
                         videoId={"ydQnzU4nV6Q"}
-                        onReady={() => { this.setState({ ready: true }) }}
+                        onReady={() => { setReady(true) }}
                     />
                 </View>
 
