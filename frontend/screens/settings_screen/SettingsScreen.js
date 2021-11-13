@@ -21,6 +21,14 @@ function SettingsScreen () {
 
     const navigation = useNavigation()
 
+    function navigateToAboutUs() {
+        navigation.navigate('About Us', {screen: 'AboutUs'})
+    }
+
+    function navigateToContactUs() {
+        navigation.navigate('Contact Us', {screen: 'ContactUs'})
+    }
+
     const checkItemColor = theme === 'Light' ? '#f2f2f2' : '#313131'
 
     const checkThemeColor = theme === 'Light' ? '#c4c4c4' : '#ffffff'
@@ -46,7 +54,11 @@ function SettingsScreen () {
           <Text style={[styles.title, {color: colors.text}]}>{title}</Text>
           <View>
           {title === checkMode ? <DarkThemeToggle></DarkThemeToggle>
-          : <TouchableOpacity>
+          : <TouchableOpacity onPress={() => 
+          {if (title === 'About Us'){navigateToAboutUs()}
+          {if (title === 'Contact Us'){navigateToContactUs()}}
+          }
+          } >
             <Icon name='chevron-right' size={24} color={checkThemeColor}/>
           </TouchableOpacity> }
           </View>
