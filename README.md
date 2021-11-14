@@ -9,47 +9,6 @@ link: https://exp.host/@jaydenjunhyeoncho/arche-echo-v3
 
 ## Backend has switched to Firebase
 
-## Backend deployment
-### Backend has deployed on Cybera
-private ipv4: 10.2.11.229
-
-ipv6: 2605:fd00:4:1001:f816:3eff:fe5e:ba3b
-
-## Installation 
-
-Set up Python3 Virtual environment 
-
-```
-virtualenv venv
-source venv/bin/active
-```
-
-Install required packages
-
-```
-pip install -r requirements.txt
-```
-
-Django migrate
-
-```
-python manage.py makemigrations
-python manage.py migrate
-```
-
-Start Server
-
-```
-python manage.py runserver
-```
-
-
-## Documentation Endpoint
-ipv4 (private): http://10.2.11.229/docs
-
-ipv6: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/docs
-
-
 # ARCHE | ECHO App
 
 ## Deployment Website
