@@ -1,6 +1,4 @@
-# Sprint 2 Release
-
-development branch
+# Sprint 3 Release
 
 ## Frontend deployment
 
