@@ -11,6 +11,7 @@ export default function ClinicMap() {
     const [errorMsg, setErrorMsg] = useState(null);
     const [clinics, setClinics] = useState([]);
     const mapRef = useRef(null);
+    const [markers, setMarkers] = useState([]);
     const [clinicLocation, setClinicLocation] = useState(null)
     const [myRegion, setRegion] = useState({
         latitude: 53.5461,
@@ -28,6 +29,35 @@ export default function ClinicMap() {
     
           let location = await Location.getCurrentPositionAsync({});
           setLocation(location);
+          const region = {
+            latitude: location['coords'].latitude,
+            longitude: location['coords'].longitude,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          }
+          mapRef.current.animateToRegion(region, 3 * 1000);
+
+          const latitude = region['latitude'];
+          const longitude = region['longitude'];
+          const type = 'hospital';
+          const radius = 10000;
+          const key = 'AIzaSyBx8_um411OKC9LMqN49FFh835HXO0k3L4'
+          const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&radius=' + radius + '&type=' + type + '&key=' + key;
+          
+          
+          fetch(url)
+              .then(res => {
+                  return res.json()
+              })
+              .then(res => {
+                  // for each service returned retrieve its details, put details in clinics list
+                  setClinics(res['results'])
+              })
+  
+              // catch any errors
+              .catch(error => {
+                  //console.log(error);
+              });
           setRegion({
             latitude: location['coords'].latitude,
             longitude: location['coords'].longitude,
@@ -35,10 +65,10 @@ export default function ClinicMap() {
             longitudeDelta: 0.01,
           }
           )
-          console.log(myRegion)
  
 
         })();
+
       }, []);
     
       let text = 'Waiting..';
@@ -48,33 +78,6 @@ export default function ClinicMap() {
         text = JSON.stringify(location);
         
       }
-    const Clinics = [
-        {
-            id: 1,
-            name: "Medicine Place Pharmacy",
-            distance: "700m - 3 mins",
-        },
-        {
-            id: 2,
-            name: "Downtown Medical Clinic",
-            distance: "1.7km - 6 mins",
-        },
-        {
-            id: 3,
-            name: "RaiN MedClinic",
-            distance: "1.8km - 7 mins",
-        },
-        {
-            id: 4,
-            name: "Downtown Medicentre",
-            distance: "1.8km - 7 mins",
-        },
-        {
-            id: 5,
-            name: "Alberta Avenue Medical Clinic",
-            distance: "2.9km - 11 mins",
-        },
-    ];
 
     // function Item({name, distance}) {
     //     return (
@@ -85,31 +88,27 @@ export default function ClinicMap() {
     //     )
     // };
     function getClinics(){
-        const latitude = myRegion.latitude;
-        const longitude = myRegion.longitude;
-        const type = 'hospital';
-        const radius = 10000;
-        const key = 'AIzaSyBx8_um411OKC9LMqN49FFh835HXO0k3L4'
-        const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&radius=' + radius + '&type=' + type + '&key=' + key;
-        mapRef.current.animateToRegion(myRegion, 3 * 1000);
-        
-        fetch(url)
-            .then(res => {
-                return res.json()
-            })
-            .then(res => {
-                // for each service returned retrieve its details, put details in clinics list
-                setClinics(res['results'])
-            })
 
-            // catch any errors
-            .catch(error => {
-                console.log(error);
-            });
         
-        clinics.forEach(element => {
-            
-        });
+        const marks = []
+        for (let index = 0; index < clinics.length; index++) {
+            const element = clinics[index];
+            marks.push({
+                id : index,
+                latitude : element['geometry'].location['lat'],
+                longitude : element['geometry'].location['lng'],
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+                name : element.name,
+                description : element.vicinity
+
+
+            }) 
+        }
+        
+        setMarkers(marks)
+        //console.log('markers',markers)
+
         
 
 
@@ -117,11 +116,16 @@ export default function ClinicMap() {
 
     }
     function goToClinic(item){
-        console.log(item['geometry'].location)
-        setClinicLocation({
+        //console.log(item)
+        const location = {
             latitude : item['geometry'].location['lat'],
-            longitude : item['geometry'].location['lng']
-        })
+            longitude : item['geometry'].location['lng'],
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
+        }
+        mapRef.current.animateToRegion(location, 3 * 1000);
+
+
     }
     return (
         <SafeAreaView style={styles.safeview}>
@@ -136,9 +140,36 @@ export default function ClinicMap() {
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}
-                    
+                    /*
+                    {
+                        ...
+                        markers.forEach(element => {
+                            console.log(element)
+                            (<Marker>
+                                coordinate={{
+                                    latitude: element['latitude'],
+                                    longitude: element['longitude'],
+                                }}
+                            </Marker>)
+                            
+                        })}*/
+   
 
-                />
+                >
+                    {markers &&
+                    markers.map((marker, index) => (
+                        <Marker
+                        key={index}
+                        coordinate={{
+                            latitude: marker['latitude'],
+                            longitude: marker['longitude'],
+                            
+                        }}
+                        title={marker['name']}
+                        description={marker['description']}
+                        />
+                    ))}
+                </MapView>
             </View>
             <View style={{alignItems: 'center',}}>
                 <TouchableOpacity
