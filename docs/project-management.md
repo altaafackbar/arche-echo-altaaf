@@ -47,6 +47,11 @@ This page provides a general overview of the Story Map, the overall Project Plan
 
 #### Due: November 13th
 
+##### Updated Scrum Roles
+
+- Product Owner: Jun Li
+- Scrum Master: Kevin Zhu
+
 | Rubric Description | Task-to-Do                     | Assigned To                    | Date To Complete By |
 |--------------------|--------------------------------|--------------------------------|---------------------|
 | Revisions          | Documentation Revisions        | Entire Team                    | November 13th, 2021 |
