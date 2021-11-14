@@ -1,4 +1,4 @@
-## Running frontend test cases instructions 
+## Running test cases instructions 
 
 ### Test Cases are locate in "frontend/\_\_testes__" folder
 
