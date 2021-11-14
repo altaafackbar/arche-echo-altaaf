@@ -10,6 +10,13 @@ link: https://expo.dev/@jaydenjunhyeoncho/arche-echo
 
 ### Test Cases locate in "frontend/\_\_tests__" folder
 
+## Running test cases instructions 
+
+
+```
+git clone repo
+cd frontend
+```
 
 
 ## Backend deployment
