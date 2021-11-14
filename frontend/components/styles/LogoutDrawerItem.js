@@ -10,6 +10,7 @@ const LogoutDrawerItem = () => {
 
     const { setTheme, theme } = React.useContext(themeContext);
 
+    // Set the color of the logout text based on the theme
     let logoutText;
 
     if (theme === 'Light'){

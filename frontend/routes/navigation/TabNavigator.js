@@ -21,6 +21,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { MaterialIcons } from '@expo/vector-icons';
 import { firebase } from '../../Firebase';
 
+//This file is for setting up the Tab Navigator on the bottom of the main screens
+
 const Tab = createBottomTabNavigator()
 
 export default function TabNavigator(props) {
@@ -36,12 +38,15 @@ export default function TabNavigator(props) {
   
     const navigation = useNavigation()
   
+    // Open the drawer when the hamburger icon is clicked
     function openDrawer() {
       navigation.openDrawer()
     }
   
+    // Change the color of the hamburger icon based on the theme
     let hamburgerIcon;
   
+    // Checks if the theme is light or dark and changes the hamburger color accordingly.
     if (theme === 'Light') {
       hamburgerIcon = '#1f1f1f'
     }

@@ -29,7 +29,7 @@ import swipeContext from '../../components/styles/SwipeContext';
 
 const Stack = createNativeStackNavigator();
 
-// Creating the navigation function
+// Creating the navigation function. This is for the regular stack navigation throughout the app.
 export default function Navigator() {
 
     const handleAnonymousSignIn = () => {

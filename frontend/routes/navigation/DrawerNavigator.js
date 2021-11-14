@@ -11,6 +11,7 @@ import Navigator from './StackNavigator';
 import TabNavigator from './TabNavigator';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
+import { StatusBar } from 'react-native';
 
 const Drawer = createDrawerNavigator()
 

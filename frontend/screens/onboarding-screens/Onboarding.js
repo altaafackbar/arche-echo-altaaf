@@ -3,6 +3,8 @@ import { Text, View, Button, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Onboarding from 'react-native-onboarding-swiper';
 
+//This is the onboarding page. These are for the onboarding screens for new users and guests.
+
 const OnboardingScreen = () => {
     const navigation = useNavigation()
     return (
