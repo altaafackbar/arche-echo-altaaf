@@ -4,15 +4,17 @@
 
 Deployed on EXPO_CLI
 
-
 link: https://exp.host/@jaydenjunhyeoncho/arche-echo-v3
 
-## Backend has switched to Firebase
+## Backend deployment
+
+Backend has been migrated from Django to Firebase
+
+## Document Website
+
+https://ualberta-cmput401.github.io/arche-echo/
 
 # ARCHE | ECHO App
-
-## Deployment Website
-https://ualberta-cmput401.github.io/arche-echo/
 
 ## Project Overview
 
