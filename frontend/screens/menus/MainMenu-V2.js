@@ -21,11 +21,13 @@ export default function MainMenuV2(props) {
 
     const {colors, isDark} = useTheme();
 
+    // Variables to set dynamic background colors
     const background = colors.background
     const color = colors.text
     
     const { setTheme, theme } = React.useContext(themeContext);
 
+    // This handles the greeting message on the homepage using Firebase and the Date function in Javascript.
     var hour = new Date().getHours()
     const user = firebase.auth().currentUser
     var userName = user.displayName
@@ -36,6 +38,7 @@ export default function MainMenuV2(props) {
     if (hour >= 21 && hour < 24) message += 'Night'
     if (userName != 'Guest') message += `, ${userName}`
 
+    // This whole section is set up for handling navigation to other screens from the main menu.
     const navigation = useNavigation();
 
     function navigateToClinicMap() {
@@ -60,9 +63,12 @@ export default function MainMenuV2(props) {
         navigation.navigate('SavedLocations')
     }
 
+    // Change the color of the cards on the homepage depending on whether or not it's light mode or dark mode.3
     const cardColor = theme === 'Light' ? '#ffffff' : '#313131'
 
 
+    // This is our data list for the flatlist where we set the names of the cards on the home screen
+    // And we set the images for each of the cards.
     const [items, setItems] = React.useState([
         { name: 'Tools and Resources', image: ToolsAndResources },
         { name: 'Symptom Checker', image: SymptomCheck },

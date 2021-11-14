@@ -54,3 +54,9 @@ Continue As Guest
                     }} />
                     <Text style={styles.socialIconText}>Continue As Guest</Text>
                 </TouchableOpacity>
+
+
+{/* <Button
+                title="Switch Theme"
+                onPress={() => setTheme(theme === 'Light' ? 'Dark' : 'Light')}
+            /> */}

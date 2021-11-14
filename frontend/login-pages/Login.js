@@ -19,6 +19,7 @@ export default function Login() {
     const navigation = useNavigation();
     const [hidePass, setHidePass] = useState(true)
 
+    // Setting up the navigation
     navigateToOnboarding = () => navigation.navigate('Onboarding');
     navigateToSignUp = () => navigation.navigate('SignUp');
     navigateToLanding = () => navigation.navigate('Landing')

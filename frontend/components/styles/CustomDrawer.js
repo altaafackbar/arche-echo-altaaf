@@ -16,7 +16,7 @@ const CustomDrawer = (props) => {
 
     const {colors, isDark} = useTheme();
 
-
+    // Set up calling function for both 911 and 811
     function dialNumber (number) {
         let phoneNumber = ''
         if (Platform.OS === 'android'){
@@ -25,7 +25,7 @@ const CustomDrawer = (props) => {
         else {phoneNumber = `telprompt:${number}`; }
         Linking.openURL(phoneNumber);
     }
-
+    // Change text for toggle based on theme
     const checkMode = theme === 'Light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'
 
     return (
@@ -53,10 +53,6 @@ const CustomDrawer = (props) => {
             <View style={styles.horizontalLine} />
             
             <DrawerItemList {...props} />
-            {/* <Button
-                title="Switch Theme"
-                onPress={() => setTheme(theme === 'Light' ? 'Dark' : 'Light')}
-            /> */}
             <View style={[styles.horizontalLine, {marginBottom: 10}]} />
             <View style={styles.switchThemeContainer}>
                 <Text style={styles.switchThemeHeaderText}>{checkMode}</Text>

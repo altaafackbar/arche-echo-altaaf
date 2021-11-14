@@ -6,11 +6,15 @@ import { useTheme } from '@react-navigation/native';
 import { useContext } from 'react';
 import themeContext from './ThemeContext';
 
+// This file is for toggling dark mode throughout the entire app.
+// This is a simple switch for toggling dark mode.
+
 export const DarkThemeToggle = () => {
 
-
+    // Gets the colors from the React Navigation Theme 
     const {colors, isDark} = useTheme()
 
+    // Initializing a toggle to switch the state for Dark Mode
     const [isDarkTheme, setIsDarkTheme] = React.useState(false)
 
 
@@ -19,8 +23,8 @@ export const DarkThemeToggle = () => {
         console.log(isDarkTheme)
     }
     
+    // Uses a context to get the theme as a universal variable.
     const { setTheme, theme } = React.useContext(themeContext);
-    // const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme
 
     return (
         <Switch 
