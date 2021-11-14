@@ -5,7 +5,9 @@
 Deployed on EXPO_CLI
 
 
-link: https://expo.dev/@jaydenjunhyeoncho/arche-echo
+link: https://exp.host/@jaydenjunhyeoncho/arche-echo-v3
+
+## Backend has switched to Firebase
 
 ## Backend deployment
 ### Backend has deployed on Cybera
