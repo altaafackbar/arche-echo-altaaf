@@ -1,10 +1,24 @@
-jest.mock('./src/RNGestureHandlerModule', () => require('./src/mocks'));
+jest.mock('./src/RNGestureHandlerModule', () => require('react-native-gesture-handler/src/mocks'));
 jest.mock('./lib/commonjs/RNGestureHandlerModule', () =>
-  require('./lib/commonjs/mocks')
+  require('react-native-gesture-handler/lib/commonjs/mocks')
 );
 jest.mock('./lib/module/RNGestureHandlerModule', () =>
-  require('./lib/module/mocks')
+  require('react-native-gesture-handler/lib/module/mocks')
 );
+
+jest.mock("@react-navigation/native", () => {
+  const actualNav = jest.requireActual("@react-navigation/native");
+  return {
+    ...actualNav,
+    useNavigation: () => ({
+      navigate: jest.fn(),
+      dispatch: jest.fn(),
+      goBack: jest.fn(),
+      replace: jest.fn(),
+    }),
+  };
+});
+
 jest.mock('react-native-gesture-handler', () => {
   const View = require('react-native/Libraries/Components/View/View');
   return {

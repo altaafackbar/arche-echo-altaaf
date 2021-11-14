@@ -1,12 +1,12 @@
 import React from "react";
 import renderer from 'react-test-renderer';
 
-import LandingV2 from '../login-pages/Landing-V2';
+import ForgotPasswordModal from '../screens/modals/ForgotPasswordModal';
 
 
-test('Landing snapShot', async () => {
+test('SignUp snapShot', () => {
     const snap = renderer.create(
-        <LandingV2 />
+        <ForgotPasswordModal />
     ).toJSON();
     expect(snap).toMatchSnapshot();
 });
