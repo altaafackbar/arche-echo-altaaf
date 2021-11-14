@@ -1,4 +1,65 @@
+# Sprint 3 Release
+## Frontend deployment
+
+Deployed on EXPO_CLI
+
+
+link: https://expo.dev/@jaydenjunhyeoncho/arche-echo
+
+## Frontend Test
+
+### Test Cases locate in "frontend/\_\_tests__" folder
+
+
+
+## Backend deployment
+### Update: Backend has switched to Firebase
+### Backend has deployed on Cybera
+private ipv4: 10.2.11.229
+
+ipv6: 2605:fd00:4:1001:f816:3eff:fe5e:ba3b
+
+## Installation 
+
+Set up Python3 Virtual environment 
+
+```
+virtualenv venv
+source venv/bin/active
+```
+
+Install required packages
+
+```
+pip install -r requirements.txt
+```
+
+Django migrate
+
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
+Start Server
+
+```
+python manage.py runserver
+```
+
+
+## Documentation Endpoint
+ipv4 (private): http://10.2.11.229/docs
+
+ipv6: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/docs
+
+
 # ARCHE | ECHO App
+
+## Deployment Website
+https://ualberta-cmput401.github.io/arche-echo/
+
+## Project Overview
 
 This project involves developing an app for parents managing their child's acute illness. The ARCHE and ECHO groups have been co-developing parental health resources (i.e. KT tools such as interactive infographics, videos, and eBooks). These resources are played in healthcare setting across Canada including Alberta’s HUTV platform which results in exposure to almost a million viewers each month.
 
@@ -6,4 +67,5 @@ Our goal is to increase the accessibility and visibility of these tools to paren
 
 The app will support two languages: English and French.
 ##
-Meeting Minutes can be found at [wiki](https://github.com/UAlberta-CMPUT401/arche-echo/wiki)
+### Meeting Minutes can be found at our [Wiki](https://github.com/UAlberta-CMPUT401/arche-echo/wiki)
+
