@@ -6,7 +6,7 @@ import SignUp from '../login-pages/SignUp';
 
 test('SignUp snapShot', () => {
     const snap = renderer.create(
-        <SignUp />
+        <SignUp navigation={{ navigate: jest.fn() }} />
     ).toJSON();
     expect(snap).toMatchSnapshot();
 });
