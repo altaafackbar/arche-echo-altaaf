@@ -254,7 +254,7 @@ export default function SymptomChecker() {
 
                     <View style={{ padding: 5 }}>
                         <TouchableOpacity style={
-                            { flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: itemHighlight(item.id) ? '#b2cded' : "#E7ECF2", borderRadius: 10, height: 40 }
+                            { flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: itemHighlight(item.id) ? '#b2cded' : "#E7ECF2", borderRadius: 10, height: 60 }
                         }>
                             <Text style={{ alignItems: 'flex-start', paddingLeft: 30, marginRight: 50 }}>
                                 {item.name}
@@ -273,7 +273,7 @@ export default function SymptomChecker() {
 
                                 }}
                             >
-                                <Icon name={!itemChecked(item.id) ? 'checkbox-blank-circle-outline' : 'check-circle'} size={24} color={!itemChecked(item.id) ? '#dadada' : primary}></Icon>
+                                <Icon name={!itemChecked(item.id) ? 'checkbox-blank-circle-outline' : 'check-circle'} size={28} color={!itemChecked(item.id) ? '#dadada' : primary}></Icon>
                             </TouchableOpacity>
                         </TouchableOpacity>
 

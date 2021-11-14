@@ -9,7 +9,9 @@ import * as Location from 'expo-location';
 export default function ClinicMap() {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    const [clinics, setClinics] = useState([]);
     const mapRef = useRef(null);
+    const [clinicLocation, setClinicLocation] = useState(null)
     const [myRegion, setRegion] = useState({
         latitude: 53.5461,
         longitude: -113.4938,
@@ -34,7 +36,7 @@ export default function ClinicMap() {
           }
           )
           console.log(myRegion)
-          mapRef.current.animateToRegion(myRegion, 3 * 1000);
+ 
 
         })();
       }, []);
@@ -82,7 +84,45 @@ export default function ClinicMap() {
     //         </TouchableOpacity>
     //     )
     // };
+    function getClinics(){
+        const latitude = myRegion.latitude;
+        const longitude = myRegion.longitude;
+        const type = 'hospital';
+        const radius = 10000;
+        const key = 'AIzaSyBx8_um411OKC9LMqN49FFh835HXO0k3L4'
+        const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&radius=' + radius + '&type=' + type + '&key=' + key;
+        mapRef.current.animateToRegion(myRegion, 3 * 1000);
+        
+        fetch(url)
+            .then(res => {
+                return res.json()
+            })
+            .then(res => {
+                // for each service returned retrieve its details, put details in clinics list
+                setClinics(res['results'])
+            })
 
+            // catch any errors
+            .catch(error => {
+                console.log(error);
+            });
+        
+        clinics.forEach(element => {
+            
+        });
+        
+
+
+        //console.log(clinics)
+
+    }
+    function goToClinic(item){
+        console.log(item['geometry'].location)
+        setClinicLocation({
+            latitude : item['geometry'].location['lat'],
+            longitude : item['geometry'].location['lng']
+        })
+    }
     return (
         <SafeAreaView style={styles.safeview}>
             <View style={styles.container}>
@@ -100,6 +140,13 @@ export default function ClinicMap() {
 
                 />
             </View>
+            <View style={{alignItems: 'center',}}>
+                <TouchableOpacity
+                onPress={() => getClinics()}
+                style={{backgroundColor: '#b2cded', borderRadius: 10, height: 30,width: '50%',alignItems: 'center',}}>
+                    <Text>Get Nearby Hospitals</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.buttoncontainer}>
                 <TouchableOpacity style={styles.button1}>
                     <Text>Sorted By:</Text>
@@ -114,8 +161,15 @@ export default function ClinicMap() {
             </View>
             <View style={styles.flatlistContainer}>
                 <FlatList
-                    data={Clinics}
-                    renderItem={({ item }) => (<Text style={styles.listName}>{item.name}{"\n"}{item.distance}</Text>)}
+                    data={clinics}
+                    renderItem={({ item }) => (
+                    
+                        <TouchableOpacity onPress={() => goToClinic(item)}>
+                            <Text style={styles.listName}>{item.name}{"\n"}{item.distance}</Text>
+                        </TouchableOpacity>
+                    )
+                        
+                    }
                     keyExtractor = { (item, index) => index.toString() }
                 >
                 </FlatList>
