@@ -82,7 +82,35 @@ export default function ClinicMap() {
     //         </TouchableOpacity>
     //     )
     // };
+    function getClinics(){
+        const latitude = myRegion.latitude;
+        const longitude = myRegion.longitude;
+        const type = 'hospital';
+        const radius = 50000;
+        const clinics = []
+        const key = 'AIzaSyBx8_um411OKC9LMqN49FFh835HXO0k3L4'
+        const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&radius=' + radius + '&type=' + type + '&key=' + key;
+        fetch(url)
+            .then(res => {
+                return res.json()
+            })
+            .then(res => {
+                // for each service returned retrieve its details, put details in clinics list
+                console.log(res)
+            })
 
+            // catch any errors
+            .catch(error => {
+                console.log(error);
+            });
+        
+        
+        
+
+
+        console.log(clinics)
+
+    }
     return (
         <SafeAreaView style={styles.safeview}>
             <View style={styles.container}>
@@ -99,6 +127,13 @@ export default function ClinicMap() {
                     
 
                 />
+            </View>
+            <View style={{alignItems: 'center',}}>
+                <TouchableOpacity
+                onPress={() => getClinics()}
+                style={{backgroundColor: '#b2cded', borderRadius: 10, height: 30,width: '50%',alignItems: 'center',}}>
+                    <Text>Get Nearby Hospitals</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.buttoncontainer}>
                 <TouchableOpacity style={styles.button1}>
