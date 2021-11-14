@@ -3,12 +3,14 @@ import { Text, View, Button, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Onboarding from 'react-native-onboarding-swiper';
 
+//This is the onboarding page. These are for the onboarding screens for new users and guests.
+
 const OnboardingScreen = () => {
     const navigation = useNavigation()
     return (
         <Onboarding
-        onSkip={() => navigation.navigate('Disclaimer')}
-        onDone={() => navigation.navigate('Disclaimer')}
+        onSkip={() => navigation.replace('MainMenu')}
+        onDone={() => navigation.replace('MainMenu')}
         pages={[
             {
                 backgroundColor: '#ffd44d',
@@ -21,12 +23,6 @@ const OnboardingScreen = () => {
                 image: <Image source={require('../../assets/images/onboarding-2.png')} style={styles.imageResizer} />,
                 title: "Tools For Children's Health",
                 subtitle: 'Learn about common childhood illnesses developed in collaboration with our partners and funders.',
-            },
-            {
-                backgroundColor: '#FF4646',
-                image: <Image source={require('../../assets/images/onboarding-3.png')} style={styles.imageResizer} />,
-                title: "Let's Get Started",
-                subtitle: 'Begin learning through knowledge transition.',
             },
             
         ]} 
@@ -52,3 +48,5 @@ const styles = StyleSheet.create({
 })
 
 // 76c1f9
+
+// Test

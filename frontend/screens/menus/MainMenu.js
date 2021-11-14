@@ -14,12 +14,21 @@ export default function MainMenu ()
     function naviagteToSymptomChecker() {
         navigation.navigate('SymptomChecker')
     }
+    function navigateToToolsAndResources() {
+        navigation.navigate('ToolsAndResources')
+    }
+
+    function navigateToSettings() {
+        navigation.navigate('SettingsScreen')
+    }
 
     return(
         <SafeAreaView style={styles.container}>
 
             <View style={styles.containerRow1}>
-                <Pressable style={styles.button}>
+                <Pressable 
+                    style={styles.button}
+                    onPress={() => navigateToToolsAndResources()}>
                     <Text style={styles.text}>Tools and Resources</Text>
                 </Pressable>
                 <Pressable 
@@ -44,7 +53,10 @@ export default function MainMenu ()
                 <Pressable style={styles.button}>
                     <Text style={styles.text}>Saved Locations</Text>
                 </Pressable>
-                <Pressable style={styles.button}>
+                <Pressable 
+                    style={styles.button}
+                    onPress={() => navigateToSettings()}
+                    >
                     <Text style={styles.text}>Settings Menu</Text>
                 </Pressable>
             </View>

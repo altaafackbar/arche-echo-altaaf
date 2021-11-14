@@ -1,10 +1,53 @@
 import React from "react";
+import { useState, useEffect, useRef  } from 'react';
 import { View, Text, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList } from "react-native";
 import MapView from 'react-native-maps';
+import { Marker } from 'react-native-maps';
+import * as Location from 'expo-location';
 // import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ClinicMap() {
+    const [location, setLocation] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
+    const [clinics, setClinics] = useState([]);
+    const mapRef = useRef(null);
+    const [clinicLocation, setClinicLocation] = useState(null)
+    const [myRegion, setRegion] = useState({
+        latitude: 53.5461,
+        longitude: -113.4938,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      });
+    useEffect(() => {
+        (async () => {
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
+          }
+    
+          let location = await Location.getCurrentPositionAsync({});
+          setLocation(location);
+          setRegion({
+            latitude: location['coords'].latitude,
+            longitude: location['coords'].longitude,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          }
+          )
+          console.log(myRegion)
+ 
 
+        })();
+      }, []);
+    
+      let text = 'Waiting..';
+      if (errorMsg) {
+        text = errorMsg;
+      } else if (location) {
+        text = JSON.stringify(location);
+        
+      }
     const Clinics = [
         {
             id: 1,
@@ -41,12 +84,51 @@ export default function ClinicMap() {
     //         </TouchableOpacity>
     //     )
     // };
+    function getClinics(){
+        const latitude = myRegion.latitude;
+        const longitude = myRegion.longitude;
+        const type = 'hospital';
+        const radius = 10000;
+        const key = 'AIzaSyBx8_um411OKC9LMqN49FFh835HXO0k3L4'
+        const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&radius=' + radius + '&type=' + type + '&key=' + key;
+        mapRef.current.animateToRegion(myRegion, 3 * 1000);
+        
+        fetch(url)
+            .then(res => {
+                return res.json()
+            })
+            .then(res => {
+                // for each service returned retrieve its details, put details in clinics list
+                setClinics(res['results'])
+            })
 
+            // catch any errors
+            .catch(error => {
+                console.log(error);
+            });
+        
+        clinics.forEach(element => {
+            
+        });
+        
+
+
+        //console.log(clinics)
+
+    }
+    function goToClinic(item){
+        console.log(item['geometry'].location)
+        setClinicLocation({
+            latitude : item['geometry'].location['lat'],
+            longitude : item['geometry'].location['lng']
+        })
+    }
     return (
         <SafeAreaView style={styles.safeview}>
             <View style={styles.container}>
                 <MapView 
                     style={styles.map}
+                    ref={mapRef}
                     provider = { MapView.PROVIDER_GOOGLE }
                     initialRegion={{
                         latitude: 53.5461,
@@ -54,7 +136,16 @@ export default function ClinicMap() {
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}
+                    
+
                 />
+            </View>
+            <View style={{alignItems: 'center',}}>
+                <TouchableOpacity
+                onPress={() => getClinics()}
+                style={{backgroundColor: '#b2cded', borderRadius: 10, height: 30,width: '50%',alignItems: 'center',}}>
+                    <Text>Get Nearby Hospitals</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.buttoncontainer}>
                 <TouchableOpacity style={styles.button1}>
@@ -70,8 +161,15 @@ export default function ClinicMap() {
             </View>
             <View style={styles.flatlistContainer}>
                 <FlatList
-                    data={Clinics}
-                    renderItem={({ item }) => (<Text style={styles.listName}>{item.name}{"\n"}{item.distance}</Text>)}
+                    data={clinics}
+                    renderItem={({ item }) => (
+                    
+                        <TouchableOpacity onPress={() => goToClinic(item)}>
+                            <Text style={styles.listName}>{item.name}{"\n"}{item.distance}</Text>
+                        </TouchableOpacity>
+                    )
+                        
+                    }
                     keyExtractor = { (item, index) => index.toString() }
                 >
                 </FlatList>
