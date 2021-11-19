@@ -10,6 +10,7 @@ import StarredResources from '../../screens/starred_resources-screen/StarredReso
 import AboutUs from '../../screens/settings_screen/AboutUs';
 import ContactUs from '../../screens/settings_screen/ContactUs';
 import MainMenuV2 from '../../screens/menus/MainMenu-V2';
+import ClinicMapV2 from '../../screens/clinic_map_screen/ClinicMapV2';
 import SettingsScreen from '../../screens/settings_screen/SettingsScreen';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from '@react-navigation/native';
@@ -99,8 +100,8 @@ export default function TabNavigator(props) {
         <Tab.Screen options={{
           tabBarIcon: ({ focused }) => (
             <IconlyPack.Location set='bold' primaryColor={focused ? '#8A76B6' : '#d1d1d6'} />
-          ), headerTitle: 'Find A Clinic Map', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: true, headerTitleStyle: { color: '#1f1f1f' },
-        }} name="Find A Clinic" component={ClinicMap} />
+          ), headerTitle: 'Find A Clinic Map', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: true, headerTitleStyle: { color: colors.text },
+        }} name="Find A Clinic" component={ClinicMapV2} />
   
         <Tab.Screen name="Settings" component={SettingsScreen} options={{
           tabBarIcon: ({ focused }) => (

@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         marginTop: 10,
+        width: '95%',
     },
     horizontalLine: {
         flex: 1, 
