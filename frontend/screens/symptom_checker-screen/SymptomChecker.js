@@ -9,7 +9,7 @@ import bodyImageChest from '../../assets/images/Body-Chest.png'
 import bodyImageStomach from '../../assets/images/Body-Stomach.png'
 import bodyImagePelvis from '../../assets/images/Body-Pelvis.png'
 import bodyImageLegs from '../../assets/images/Body-Legs.png'
-import emergencyImage from '../../assets/images/emergency.png'
+import emergencyImage from '../../assets/images/emergency2.png'
 import TouchableScale from 'react-native-touchable-scale';
 import { ListItem } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';

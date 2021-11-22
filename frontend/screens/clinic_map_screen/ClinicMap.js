@@ -11,6 +11,7 @@ export default function ClinicMap() {
     const [errorMsg, setErrorMsg] = useState(null);
     const [clinics, setClinics] = useState([]);
     const mapRef = useRef(null);
+    const [distances, setDistances] = useState([])
     const [markers, setMarkers] = useState([]);
     const [clinicLocation, setClinicLocation] = useState(null)
     const [myRegion, setRegion] = useState({
@@ -43,7 +44,7 @@ export default function ClinicMap() {
           const radius = 10000;
           const key = 'AIzaSyBx8_um411OKC9LMqN49FFh835HXO0k3L4'
           const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&radius=' + radius + '&type=' + type + '&key=' + key;
-          
+          const clinicList = null
           
           fetch(url)
               .then(res => {
@@ -51,13 +52,37 @@ export default function ClinicMap() {
               })
               .then(res => {
                   // for each service returned retrieve its details, put details in clinics list
+                  res['results'].forEach(element => {
+                    const lat1 = element['geometry']['location'].lat
+                    const long1 = element['geometry']['location'].lng
+                    const lat2 = region['latitude']
+                    const long2 = region['longitude']
+                    
+                    const distance = roundToTwo(getDistanceFromLatLonInKm(lat1,long1,lat2,long2))
+                    element['distance'] = distance
+                  });
+                  
                   setClinics(res['results'])
+                  
               })
   
               // catch any errors
               .catch(error => {
                   //console.log(error);
               });
+
+            clinics.forEach(element => {
+                const distanceList = []
+                const lat1 = element['geometry']['location'].lat
+                const long1 = element['geometry']['location'].lng
+                const lat2 = region['latitude']
+                const long2 = region['longitude']
+                
+                const distance = roundToTwo(getDistanceFromLatLonInKm(lat1,long1,lat2,long2))
+                distanceList.push(distance)
+                setDistances(distanceList)
+
+            });
           setRegion({
             latitude: location['coords'].latitude,
             longitude: location['coords'].longitude,
@@ -87,6 +112,27 @@ export default function ClinicMap() {
     //         </TouchableOpacity>
     //     )
     // };
+    function roundToTwo(num) {    
+        return +(Math.round(num + "e+2")  + "e-2");
+    }
+    function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+        var R = 6371; // Radius of the earth in km
+        var dLat = deg2rad(lat2-lat1);  // deg2rad below
+        var dLon = deg2rad(lon2-lon1); 
+        var a = 
+          Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+          Math.sin(dLon/2) * Math.sin(dLon/2)
+          ; 
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        var d = R * c; // Distance in km
+        return d;
+      }
+      
+      function deg2rad(deg) {
+        return deg * (Math.PI/180)
+      }
+
     function getClinics(){
 
         
@@ -116,7 +162,7 @@ export default function ClinicMap() {
 
     }
     function goToClinic(item){
-        //console.log(item)
+        console.log(item)
         const location = {
             latitude : item['geometry'].location['lat'],
             longitude : item['geometry'].location['lng'],
@@ -134,6 +180,7 @@ export default function ClinicMap() {
                     style={styles.map}
                     ref={mapRef}
                     provider = { MapView.PROVIDER_GOOGLE }
+                    showsUserLocation={true}
                     initialRegion={{
                         latitude: 53.5461,
                         longitude: -113.4938,
@@ -156,6 +203,9 @@ export default function ClinicMap() {
    
 
                 >
+                    {
+                        
+                    }
                     {markers &&
                     markers.map((marker, index) => (
                         <Marker
@@ -195,9 +245,26 @@ export default function ClinicMap() {
                     data={clinics}
                     renderItem={({ item }) => (
                     
-                        <TouchableOpacity onPress={() => goToClinic(item)}>
-                            <Text style={styles.listName}>{item.name}{"\n"}{item.distance}</Text>
+                        <View style={{ padding: 5 }}>
+                        <TouchableOpacity 
+                        onPress={() => {goToClinic(item)}}
+                        style={
+                            { flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center', backgroundColor: "#E7ECF2", borderRadius: 10, height: 60 }
+                        }>
+                            <Text style={{ alignItems: 'flex-start', paddingLeft: 30}}>
+                                {item.name}
+                            </Text>
+                            <Text style={{ fontSize : 12, color : 'grey'}}>
+                                {item.distance} km 
+                            </Text>
+                            <TouchableOpacity style={{ backgroundColor: 'transparent', paddingRight: 20 }}
+                                
+                                
+                            >
+                            </TouchableOpacity>
                         </TouchableOpacity>
+
+                    </View>
                     )
                         
                     }
