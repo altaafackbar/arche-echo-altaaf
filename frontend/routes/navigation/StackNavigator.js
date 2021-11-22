@@ -18,8 +18,6 @@ import ForgotPassword from '../../screens/modals/ForgotPasswordModal';
 import ToolDetail from '../../screens/tools_and_resources_screen/ToolDetail';
 import ClinicMap from '../../screens/clinic_map_screen/ClinicMap';
 import SymptomChecker from '../../screens/symptom_checker-screen/SymptomChecker';
-import AboutUs from '../../screens/settings_screen/AboutUs';
-import ContactUs from '../../screens/settings_screen/ContactUs';
 import RelatedCauses from '../../screens/symptom_checker-screen/RelatedCauses';
 import ToolsAndResources from '../../screens/tools_and_resources_screen/ToolsAndResources';
 import SavedLocations from '../../screens/saved_locations_screen/SavedLocations';
@@ -261,8 +259,8 @@ export default function Navigator() {
         <Stack.Screen options={{ headerTitle: 'SavedLocations', headerShadowVisible: false }} name="SavedLocations" component={SavedLocations} />
         <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false }} name="ToolDetails" component={ToolDetail} />
         <Stack.Screen options={{ headerTitle: 'Admin Screen', headerShadowVisible: false }} name="EditToolsAdmin" component={EditToolsAdmin} />
-        <Stack.Screen options={{headerTitle: 'About Us', headerShadowVisible: false}} name="AboutUs" component={AboutUs}/>
-        <Stack.Screen options={{headerTitle: 'Contact Us', headerShadowVisible: false}} name="ContactUs" component={ContactUs}/>
+        {/* <Stack.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false}} name="StarredResources" component={StarredResources}/>
+          <Stack.Screen options={{headerTitle: 'SavedLocations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/> */}
         {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
       </Stack.Navigator >
   
