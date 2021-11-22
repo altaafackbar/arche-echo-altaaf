@@ -2,10 +2,14 @@ import React, { useCallback, useState, Component, } from 'react'
 import { ScrollView, Pressable, Dimensions, PixelRatio, View, Text, StyleSheet, Button, SafeAreaView } from 'react-native'
 import YoutubeIFrame from 'react-native-youtube-iframe';
 import { useNavigation } from '@react-navigation/native';
-import { useTheme } from '../../components/styles/ThemeProvider';
+import { useTheme } from '@react-navigation/native';
+import themeContext from '../../components/styles/ThemeContext';
 
 
 export default function AboutUs(props) {
+
+    const { setTheme, theme } = React.useContext(themeContext);
+
 
     const w = Math.floor(Dimensions.get('window').width)
     const h = Math.floor(Dimensions.get('window').height)
@@ -87,7 +91,7 @@ export default function AboutUs(props) {
     return (
         // <SafeAreaView style={{ flex: 1, }}>
         <ScrollView>
-            <View style={styles.container}>
+            <View style={[styles.container, {backgroundColor: colors.background}]}>
                 {/* Video */}
                 <View style={styles.playerView}>
                     {!ready && <>

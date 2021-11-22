@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUp snapShot 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "backgroundColor": "#fafafa",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "flex-end",
+        "marginTop": "20%",
+        "padding": 10,
+        "textAlign": "left",
+        "width": "100%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#1f1f1f",
+          "fontSize": 24,
+          "fontWeight": "bold",
+          "paddingLeft": 10,
+        }
+      }
+    >
+      DISCLAIMER
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-end",
+        "overflow": "hidden",
+        "width": "90%",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#1f1f1f",
+          "fontSize": 16,
+          "lineHeight": 26,
+          "paddingLeft": 10,
+          "textAlign": "left",
+        }
+      }
+    >
+      Please remember that ARCHE | ECHO cannot give medical advice. ARCHE | ECHO does not replace your doctor. Call 911 immediately in the event of an emergency.
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginTop": 20,
+        "width": "80%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "transparent",
+          "opacity": 1,
+          "paddingLeft": 13,
+        }
+      }
+    >
+      <Text />
+    </View>
+    <Text
+      style={
+        Object {
+          "fontSize": 10,
+          "marginLeft": 10,
+          "textAlign": "left",
+        }
+      }
+    >
+      I agree to ARCHE | ECHO's terms and conditions and confirm that I have read the disclaimer statement above.
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "padding": 15,
+        "width": "100%",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#007bff",
+          "borderRadius": 5,
+          "height": 40,
+          "marginTop": 20,
+          "opacity": 0.5,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "alignItems": "center",
+            "color": "#fafafa",
+            "fontSize": 16,
+            "fontWeight": "500",
+            "margin": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        Continue
+      </Text>
+    </View>
+  </View>
+</RCTSafeAreaView>
+`;

@@ -17,15 +17,28 @@ function SettingsScreen () {
 
     const {colors, isDark} = useTheme();
 
+    // Change the text in the flatlist for the toggle based on the theme
     const checkMode = theme === 'Light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'
 
     const navigation = useNavigation()
 
+    // Setting up navigation for About Us and Contact Us Pages
+    function navigateToAboutUs() {
+        navigation.navigate('About Us', {screen: 'AboutUs'})
+    }
+
+    function navigateToContactUs() {
+        navigation.navigate('Contact Us', {screen: 'ContactUs'})
+    }
+
+    // Set the color of list item based on the theme 
     const checkItemColor = theme === 'Light' ? '#f2f2f2' : '#313131'
 
+    // Change the > button color in the flatlist based on the theme
     const checkThemeColor = theme === 'Light' ? '#c4c4c4' : '#ffffff'
 
 
+    // Set the data for the flatlist to get information from
     const settingsData = [
         {
             id: '1',
@@ -41,18 +54,24 @@ function SettingsScreen () {
         },
     ]
 
+    // This is the list item. Here I have the list item initialized based on the width of the window.
     const Item = ({ title }) => (
         <View style={[styles.item, {width: Dimensions.get('window').width * 0.95}, {backgroundColor: checkItemColor}]}>
           <Text style={[styles.title, {color: colors.text}]}>{title}</Text>
           <View>
           {title === checkMode ? <DarkThemeToggle></DarkThemeToggle>
-          : <TouchableOpacity>
+          : <TouchableOpacity onPress={() => 
+          {if (title === 'About Us'){navigateToAboutUs()}
+          {if (title === 'Contact Us'){navigateToContactUs()}}
+          }
+          } >
             <Icon name='chevron-right' size={24} color={checkThemeColor}/>
           </TouchableOpacity> }
           </View>
         </View>
       );
 
+      // Set up item object to render inside of the view
       const renderItem = ({ item }) => (
         <Item title={item.title} />
       );

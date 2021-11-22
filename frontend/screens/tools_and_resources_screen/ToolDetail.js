@@ -158,7 +158,7 @@ function ToolDetails() {
                         <>
                             <View style={styles.textView}>
                                 <Text style={styles.infoTitle}>{tool.videoTitle}</Text>
-                                <Text style={styles.infoSubTitle}>{tool.videoInfo}</Text>
+                                <Text style={[styles.infoSubTitle, {color: colors.text}]}>{tool.videoInfo}</Text>
                             </View>
 
                             <View style={styles.subView}>

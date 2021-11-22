@@ -1,15 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { Text, Button, Pressable, StyleSheet, TouchableOpacity, View, Touchable, SafeAreaView, ScrollView, Image, Platform } from 'react-native';
-// import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { FlatGrid } from 'react-native-super-grid';
-// import ToolsAndResources from '../../assets/images/tools-resources-menu.png'
-// import FindAClinic from '../../assets/images/find-clinic-menu.png'
-// import StarredResources from '../../assets/images/starred-resources-menu.png'
-// import SavedLocations from '../../assets/images/saved-locations.png'
-// import Settings from '../../assets/images/settings-menu.png'
-// import SymptomCheck from '../../assets/images/symptom-checker.png'
 import ToolsAndResources from '../../assets/Menu-Images/ToolsandResources.png'
 import FindAClinic from '../../assets/Menu-Images/Map.png'
 import StarredResources from '../../assets/Menu-Images/StarredResources.png'
@@ -28,23 +21,13 @@ export default function MainMenuV2(props) {
 
     const {colors, isDark} = useTheme();
 
+    // Variables to set dynamic background colors
     const background = colors.background
     const color = colors.text
     
     const { setTheme, theme } = React.useContext(themeContext);
 
-    // const containerStyle = {
-    //     flex: 1,
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     /* 
-    //     * the colors.background value will change dynamicly with
-    //     * so if we wanna change its value we can go directly to the pallet
-    //     * this will make super easy to change and maintain mid or end project
-    //     */
-    //     backgroundColor: colors.background,
-    // };
-
+    // This handles the greeting message on the homepage using Firebase and the Date function in Javascript.
     var hour = new Date().getHours()
     const user = firebase.auth().currentUser
     var userName = user.displayName
@@ -55,6 +38,7 @@ export default function MainMenuV2(props) {
     if (hour >= 21 && hour < 24) message += 'Night'
     if (userName != 'Guest') message += `, ${userName}`
 
+    // This whole section is set up for handling navigation to other screens from the main menu.
     const navigation = useNavigation();
 
     function navigateToClinicMap() {
@@ -79,9 +63,12 @@ export default function MainMenuV2(props) {
         navigation.navigate('SavedLocations')
     }
 
+    // Change the color of the cards on the homepage depending on whether or not it's light mode or dark mode.3
     const cardColor = theme === 'Light' ? '#ffffff' : '#313131'
 
 
+    // This is our data list for the flatlist where we set the names of the cards on the home screen
+    // And we set the images for each of the cards.
     const [items, setItems] = React.useState([
         { name: 'Tools and Resources', image: ToolsAndResources },
         { name: 'Symptom Checker', image: SymptomCheck },
