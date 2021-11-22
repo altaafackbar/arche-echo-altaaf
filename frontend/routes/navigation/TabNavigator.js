@@ -111,8 +111,8 @@ export default function TabNavigator(props) {
   
         <Tab.Screen options={{ headerTitle: 'Starred Resources', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="StarredResources" component={StarredResources} />
         <Tab.Screen options={{ headerTitle: 'Saved Locations', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="SavedLocations" component={SavedLocations} />
-        <Tab.Screen options={{ headerTitle: 'About Us', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="AboutUs" component={AboutUs} />
-        <Tab.Screen options={{ headerTitle: 'Contact Us', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="ContactUs" component={ContactUs} />
+        {/* <Tab.Screen options={{ headerTitle: 'About Us', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="AboutUs" component={AboutUs} />
+        <Tab.Screen options={{ headerTitle: 'Contact Us', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="ContactUs" component={ContactUs} /> */}
       </Tab.Navigator>
     )
   

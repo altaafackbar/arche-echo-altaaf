@@ -63,8 +63,8 @@ export default function DrawerNav() {
             <Drawer.Screen name="Home" component={Navigator} initialParams={{ screen: 'Home' }}  />
             <Drawer.Screen name="Symptom Checker" component={TabNavigator} initialParams={{ screen: 'Symptom Checker' }} />
             <Drawer.Screen name="Find A Clinic Map" component={TabNavigator} initialParams={{ screen: 'Find A Clinic' }} />
-            <Drawer.Screen name="About Us" component={TabNavigator} initialParams={{ screen: 'AboutUs' }} />
-            <Drawer.Screen name="Contact Us" component={TabNavigator} initialParams={{ screen: 'ContactUs' }} />
+            {/* <Drawer.Screen name="About Us" component={TabNavigator} initialParams={{ screen: 'AboutUs' }} />
+            <Drawer.Screen name="Contact Us" component={TabNavigator} initialParams={{ screen: 'ContactUs' }} /> */}
           </Drawer.Navigator>
         </NavigationContainer>
       </themeContext.Provider>
