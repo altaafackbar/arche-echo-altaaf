@@ -10,30 +10,11 @@ import { useTheme } from '@react-navigation/native';
 import themeContext from './ThemeContext'
 import { DarkThemeToggle } from './DarkThemeToggle';
 
-
 const CustomDrawer = (props) => {
 
     const { setTheme, theme } = React.useContext(themeContext);
 
     const {colors, isDark} = useTheme();
-
-    const navigation = useNavigation()
-
-    function navigateToSymptomChecker() {
-        navigation.navigate('Symptom Checker')
-    }
-
-    function navigateToClinicMap() {
-        navigation.navigate('Find A Clinic')
-    }
-
-    function navigateToAboutUs() {
-        navigation.navigate('AboutUs', {screen: 'AboutUs'})
-    }
-
-    function navigateToContactUs() {
-        navigation.navigate('ContactUs', {screen: 'ContactUs'})
-    }
 
     // Set up calling function for both 911 and 811
     function dialNumber (number) {
@@ -71,43 +52,7 @@ const CustomDrawer = (props) => {
 
             <View style={styles.horizontalLine} />
             
-            {/* <DrawerItemList {...props} /> */}
-            <DrawerItem
-            label="Symptom Checker"
-            focused={false}
-            activeTintColor="#8a76b6"
-            inactiveTintColor="#bcbcc1"
-            activeBackgroundColor="#e8e4f0"
-            inactiveBackgroundColor="transparent"
-            onPress={() => navigateToSymptomChecker()}
-            />
-            <DrawerItem
-            label="Find A Clinic Map"
-            focused={false}
-            activeTintColor="#8a76b6"
-            inactiveTintColor="#bcbcc1"
-            activeBackgroundColor="#e8e4f0"
-            inactiveBackgroundColor="transparent"
-            onPress={() => navigateToClinicMap()}
-            />
-            <DrawerItem
-            label="About Us"
-            focused={false}
-            activeTintColor="#8a76b6"
-            inactiveTintColor="#bcbcc1"
-            activeBackgroundColor="#e8e4f0"
-            inactiveBackgroundColor="transparent"
-            onPress={() => navigateToAboutUs()}
-            />
-            <DrawerItem
-            label="Contact Us"
-            focused={false}
-            activeTintColor="#8a76b6"
-            inactiveTintColor="#bcbcc1"
-            activeBackgroundColor="#e8e4f0"
-            inactiveBackgroundColor="transparent"
-            onPress={() => navigateToContactUs()}
-            />
+            <DrawerItemList {...props} />
             <View style={[styles.horizontalLine, {marginBottom: 10}]} />
             <View style={styles.switchThemeContainer}>
                 <Text style={styles.switchThemeHeaderText}>{checkMode}</Text>
@@ -171,7 +116,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         marginTop: 10,
-        width: '95%',
     },
     horizontalLine: {
         flex: 1, 

@@ -20,7 +20,7 @@ export default function AboutUs(props) {
             flex: 1,
             backgroundColor: "#fff",     // #f0f7f8
             alignItems: 'center',
-            // height: h,
+            height: h,
             // justifyContent: 'center', // put things centered on vertical axis
         },
 
@@ -89,13 +89,13 @@ export default function AboutUs(props) {
     const [ready, setReady] = useState(false);
 
     return (
-        <SafeAreaView style={{ flex: 1, }}>
+        // <SafeAreaView style={{ flex: 1, }}>
         <ScrollView>
             <View style={[styles.container, {backgroundColor: colors.background}]}>
                 {/* Video */}
                 <View style={styles.playerView}>
                     {!ready && <>
-                        <Text style={{color: colors.text}}>Video will arrive shortly ..</Text>
+                        <Text>Video will arrive shortly ..</Text>
                     </>}
                     <YoutubeIFrame
                         width={w * 0.8}
@@ -131,6 +131,6 @@ export default function AboutUs(props) {
                 </View>
             </View>
         </ScrollView >
-        </SafeAreaView>
+        // </SafeAreaView>
     )
 }

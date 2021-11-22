@@ -24,11 +24,11 @@ function SettingsScreen () {
 
     // Setting up navigation for About Us and Contact Us Pages
     function navigateToAboutUs() {
-        navigation.navigate('AboutUs', {screen: 'AboutUs'})
+        navigation.navigate('About Us', {screen: 'AboutUs'})
     }
 
     function navigateToContactUs() {
-        navigation.navigate('ContactUs', {screen: 'ContactUs'})
+        navigation.navigate('Contact Us', {screen: 'ContactUs'})
     }
 
     // Set the color of list item based on the theme 
