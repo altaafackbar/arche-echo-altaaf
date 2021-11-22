@@ -1,14 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { ScrollView, View, Text, StyleSheet, SafeAreaView, TouchableOpacity, TouchableWithoutFeedback, Keyboard, TextInput, Alert, KeyboardAvoidingView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useTheme } from '../../components/styles/ThemeProvider';
 import { CheckBox, SocialIcon } from 'react-native-elements';
 import * as Linking from 'expo-linking';
 import { firebase } from '../../Firebase';
+import { useTheme } from '@react-navigation/native';
+import themeContext from '../../components/styles/ThemeContext';
 
 
 function ContactUs() {     // undefined
     const { colors, isDark } = useTheme();
+    const { setTheme, theme } = React.useContext(themeContext);
     const [message, setMessage] = useState('')
     const [parents, setParents] = useState(false)
     const [researcher, setResearcher] = useState(false)
@@ -95,8 +97,8 @@ function ContactUs() {     // undefined
     }
 
     return (
-
-        <SafeAreaView style={styles.container}>
+        
+        <SafeAreaView style={[styles.container, {backgroundColor: colors.background}]}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
