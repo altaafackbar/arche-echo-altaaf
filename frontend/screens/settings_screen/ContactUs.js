@@ -255,7 +255,6 @@ const styles = StyleSheet.create({
     mediaContainer: {
         width: '90%',
         backgroundColor: 'transparent',
-        height: 377, 
         borderColor: '#dadada', 
         borderWidth: 2,
         borderRadius: 20,
