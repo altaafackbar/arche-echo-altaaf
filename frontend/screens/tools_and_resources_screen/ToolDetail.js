@@ -49,19 +49,19 @@ function ToolDetails() {
                 setTool(documentSnapshot.data())
 
                 // for disable button use
-                // const disable = disabledButton
-                // if (documentSnapshot.data().video === false) {
-                //     disable.push(0)
-                //     setDisabledButton(disable)
-                // }
-                // if (documentSnapshot.data().eBook === false) {
-                //     disable.push(1)
-                //     setDisabledButton(disable)
-                // }
-                // if (documentSnapshot.data().infographic === false) {
-                //     disable.push(2)
-                //     setDisabledButton(disable)
-                // }
+                const disable = [...disabledButton]
+                if (documentSnapshot.data().video === false) {
+                    disable.push(0)
+                    setDisabledButton(disable)
+                }
+                if (documentSnapshot.data().eBook === false) {
+                    disable.push(1)
+                    setDisabledButton(disable)
+                }
+                if (documentSnapshot.data().infographic === false) {
+                    disable.push(2)
+                    setDisabledButton(disable)
+                }
 
                 if (documentSnapshot.data().video === false) {
                     if (documentSnapshot.data().eBook === true) {
@@ -122,7 +122,8 @@ function ToolDetails() {
     const component2 = () => <Text>eBook</Text>
     const component3 = () => <Text>InfoGraphic</Text>
 
-    const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }]
+    // const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }]
+    const buttons = ['Video', 'eBook', 'InfoGraphic']
     // const {selectedIndex} = this.state
     // const {playing} = this.state
     return (
@@ -137,7 +138,9 @@ function ToolDetails() {
                         onPress={updateIndex}
                         selectedIndex={selectedIndex}
                         buttons={buttons}
-                        // disabled={disabledButton}
+                        disabled={disabledButton}
+                        disabledTextStyle={{opacity: 0.5}}
+                        // disabledStyle={{backgroundColor: '#cccccc', }}
                         containerStyle={{ height: 45, borderRadius: 15, }}
                     />
                 </>
@@ -406,4 +409,10 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#1f1f1f',
     },
+    disabledText: {
+        fontSize: 16,
+        fontWeight: '500',
+        color: '#fafafa',
+        opacity: 0.5,
+    }
 })

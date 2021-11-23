@@ -160,7 +160,7 @@ function ContactUs() {     // undefined
                         <Text style={styles.textStyle}>For all other inquiries, please feel free to message us through our contact form below.</Text>
                     </View>
                     <View style={styles.textContainer}>
-                        <Text style={{ textAlign: 'center', fontSize: 16, color: '#8A76B6', }}>Are you contacting us as...</Text>
+                        <Text style={{textAlign: 'center', fontSize: 16, color: '#8A76B6',}}>Are you contacting us as...(Please select all that apply.)</Text>
                     </View>
                     {/* Checkboxes let user pick what roles are they */}
                     <View style={styles.checkBoxContainer}>
@@ -212,7 +212,7 @@ function ContactUs() {     // undefined
                     </View>
                     <View style={styles.checkBoxContainer}>
                         <CheckBox
-                            title='If you want us to contact you'
+                            title='Check this box if you want us to reply you.'
                             checked={contact}
                             onPress={() => { setContact(!contact) }}
                         />
