@@ -159,17 +159,6 @@ export default function Login() {
                     <Image source={GIcon} style={styles.socialIcons} />
                     <Text style={styles.socialIconText}>Sign In With Google</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.socialSignUpStyles}>
-                    <Image source={AppleIcon} style={{
-                        padding: 10,
-                        margin: 20,
-                        width: 24,
-                        height: 24,
-                        resizeMode: 'contain'
-                    }} />
-                    <Text style={styles.socialIconText}>Sign In With Apple</Text>
-                </TouchableOpacity>
             </View>
 
             <View style={{ width: '90%', padding: 10, alignItems: 'center', paddingBottom: '10%' }}>

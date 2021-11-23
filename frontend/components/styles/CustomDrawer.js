@@ -28,11 +28,11 @@ const CustomDrawer = (props) => {
     }
 
     function navigateToAboutUs() {
-        navigation.navigate('AboutUs', {screen: 'AboutUs'})
+        navigation.navigate('About Us', {screen: 'AboutUs'})
     }
 
     function navigateToContactUs() {
-        navigation.navigate('ContactUs', {screen: 'ContactUs'})
+        navigation.navigate('Contact Us', {screen: 'ContactUs'})
     }
 
     // Set up calling function for both 911 and 811
