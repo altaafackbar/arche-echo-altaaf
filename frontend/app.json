@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "arche-echo",
+    "name": "ARCHE | ECHO",
     "slug": "arche-echo",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,10 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      },
+      "package": "com.archeecho.archeecho"
     }
   }
 }
