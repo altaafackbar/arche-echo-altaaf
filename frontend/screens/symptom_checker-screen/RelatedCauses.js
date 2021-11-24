@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList, Image, Picker } from "react-native";;
 import TouchableScale from 'react-native-touchable-scale';
 import { ListItem, Card } from 'react-native-elements';
-import symptoms from './symptoms.json'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from "lodash"
 import { useNavigation } from '@react-navigation/native';
@@ -22,12 +21,10 @@ export default function RelatedCauses({ route }) {
         .onSnapshot(querySnapshot => {
             const tools = []
             const detailedTools = []
-            var id = 0
             querySnapshot.forEach(documentSnapshot => {
                 const temp = documentSnapshot.data()
                 
                 causes.forEach(element => {
-                    //console.log(element.name, temp['lower_name'])
                     if(element.name == temp['name']){
                         temp['exists'] = true
                         temp['id'] = element.id.toString()
@@ -45,9 +42,10 @@ export default function RelatedCauses({ route }) {
             var missingResourcesTools = _.difference(causes,detailedTools);
             missingResourcesTools.forEach(element => {
                 element['exists'] = false
+                element['id'] = element['id'].toString()
                 tools.push(element)
             });
-            console.log(tools)
+
             setToolsList(tools)
 
             
@@ -58,13 +56,9 @@ export default function RelatedCauses({ route }) {
 
     function getToolsData(item){
         var tool = item.name;
-        // console.log(tool)
 
         navigation.navigate('ToolDetails', {toolName: tool})
 
-        // Alert.alert('Test', tool, [
-        //     {text: 'OK', onPress: () => console.log('OK pressed')}
-        // ]);
     };
     //const user = await firestore().collection('Users').doc('ABC').get();
     return (
