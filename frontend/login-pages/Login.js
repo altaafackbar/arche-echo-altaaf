@@ -33,13 +33,22 @@ export default function Login() {
             .then(userCredentials => {
                 const user = userCredentials.user;
                 console.log('Logged in with: ', user.email)
+                navigateToLanding()
             })
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                Alert.alert('Error', errorMessage, [
-                    {text: 'OK', onPress: () => console.log('OK pressed')}
-                ]);
+                if (error.code === 'auth/wrong-password') {
+                    Alert.alert('Warning', 'The password is incorrect, please enter a correct password.', [
+                        {text: 'OK', onPress: () => console.log('OK pressed')}
+                    ]);
+                }
+                if (error.code === 'auth/invalid-email') {
+                    Alert.alert('Warning', 'email format not correct, please enter a correct email address.', [
+                        {text: 'OK', onPress: () => console.log('OK pressed')}
+                    ]);
+                }
+                
             })
     };
     
@@ -54,7 +63,7 @@ export default function Login() {
                     console.log('Enable anonymous in your firebase console.');
                 }
 
-                console.error(error);
+                // console.error(error);
             })
     };
 
@@ -99,6 +108,7 @@ export default function Login() {
                                 admin: false,
                                 starTools: ['empty'],
                             })
+                        navigateToLanding()
                     })
                     .catch((error) => {
                         // Handle Errors here.
@@ -145,7 +155,7 @@ export default function Login() {
             <LoginButton
                 type='signIn'
                 content='Sign In'
-                onPress={() => {handleLogIn(); navigateToLanding()}}
+                onPress={() => {handleLogIn()}}
             ></LoginButton>
             
 

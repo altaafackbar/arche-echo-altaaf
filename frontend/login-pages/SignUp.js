@@ -195,7 +195,7 @@ export default function SignUp ()
                         {text: 'OK', onPress: () => console.log('OK pressed')}
                     ]);
                 }
-            console.error(error)
+            // console.error(error)
             });
     };
 
@@ -210,7 +210,7 @@ export default function SignUp ()
                     console.log('Enable anonymous in your firebase console.');
                 }
 
-                console.error(error);
+                // console.error(error);
             })
     };
 
