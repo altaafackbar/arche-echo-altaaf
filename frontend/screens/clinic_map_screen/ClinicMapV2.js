@@ -358,7 +358,7 @@ export default function ClinicMap({ route }) {
                     <Card containerStyle={styles.card_item}>
                         <Card.Title  style={{ color: 'black', }}>{item.name}</Card.Title>
                         <Card.Divider></Card.Divider>
-                        <View style={{ flexDirection: 'row', backgroundColor: colors.background }}>
+                        <View style={{ flexDirection: 'row', backgroundColor: "#E7ECF2" }}>
                             <Text style={{ flex: 0.8 }}>{item.duration} away by car      -      {item.distance}</Text>
                             
                             {bookmarked.includes(item.name) === true &&
