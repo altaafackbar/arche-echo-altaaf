@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Dimensions, useColorScheme } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions, useColorScheme, SafeAreaView } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
 import CustomDrawer from '../../components/styles/CustomDrawer';
@@ -11,7 +11,8 @@ import Navigator from './StackNavigator';
 import TabNavigator from './TabNavigator';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'react-native';
 
 const Drawer = createDrawerNavigator()
 
@@ -45,7 +46,9 @@ export default function DrawerNav() {
   
   
     return (
-      <themeContext.Provider value={themeData}>
+      <View style={{flex: 1}}>
+      <StatusBar barStyle={theme == 'Light' ? 'dark-content' : 'light-content'} />
+        <themeContext.Provider value={themeData}>
         <NavigationContainer theme={theme == 'Light' ? CustomDefaultTheme : CustomDarkTheme}>
           <Drawer.Navigator
             screenOptions={{
@@ -68,6 +71,8 @@ export default function DrawerNav() {
           </Drawer.Navigator>
         </NavigationContainer>
       </themeContext.Provider>
+      </View>
+        
   
     )
   

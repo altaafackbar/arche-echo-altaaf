@@ -100,7 +100,7 @@ export default function TabNavigator(props) {
         <Tab.Screen options={{
           tabBarIcon: ({ focused }) => (
             <IconlyPack.Location set='bold' primaryColor={focused ? '#8A76B6' : '#d1d1d6'} />
-          ), headerTitle: 'Find A Clinic Map', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: true, headerTitleStyle: { color: colors.text },
+          ), headerTitle: 'Find A Clinic Map', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: false, headerTitleStyle: { color: colors.text },
         }} name="Find A Clinic" component={ClinicMapV2} />
   
         <Tab.Screen name="Settings" component={SettingsScreen} options={{
