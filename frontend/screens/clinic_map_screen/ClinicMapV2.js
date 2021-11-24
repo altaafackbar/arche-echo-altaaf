@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/core";
 import SavedLocations from '../../assets/Menu-Images/SavedLocations.png'
 import { firebase } from '../../Firebase';
 
-export default function ClinicMap() {
+export default function ClinicMap({ route }) {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
     const [currentList, setCurrentList] = useState([]);
@@ -31,7 +31,6 @@ export default function ClinicMap() {
     const checkMode = theme === 'Light' ? [] : DarkMapStyle
     const mapRef = useRef(null);
     const [showBookmarked, setShowBookmarked] = useState(false)
-    
     const [clinicLocation, setClinicLocation] = useState(null)
     const [myRegion, setRegion] = useState({
         latitude: 53.5461,
