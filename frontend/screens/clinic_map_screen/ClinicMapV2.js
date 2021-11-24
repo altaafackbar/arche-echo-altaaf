@@ -284,6 +284,7 @@ export default function ClinicMap({ route }) {
             <View style={styles.container}>
             <MapView 
                     style={styles.map}
+                    customMapStyle={checkMode}
                     ref={mapRef}
                     showsUserLocation={true}
                     provider = { MapView.PROVIDER_GOOGLE }
