@@ -1,18 +1,14 @@
-import React, { useCallback, useMemo } from "react";
-import { useState, useEffect, useRef  } from 'react';
-import { Card, colors} from 'react-native-elements';
-import { Alert, View, Text, Image, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList, Button, StatusBar } from "react-native";
-import MapView from 'react-native-maps';
-import { Marker } from 'react-native-maps';
-import * as Location from 'expo-location';
 import { AntDesign } from '@expo/vector-icons';
 import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet";
-import { useTheme } from '@react-navigation/native';
-import themeContext from "../../components/styles/ThemeContext";
-import { DarkMapStyle } from "../../components/styles/CustomMaps";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from "@react-navigation/core";
-import SavedLocations from '../../assets/Menu-Images/SavedLocations.png'
+import { useTheme } from '@react-navigation/native';
+import * as Location from 'expo-location';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Card } from 'react-native-elements';
+import MapView, { Marker } from 'react-native-maps';
+import { DarkMapStyle } from "../../components/styles/CustomMaps";
+import themeContext from "../../components/styles/ThemeContext";
 import { firebase } from '../../Firebase';
 
 export default function ClinicMap({ route }) {
@@ -20,7 +16,7 @@ export default function ClinicMap({ route }) {
     const [errorMsg, setErrorMsg] = useState(null);
     const [currentList, setCurrentList] = useState([]);
     const [clinics, setClinics] = useState([]);
-    const {colors, isDark} = useTheme();
+    const { colors, isDark } = useTheme();
     const [markers, setMarkers] = useState([]);
     const [bookmarked, setBookmarked] = useState([]);
     const [bookmarkedDetail, setBookmarkedDetail] = useState([]);
@@ -37,109 +33,110 @@ export default function ClinicMap({ route }) {
         longitude: -113.4938,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
-      });
-      useEffect(() => {
+    });
+    useEffect(() => {
         (async () => {
-          let { status } = await Location.requestForegroundPermissionsAsync();
-          if (status !== 'granted') {
-            setErrorMsg('Permission to access location was denied');
-            return;
-          }
-    
-          let location = await Location.getCurrentPositionAsync({});
-          setLocation(location);
-          const region = {
-            latitude: location['coords'].latitude,
-            longitude: location['coords'].longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
-          }
-          mapRef.current.animateToRegion(region, 3 * 1000);
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
 
-          const latitude = region['latitude'];
-          const longitude = region['longitude'];
-          const type = 'hospital';
-          const radius = 8000;
-          const key = 'AIzaSyBx8_um411OKC9LMqN49FFh835HXO0k3L4'
-          const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&radius=' + radius + '&type=' + type + '&key=' + key;
-          const clinicList = []
-          
-          fetch(url)
-              .then(res => {
-                  return res.json()
-              })
-              .then(res => {
-                  // for each service returned retrieve its details, put details in clinics list
-                  res['results'].forEach(element => {
-                    const lat1 = element['geometry']['location'].lat
-                    const long1 = element['geometry']['location'].lng
-                    const lat2 = region['latitude']
-                    const long2 = region['longitude']
-                    //get distance and driving time for each location using distance matrix google API
-                    var urlToFetchDistance = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='+lat1+','+long1+'&destinations='+lat2+'%2C'+long2+'&key=' + key;
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+            const region = {
+                latitude: location['coords'].latitude,
+                longitude: location['coords'].longitude,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+            }
+            mapRef.current.animateToRegion(region, 3 * 1000);
 
-                    fetch(urlToFetchDistance)
-                            .then(res => {
+            const latitude = region['latitude'];
+            const longitude = region['longitude'];
+            const type = 'hospital';
+            const radius = 8000;
+            const key = 'AIzaSyBx8_um411OKC9LMqN49FFh835HXO0k3L4'
+            const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&radius=' + radius + '&type=' + type + '&key=' + key;
+            const clinicList = []
+
+            fetch(url)
+                .then(res => {
                     return res.json()
-                    })
-                    .then(res => {
-                        
-                              var distanceString = res.rows[0].elements[0].distance.text;
-                              var distanceNum = res.rows[0].elements[0].distance.value;
-                              var durationString = res.rows[0].elements[0].duration.text;
-                              var durationNum = res.rows[0].elements[0].duration.value;
-                              element['duration'] = durationString
-                              element['durationNum'] = durationNum
-                              element['distance'] = distanceString
-                              element['distanceNum'] = distanceNum
-                              clinicList.push(element)
-                
-                     
-                     })
-                    .catch(error => {
-                             console.log("Problem occurred");
-                     });
-                    //const distance = roundToTwo(getDistanceFromLatLonInKm(lat1,long1,lat2,long2))
-                    
-                  });
+                })
+                .then(res => {
+                    // for each service returned retrieve its details, put details in clinics list
+                    res['results'].forEach(element => {
+                        const lat1 = element['geometry']['location'].lat
+                        const long1 = element['geometry']['location'].lng
+                        const lat2 = region['latitude']
+                        const long2 = region['longitude']
+                        //get distance and driving time for each location using distance matrix google API
+                        var urlToFetchDistance = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=' + lat1 + ',' + long1 + '&destinations=' + lat2 + '%2C' + long2 + '&key=' + key;
 
-                  setClinics(clinicList)
-                  setCurrentList(clinicList)
-                  
-              })
-  
-              // catch any errors
-              .catch(error => {
-                  //console.log(error);
-              });
-          setRegion({
-            latitude: location['coords'].latitude,
-            longitude: location['coords'].longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
-          }
-          )
- 
+                        fetch(urlToFetchDistance)
+                            .then(res => {
+                                return res.json()
+                            })
+                            .then(res => {
+
+                                var distanceString = res.rows[0].elements[0].distance.text;
+                                var distanceNum = res.rows[0].elements[0].distance.value;
+                                var durationString = res.rows[0].elements[0].duration.text;
+                                var durationNum = res.rows[0].elements[0].duration.value;
+                                element['duration'] = durationString
+                                element['durationNum'] = durationNum
+                                element['distance'] = distanceString
+                                element['distanceNum'] = distanceNum
+                                clinicList.push(element)
+
+
+                            })
+                            .catch(error => {
+                                console.log("Problem occurred");
+                            });
+                        //const distance = roundToTwo(getDistanceFromLatLonInKm(lat1,long1,lat2,long2))
+
+                    });
+
+                    setClinics(clinicList)
+                    setCurrentList(clinicList)
+
+                })
+
+                // catch any errors
+                .catch(error => {
+                    //console.log(error);
+                });
+            setRegion({
+                latitude: location['coords'].latitude,
+                longitude: location['coords'].longitude,
+                latitudeDelta: 0.01,
+                longitudeDelta: 0.01,
+            }
+            )
+
 
         })();
         const user = firebase.auth().currentUser
         setUser(user)
         firebase.firestore().collection('users').doc(user.uid)
-        .onSnapshot(documentSnapshot => {
+            .onSnapshot(documentSnapshot => {
 
-            setBookmarked(documentSnapshot.data().bookmarkedLocations)
-        })
+                setBookmarked(documentSnapshot.data().bookmarkedLocations)
+            })
 
 
-      }, []);
-    
-      let text = 'Waiting..';
-      if (errorMsg) {
+    }, []);
+
+    // Not used? 
+    let text = 'Waiting..';
+    if (errorMsg) {
         text = errorMsg;
-      } else if (location) {
+    } else if (location) {
         text = JSON.stringify(location);
-        
-      }
+
+    }
 
     // function Item({name, distance}) {
     //     return (
@@ -149,62 +146,51 @@ export default function ClinicMap({ route }) {
     //         </TouchableOpacity>
     //     )
     // };
-    function fillList(){
+    function fillList() {    // empty?
 
     }
-    function getClinics(){
+    function getClinics() {
         var sortedClinics = clinics
         sortedClinics.sort((a, b) => Number(a.durationNum) - Number(b.durationNum));
-        
+
         setClinics(sortedClinics)
-        
-        
+
+
         const marks = []
         for (let index = 0; index < clinics.length; index++) {
             const element = clinics[index];
             marks.push({
-                id : index,
-                latitude : element['geometry'].location['lat'],
-                longitude : element['geometry'].location['lng'],
+                id: index,
+                latitude: element['geometry'].location['lat'],
+                longitude: element['geometry'].location['lng'],
                 latitudeDelta: 0.01,
                 longitudeDelta: 0.01,
-                name : element.name,
-                description : element.vicinity
+                name: element.name,
+                description: element.vicinity
 
 
-            }) 
+            })
         }
-        
+
         setMarkers(marks)
-        //console.log('markers',markers)
-
-        
-
-
-        //console.log(clinics)
-
     }
-    function goToClinic(item){
- 
+    function goToClinic(item) {
         const location = {
-            latitude : item['geometry'].location['lat'],
-            longitude : item['geometry'].location['lng'],
+            latitude: item['geometry'].location['lat'],
+            longitude: item['geometry'].location['lng'],
             latitudeDelta: 0.005,
             longitudeDelta: 0.005,
         }
         sheetRef.current?.snapToIndex(0);
         mapRef.current.animateToRegion(location, 3 * 1000);
-
-
-
     }
-    function showBookmarkedLocations(){
+    function showBookmarkedLocations() {
         setShowBookmarked(!showBookmarked)
-        if(!showBookmarked){
+        if (!showBookmarked) {
             console.log('show')
             const details = []
             bookmarked.forEach(element => {
-                if(typeof(element) == "object"){
+                if (typeof (element) == "object") {
                     details.push(element)
                 }
             });
@@ -212,7 +198,7 @@ export default function ClinicMap({ route }) {
             setCurrentList(details)
 
         }
-        else{
+        else {
             console.log('no')
             setCurrentList(clinics)
         }
@@ -231,24 +217,24 @@ export default function ClinicMap({ route }) {
 
     const snapPoints = useMemo(() => ["30%", "50%", "90%"], []);
 
-    useEffect (() => {
+    useEffect(() => {
         getClinics()
     }, [])
 
     // Header for bottom sheet
     const listHeader = () => (
-        <View style={[styles.sheetHeaderContainer, {backgroundColor: colors.background}]}>
-        <Text style={[styles.sheetHeaderText, {color: colors.text}]}>Nearby Health Services</Text>
+        <View style={[styles.sheetHeaderContainer, { backgroundColor: colors.background }]}>
+            <Text style={[styles.sheetHeaderText, { color: colors.text }]}>Nearby Health Services</Text>
             <View style={styles.nearbyButtonContainer}>
                 <TouchableOpacity
-                onPress={() => getClinics()}
-                style={styles.nearbyButton}>
+                    onPress={() => getClinics()}
+                    style={styles.nearbyButton}>
                     <Text style={styles.nearbyButtonText}>Get Nearby Health Services</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                onPress={() => showBookmarkedLocations()}
-                style={showBookmarked ? styles.savedLocationsButtonTrue : styles.savedLocationsButton}>
-                    <Text style={[styles.nearbyButtonText, {color: showBookmarked? 'white' : '#4285F4'}]}>View Saved Locations</Text>
+                    onPress={() => showBookmarkedLocations()}
+                    style={showBookmarked ? styles.savedLocationsButtonTrue : styles.savedLocationsButton}>
+                    <Text style={[styles.nearbyButtonText, { color: showBookmarked ? 'white' : '#4285F4' }]}>View Saved Locations</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -256,16 +242,16 @@ export default function ClinicMap({ route }) {
 
 
 
-    function handleBookmark(item){
+    function handleBookmark(item) {
         var newBookmarked = [...bookmarked]
         newBookmarked.push(item.name, item)
         firebase.firestore().collection('users').doc(user.uid)
             .update({
-                bookmarkedLocations : newBookmarked,
+                bookmarkedLocations: newBookmarked,
             })
     }
 
-    function handleUnBookmark(item){
+    function handleUnBookmark(item) {
         var newBookmarked = [...bookmarked]
         var index = newBookmarked.indexOf(item.name)
         if (index > -1) {
@@ -277,17 +263,17 @@ export default function ClinicMap({ route }) {
                 bookmarkedLocations: newBookmarked,
             })
     }
-    
+
 
     return (
         <SafeAreaView style={styles.safeview}>
             <View style={styles.container}>
-            <MapView 
+                <MapView
                     style={styles.map}
                     customMapStyle={checkMode}
                     ref={mapRef}
                     showsUserLocation={true}
-                    provider = { MapView.PROVIDER_GOOGLE }
+                    provider={MapView.PROVIDER_GOOGLE}
                     showsUserLocation={true}
                     initialRegion={{
                         latitude: 53.5461,
@@ -298,18 +284,18 @@ export default function ClinicMap({ route }) {
                 >
 
                     {markers &&
-                    markers.map((marker, index) => (
-                        <Marker
-                        key={index}
-                        coordinate={{
-                            latitude: marker['latitude'],
-                            longitude: marker['longitude'],
-                            
-                        }}
-                        title={marker['name']}
-                        description={marker['description']}
-                        />
-                    ))}
+                        markers.map((marker, index) => (
+                            <Marker
+                                key={index}
+                                coordinate={{
+                                    latitude: marker['latitude'],
+                                    longitude: marker['longitude'],
+
+                                }}
+                                title={marker['name']}
+                                description={marker['description']}
+                            />
+                        ))}
                 </MapView>
             </View>
             {/* <View style={styles.buttoncontainer}>
@@ -327,14 +313,14 @@ export default function ClinicMap({ route }) {
 
 
             <BottomSheet
-            ref={sheetRef}
-            snapPoints={snapPoints}
-            onChange={handleSheetChange}
-            handleIndicatorStyle={{backgroundColor: '#dadada'}}
-            handleStyle={{backgroundColor: colors.background}}
+                ref={sheetRef}
+                snapPoints={snapPoints}
+                onChange={handleSheetChange}
+                handleIndicatorStyle={{ backgroundColor: '#dadada' }}
+                handleStyle={{ backgroundColor: colors.background }}
             >
 
-            {/* <View style={{alignItems: 'center',}}>
+                {/* <View style={{alignItems: 'center',}}>
                 <TouchableOpacity
                 onPress={() => getClinics()}
                 style={{backgroundColor: '#b2cded', borderRadius: 10, height: 30,width: '50%',alignItems: 'center',}}>
@@ -342,67 +328,67 @@ export default function ClinicMap({ route }) {
                 </TouchableOpacity>
             </View> */}
 
-            <BottomSheetFlatList 
-            data={currentList}
-            renderItem={({ item }) => (
-                    /*
-                    <View style={styles.listItem}>
-                    <Icon name='map-marker' size={24} color='#4285F4'></Icon>
-                        <TouchableOpacity 
-                        onLongPress={() => saveItem()}
-                        onPress={() => goToClinic(item)}>
-                        <Text style={[styles.listName, {color: colors.text}]}>{item.name}{"\n"}{item.distance}-{item.duration}</Text>
-                    </TouchableOpacity>
-                    </View>*/
-                    <TouchableOpacity onPress={() =>goToClinic(item)}>
-                    <Card containerStyle={styles.card_item}>
-                        <Card.Title  style={{ color: 'black', }}>{item.name}</Card.Title>
-                        <Card.Divider></Card.Divider>
-                        <View style={{ flexDirection: 'row', backgroundColor: "#E7ECF2" }}>
-                            <Text style={{ flex: 0.8 }}>{item.duration} away by car      -      {item.distance}</Text>
-                            
-                            {bookmarked.includes(item.name) === true &&
-                                <>
-                                    <TouchableOpacity style={{ flex: 0.2, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={() =>handleUnBookmark(item)}>
-                                        <AntDesign name="heart" size={35} color="black" />
-                                        {/* <AntDesign name="staro" size={35} color="black"/> */}
-                                    </TouchableOpacity>
-                                </>
-                            }
-                            {/* unstarred tools */}
-                            {bookmarked.includes(item.name) === false &&
-                                <>
-                                    <TouchableOpacity style={{ flex: 0.2, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={() => handleBookmark(item)}>
-                                        <AntDesign name="hearto" size={35} color="black" />
-                                    </TouchableOpacity>
-                                </>
-                            }
-                            
+                <BottomSheetFlatList
+                    data={currentList}
+                    renderItem={({ item }) => (
+                        /*
+                        <View style={styles.listItem}>
+                        <Icon name='map-marker' size={24} color='#4285F4'></Icon>
+                            <TouchableOpacity 
+                            onLongPress={() => saveItem()}
+                            onPress={() => goToClinic(item)}>
+                            <Text style={[styles.listName, {color: colors.text}]}>{item.name}{"\n"}{item.distance}-{item.duration}</Text>
+                        </TouchableOpacity>
+                        </View>*/
+                        <TouchableOpacity onPress={() => goToClinic(item)}>
+                            <Card containerStyle={styles.card_item}>
+                                <Card.Title style={{ color: 'black', }}>{item.name}</Card.Title>
+                                <Card.Divider></Card.Divider>
+                                <View style={{ flexDirection: 'row', backgroundColor: "#E7ECF2" }}>
+                                    <Text style={{ flex: 0.8 }}>{item.duration} away by car      -      {item.distance}</Text>
 
-                        </View>
-                    </Card>
-                </TouchableOpacity>
+                                    {bookmarked.includes(item.name) === true &&
+                                        <>
+                                            <TouchableOpacity style={{ flex: 0.2, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={() => handleUnBookmark(item)}>
+                                                <AntDesign name="heart" size={35} color="black" />
+                                                {/* <AntDesign name="staro" size={35} color="black"/> */}
+                                            </TouchableOpacity>
+                                        </>
+                                    }
+                                    {/* unstarred tools */}
+                                    {bookmarked.includes(item.name) === false &&
+                                        <>
+                                            <TouchableOpacity style={{ flex: 0.2, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={() => handleBookmark(item)}>
+                                                <AntDesign name="hearto" size={35} color="black" />
+                                            </TouchableOpacity>
+                                        </>
+                                    }
 
-                    
-                )
-                    
-                }
-                keyExtractor = { (item, index) => index.toString() }
-                ListHeaderComponent={listHeader}
-                contentContainerStyle={{backgroundColor: colors.background}}
-            />
+
+                                </View>
+                            </Card>
+                        </TouchableOpacity>
+
+
+                    )
+
+                    }
+                    keyExtractor={(item, index) => index.toString()}
+                    ListHeaderComponent={listHeader}
+                    contentContainerStyle={{ backgroundColor: colors.background }}
+                />
 
             </BottomSheet>
-                
+
         </SafeAreaView>
-        
+
 
 
     );
-  }
-  
-  const styles = StyleSheet.create({
-    safeview:{
+}
+
+const styles = StyleSheet.create({
+    safeview: {
         flex: 1,
     },
     container: {
@@ -412,8 +398,8 @@ export default function ClinicMap({ route }) {
     },
     map: {
         ...StyleSheet.absoluteFillObject,
-    //   width: Dimensions.get('window').width,
-    //   height: Dimensions.get('window').height,
+        //   width: Dimensions.get('window').width,
+        //   height: Dimensions.get('window').height,
     },
     buttoncontainer: {
         flex: 1,
@@ -489,8 +475,8 @@ export default function ClinicMap({ route }) {
         fontSize: 16,
         fontWeight: '500',
         color: '#fafafa'
-      },
-      savedLocationsButton: {
+    },
+    savedLocationsButton: {
         borderRadius: 5,
         width: '75%',
         height: 40,
@@ -511,7 +497,7 @@ export default function ClinicMap({ route }) {
         borderColor: '#4285F4',
         borderWidth: 2,
     },
-    
+
     imageDetails: {
         resizeMode: 'center',
         alignItems: 'center',
@@ -525,4 +511,4 @@ export default function ClinicMap({ route }) {
         margin: 15,
     },
 
-  });
+});

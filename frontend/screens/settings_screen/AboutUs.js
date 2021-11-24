@@ -91,11 +91,11 @@ export default function AboutUs(props) {
     return (
         // <SafeAreaView style={{ flex: 1, }}>
         <ScrollView>
-            <View style={[styles.container, {backgroundColor: colors.background}]}>
+            <View style={[styles.container, { backgroundColor: colors.background }]}>
                 {/* Video */}
                 <View style={styles.playerView}>
                     {!ready && <>
-                        <Text style={{color: colors.text}}>Video will arrive shortly ..</Text>
+                        <Text>Video will arrive shortly ..</Text>
                     </>}
                     <YoutubeIFrame
                         width={w * 0.8}
@@ -105,28 +105,11 @@ export default function AboutUs(props) {
                     />
                 </View>
 
-                {/* Button hided as requested */}
-                {/* <View style={{ paddingTop: 20 }}>
-                        <Pressable
-                            style={({ pressed }) => [
-                                {
-                                    backgroundColor: pressed
-                                        ? 'rgb(210, 210, 210)'
-                                        : 'white'
-                                }, styles.viewPartner]}
-                            onPress={() => this.props.navigation.navigate('ContactUs')}>
-                            <Text style={styles.viewPartnerText} >
-                                View Our Partners
-                            </Text>
-                        </Pressable>
-                    </View> */}
-
                 {/* About */}
                 <View style={{ paddingTop: 20 }}>
                     <View style={styles.aboutWrapper} >
                         <Text style={styles.aboutTitleText} >  ABOUT ARCHE | ECHO </Text>
-                        <Text style={styles.aboutText} >ECHO and ARCHE are research programs housed at the University of Alberta.
-                            ECHO and ARCHE are aimed at improving child health outcomes and are part of a movement in healthcare towards more patient - and family - centered care, where patients and their families actively engage in health care decision - making in partnership with nurses, clinicians, and other healthcare professionals. </Text>
+                        <Text style={styles.aboutText} >ECHO and ARCHE are research programs housed at the University of Alberta. These research programs are aimed at improving child health outcomes and are part of a movement in healthcare towards more patient and family-centered care. The ARCHE | ECHO app is a reflection of these beliefs and was made in partnership with parents, nurses, clinicians and other healthcare professionals. </Text>
                     </View>
                 </View>
             </View>
