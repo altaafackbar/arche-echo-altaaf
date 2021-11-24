@@ -108,8 +108,7 @@ export default function Login() {
                                     starTools: ['empty'],
                                     bookmarkedLocations: ['empty'],
                                 })
-                        }
-                        navigateToLanding()
+                        }              
                     })
                     .catch((error) => {
                         // Handle Errors here.
