@@ -288,7 +288,8 @@ export default function SymptomChecker() {
                             backgroundColor: "#96bdeb",
                             borderRadius: 10, height: 40,
                             justifyContent: 'center',
-                            borderWidth: 1
+                            borderWidth: 1,
+                            borderColor: '#4285F4' 
                         }
 
                     }>
