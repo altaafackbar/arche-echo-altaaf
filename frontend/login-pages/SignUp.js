@@ -112,20 +112,23 @@ export default function SignUp ()
                         displayName: result.user.givenName,
                         })
                     const currentUser = firebase.auth().currentUser;
-                    const db = firebase.firestore()
-                    // console.log(result.user.email)
-                    // console.log(result.user.givenName)
-                    db
-                        .collection('users')
-                        .doc(currentUser.uid)
-                        .set({
-                            email: currentUser.email,
-                            firstName: result.user.givenName,
-                            lastName: result.user.familyName,
-                            disclaimer: false,
-                            admin: false,
-                            starTools: ['empty'],
-                        })
+                    // check if user is first time login
+                    if (currentUser.metadata.creationTime === currentUser.metadata.lastSignInTime) {
+                        const db = firebase.firestore()
+                        db
+                            .collection('users')
+                            .doc(currentUser.uid)
+                            .set({
+                                email: currentUser.email,
+                                firstName: result.user.givenName,
+                                lastName: result.user.familyName,
+                                disclaimer: false,
+                                admin: false,
+                                starTools: ['empty'],
+                                bookmarkedLocations: ['empty'],
+                            })
+                    }
+                    
                 })
                 .catch((error) => {
                     // Handle Errors here.
@@ -158,7 +161,6 @@ export default function SignUp ()
                     displayName: firstName,
                 })
                 const currentUser = firebase.auth().currentUser;
-                console.log(currentUser.email)
                 // creating user profile on firestore
                 // using user uid as a unique key to connect user profile
                 const db = firebase.firestore()
@@ -172,12 +174,13 @@ export default function SignUp ()
                         disclaimer: false,
                         admin: false,
                         starTools: ['empty'],
+                        bookmarkedLocations: ['empty'],
                     })
                     .then(() => {
-                        console.log('User created');
+                        // console.log('User created');
                     })
                     .catch((error) => {
-                        console.error('Error writing document: ', error);
+                        // console.error('Error writing document: ', error);
                     });
             })
             .catch(error => {
