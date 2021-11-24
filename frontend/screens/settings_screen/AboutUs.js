@@ -100,7 +100,7 @@ export default function AboutUs(props) {
                     <YoutubeIFrame
                         width={w * 0.8}
                         height={w * 9 / 20}
-                        videoId={"ydQnzU4nV6Q"}
+                        videoId={"QwCOEDxgLlQ"}
                         onReady={() => { setReady(true) }}
                     />
                 </View>
