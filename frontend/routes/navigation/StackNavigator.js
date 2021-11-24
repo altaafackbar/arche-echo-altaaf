@@ -90,6 +90,7 @@ export default function Navigator() {
           options={{
             headerTitle: '',
             headerShadowVisible: false,
+            headerTransparent: false,
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => handleAnonymousSignIn()}
@@ -261,8 +262,8 @@ export default function Navigator() {
         <Stack.Screen options={{ headerTitle: 'SavedLocations', headerShadowVisible: false }} name="SavedLocations" component={SavedLocations} />
         <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false }} name="ToolDetails" component={ToolDetail} />
         <Stack.Screen options={{ headerTitle: 'Admin Screen', headerShadowVisible: false }} name="EditToolsAdmin" component={EditToolsAdmin} />
-        <Stack.Screen options={{headerTitle: 'About Us', headerShadowVisible: false}} name="AboutUs" component={AboutUs}/>
-        <Stack.Screen options={{headerTitle: 'Contact Us', headerShadowVisible: false}} name="ContactUs" component={ContactUs}/>
+        <Stack.Screen options={{headerTitle: 'About Us', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: false}} name="About Us" component={AboutUs}/>
+        <Stack.Screen options={{headerTitle: 'Contact Us', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: false}} name="Contact Us" component={ContactUs}/>
         {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
       </Stack.Navigator >
   

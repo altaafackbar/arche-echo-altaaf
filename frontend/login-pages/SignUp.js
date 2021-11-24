@@ -273,17 +273,6 @@ export default function SignUp ()
             <Image source={GIcon} style={styles.socialIcons}/>
             <Text style={styles.socialIconText}>Sign Up With Google</Text>
         </TouchableOpacity>
-
-        {/* Sign Up With Apple button */}
-        <TouchableOpacity
-        style={styles.socialSignUpStyles}>
-            <Image source={AppleIcon} style={{padding: 10,
-            margin: 20,
-            width: 24,
-            height: 24,
-            resizeMode: 'contain'}}/>
-            <Text style={styles.socialIconText}>Sign Up With Apple</Text>
-        </TouchableOpacity>
         </View>
 
         {/* Already Have An Account dialog at the bottom */}

@@ -227,6 +227,7 @@ export default function ClinicMap() {
             <MapView 
                     style={styles.map}
                     ref={mapRef}
+                    showsUserLocation={true}
                     provider = { MapView.PROVIDER_GOOGLE }
                     showsUserLocation={true}
                     initialRegion={{
@@ -357,7 +358,7 @@ export default function ClinicMap() {
         flex: 1,
         flexWrap: 'wrap',
         // backgroundColor: "#E7ECF2",
-        width: Dimensions.get('window').width,
+        // width: Dimensions.get('window').width,
         fontSize: 16,
         fontWeight: 'bold',
         marginLeft: 10,
