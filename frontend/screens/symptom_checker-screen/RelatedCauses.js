@@ -17,27 +17,40 @@ export default function RelatedCauses({ route }) {
 
     
     useEffect(() => {
+        
         firebase.firestore().collection('tools')
         .onSnapshot(querySnapshot => {
             const tools = []
+            const detailedTools = []
             var id = 0
             querySnapshot.forEach(documentSnapshot => {
                 const temp = documentSnapshot.data()
-                temp['id'] = id.toString()
+                
                 causes.forEach(element => {
                     //console.log(element.name, temp['lower_name'])
                     if(element.name == temp['name']){
                         temp['exists'] = true
+                        temp['id'] = element.id.toString()
                         tools.push(temp)
+                        detailedTools.push(element)
+                        
                     }
 
 
+
                 });
-                id = id + 1
 
             })
-
+            //add tools that have no resources to list
+            var missingResourcesTools = _.difference(causes,detailedTools);
+            missingResourcesTools.forEach(element => {
+                element['exists'] = false
+                tools.push(element)
+            });
+            console.log(tools)
             setToolsList(tools)
+
+            
         })
 
     }, [])
@@ -75,7 +88,7 @@ export default function RelatedCauses({ route }) {
                     <Card.Title h4 style={{color: '#8A76B6',}}>{item.name}</Card.Title>
                     <Card.Divider></Card.Divider>
                     <View>
-                        <Text>{item.details}</Text>
+                        <Text>{item.exists ? item.details : 'Resource coming soon!'}</Text>
                     </View>
                     </Card>
                 </TouchableOpacity>

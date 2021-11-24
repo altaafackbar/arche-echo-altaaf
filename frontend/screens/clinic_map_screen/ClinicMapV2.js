@@ -18,10 +18,12 @@ import { firebase } from '../../Firebase';
 export default function ClinicMap() {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    const [currentList, setCurrentList] = useState([]);
     const [clinics, setClinics] = useState([]);
     const {colors, isDark} = useTheme();
     const [markers, setMarkers] = useState([]);
     const [bookmarked, setBookmarked] = useState([]);
+    const [bookmarkedDetail, setBookmarkedDetail] = useState([]);
     const [user, setUser] = useState(null);
     const { setTheme, theme } = React.useContext(themeContext);
     const sheetRef = useRef(null);
@@ -86,7 +88,9 @@ export default function ClinicMap() {
                               var distanceString = res.rows[0].elements[0].distance.text;
                               var distanceNum = res.rows[0].elements[0].distance.value;
                               var durationString = res.rows[0].elements[0].duration.text;
+                              var durationNum = res.rows[0].elements[0].duration.value;
                               element['duration'] = durationString
+                              element['durationNum'] = durationNum
                               element['distance'] = distanceString
                               element['distanceNum'] = distanceNum
                               clinicList.push(element)
@@ -101,6 +105,7 @@ export default function ClinicMap() {
                   });
 
                   setClinics(clinicList)
+                  setCurrentList(clinicList)
                   
               })
   
@@ -126,6 +131,7 @@ export default function ClinicMap() {
             setBookmarked(documentSnapshot.data().bookmarkedLocations)
         })
 
+
       }, []);
     
       let text = 'Waiting..';
@@ -149,7 +155,7 @@ export default function ClinicMap() {
     }
     function getClinics(){
         var sortedClinics = clinics
-        sortedClinics.sort((a, b) => Number(a.distanceNum) - Number(b.distanceNum));
+        sortedClinics.sort((a, b) => Number(a.durationNum) - Number(b.durationNum));
         
         setClinics(sortedClinics)
         
@@ -195,6 +201,22 @@ export default function ClinicMap() {
     }
     function showBookmarkedLocations(){
         setShowBookmarked(!showBookmarked)
+        if(!showBookmarked){
+            console.log('show')
+            const details = []
+            bookmarked.forEach(element => {
+                if(typeof(element) == "object"){
+                    details.push(element)
+                }
+            });
+            setBookmarkedDetail(details)
+            setCurrentList(details)
+
+        }
+        else{
+            console.log('no')
+            setCurrentList(clinics)
+        }
     }
 
     const navigation = useNavigation()
@@ -232,15 +254,12 @@ export default function ClinicMap() {
             </View>
         </View>
     )
-    function saveItem(){
-        Alert.alert('Location has been saved to "Saved Locations"')
 
-    }
 
 
     function handleBookmark(item){
         var newBookmarked = [...bookmarked]
-        newBookmarked.push(item.name)
+        newBookmarked.push(item.name, item)
         firebase.firestore().collection('users').doc(user.uid)
             .update({
                 bookmarkedLocations : newBookmarked,
@@ -251,7 +270,7 @@ export default function ClinicMap() {
         var newBookmarked = [...bookmarked]
         var index = newBookmarked.indexOf(item.name)
         if (index > -1) {
-            newBookmarked.splice(index, 1)
+            newBookmarked.splice(index, index + 1)
         }
         // console.log(starred)
         firebase.firestore().collection('users').doc(user.uid)
@@ -259,6 +278,7 @@ export default function ClinicMap() {
                 bookmarkedLocations: newBookmarked,
             })
     }
+    
 
     return (
         <SafeAreaView style={styles.safeview}>
@@ -323,7 +343,7 @@ export default function ClinicMap() {
             </View> */}
 
             <BottomSheetFlatList 
-            data={showBookmarked ? clinics : clinics}
+            data={currentList}
             renderItem={({ item }) => (
                     /*
                     <View style={styles.listItem}>
@@ -339,7 +359,7 @@ export default function ClinicMap() {
                         <Card.Title  style={{ color: 'black', }}>{item.name}</Card.Title>
                         <Card.Divider></Card.Divider>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text style={{ flex: 0.8 }}>{item.distance}    -    {item.duration} away </Text>
+                            <Text style={{ flex: 0.8 }}>{item.duration} away by car      -      {item.distance}</Text>
                             
                             {bookmarked.includes(item.name) === true &&
                                 <>

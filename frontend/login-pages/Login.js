@@ -98,6 +98,7 @@ export default function Login() {
                                 disclaimer: true,
                                 admin: false,
                                 starTools: ['empty'],
+                                bookmarkedLocations: ['empty']
                             })
                     })
                     .catch((error) => {
