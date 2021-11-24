@@ -1,15 +1,19 @@
 import React, { useCallback, useMemo } from "react";
 import { useState, useEffect, useRef  } from 'react';
-import { View, Text, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList, Button, StatusBar } from "react-native";
+import { Card} from 'react-native-elements';
+import { Alert, View, Text, Image, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList, Button, StatusBar } from "react-native";
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
+import { AntDesign } from '@expo/vector-icons';
 import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { useTheme } from '@react-navigation/native';
 import themeContext from "../../components/styles/ThemeContext";
 import { DarkMapStyle } from "../../components/styles/CustomMaps";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useNavigation } from "@react-navigation/core";
+import SavedLocations from '../../assets/Menu-Images/SavedLocations.png'
+import { firebase } from '../../Firebase';
 
 export default function ClinicMap() {
     const [location, setLocation] = useState(null);
@@ -17,11 +21,14 @@ export default function ClinicMap() {
     const [clinics, setClinics] = useState([]);
     const {colors, isDark} = useTheme();
     const [markers, setMarkers] = useState([]);
+    const [bookmarked, setBookmarked] = useState([]);
+    const [user, setUser] = useState(null);
     const { setTheme, theme } = React.useContext(themeContext);
     const sheetRef = useRef(null);
     const checkItemColor = theme === 'Light' ? '#bcbcc1' : '#313131'
     const checkMode = theme === 'Light' ? [] : DarkMapStyle
     const mapRef = useRef(null);
+    
     const [clinicLocation, setClinicLocation] = useState(null)
     const [myRegion, setRegion] = useState({
         latitude: 53.5461,
@@ -50,10 +57,10 @@ export default function ClinicMap() {
           const latitude = region['latitude'];
           const longitude = region['longitude'];
           const type = 'hospital';
-          const radius = 10000;
+          const radius = 8000;
           const key = 'AIzaSyBx8_um411OKC9LMqN49FFh835HXO0k3L4'
           const url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + latitude + ',' + longitude + '&radius=' + radius + '&type=' + type + '&key=' + key;
-          const clinicList = null
+          const clinicList = []
           
           fetch(url)
               .then(res => {
@@ -66,12 +73,33 @@ export default function ClinicMap() {
                     const long1 = element['geometry']['location'].lng
                     const lat2 = region['latitude']
                     const long2 = region['longitude']
+                    //get distance and driving time for each location using distance matrix google API
+                    var urlToFetchDistance = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='+lat1+','+long1+'&destinations='+lat2+'%2C'+long2+'&key=' + key;
+
+                    fetch(urlToFetchDistance)
+                            .then(res => {
+                    return res.json()
+                    })
+                    .then(res => {
+                        
+                              var distanceString = res.rows[0].elements[0].distance.text;
+                              var distanceNum = res.rows[0].elements[0].distance.value;
+                              var durationString = res.rows[0].elements[0].duration.text;
+                              element['duration'] = durationString
+                              element['distance'] = distanceString
+                              element['distanceNum'] = distanceNum
+                              clinicList.push(element)
+                
+                     
+                     })
+                    .catch(error => {
+                             console.log("Problem occurred");
+                     });
+                    //const distance = roundToTwo(getDistanceFromLatLonInKm(lat1,long1,lat2,long2))
                     
-                    const distance = roundToTwo(getDistanceFromLatLonInKm(lat1,long1,lat2,long2))
-                    element['distance'] = distance
                   });
-                  
-                  setClinics(res['results'])
+
+                  setClinics(clinicList)
                   
               })
   
@@ -102,6 +130,13 @@ export default function ClinicMap() {
  
 
         })();
+        const user = firebase.auth().currentUser
+        setUser(user)
+        firebase.firestore().collection('users').doc(user.uid)
+        .onSnapshot(documentSnapshot => {
+            console.log(documentSnapshot.data().bookmarkedLocations)
+            setBookmarked(documentSnapshot.data().bookmarkedLocations)
+        })
 
       }, []);
     
@@ -121,29 +156,13 @@ export default function ClinicMap() {
     //         </TouchableOpacity>
     //     )
     // };
-    function roundToTwo(num) {    
-        return +(Math.round(num + "e+2")  + "e-2");
-    }
-    function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-        var R = 6371; // Radius of the earth in km
-        var dLat = deg2rad(lat2-lat1);  // deg2rad below
-        var dLon = deg2rad(lon2-lon1); 
-        var a = 
-          Math.sin(dLat/2) * Math.sin(dLat/2) +
-          Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-          Math.sin(dLon/2) * Math.sin(dLon/2)
-          ; 
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-        var d = R * c; // Distance in km
-        return d;
-      }
-      
-      function deg2rad(deg) {
-        return deg * (Math.PI/180)
-      }
 
     function getClinics(){
-
+        var sortedClinics = clinics
+        sortedClinics.sort((a, b) => Number(a.distanceNum) - Number(b.distanceNum));
+        
+        setClinics(sortedClinics)
+        
         
         const marks = []
         for (let index = 0; index < clinics.length; index++) {
@@ -178,7 +197,9 @@ export default function ClinicMap() {
             latitudeDelta: 0.005,
             longitudeDelta: 0.005,
         }
+        sheetRef.current?.snapToIndex(0);
         mapRef.current.animateToRegion(location, 3 * 1000);
+        console.log(clinics)
 
 
     }
@@ -218,8 +239,33 @@ export default function ClinicMap() {
             </View>
         </View>
     )
+    function saveItem(){
+        Alert.alert('Location has been saved to "Saved Locations"')
+
+    }
 
 
+    function handleBookmark(item){
+        var newBookmarked = [...bookmarked]
+        newBookmarked.push(item.name)
+        firebase.firestore().collection('users').doc(user.uid)
+            .update({
+                bookmarkedLocations : newBookmarked,
+            })
+    }
+
+    function handleUnBookmark(item){
+        var newBookmarked = [...bookmarked]
+        var index = newBookmarked.indexOf(item.name)
+        if (index > -1) {
+            newBookmarked.splice(index, 1)
+        }
+        // console.log(starred)
+        firebase.firestore().collection('users').doc(user.uid)
+            .update({
+                bookmarkedLocations: newBookmarked,
+            })
+    }
 
     return (
         <SafeAreaView style={styles.safeview}>
@@ -286,13 +332,43 @@ export default function ClinicMap() {
             <BottomSheetFlatList 
             data={clinics}
             renderItem={({ item }) => (
+                    /*
                     <View style={styles.listItem}>
                     <Icon name='map-marker' size={24} color='#4285F4'></Icon>
-                        <TouchableOpacity onPress={() => goToClinic(item)}>
-                        <Text style={[styles.listName, {color: colors.text}]}>{item.name}{"\n"}{item.distance}</Text>
+                        <TouchableOpacity 
+                        onLongPress={() => saveItem()}
+                        onPress={() => goToClinic(item)}>
+                        <Text style={[styles.listName, {color: colors.text}]}>{item.name}{"\n"}{item.distance}-{item.duration}</Text>
                     </TouchableOpacity>
-                    
-                    </View>
+                    </View>*/
+                    <TouchableOpacity onPress={() =>goToClinic(item)}>
+                    <Card containerStyle={styles.card_item}>
+                        <Card.Title  style={{ color: 'black', }}>{item.name}</Card.Title>
+                        <Card.Divider></Card.Divider>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={{ flex: 0.8 }}>{item.distance}</Text>
+                            <Text style={{ flex: 0.8 }}>{item.duration} away</Text>
+                            {bookmarked.includes(item.name) === true &&
+                                <>
+                                    <TouchableOpacity style={{ flex: 0.2, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={() =>handleUnBookmark(item)}>
+                                        <AntDesign name="heart" size={35} color="black" />
+                                        {/* <AntDesign name="staro" size={35} color="black"/> */}
+                                    </TouchableOpacity>
+                                </>
+                            }
+                            {/* unstarred tools */}
+                            {bookmarked.includes(item.name) === false &&
+                                <>
+                                    <TouchableOpacity style={{ flex: 0.2, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={() => handleBookmark(item)}>
+                                        <AntDesign name="hearto" size={35} color="black" />
+                                    </TouchableOpacity>
+                                </>
+                            }
+                            
+
+                        </View>
+                    </Card>
+                </TouchableOpacity>
 
                     
                 )
@@ -410,6 +486,18 @@ export default function ClinicMap() {
         marginTop: 20,
         borderColor: '#4285F4',
         borderWidth: 2,
+    },
+    imageDetails: {
+        resizeMode: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%'
+    },
+    card_item: {
+        flex: 1,
+        backgroundColor: "#E7ECF2",
+        borderRadius: 15,
+        margin: 15,
     },
 
   });
