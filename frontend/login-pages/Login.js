@@ -39,7 +39,12 @@ export default function Login() {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 if (error.code === 'auth/wrong-password') {
-                    Alert.alert('Error', 'The password is incorrect, please enter a correct password.', [
+                    Alert.alert('Warning', 'The password is incorrect, please enter a correct password.', [
+                        {text: 'OK', onPress: () => console.log('OK pressed')}
+                    ]);
+                }
+                if (error.code === 'auth/invalid-email') {
+                    Alert.alert('Warning', 'email format not correct, please enter a correct email address.', [
                         {text: 'OK', onPress: () => console.log('OK pressed')}
                     ]);
                 }
@@ -58,7 +63,7 @@ export default function Login() {
                     console.log('Enable anonymous in your firebase console.');
                 }
 
-                console.error(error);
+                // console.error(error);
             })
     };
 
