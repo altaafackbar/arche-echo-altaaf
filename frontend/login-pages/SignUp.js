@@ -125,6 +125,7 @@ export default function SignUp ()
                             disclaimer: false,
                             admin: false,
                             starTools: ['empty'],
+                            bookmarkedLocations: ['empty']
                         })
                 })
                 .catch((error) => {

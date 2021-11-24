@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import { useState, useEffect, useRef  } from 'react';
-import { Card} from 'react-native-elements';
+import { Card, colors} from 'react-native-elements';
 import { Alert, View, Text, Image, StyleSheet, Dimensions, SafeAreaView, ScrollView, Pressable, TouchableOpacity, FlatList, Button, StatusBar } from "react-native";
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
@@ -28,6 +28,7 @@ export default function ClinicMap() {
     const checkItemColor = theme === 'Light' ? '#bcbcc1' : '#313131'
     const checkMode = theme === 'Light' ? [] : DarkMapStyle
     const mapRef = useRef(null);
+    const [showBookmarked, setShowBookmarked] = useState(false)
     
     const [clinicLocation, setClinicLocation] = useState(null)
     const [myRegion, setRegion] = useState({
@@ -107,19 +108,6 @@ export default function ClinicMap() {
               .catch(error => {
                   //console.log(error);
               });
-
-            clinics.forEach(element => {
-                const distanceList = []
-                const lat1 = element['geometry']['location'].lat
-                const long1 = element['geometry']['location'].lng
-                const lat2 = region['latitude']
-                const long2 = region['longitude']
-                
-                const distance = roundToTwo(getDistanceFromLatLonInKm(lat1,long1,lat2,long2))
-                distanceList.push(distance)
-                setDistances(distanceList)
-
-            });
           setRegion({
             latitude: location['coords'].latitude,
             longitude: location['coords'].longitude,
@@ -134,7 +122,7 @@ export default function ClinicMap() {
         setUser(user)
         firebase.firestore().collection('users').doc(user.uid)
         .onSnapshot(documentSnapshot => {
-            console.log(documentSnapshot.data().bookmarkedLocations)
+
             setBookmarked(documentSnapshot.data().bookmarkedLocations)
         })
 
@@ -156,7 +144,9 @@ export default function ClinicMap() {
     //         </TouchableOpacity>
     //     )
     // };
+    function fillList(){
 
+    }
     function getClinics(){
         var sortedClinics = clinics
         sortedClinics.sort((a, b) => Number(a.distanceNum) - Number(b.distanceNum));
@@ -190,7 +180,7 @@ export default function ClinicMap() {
 
     }
     function goToClinic(item){
-        console.log(item)
+ 
         const location = {
             latitude : item['geometry'].location['lat'],
             longitude : item['geometry'].location['lng'],
@@ -199,9 +189,12 @@ export default function ClinicMap() {
         }
         sheetRef.current?.snapToIndex(0);
         mapRef.current.animateToRegion(location, 3 * 1000);
-        console.log(clinics)
 
 
+
+    }
+    function showBookmarkedLocations(){
+        setShowBookmarked(!showBookmarked)
     }
 
     const navigation = useNavigation()
@@ -232,9 +225,9 @@ export default function ClinicMap() {
                     <Text style={styles.nearbyButtonText}>Get Nearby Health Services</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                onPress={() => navigateToSavedLocations()}
-                style={styles.savedLocationsButton}>
-                    <Text style={[styles.nearbyButtonText, {color: '#4285F4'}]}>View Saved Locations</Text>
+                onPress={() => showBookmarkedLocations()}
+                style={showBookmarked ? styles.savedLocationsButtonTrue : styles.savedLocationsButton}>
+                    <Text style={[styles.nearbyButtonText, {color: showBookmarked? 'white' : '#4285F4'}]}>View Saved Locations</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -330,7 +323,7 @@ export default function ClinicMap() {
             </View> */}
 
             <BottomSheetFlatList 
-            data={clinics}
+            data={showBookmarked ? clinics : clinics}
             renderItem={({ item }) => (
                     /*
                     <View style={styles.listItem}>
@@ -346,8 +339,8 @@ export default function ClinicMap() {
                         <Card.Title  style={{ color: 'black', }}>{item.name}</Card.Title>
                         <Card.Divider></Card.Divider>
                         <View style={{ flexDirection: 'row' }}>
-                            <Text style={{ flex: 0.8 }}>{item.distance}</Text>
-                            <Text style={{ flex: 0.8 }}>{item.duration} away</Text>
+                            <Text style={{ flex: 0.8 }}>{item.distance}    -    {item.duration} away </Text>
+                            
                             {bookmarked.includes(item.name) === true &&
                                 <>
                                     <TouchableOpacity style={{ flex: 0.2, alignContent: 'center', alignItems: 'center', paddingTop: '5%' }} onPress={() =>handleUnBookmark(item)}>
@@ -487,6 +480,18 @@ export default function ClinicMap() {
         borderColor: '#4285F4',
         borderWidth: 2,
     },
+    savedLocationsButtonTrue: {
+        backgroundColor: '#4285F4',
+        borderRadius: 5,
+        width: '75%',
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+        borderColor: '#4285F4',
+        borderWidth: 2,
+    },
+    
     imageDetails: {
         resizeMode: 'center',
         alignItems: 'center',
