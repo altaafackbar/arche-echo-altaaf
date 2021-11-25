@@ -10,7 +10,6 @@ import StarredResources from '../../screens/starred_resources-screen/StarredReso
 import AboutUs from '../../screens/settings_screen/AboutUs';
 import ContactUs from '../../screens/settings_screen/ContactUs';
 import MainMenuV2 from '../../screens/menus/MainMenu-V2';
-import ClinicMapV2 from '../../screens/clinic_map_screen/ClinicMapV2';
 import SettingsScreen from '../../screens/settings_screen/SettingsScreen';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from '@react-navigation/native';
@@ -111,8 +110,8 @@ export default function TabNavigator(props) {
   
         <Tab.Screen options={{ headerTitle: 'Starred Resources', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="StarredResources" component={StarredResources} />
         <Tab.Screen options={{ headerTitle: 'Saved Locations', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="SavedLocations" component={SavedLocations} />
-        {/* <Tab.Screen options={{ headerTitle: 'About Us', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="AboutUs" component={AboutUs} />
-        <Tab.Screen options={{ headerTitle: 'Contact Us', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="ContactUs" component={ContactUs} /> */}
+        <Tab.Screen options={{ headerTitle: 'About Us', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="AboutUs" component={AboutUs} />
+        <Tab.Screen options={{ headerTitle: 'Contact Us', headerShadowVisible: false, headerTitleAlign: 'center', tabBarButton: () => null, tabBarVisible: false }} name="ContactUs" component={ContactUs} />
       </Tab.Navigator>
     )
   
