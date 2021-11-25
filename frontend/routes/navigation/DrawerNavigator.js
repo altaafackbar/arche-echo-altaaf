@@ -1,10 +1,15 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions, useColorScheme, SafeAreaView } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
 import CustomDrawer from '../../components/styles/CustomDrawer';
+import { firebase } from '../../Firebase';
 import themeContext from '../../components/styles/ThemeContext';
+import { useTheme } from '@react-navigation/native';
+import swipeContext from '../../components/styles/SwipeContext';
 import Navigator from './StackNavigator';
 import TabNavigator from './TabNavigator';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
 
@@ -14,6 +19,10 @@ export default function DrawerNav() {
 
   const [theme, setTheme] = React.useState('Light');
   const themeData = { theme, setTheme };
+
+  const { colors, isDark } = useTheme();
+
+  const swipe = React.useState(1)
 
   const CustomDefaultTheme = {
     dark: false,

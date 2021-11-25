@@ -1,8 +1,11 @@
-import { View, Text, StyleSheet, Platform } from 'react-native'
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, Platform, Button } from 'react-native'
+import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer'
+import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Linking from 'expo-linking';
 import LogoutDrawerItem from './LogoutDrawerItem';
+import { Switch } from 'react-native-paper';
 import { useTheme } from '@react-navigation/native';
 import themeContext from './ThemeContext'
 import { DarkThemeToggle } from './DarkThemeToggle';

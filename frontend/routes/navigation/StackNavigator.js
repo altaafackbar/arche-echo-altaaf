@@ -1,26 +1,33 @@
-import { useTheme } from '@react-navigation/native';
+import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions, useColorScheme } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { firebase } from '../../Firebase';
 import LandingV2 from '../../login-pages/Landing-V2';
 import Login from '../../login-pages/Login';
 import SignUp from '../../login-pages/SignUp';
+import Onboard from '../../screens/onboarding-screens/Onboarding'
+import DisclaimerModal from '../../screens/modals/disclaimer-modal';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import EditToolsAdmin from '../../screens/admin_screens/EditToolsAdmin';
 import AddToolModal from '../../screens/modals/AddToolModal';
-import DisclaimerModal from '../../screens/modals/disclaimer-modal';
-import EditEBook from '../../screens/modals/EditEBook';
-import ForgotPassword from '../../screens/modals/ForgotPasswordModal';
-import UpdateEBook from '../../screens/modals/UpdateEBook';
-import UpdateInfoGraphic from '../../screens/modals/UpdateInfoGraphic';
 import UpdateVideo from '../../screens/modals/UpdateVideo';
-import Onboard from '../../screens/onboarding-screens/Onboarding';
+import UpdateInfoGraphic from '../../screens/modals/UpdateInfoGraphic';
+import UpdateEBook from '../../screens/modals/UpdateEBook';
+import EditEBook from '../../screens/modals/EditEBook'
+import ForgotPassword from '../../screens/modals/ForgotPasswordModal';
+import ToolDetail from '../../screens/tools_and_resources_screen/ToolDetail';
+import ClinicMap from '../../screens/clinic_map_screen/ClinicMap';
+import SymptomChecker from '../../screens/symptom_checker-screen/SymptomChecker';
+import RelatedCauses from '../../screens/symptom_checker-screen/RelatedCauses';
+import ToolsAndResources from '../../screens/tools_and_resources_screen/ToolsAndResources';
 import SavedLocations from '../../screens/saved_locations_screen/SavedLocations';
 import StarredResources from '../../screens/starred_resources-screen/StarredResources';
-import RelatedCauses from '../../screens/symptom_checker-screen/RelatedCauses';
-import ToolDetail from '../../screens/tools_and_resources_screen/ToolDetail';
+import { StatusBar } from 'expo-status-bar';
 import TabNavigator from './TabNavigator';
+import swipeContext from '../../components/styles/SwipeContext';
+import { colors } from 'react-native-elements';
+import themeContext from '../../components/styles/ThemeContext';
+import { useTheme } from '@react-navigation/native';
 
 
 const Stack = createNativeStackNavigator();
@@ -28,6 +35,7 @@ const Stack = createNativeStackNavigator();
 // Creating the navigation function. This is for the regular stack navigation throughout the app.
 export default function Navigator() {
 
+  const { setTheme, theme } = React.useContext(themeContext);
   const { colors, isDark } = useTheme();
 
   const handleAnonymousSignIn = () => {

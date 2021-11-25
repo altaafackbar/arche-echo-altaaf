@@ -1,19 +1,25 @@
-import { MaterialIcons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useNavigation, useTheme } from '@react-navigation/native';
-import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import * as IconlyPack from 'react-native-iconly';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import themeContext from '../../components/styles/ThemeContext';
-import MainMenuV2 from '../../screens/menus/MainMenu-V2';
+import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions, useColorScheme } from 'react-native';
+import ClinicMap from '../../screens/clinic_map_screen/ClinicMap';
+import { useState } from 'react';
+import SymptomChecker from '../../screens/symptom_checker-screen/SymptomChecker';
+import RelatedCauses from '../../screens/symptom_checker-screen/RelatedCauses';
+import ToolsAndResources from '../../screens/tools_and_resources_screen/ToolsAndResources';
 import SavedLocations from '../../screens/saved_locations_screen/SavedLocations';
+import StarredResources from '../../screens/starred_resources-screen/StarredResources';
 import AboutUs from '../../screens/settings_screen/AboutUs';
 import ContactUs from '../../screens/settings_screen/ContactUs';
+import MainMenuV2 from '../../screens/menus/MainMenu-V2';
 import SettingsScreen from '../../screens/settings_screen/SettingsScreen';
-import StarredResources from '../../screens/starred_resources-screen/StarredResources';
-import SymptomChecker from '../../screens/symptom_checker-screen/SymptomChecker';
-import ToolsAndResources from '../../screens/tools_and_resources_screen/ToolsAndResources';
+import { StatusBar } from 'expo-status-bar';
+import { useTheme } from '@react-navigation/native';
+import themeContext from '../../components/styles/ThemeContext';
+import { useNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as IconlyPack from 'react-native-iconly';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { MaterialIcons } from '@expo/vector-icons';
+import { firebase } from '../../Firebase';
 
 //This file is for setting up the Tab Navigator on the bottom of the main screens
 
