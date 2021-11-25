@@ -8,11 +8,17 @@ link: https://expo.dev/@clubsand/arche-echo
 
 ### Documents are located in docs/
 
-Deployment Manual: https://github.com/UAlberta-CMPUT401/arche-echo/blob/main/docs/ARCHE%20_%20ECHO%20-%20Deployment%20Manual.pdf
+[Deployment Manual](https://github.com/UAlberta-CMPUT401/arche-echo/blob/main/docs/ARCHE%20_%20ECHO%20-%20Deployment%20Manual.pdf)
 
-User Manual: https://github.com/UAlberta-CMPUT401/arche-echo/blob/main/docs/ARCHE%20_%20ECHO%20-%20User%20Manual.pdf
+[User Manual](https://github.com/UAlberta-CMPUT401/arche-echo/blob/main/docs/ARCHE%20_%20ECHO%20-%20User%20Manual.pdf)
 
-Test Document: https://github.com/UAlberta-CMPUT401/arche-echo/blob/main/docs/ARCHE___ECHO_-_Test_Documentation.pdf
+[Test Document](https://github.com/UAlberta-CMPUT401/arche-echo/blob/main/docs/ARCHE___ECHO_-_Test_Documentation.pdf)
+
+## Sprint 4 Roles
+
+Product Owner: Jun Li
+
+Scrum Master: Kevin Zhu
 
 ## Backend deployment
 
