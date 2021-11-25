@@ -8,6 +8,12 @@ link: https://expo.dev/@clubsand/arche-echo
 
 ### Documents are located in docs/
 
+Deployment Manual: https://github.com/UAlberta-CMPUT401/arche-echo/blob/main/docs/ARCHE%20_%20ECHO%20-%20Deployment%20Manual.pdf
+
+User Manual: https://github.com/UAlberta-CMPUT401/arche-echo/blob/main/docs/ARCHE%20_%20ECHO%20-%20User%20Manual.pdf
+
+Test Document: https://github.com/UAlberta-CMPUT401/arche-echo/blob/main/docs/ARCHE___ECHO_-_Test_Documentation.pdf
+
 ## Backend deployment
 
 Backend has been migrated from Django to Firebase
