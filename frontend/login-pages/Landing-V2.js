@@ -86,6 +86,7 @@ class LandingV2 extends Component {
                         disclaimer: false,
                         admin: false,
                         starTools: ['empty'],
+                        bookmarkedLocations: ['empty'],
                     })
                     .then(() => {
                         console.log('User created');
