@@ -3,7 +3,7 @@
 ## Architecture/Component Diagram
 
 This is a brief overview of the architecture of the app. 
-![Architecture Diagram](https://user-images.githubusercontent.com/20648179/137605084-6c04c09e-4362-488a-b86b-107931e02dc0.jpeg)
+![Architecture Diagram](https://user-images.githubusercontent.com/20648179/141710667-32d650a8-4aa6-4a45-9efe-d9be4bfb1d7c.png)
 
 This is a component diagram, explaining couplings between components.
 ![UML Component Diagram](https://user-images.githubusercontent.com/20648179/137605113-61f2fdb3-8744-484b-84a5-9c3a06a86cfa.png)
