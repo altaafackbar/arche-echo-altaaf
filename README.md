@@ -4,7 +4,7 @@
 
 Deployed on EXPO_CLI
 
-link: https://exp.host/@jaydenjunhyeoncho/arche-echo-v3
+link: https://expo.dev/@clubsand/arche-echo
 
 ### Documents are located in docs/
 
