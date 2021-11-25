@@ -11,13 +11,13 @@ import bodyImagePelvis from '../../assets/images/Body-Pelvis.png'
 import bodyImageLegs from '../../assets/images/Body-Legs.png'
 import emergencyImage from '../../assets/images/emergency.png'
 import TouchableScale from 'react-native-touchable-scale';
-import { ListItem } from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
-import symptoms from './symptoms.json'
-import parts from './parts.json'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import _ from "lodash"
 import { firebase } from '../../Firebase';
+import { useTheme } from "@react-navigation/native";
+import themeContext from "../../components/styles/ThemeContext";
 
 
 export default function SymptomChecker() {
@@ -31,6 +31,8 @@ export default function SymptomChecker() {
     const [checked, setChecked] = useState([]);
     const [causes, setCauses] = useState([])
     const [highlighted, setHilighted] = useState([])
+    const {colors, isDark} = useTheme();
+    const { setTheme, theme } = React.useContext(themeContext);
 
     useEffect(() => {
         LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
@@ -175,7 +177,7 @@ export default function SymptomChecker() {
     return (
         <ScrollView>
             <View style={styles.titles}>
-                <Text style={styles.headerTitle}>Symptom Checker</Text>
+                <Text style={[styles.headerTitle, {color: colors.text}]}>Symptom Checker</Text>
                 <Text style={styles.subTitle}>Select a body part to get started.</Text>
             </View>
 
@@ -251,15 +253,11 @@ export default function SymptomChecker() {
                 extraData={checked}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item, index }) =>
-
-                    <View style={{ padding: 5 }}>
-                        <TouchableOpacity style={
-                            { flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: itemHighlight(item.id) ? '#b2cded' : "#E7ECF2", borderRadius: 10, height: 60 }
-                        }>
-                            <Text style={{ alignItems: 'flex-start', paddingLeft: 30, marginRight: 50 }}>
-                                {item.name}
-                            </Text>
-                            <TouchableOpacity style={{ backgroundColor: 'transparent', paddingRight: 20 }}
+                    <TouchableOpacity>
+                        <Card containerStyle={ itemHighlight(item.id) ? styles.card_item_h : styles.card_item}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={{ flex: 1, }}>{item.name}</Text>
+                            <TouchableOpacity style={{ backgroundColor: 'transparent'}}
                                 isChecked={checked.includes(item.id)}
                                 onPress={() => {
                                     const newIds = [...checked];
@@ -275,28 +273,9 @@ export default function SymptomChecker() {
                             >
                                 <Icon name={!itemChecked(item.id) ? 'checkbox-blank-circle-outline' : 'check-circle'} size={28} color={!itemChecked(item.id) ? '#dadada' : primary}></Icon>
                             </TouchableOpacity>
-                        </TouchableOpacity>
-
-                    </View>
-                    /*
-                    <ListItem 
-                        containerStyle={{backgroundColor: "#E7ECF2", borderRadius: 10}}
-                        bottomDivider
-                        Component={TouchableScale}
-                        friction={90}
-                        tension={100}
-                        activeScale={0.95}
-                        
-                    >
-    
-                        <ListItem.Content>
-                            <ListItem.Title>{item.name}</ListItem.Title>
-                        </ListItem.Content>
-                        <ListItem.CheckBox color="black" solid
-                            checked={isSelected}
-                            style={styles.checkbox}/>
-    
-                    </ListItem>*/
+                        </View>
+                        </Card>
+                    </TouchableOpacity>
                 }
 
             />
@@ -309,7 +288,8 @@ export default function SymptomChecker() {
                             backgroundColor: "#96bdeb",
                             borderRadius: 10, height: 40,
                             justifyContent: 'center',
-                            borderWidth: 1
+                            borderWidth: 1,
+                            borderColor: '#4285F4' 
                         }
 
                     }>
@@ -333,6 +313,18 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         backgroundColor: '#fff',
 
+    },
+    card_item: {
+        flex: 1,
+        backgroundColor: "#E7ECF2",
+        borderRadius: 15,
+        margin: 15,
+    },
+    card_item_h: {
+        flex: 1,
+        backgroundColor: "#b2cded",
+        borderRadius: 15,
+        margin: 15,
     },
     container: {
         backgroundColor: '#fff',

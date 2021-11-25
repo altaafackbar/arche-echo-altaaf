@@ -1,59 +1,20 @@
-# Sprint 2 Release
-
-development branch
+# Sprint 3 Release
 
 ## Frontend deployment
 
 Deployed on EXPO_CLI
 
-
-link: https://expo.dev/@jaydenjunhyeoncho/arche-echo
+link: https://exp.host/@jaydenjunhyeoncho/arche-echo-v3
 
 ## Backend deployment
-### Backend has deployed on Cybera
-private ipv4: 10.2.11.229
 
-ipv6: 2605:fd00:4:1001:f816:3eff:fe5e:ba3b
+Backend has been migrated from Django to Firebase
 
-## Installation 
+## Document Website
 
-Set up Python3 Virtual environment 
-
-```
-virtualenv venv
-source venv/bin/active
-```
-
-Install required packages
-
-```
-pip install -r requirements.txt
-```
-
-Django migrate
-
-```
-python manage.py makemigrations
-python manage.py migrate
-```
-
-Start Server
-
-```
-python manage.py runserver
-```
-
-
-## Documentation Endpoint
-ipv4 (private): http://10.2.11.229/docs
-
-ipv6: http://[2605:fd00:4:1001:f816:3eff:fe5e:ba3b]/docs
-
+https://ualberta-cmput401.github.io/arche-echo/
 
 # ARCHE | ECHO App
-
-## Deployment Website
-https://ualberta-cmput401.github.io/arche-echo/
 
 ## Project Overview
 
