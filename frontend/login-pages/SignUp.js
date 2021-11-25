@@ -112,20 +112,21 @@ export default function SignUp ()
                         displayName: result.user.givenName,
                         })
                     const currentUser = firebase.auth().currentUser;
-                    const db = firebase.firestore()
-                    // console.log(result.user.email)
-                    // console.log(result.user.givenName)
-                    db
-                        .collection('users')
-                        .doc(currentUser.uid)
-                        .set({
-                            email: currentUser.email,
-                            firstName: result.user.givenName,
-                            lastName: result.user.familyName,
-                            disclaimer: false,
-                            admin: false,
-                            starTools: ['empty'],
-                        })
+                    if (currentUser.metadata.creationTime === currentUser.metadata.lastSignInTime) {
+                        const db = firebase.firestore()
+                        db
+                            .collection('users')
+                            .doc(currentUser.uid)
+                            .set({
+                                email: currentUser.email,
+                                firstName: result.user.givenName,
+                                lastName: result.user.familyName,
+                                disclaimer: false,
+                                admin: false,
+                                starTools: ['empty'],
+                                bookmarkedLocations: ['empty'],
+                            })
+                    }           
                 })
                 .catch((error) => {
                     // Handle Errors here.
@@ -273,17 +274,6 @@ export default function SignUp ()
             <Image source={GIcon} style={styles.socialIcons}/>
             <Text style={styles.socialIconText}>Sign Up With Google</Text>
         </TouchableOpacity>
-
-        {/* Sign Up With Apple button */}
-        <TouchableOpacity
-        style={styles.socialSignUpStyles}>
-            <Image source={AppleIcon} style={{padding: 10,
-            margin: 20,
-            width: 24,
-            height: 24,
-            resizeMode: 'contain'}}/>
-            <Text style={styles.socialIconText}>Sign Up With Apple</Text>
-        </TouchableOpacity>
         </View>
 
         {/* Already Have An Account dialog at the bottom */}
@@ -306,7 +296,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#fafafa',
+        backgroundColor: '#ffffff',
         alignItems: 'center',
         justifyContent: 'center',
     },

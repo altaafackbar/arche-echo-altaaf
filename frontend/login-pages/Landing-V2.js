@@ -3,6 +3,7 @@ import { Text, View, Button, StyleSheet, Image, SafeAreaView, Pressable, Touchab
 import { useNavigation } from '@react-navigation/native';
 import Onboarding from 'react-native-onboarding-swiper';
 import MainPhoto from '../assets/images/landing-image.png'
+import MainPhotoV2 from '../assets/images/landing-image-updated.png'
 import * as Google from 'expo-google-app-auth';
 import GIcon from '../assets/images/Google__G__Logo.svg.png'
 import AppleIcon from '../assets/images/Apple_logo_black.svg.png'
@@ -85,6 +86,7 @@ class LandingV2 extends Component {
                         disclaimer: false,
                         admin: false,
                         starTools: ['empty'],
+                        bookmarkedLocations: ['empty'],
                     })
                     .then(() => {
                         console.log('User created');
@@ -107,7 +109,7 @@ class LandingV2 extends Component {
       <SafeAreaView style={styles.container}>
         <StatusBar style='auto'/>
         <View style={styles.imageContainer}>
-            <Image source={MainPhoto} style={styles.mainImage}></Image>
+            <Image source={MainPhotoV2} style={styles.mainImage}></Image>
         </View>
         <View style={styles.titles}>
             <Text style={styles.headerTitle}>Welcome to ARCHE | ECHO!</Text>

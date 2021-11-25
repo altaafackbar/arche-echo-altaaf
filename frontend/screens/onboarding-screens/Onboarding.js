@@ -13,16 +13,10 @@ const OnboardingScreen = () => {
         onDone={() => navigation.replace('MainMenu')}
         pages={[
             {
-                backgroundColor: '#ffd44d',
-                image: <Image source={require('../../assets/images/onboard-yellow.png')} style={styles.imageResizer} />,
-                title: 'Mobile-Accessible Tools',
-                subtitle: 'Access our resources from the palm of your hands. Anytime. Anywhere.',
-            },
-            {
-                backgroundColor: '#76c1f9',
-                image: <Image source={require('../../assets/images/onboarding-2.png')} style={styles.imageResizer} />,
+                backgroundColor: '#ffffff',
+                image: <Image source={require('../../assets/images/onboarding-updated.png')} style={styles.imageResizer} />,
                 title: "Tools For Children's Health",
-                subtitle: 'Learn about common childhood illnesses developed in collaboration with our partners and funders.',
+                subtitle: "We work with parents to co-create tools for learning about common childhood illnesses. Access these award-winning tools in our app to learn more about caring for your child's illness!",
             },
             
         ]} 
