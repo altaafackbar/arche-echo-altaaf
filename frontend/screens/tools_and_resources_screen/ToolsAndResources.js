@@ -5,8 +5,8 @@ import { SearchBar, ListItem, Card, FAB, Icon } from 'react-native-elements';
 import { AntDesign } from '@expo/vector-icons';
 import _ from 'lodash';
 import { firebase } from '../../Firebase';
-
-
+import { useTheme } from '@react-navigation/native';
+import themeContext from '../../components/styles/ThemeContext';
 
 
 
@@ -117,6 +117,7 @@ class ToolsAndResources extends Component {
                 starTools: starred,
             })
     }
+
 
     render() {
         return (
