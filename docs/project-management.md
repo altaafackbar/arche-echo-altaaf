@@ -47,6 +47,11 @@ This page provides a general overview of the Story Map, the overall Project Plan
 
 #### Due: November 13th
 
+##### Updated Scrum Roles
+
+- Product Owner: Jun Li
+- Scrum Master: Kevin Zhu
+
 | Rubric Description | Task-to-Do                     | Assigned To                    | Date To Complete By |
 |--------------------|--------------------------------|--------------------------------|---------------------|
 | Revisions          | Documentation Revisions        | Entire Team                    | November 13th, 2021 |
@@ -54,12 +59,17 @@ This page provides a general overview of the Story Map, the overall Project Plan
 | Codebase           | US 05.01.02 - Admin Privileges | Altaaf Ackbar, Jun Li          | November 10, 2021   |
 | Codebase           | US 04.01  - Settings Menu      | Jason Branch-Allen, Jayden Cho | November 10, 2021   |
 | Codebase           | US 08.01 Symptom Checker       | Altaaf Ackbar, Kevin Zhu       | November 10, 2021   |
-| Codebase           | US 05.01 - Tools and resources | Jun Li, Natalia Hasan          | November 10, 2021   |
+| Codebase           | US 05.01 - Tools and resources | Jun Li, Natalia Hassan          | November 10, 2021   |
 | Codebase           | US 07.01 - Find a Clinic       | Jun Li, Kevin Zhu              | November 10, 2021   |
 
 ### Sprint 4
 
 #### Due: November 24th
+
+##### Last Scrum Roles
+
+- Product Owner: Jun Li
+- Scrum Master: Kevin Zhu
 
 | Rubric Description                       | Task-to-Do                                                                | Assigned To | Date To Complete By |
 |------------------------------------------|---------------------------------------------------------------------------|-------------|---------------------|
