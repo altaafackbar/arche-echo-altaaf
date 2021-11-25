@@ -97,6 +97,9 @@ export default function Navigator() {
             headerTitle: '',
             headerShadowVisible: false,
             headerTransparent: false,
+            headerStyle: {
+              backgroundColor: 'white',
+            },
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => handleAnonymousSignIn()}
