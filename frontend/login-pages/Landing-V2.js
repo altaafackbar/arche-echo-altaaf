@@ -40,7 +40,7 @@ class LandingV2 extends Component {
             }
           }
         })
-        
+
 
       } else {
         this.props.navigation.navigate('Landing')
@@ -49,7 +49,7 @@ class LandingV2 extends Component {
   };
 
 
-  
+
   navigateToLogin = () => {
     this.props.navigation.navigate('Login')
   }
@@ -68,72 +68,73 @@ class LandingV2 extends Component {
 
   handleAnonymousSignIn = () => {
     firebase.auth()
-        .signInAnonymously()
-        .then((userCredentials) => {
-            const user = userCredentials.user
-            user.updateProfile({
-              displayName: 'Guest',
-            })
-            console.log('User signed in anonymously');
-            const db = firebase.firestore()
-                db
-                    .collection("users")
-                    .doc(user.uid)
-                    .set({
-                        email: 'AnonymousEmail',
-                        firstName: 'Guest',
-                        lastName: 'Anonymous',
-                        disclaimer: false,
-                        admin: false,
-                        starTools: ['empty'],
-                    })
-                    .then(() => {
-                        console.log('User created');
-                    })
-                    .catch((error) => {
-                        console.error('Error writing document: ', error);
-                    });
+      .signInAnonymously()
+      .then((userCredentials) => {
+        const user = userCredentials.user
+        user.updateProfile({
+          displayName: 'Guest',
         })
-        .catch(error => {
-            if (error.code === 'auth/operation-not-allowed') {
-                console.log('Enable anonymous in your firebase console.');
-            }
+        console.log('User signed in anonymously');
+        const db = firebase.firestore()
+        db
+          .collection("users")
+          .doc(user.uid)
+          .set({
+            email: 'AnonymousEmail',
+            firstName: 'Guest',
+            lastName: 'Anonymous',
+            disclaimer: false,
+            admin: false,
+            starTools: ['empty'],
+            bookmarkedLocations: ['empty']
+          })
+          .then(() => {
+            console.log('User created');
+          })
+          .catch((error) => {
+            console.error('Error writing document: ', error);
+          });
+      })
+      .catch(error => {
+        if (error.code === 'auth/operation-not-allowed') {
+          console.log('Enable anonymous in your firebase console.');
+        }
 
-            console.error(error);
-        })
+        console.error(error);
+      })
   };
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <StatusBar style='auto'/>
+        <StatusBar style='auto' />
         <View style={styles.imageContainer}>
-            <Image source={MainPhotoV2} style={styles.mainImage}></Image>
+          <Image source={MainPhotoV2} style={styles.mainImage}></Image>
         </View>
         <View style={styles.titles}>
-            <Text style={styles.headerTitle}>Welcome to ARCHE | ECHO!</Text>
-            <Text style={styles.subTitle}>All the resources you need to maximize your child's care.</Text>
+          <Text style={styles.headerTitle}>Welcome to ARCHE | ECHO!</Text>
+          <Text style={styles.subTitle}>All the resources you need to maximize your child's care.</Text>
         </View>
-    
+
         <LoginButton
-        type='signIn'
-        content='Sign In'
-        onPress={() => this.navigateToLogin()}
+          type='signIn'
+          content='Sign In'
+          onPress={() => this.navigateToLogin()}
         ></LoginButton>
-    
+
         <LoginButton
-        type='signUp'
-        content='Sign Up'
-        onPress={() => this.navigateToSignUp()}
+          type='signUp'
+          content='Sign Up'
+          onPress={() => this.navigateToSignUp()}
         ></LoginButton>
-    
+
         {/* This is the 'Don't Have An Account' section at the bottom */}
-        <View style={{width: '90%', padding: 10, alignItems: 'center', paddingBottom: '10%', marginTop: '2%'}}>
-            <TouchableOpacity>  
-                <Text style={{fontStyle: 'italic',color: '#1f1f1f', fontWeight: '500', fontSize: 16}} onPress= {()=>{this.handleAnonymousSignIn(); this.navigateToDisclaimer()}}>Continue As Guest</Text>
-            </TouchableOpacity>
+        <View style={{ width: '90%', padding: 10, alignItems: 'center', paddingBottom: '10%', marginTop: '2%' }}>
+          <TouchableOpacity>
+            <Text style={{ fontStyle: 'italic', color: '#1f1f1f', fontWeight: '500', fontSize: 16 }} onPress={() => { this.handleAnonymousSignIn(); this.navigateToDisclaimer() }}>Continue As Guest</Text>
+          </TouchableOpacity>
         </View>
-        
+
       </SafeAreaView>
     )
   }
@@ -143,7 +144,7 @@ class LandingV2 extends Component {
 export default LandingV2
 
 
-    
+
 
 //     const navigation = useNavigation();
 
@@ -158,7 +159,7 @@ export default LandingV2
 //     function navigateToSignUp (){
 //       navigation.navigate('SignUp')
 //     }
-    
+
 //     render() {
 //       return (
 //         <SafeAreaView style={styles.container}>
@@ -169,30 +170,30 @@ export default LandingV2
 //             <Text style={styles.headerTitle}>Welcome to ARCHE | ECHO!</Text>
 //             <Text style={styles.subTitle}>All the resources you need to maximize your child's care.</Text>
 //         </View>
-    
+
 //         <LoginButton
 //         type='signIn'
 //         content='Sign In'
 //         onPress={() => navigateToLogin()}
 //         ></LoginButton>
-    
+
 //         <LoginButton
 //         type='signUp'
 //         content='Sign Up'
 //         onPress={() => navigateToSignUp()}
 //         ></LoginButton>
-    
+
 //         {/* This is the 'Don't Have An Account' section at the bottom */}
 //         <View style={{width: '90%', padding: 10, alignItems: 'center', paddingBottom: '10%', marginTop: '2%'}}>
 //             <TouchableOpacity>  
 //                 <Text style={{fontStyle: 'italic',color: '#1f1f1f', fontWeight: '500', fontSize: 16}} onPress= {()=>navigateToDisclaimer()}>Continue As Guest</Text>
 //             </TouchableOpacity>
 //         </View>
-        
+
 //         </SafeAreaView>
 //         );
 //     };
-    
+
 
 // }
 
@@ -205,49 +206,49 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   titles: {
-      marginTop: '10%',
-      width: '100%',
-      textAlign: 'center'
+    marginTop: '10%',
+    width: '100%',
+    textAlign: 'center'
   },
   headerTitle: {
-      fontSize: 24,
-      color: '#1f1f1f',
-      textAlign: 'center',
+    fontSize: 24,
+    color: '#1f1f1f',
+    textAlign: 'center',
   },
   subTitle: {
-      fontSize: 16,
-      color: '#919191',
-      textAlign: 'center',
-      padding: 10,
+    fontSize: 16,
+    color: '#919191',
+    textAlign: 'center',
+    padding: 10,
   },
   regularText: {
     fontSize: 16,
     color: '#1f1f1f',
     textAlign: 'center',
     padding: 10,
-},
+  },
   mainImage: {
-      width: 300,
-      height: 300,
+    width: 300,
+    height: 300,
   },
   imageContainer: {
-      width: '100%',
-      alignItems: 'center',
+    width: '100%',
+    alignItems: 'center',
   },
   buttonContainer: {
     width: '100%',
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    
+
   },
   button: {
-      backgroundColor: '#8A76B6',
-      borderRadius: 50,
-      width: '60%',
-      height: 40,
-      justifyContent: 'center',
-      alignItems: 'center'
+    backgroundColor: '#8A76B6',
+    borderRadius: 50,
+    width: '60%',
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   signInButtonContainer: {
     width: '100%',
@@ -255,7 +256,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row'
-    
+
   },
   signInButton: {
     backgroundColor: '#5633a1',
@@ -264,22 +265,22 @@ const styles = StyleSheet.create({
     height: 30,
     justifyContent: 'center',
     alignItems: 'center'
-},
+  },
   buttonText: {
     color: 'white',
     fontSize: 16,
   },
   lineContainer: {
-    flexDirection: 'row', 
-    alignItems: 'center', 
+    flexDirection: 'row',
+    alignItems: 'center',
     padding: 20,
-},
-horizontalLine: {
-    flex: 1, 
-    height: 0.5, 
+  },
+  horizontalLine: {
+    flex: 1,
+    height: 0.5,
     backgroundColor: '#B9B9B9',
-},
-socialSignUpStyles: {
+  },
+  socialSignUpStyles: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'transparent',
@@ -289,23 +290,23 @@ socialSignUpStyles: {
     borderWidth: 0.5,
     margin: 5,
     marginVertical: 10,
-},
-socialIconText: {
+  },
+  socialIconText: {
     color: '#1f1f1f',
     textAlignVertical: 'center',
     textAlign: 'center',
     alignItems: 'center',
     paddingRight: 15,
-},
-socialIcons: {
+  },
+  socialIcons: {
     padding: 10,
     margin: 20,
     width: 24,
     height: 24,
-},
-socialContainer: {
+  },
+  socialContainer: {
     width: '70%',
     padding: 10,
     marginVertical: 0,
-}
+  }
 });
