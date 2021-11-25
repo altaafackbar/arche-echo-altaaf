@@ -60,6 +60,7 @@ export default function Navigator() {
               disclaimer: false,
               admin: false,
               starTools: ['empty'],
+              bookmarkedLocations: ['empty'],
             })
             .then(() => {
               console.log('User created');

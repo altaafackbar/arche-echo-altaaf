@@ -112,21 +112,21 @@ export default function SignUp ()
                         displayName: result.user.givenName,
                         })
                     const currentUser = firebase.auth().currentUser;
-                    const db = firebase.firestore()
-                    // console.log(result.user.email)
-                    // console.log(result.user.givenName)
-                    db
-                        .collection('users')
-                        .doc(currentUser.uid)
-                        .set({
-                            email: currentUser.email,
-                            firstName: result.user.givenName,
-                            lastName: result.user.familyName,
-                            disclaimer: false,
-                            admin: false,
-                            starTools: ['empty'],
-                            bookmarkedLocations: ['empty']
-                        })
+                    if (currentUser.metadata.creationTime === currentUser.metadata.lastSignInTime) {
+                        const db = firebase.firestore()
+                        db
+                            .collection('users')
+                            .doc(currentUser.uid)
+                            .set({
+                                email: currentUser.email,
+                                firstName: result.user.givenName,
+                                lastName: result.user.familyName,
+                                disclaimer: false,
+                                admin: false,
+                                starTools: ['empty'],
+                                bookmarkedLocations: ['empty'],
+                            })
+                    }           
                 })
                 .catch((error) => {
                     // Handle Errors here.
