@@ -95,7 +95,7 @@ export default function AboutUs(props) {
                 {/* Video */}
                 <View style={styles.playerView}>
                     {!ready && <>
-                        <Text>Video will arrive shortly ..</Text>
+                        <Text style={{color: colors.text}}>Video will arrive shortly ..</Text>
                     </>}
                     <YoutubeIFrame
                         width={w * 0.8}

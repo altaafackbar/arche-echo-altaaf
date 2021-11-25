@@ -18,6 +18,8 @@ import ForgotPassword from '../../screens/modals/ForgotPasswordModal';
 import ToolDetail from '../../screens/tools_and_resources_screen/ToolDetail';
 import ClinicMap from '../../screens/clinic_map_screen/ClinicMap';
 import SymptomChecker from '../../screens/symptom_checker-screen/SymptomChecker';
+import AboutUs from '../../screens/settings_screen/AboutUs';
+import ContactUs from '../../screens/settings_screen/ContactUs';
 import RelatedCauses from '../../screens/symptom_checker-screen/RelatedCauses';
 import ToolsAndResources from '../../screens/tools_and_resources_screen/ToolsAndResources';
 import SavedLocations from '../../screens/saved_locations_screen/SavedLocations';
