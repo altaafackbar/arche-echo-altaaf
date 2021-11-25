@@ -60,7 +60,7 @@ export default function MainMenuV2(props) {
     }
 
     function navigateToSavedLocations() {
-        navigation.navigate('SavedLocations')
+        navigation.navigate('Find A Clinic')
     }
 
     // Change the color of the cards on the homepage depending on whether or not it's light mode or dark mode.3

@@ -18,6 +18,8 @@ import ForgotPassword from '../../screens/modals/ForgotPasswordModal';
 import ToolDetail from '../../screens/tools_and_resources_screen/ToolDetail';
 import ClinicMap from '../../screens/clinic_map_screen/ClinicMap';
 import SymptomChecker from '../../screens/symptom_checker-screen/SymptomChecker';
+import AboutUs from '../../screens/settings_screen/AboutUs';
+import ContactUs from '../../screens/settings_screen/ContactUs';
 import RelatedCauses from '../../screens/symptom_checker-screen/RelatedCauses';
 import ToolsAndResources from '../../screens/tools_and_resources_screen/ToolsAndResources';
 import SavedLocations from '../../screens/saved_locations_screen/SavedLocations';
@@ -25,12 +27,18 @@ import StarredResources from '../../screens/starred_resources-screen/StarredReso
 import { StatusBar } from 'expo-status-bar';
 import TabNavigator from './TabNavigator';
 import swipeContext from '../../components/styles/SwipeContext';
+import { colors } from 'react-native-elements';
+import themeContext from '../../components/styles/ThemeContext';
+import { useTheme } from '@react-navigation/native';
 
 
 const Stack = createNativeStackNavigator();
 
 // Creating the navigation function. This is for the regular stack navigation throughout the app.
 export default function Navigator() {
+
+  const { setTheme, theme } = React.useContext(themeContext);
+  const { colors, isDark } = useTheme();
 
     const handleAnonymousSignIn = () => {
       firebase.auth()
@@ -52,6 +60,7 @@ export default function Navigator() {
               disclaimer: false,
               admin: false,
               starTools: ['empty'],
+              bookmarkedLocations: ['empty'],
             })
             .then(() => {
               console.log('User created');
@@ -88,6 +97,10 @@ export default function Navigator() {
           options={{
             headerTitle: '',
             headerShadowVisible: false,
+            headerTransparent: false,
+            headerStyle: {
+              backgroundColor: 'white',
+            },
             headerRight: () => (
               <TouchableOpacity
                 onPress={() => handleAnonymousSignIn()}
@@ -259,8 +272,8 @@ export default function Navigator() {
         <Stack.Screen options={{ headerTitle: 'SavedLocations', headerShadowVisible: false }} name="SavedLocations" component={SavedLocations} />
         <Stack.Screen options={{ headerTitle: '', headerShadowVisible: false }} name="ToolDetails" component={ToolDetail} />
         <Stack.Screen options={{ headerTitle: 'Admin Screen', headerShadowVisible: false }} name="EditToolsAdmin" component={EditToolsAdmin} />
-        {/* <Stack.Screen options={{headerTitle: 'Starred Resources', headerShadowVisible: false}} name="StarredResources" component={StarredResources}/>
-          <Stack.Screen options={{headerTitle: 'SavedLocations', headerShadowVisible: false}} name="SavedLocations" component={SavedLocations}/> */}
+        <Stack.Screen options={{headerTitle: 'About Us', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: false, headerStyle: {backgroundColor: colors.background}}} name="About Us" component={AboutUs}/>
+        <Stack.Screen options={{headerTitle: 'Contact Us', headerShadowVisible: false, headerTitleAlign: 'center', headerTransparent: false, headerStyle: {backgroundColor: colors.background}}} name="Contact Us" component={ContactUs}/>
         {/* <Stack.Screen name="SymptomChecker" component={SymptomChecker} /> */}
       </Stack.Navigator >
   

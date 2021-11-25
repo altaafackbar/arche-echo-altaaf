@@ -95,12 +95,12 @@ export default function AboutUs(props) {
                 {/* Video */}
                 <View style={styles.playerView}>
                     {!ready && <>
-                        <Text>Video will arrive shortly ..</Text>
+                        <Text style={{color: colors.text}}>Video will arrive shortly ..</Text>
                     </>}
                     <YoutubeIFrame
                         width={w * 0.8}
                         height={w * 9 / 20}
-                        videoId={"ydQnzU4nV6Q"}
+                        videoId={"QwCOEDxgLlQ"}
                         onReady={() => { setReady(true) }}
                     />
                 </View>
