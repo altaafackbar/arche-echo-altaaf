@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useState } from 'react';
-import { TextInput, StyleSheet, SafeAreaView, Text, View } from 'react-native';
+import { TextInput, StyleSheet, SafeAreaView, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 // Creating a custom input component
@@ -9,6 +9,7 @@ export default function CustomInput({value, setValue, placeholder, secureTextEnt
   // const [hidePass, setHidePass] = useState('')
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <View style={styles.container}> 
     <TextInput
       selectionColor={'#1f1f1f'}
@@ -27,6 +28,7 @@ export default function CustomInput({value, setValue, placeholder, secureTextEnt
     
     
     </View>
+    </TouchableWithoutFeedback>
   );
 };
 
