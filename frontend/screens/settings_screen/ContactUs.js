@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ScrollView, View, Text, StyleSheet, SafeAreaView, TouchableOpacity, TouchableWithoutFeedback, Keyboard, TextInput, Alert, KeyboardAvoidingView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useTheme } from '../../components/styles/ThemeProvider';
 import { CheckBox, SocialIcon } from 'react-native-elements';
 import * as Linking from 'expo-linking';
 import { firebase } from '../../Firebase';
+import { useTheme } from '@react-navigation/native';
+import themeContext from '../../components/styles/ThemeContext';
 
 
 function ContactUs() {     // undefined
     const { colors, isDark } = useTheme();
+    const { setTheme, theme } = React.useContext(themeContext);
     const [message, setMessage] = useState('')
     const [parents, setParents] = useState(false)
     const [researcher, setResearcher] = useState(false)
     const [student, setStudent] = useState(false)
     const [media, setMedia] = useState(false)
     const [contact, setContact] = useState(false)
-
+    const commentInputBox = useRef(null)
     const checkInput = !message.trim().length == 0;
 
     const currentUser = firebase.auth().currentUser
@@ -91,16 +93,16 @@ function ContactUs() {     // undefined
             .catch((error) => {
                 console.error("Error adding document: ", error);
             })
-        
+
     }
 
     return (
         
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, {backgroundColor: colors.background}]}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
-                style={{flex: 1}}
+                style={{ flex: 1 }}
             >
                 <ScrollView style={styles.scrollViewContainer}>
                     <View style={styles.headerContainer}>
@@ -113,7 +115,7 @@ function ContactUs() {     // undefined
                             type='twitter'
                             button
                             Component={TouchableOpacity}
-                            onPress={() => {handleARCHETwitter()}}
+                            onPress={() => { handleARCHETwitter() }}
                         />
                         <SocialIcon
                             iconSize={17}
@@ -121,7 +123,7 @@ function ContactUs() {     // undefined
                             type='twitter'
                             button
                             Component={TouchableOpacity}
-                            onPress={() => {handleECHOKTTwitter()}}
+                            onPress={() => { handleECHOKTTwitter() }}
                         />
                         <SocialIcon
                             iconSize={17}
@@ -129,7 +131,7 @@ function ContactUs() {     // undefined
                             type='youtube'
                             button
                             Component={TouchableOpacity}
-                            onPress={() => {handleYouTube()}}
+                            onPress={() => { handleYouTube() }}
                         />
                         <SocialIcon
                             iconSize={17}
@@ -137,7 +139,7 @@ function ContactUs() {     // undefined
                             type='instagram'
                             button
                             Component={TouchableOpacity}
-                            onPress={() => {handleIns()}}
+                            onPress={() => { handleIns() }}
                         />
                         <SocialIcon
                             iconSize={17}
@@ -145,7 +147,7 @@ function ContactUs() {     // undefined
                             button
                             title='ARCHE Website'
                             Component={TouchableOpacity}
-                            onPress={() => {handleARCHEWeb()}}
+                            onPress={() => { handleARCHEWeb() }}
                         />
                         <SocialIcon
                             iconSize={17}
@@ -153,51 +155,56 @@ function ContactUs() {     // undefined
                             button
                             title='ECHO Website'
                             Component={TouchableOpacity}
-                            onPress={() => {handleECHOWeb()}}
+                            onPress={() => { handleECHOWeb() }}
                         />
                     </View>
                     <View style={styles.textContainer}>
                         <Text style={styles.textStyle}>For all other inquiries, please feel free to message us through our contact form below.</Text>
                     </View>
                     <View style={styles.textContainer}>
-                        <Text style={{textAlign: 'center', fontSize: 16, color: '#8A76B6',}}>Are you contacting us as...(Please select all that apply.)</Text>
+                        <Text style={{ textAlign: 'center', fontSize: 16, color: '#8A76B6', }}>Are you contacting us as...(Please select all that apply.)</Text>
                     </View>
                     {/* Checkboxes let user pick what roles are they */}
                     <View style={styles.checkBoxContainer}>
                         <CheckBox
                             title='Parents/Family Member'
                             checked={parents}
-                            onPress={() => {setParents(!parents)}}
+                            onPress={() => { setParents(!parents) }}
                         />
                     </View>
                     <View style={styles.checkBoxContainer}>
                         <CheckBox
                             title='Researcher'
                             checked={researcher}
-                            onPress={() => {setResearcher(!researcher)}}
+                            onPress={() => { setResearcher(!researcher) }}
                         />
                     </View>
                     <View style={styles.checkBoxContainer}>
                         <CheckBox
                             title='Student'
                             checked={student}
-                            onPress={() => {setStudent(!student)}}
+                            onPress={() => { setStudent(!student) }}
                         />
                     </View>
                     <View style={styles.checkBoxContainer}>
                         <CheckBox
                             title='Member of the Media'
                             checked={media}
-                            onPress={() => {setMedia(!media)}}
+                            onPress={() => { setMedia(!media) }}
                         />
                     </View>
-                    <View style={styles.inputContainer}>
-                        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                    <View style={styles.inputContainer} onTouchStart={() => commentInputBox.current.focus()}>
+                        <TouchableWithoutFeedback
+                            onPress={
+                                Keyboard.dismiss
+                            }
+                            accessible={false}>
                             <TextInput
+                                ref={commentInputBox}
                                 selectionColor={'#a5a5a5'}
                                 placeholder='Comment or Message'
                                 multiline={true}
-                                numberOfLines={6}
+                                // numberOfLines={6}
                                 value={message}
                                 setValue={message}
                                 onChangeText={text => setMessage(text)}
@@ -209,14 +216,14 @@ function ContactUs() {     // undefined
                         <CheckBox
                             title='Check this box if you want us to reply you.'
                             checked={contact}
-                            onPress={() => {setContact(!contact)}}
+                            onPress={() => { setContact(!contact) }}
                         />
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity 
-                        style={checkInput ? styles.button : styles.buttonDisabled} 
-                        disabled={checkInput ? false : true} 
-                        onPress={() => {handleFirebase()}}
+                        <TouchableOpacity
+                            style={checkInput ? styles.button : styles.buttonDisabled}
+                            disabled={checkInput ? false : true}
+                            onPress={() => { handleFirebase() }}
                         >
                             <Text style={styles.buttonText}>Send</Text>
                         </TouchableOpacity>
@@ -232,10 +239,10 @@ export default ContactUs
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fafafa', 
+        backgroundColor: '#fafafa',
 
     },
-    scrollViewContainer:{
+    scrollViewContainer: {
         flex: 1,
         width: '100%'
     },
@@ -255,13 +262,12 @@ const styles = StyleSheet.create({
     mediaContainer: {
         width: '90%',
         backgroundColor: 'transparent',
-        borderColor: '#dadada', 
+        borderColor: '#dadada',
         borderWidth: 2,
         borderRadius: 20,
         paddingHorizontal: 10,
-        alignSelf: 'center',
-        // marginLeft: 17,
-        // marginRight: 17,
+        marginLeft: 17,
+        marginRight: 17,
         marginVertical: 10,
         paddingVertical: 10,
     },
@@ -281,8 +287,8 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: '90%',
         backgroundColor: 'transparent',
-        height: 150, 
-        borderColor: '#dadada', 
+        height: 150,
+        borderColor: '#dadada',
         borderWidth: 1,
         borderRadius: 12,
         paddingHorizontal: 10,
@@ -292,7 +298,7 @@ const styles = StyleSheet.create({
         paddingVertical: 13,
     },
     checkBoxContainer: {
-        width: '90%', 
+        width: '90%',
         marginLeft: 17,
         marginRight: 17,
     },
