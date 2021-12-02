@@ -28,6 +28,10 @@ Backend has been migrated from Django to Firebase
 
 https://ualberta-cmput401.github.io/arche-echo/
 
+## Screencast Link
+
+https://drive.google.com/file/d/1DPRzMgEnssrtl1ZyDMoI1misntPS-9cd/view?usp=sharing
+
 # ARCHE | ECHO App
 
 ## Project Overview
